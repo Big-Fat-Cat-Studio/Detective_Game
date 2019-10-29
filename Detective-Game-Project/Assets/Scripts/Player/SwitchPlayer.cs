@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SwitchPlayer : MonoBehaviour
 {
-    private enum ActivePlayer
+    public enum ActivePlayer
     {
         Grandpa,
         Kid
@@ -13,7 +13,7 @@ public class SwitchPlayer : MonoBehaviour
     public GameObject grandpa;
     public GameObject kid;
 
-    private ActivePlayer active_player;
+    public ActivePlayer active_player;
     // Start is called before the first frame update
     private void Start()
     {
@@ -31,13 +31,17 @@ public class SwitchPlayer : MonoBehaviour
             if(active_player == ActivePlayer.Grandpa)
             {
                 grandpa.GetComponent<GrandpaPlayer>().is_active_player = false;
+                grandpa.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
                 kid.GetComponent<KidPlayer>().is_active_player = true;
+                kid.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
                 active_player = ActivePlayer.Kid;
             }
             else if(active_player == ActivePlayer.Kid)
             {
                 kid.GetComponent<KidPlayer>().is_active_player = false;
+                kid.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
                 grandpa.GetComponent<GrandpaPlayer>().is_active_player = true;
+                grandpa.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
                 active_player = ActivePlayer.Grandpa;
             }
         }
