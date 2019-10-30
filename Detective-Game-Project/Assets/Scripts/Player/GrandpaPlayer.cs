@@ -11,7 +11,6 @@ public class GrandpaPlayer : MonoBehaviour
     {
         if(is_active_player)
         {
-            this.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
             print("grandpa is active");
         }
     }
