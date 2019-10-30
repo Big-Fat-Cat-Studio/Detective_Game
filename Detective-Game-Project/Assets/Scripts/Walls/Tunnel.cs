@@ -24,8 +24,9 @@ namespace Scripts
                 TunnelB.GetComponent<CapsuleCollider>().enabled = false;
                 TunnelWall.GetComponent<BoxCollider>().enabled = false;
                 //disable movement script
-                Kid.GetComponent<Player>().enabled = false;
-                Kid.GetComponent<Rigidbody>().velocity = new Vector3(-5, 0, 0);
+                Kid.GetComponent<KidPlayer>().enabled = false;
+                Kid.GetComponent<Rigidbody>().velocity = new Vector3(-2, 0, 0);
+                Kid.GetComponent<Rigidbody>().useGravity = false;
                 StartCoroutine(MoveIn());
             }
         }
@@ -51,9 +52,10 @@ namespace Scripts
             {
                 Kid.transform.position = TunnelA.transform.position;
             }
-            //probably needs to be changed so player turns 180 degrees and doesn't walk backwards.
+
+            Kid.GetComponent<Rigidbody>().useGravity = true;
             Kid.transform.Rotate(new Vector3(0, 180, 0));
-            Kid.GetComponent<Rigidbody>().velocity = new Vector3(5, 0, 0);
+            Kid.GetComponent<Rigidbody>().velocity = new Vector3(2, 0, 0);
             StartCoroutine(MoveOut());
         }
 
@@ -65,7 +67,7 @@ namespace Scripts
             TunnelA.GetComponent<CapsuleCollider>().enabled = true;
             TunnelB.GetComponent<CapsuleCollider>().enabled = true;
             TunnelWall.GetComponent<BoxCollider>().enabled = true;
-            Kid.GetComponent<Player>().enabled = true;
+            Kid.GetComponent<KidPlayer>().enabled = true;
         }
     }
 }
