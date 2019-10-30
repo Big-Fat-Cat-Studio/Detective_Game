@@ -2,22 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+namespace Scripts
 {
-    public float speed = 2.0f;
-    public float rotationSpeed = 100.0f;
-
-    void Update()
+    public class Player : MonoBehaviour
     {
+        public float speed = 2.0f;
+        public float rotationSpeed = 100.0f;
+        public ActivePlayer activePlayer;
 
-        float translation = Input.GetAxis("Vertical") * speed;
-        float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+        void Update()
+        {
+            if (SwitchPlayer.active_player == activePlayer)
+            {
+                float translation = Input.GetAxis("Vertical") * speed;
+                float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
 
-        translation *= Time.deltaTime;
-        rotation *= Time.deltaTime;
+                translation *= Time.deltaTime;
+                rotation *= Time.deltaTime;
 
-        transform.Translate(0, 0, translation);
-        transform.Rotate(0, rotation, 0);
-
+                transform.Translate(0, 0, translation);
+                transform.Rotate(0, rotation, 0);
+            }
+        }
     }
 }

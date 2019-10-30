@@ -11,7 +11,7 @@ public class GrandpaPlayer : MonoBehaviour
     {
         if(is_active_player)
         {
-            print("grandpa is active");
+            //print("grandpa is active");
         }
     }
 }
