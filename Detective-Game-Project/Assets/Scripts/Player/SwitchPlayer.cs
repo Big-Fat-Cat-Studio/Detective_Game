@@ -12,6 +12,7 @@ public class SwitchPlayer : MonoBehaviour
 
     public GameObject grandpa;
     public GameObject kid;
+    public GameObject main_camera;
 
     public ActivePlayer active_player;
     // Start is called before the first frame update
@@ -19,7 +20,10 @@ public class SwitchPlayer : MonoBehaviour
     {
         grandpa = GameObject.FindGameObjectWithTag("Grandpa");
         kid = GameObject.FindGameObjectWithTag("Kid");
+        main_camera = GameObject.FindGameObjectWithTag("MainCamera");
         grandpa.GetComponent<GrandpaPlayer>().is_active_player = true;
+        grandpa.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
+        main_camera.GetComponent<Camera>().target = grandpa.transform;
         active_player = ActivePlayer.Grandpa;
     }
 
@@ -34,6 +38,7 @@ public class SwitchPlayer : MonoBehaviour
                 grandpa.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
                 kid.GetComponent<KidPlayer>().is_active_player = true;
                 kid.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
+                main_camera.GetComponent<Camera>().target = kid.transform;
                 active_player = ActivePlayer.Kid;
             }
             else if(active_player == ActivePlayer.Kid)
@@ -42,6 +47,7 @@ public class SwitchPlayer : MonoBehaviour
                 kid.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
                 grandpa.GetComponent<GrandpaPlayer>().is_active_player = true;
                 grandpa.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
+                main_camera.GetComponent<Camera>().target = grandpa.transform;
                 active_player = ActivePlayer.Grandpa;
             }
         }

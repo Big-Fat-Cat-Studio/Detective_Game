@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class KidPlayer : MonoBehaviour
 {
+    public float speed = 5.0f;
+    public float rotationSpeed = 100.0f;
     public bool is_active_player;
+    public bool is_climbing = false;
 
     // Update is called once per frame
     void Update()
@@ -12,6 +15,27 @@ public class KidPlayer : MonoBehaviour
         if(this.is_active_player)
         {
             print("kid is active");
+            float translation = Input.GetAxis("Vertical") * speed;
+            float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+            translation *= Time.deltaTime;
+            rotation *= Time.deltaTime;
+            transform.Translate(0, 0, translation);
+            transform.Rotate(0, rotation, 0);
+            if(is_climbing)
+            {
+                if (Input.GetKey(KeyCode.W))
+                {
+                    this.gameObject.transform.Translate(Vector3.up);
+                }
+                else if (Input.GetKey(KeyCode.S))
+                {
+                    this.gameObject.transform.Translate(Vector3.down);
+                }
+                else
+                {
+                    this.gameObject.transform.Translate(new Vector3(0, 0, 0));
+                }
+            }
         }
     }
 }
