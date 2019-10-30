@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerPickUp : MonoBehaviour
 {
+    public GameObject text;
+
+    new BoxCollider collider;
     GameObject holding;
     List<GameObject> pickupsInRange;
 
@@ -12,6 +15,8 @@ public class PlayerPickUp : MonoBehaviour
     {
         pickupsInRange = new List<GameObject>();
         holding = null;
+        collider = GetComponent<BoxCollider>();
+        text.SetActive(false);
     }
 
     private void Update()
@@ -23,22 +28,35 @@ public class PlayerPickUp : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
+            GameObject closestObject = null;
+
             foreach (GameObject pickup in pickupsInRange)
             {
-                //NEED AN IF STATEMENT HERE ABOUT THE CAMERA POINTING/MOUSE POINTING AT THE RIGHT OBJECT
                 if (holding == null || !ReferenceEquals(pickup, holding))
                 {
-                    dropObject();
+                    if (closestObject == null)
+                    {
+                        closestObject = pickup;
+                        continue;
+                    }
 
-                    holding = pickup;
-                    holding.transform.rotation = transform.rotation;
-                    holding.GetComponent<Rigidbody>().isKinematic = true;
-                    holding.GetComponent<Rigidbody>().useGravity = false;
-                    return;
+                    float distance = Vector3.Distance(pickup.transform.position, transform.position);
+                    float distanceClosestObject = Vector3.Distance(closestObject.transform.position, transform.position);
+                    if (distance < distanceClosestObject)
+                    {
+                        closestObject = pickup;
+                    }
                 }
             }
-
+            
             dropObject();
+            if (closestObject != null)
+            {
+                holding = closestObject;
+                holding.transform.rotation = transform.rotation;
+                holding.GetComponent<Rigidbody>().isKinematic = true;
+                holding.GetComponent<Rigidbody>().useGravity = false;
+            }
         }
     }
 
@@ -46,8 +64,7 @@ public class PlayerPickUp : MonoBehaviour
     {
         if (holding != null)
         {
-            //obviously temporary position, need to know more about the camera before items can be dropped properly
-            holding.transform.position = new Vector3(this.transform.position.x + 1f, this.transform.position.y, this.transform.position.z);
+            holding.transform.position = collider.bounds.center;
             holding.GetComponent<Rigidbody>().isKinematic = false;
             holding.GetComponent<Rigidbody>().useGravity = true;
             holding = null;
@@ -59,6 +76,7 @@ public class PlayerPickUp : MonoBehaviour
         if (other.gameObject.tag == Constant.TAG_PICKUP)
         {
             pickupsInRange.Add(other.gameObject);
+            text.SetActive(true);
         }
     }
 
@@ -67,6 +85,11 @@ public class PlayerPickUp : MonoBehaviour
         if (other.gameObject.tag == Constant.TAG_PICKUP)
         {
             pickupsInRange.Remove(other.gameObject);
+
+            if (pickupsInRange.Count == 0)
+            {
+                text.SetActive(false);
+            }
         }
     }
 }
