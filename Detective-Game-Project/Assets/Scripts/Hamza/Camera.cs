@@ -35,12 +35,10 @@ public class Camera : MonoBehaviour
 
     void LateUpdate()
     {
-
         HorizontalAxis = Input.GetAxisRaw("Mouse X");
         VerticalAxis = Input.GetAxisRaw("Mouse Y");
 
-
-        Vector3 targetOffset = new Vector3(target.position.x, (target.position.y + 2f), target.position.z);
+        Vector3 targetOffset = new Vector3(target.position.x, (target.position.y + 3f), target.position.z);
         Quaternion rotation = Quaternion.Euler(cameraHeight, rotateAround, cameraPan);
         Vector3 vectorMask = Vector3.one;
         Vector3 rotateVector = rotation * vectorMask;
@@ -52,7 +50,6 @@ public class Camera : MonoBehaviour
         SmoothCamMethod();
 
         transform.LookAt(target);
-
 
         if (rotateAround > 360)
         {
