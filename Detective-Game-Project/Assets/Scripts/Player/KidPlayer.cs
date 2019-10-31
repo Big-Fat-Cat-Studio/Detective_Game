@@ -53,13 +53,13 @@ public class KidPlayer : MonoBehaviour
                 {
                     if (Input.GetKey(KeyCode.Space))
                     {
-                        gameObject.GetComponent<Rigidbody>().AddForce(Physics.gravity = new Vector3(0, glide, 0));
+                        gameObject.GetComponent<Rigidbody>().drag = glide;
                     }
 
                 }
                 if (Input.GetKeyUp(KeyCode.Space))
                 {
-                    gameObject.GetComponent<Rigidbody>().AddForce(Physics.gravity = new Vector3(0, -9.81f, 0));
+                    gameObject.GetComponent<Rigidbody>().drag = 0;
                 }
 
                 transform.Translate(0, 0, translation);
