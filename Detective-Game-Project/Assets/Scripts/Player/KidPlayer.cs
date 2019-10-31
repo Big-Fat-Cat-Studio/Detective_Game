@@ -18,7 +18,7 @@ public class KidPlayer : MonoBehaviour
     {
         if(this.is_active_player)
         {
-            print("kid is active");
+            //print("kid is active");
             if(is_climbing)
             {
                 if (Input.GetKey(KeyCode.W))

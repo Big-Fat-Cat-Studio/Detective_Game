@@ -11,7 +11,7 @@ public class Camera : MonoBehaviour
     public float smooth = 4.0f;
     public float rotateAround = 70f;
 
-    [Header("Player to follow")]
+    [HideInInspector]
     public Transform target;
 
     [Header("Map coordinate script")]
@@ -67,7 +67,9 @@ public class Camera : MonoBehaviour
             rotateAround = (rotateAround + 360f);
         }
 
-        rotateAround += HorizontalAxis * camRotateSpeed * Time.deltaTime;
+        rotateAround += (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) ?
+            Input.GetAxis("Horizontal") * 150f * Time.deltaTime : HorizontalAxis * camRotateSpeed * Time.deltaTime;
+
         DistanceAway = Mathf.Clamp(DistanceAway += VerticalAxis, minDistance, maxDistance);
     }
 
