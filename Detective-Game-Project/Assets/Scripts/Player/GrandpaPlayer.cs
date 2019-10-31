@@ -13,7 +13,7 @@ public class GrandpaPlayer : MonoBehaviour
     {
         if(is_active_player)
         {
-            print("grandpa is active");
+            //print("grandpa is active");
             float translation = Input.GetAxis("Vertical") * speed;
             float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
             translation *= Time.deltaTime;
