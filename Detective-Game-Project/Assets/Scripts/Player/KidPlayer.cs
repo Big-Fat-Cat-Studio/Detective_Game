@@ -34,11 +34,11 @@ public class KidPlayer : MonoBehaviour
             if(!is_climbing)
             {
                 float translation = Input.GetAxis("Vertical") * speed;
-                float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+                float rotation = Input.GetAxis("Horizontal") * speed; //rotationSpeed;
                 translation *= Time.deltaTime;
                 rotation *= Time.deltaTime;
-                transform.Translate(0, 0, translation);
-                transform.Rotate(0, rotation, 0);
+                transform.Translate(rotation, 0, translation);
+                //transform.Rotate(0, rotation, 0);
             }
         }
     }

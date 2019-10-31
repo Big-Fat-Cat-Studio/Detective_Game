@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ladder : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if(collision.gameObject.tag == "Kid")
         {
@@ -13,7 +13,7 @@ public class ladder : MonoBehaviour
             collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         }
     }
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider collision)
     {
         if(collision.gameObject.tag == "Kid")
         {
