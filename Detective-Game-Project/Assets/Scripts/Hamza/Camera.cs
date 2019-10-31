@@ -11,7 +11,6 @@ public class Camera : MonoBehaviour
     public float smooth = 4.0f;
     public float rotateAround = 70f;
 
-    [HideInInspector]
     public Transform target;
 
     [Header("Map coordinate script")]

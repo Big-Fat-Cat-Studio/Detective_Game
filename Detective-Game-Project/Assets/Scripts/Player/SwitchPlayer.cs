@@ -9,6 +9,7 @@ namespace Scripts
         public GameObject grandpa;
         public GameObject kid;
         public GameObject main_camera;
+        public GameObject main_camera2;
         public static ActivePlayer active_player;
         // Start is called before the first frame update
         private void Start()
@@ -19,6 +20,7 @@ namespace Scripts
             grandpa.GetComponent<GrandpaPlayer>().is_active_player = true;
             grandpa.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
             main_camera.GetComponent<Camera>().target = grandpa.transform;
+            main_camera2.GetComponent<Camera>().target = grandpa.transform;
             active_player = ActivePlayer.Grandpa;
         }
 
@@ -34,6 +36,7 @@ namespace Scripts
                     kid.GetComponent<KidPlayer>().is_active_player = true;
                     kid.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
                     main_camera.GetComponent<Camera>().target = kid.transform;
+                    main_camera2.GetComponent<Camera>().target = kid.transform;
                     SwitchPlayer.active_player = ActivePlayer.Kid;
                 }
                 else if (SwitchPlayer.active_player == ActivePlayer.Kid)
@@ -43,6 +46,7 @@ namespace Scripts
                     grandpa.GetComponent<GrandpaPlayer>().is_active_player = true;
                     grandpa.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
                     main_camera.GetComponent<Camera>().target = grandpa.transform;
+                    main_camera2.GetComponent<Camera>().target = grandpa.transform;
                     SwitchPlayer.active_player = ActivePlayer.Grandpa;
                 }
             }
