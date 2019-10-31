@@ -10,6 +10,9 @@ public class KidPlayer : MonoBehaviour
     public bool is_active_player;
     public bool is_climbing = false;
 
+    public float jumpForce;
+    public float glide;
+
     // Update is called once per frame
     void Update()
     {
@@ -34,11 +37,33 @@ public class KidPlayer : MonoBehaviour
             if(!is_climbing)
             {
                 float translation = Input.GetAxis("Vertical") * speed;
-                float rotation = Input.GetAxis("Horizontal") * speed; //rotationSpeed;
+                float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+
                 translation *= Time.deltaTime;
                 rotation *= Time.deltaTime;
-                transform.Translate(rotation, 0, translation);
-                //transform.Rotate(0, rotation, 0);
+
+                if (gameObject.GetComponent<Rigidbody>().velocity.y == 0)
+                {
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        gameObject.GetComponent<Rigidbody>().AddForce(0, jumpForce, 0);
+                    }
+                }
+                else if (gameObject.GetComponent<Rigidbody>().velocity.y < 0)
+                {
+                    if (Input.GetKey(KeyCode.Space))
+                    {
+                        gameObject.GetComponent<Rigidbody>().AddForce(Physics.gravity = new Vector3(0, glide, 0));
+                    }
+
+                }
+                if (Input.GetKeyUp(KeyCode.Space))
+                {
+                    gameObject.GetComponent<Rigidbody>().AddForce(Physics.gravity = new Vector3(0, -9.81f, 0));
+                }
+
+                transform.Translate(0, 0, translation);
+                transform.Rotate(0, rotation, 0);
             }
         }
     }
