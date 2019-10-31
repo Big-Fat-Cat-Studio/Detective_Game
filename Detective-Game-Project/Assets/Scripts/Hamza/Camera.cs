@@ -35,6 +35,10 @@ public class Camera : MonoBehaviour
 
     void LateUpdate()
     {
+        if (target == null)
+        {
+            return;
+        }
 
         HorizontalAxis = Input.GetAxisRaw("Mouse X");
         VerticalAxis = Input.GetAxisRaw("Mouse Y");

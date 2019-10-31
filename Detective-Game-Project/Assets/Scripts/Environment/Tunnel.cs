@@ -6,8 +6,7 @@ namespace Scripts
 {
     public class Tunnel : MonoBehaviour
     {
-        public GameObject Kid, TunnelA, TunnelB, TunnelWall;
-
+        public GameObject Kid, TunnelA, TunnelB, TunnelWall, Camera;
 
         void Start()
         {
@@ -19,13 +18,11 @@ namespace Scripts
         {
             if (collision.collider.name == "Kid")
             {
-                //disable colliders
-                TunnelA.GetComponent<CapsuleCollider>().enabled = false;
-                TunnelB.GetComponent<CapsuleCollider>().enabled = false;
-                TunnelWall.GetComponent<BoxCollider>().enabled = false;
-                //disable movement script
+                Kid.GetComponent<CapsuleCollider>().enabled = false;
                 Kid.GetComponent<KidPlayer>().enabled = false;
+                Camera.GetComponent<Camera>().target = null;
                 Kid.GetComponent<Rigidbody>().velocity = new Vector3(-2, 0, 0);
+                Kid.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
                 Kid.GetComponent<Rigidbody>().useGravity = false;
                 StartCoroutine(MoveIn());
             }
@@ -43,17 +40,23 @@ namespace Scripts
         IEnumerator Delay()
         {
             yield return new WaitForSecondsRealtime(2);
-            if (this.gameObject.name == "Tunnel A")
+            if (ReferenceEquals(gameObject, TunnelA))
             {
                 Kid.transform.position = TunnelB.transform.position;
 
             }
-            if (this.gameObject.name == "Tunnel B")
+            if (ReferenceEquals(gameObject, TunnelB))
             {
                 Kid.transform.position = TunnelA.transform.position;
             }
 
-            Kid.GetComponent<Rigidbody>().useGravity = true;
+            Kid.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+            if (Camera.GetComponent<Camera>().target == null)
+            {
+                Camera.GetComponent<Camera>().target = Kid.transform; 
+            }
+
+            
             Kid.transform.Rotate(new Vector3(0, 180, 0));
             Kid.GetComponent<Rigidbody>().velocity = new Vector3(2, 0, 0);
             StartCoroutine(MoveOut());
@@ -62,11 +65,10 @@ namespace Scripts
 
         IEnumerator MoveOut()
         {
-            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSecondsRealtime(0.5f);
+            Kid.GetComponent<Rigidbody>().useGravity = true;
             Kid.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-            TunnelA.GetComponent<CapsuleCollider>().enabled = true;
-            TunnelB.GetComponent<CapsuleCollider>().enabled = true;
-            TunnelWall.GetComponent<BoxCollider>().enabled = true;
+            Kid.GetComponent<CapsuleCollider>().enabled = true;
             Kid.GetComponent<KidPlayer>().enabled = true;
         }
     }
