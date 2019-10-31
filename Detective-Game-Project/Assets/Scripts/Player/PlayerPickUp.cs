@@ -6,11 +6,11 @@ namespace Scripts
 {
     public class PlayerPickUp : MonoBehaviour
     {
+        public GameObject holding;
         public GameObject text;
         public ActivePlayer currentPlayer;
 
         new BoxCollider collider;
-        GameObject holding;
         List<GameObject> pickupsInRange;
 
         // Start is called before the first frame update
@@ -44,7 +44,7 @@ namespace Scripts
                 holding.transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
             }
 
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
                 GameObject closestObject = null;
 

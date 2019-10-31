@@ -17,6 +17,7 @@ public class ladder : MonoBehaviour
     {
         if(collision.gameObject.tag == "Kid")
         {
+            print("unboink");
             collision.gameObject.GetComponent<KidPlayer>().is_climbing = false;
             collision.gameObject.GetComponent<Rigidbody>().isKinematic = false;
         }
