@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,11 +37,9 @@ public class KidPlayer : MonoBehaviour
             if(!is_climbing)
             {
                 float translation = Input.GetAxis("Vertical") * speed;
-                float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
-
+                float rotation = Input.GetAxis("Horizontal") * speed; //rotationSpeed;
                 translation *= Time.deltaTime;
                 rotation *= Time.deltaTime;
-
                 if (gameObject.GetComponent<Rigidbody>().velocity.y == 0)
                 {
                     if (Input.GetKeyDown(KeyCode.Space))
@@ -55,15 +53,13 @@ public class KidPlayer : MonoBehaviour
                     {
                         gameObject.GetComponent<Rigidbody>().AddForce(Physics.gravity = new Vector3(0, glide, 0));
                     }
-
                 }
                 if (Input.GetKeyUp(KeyCode.Space))
                 {
                     gameObject.GetComponent<Rigidbody>().AddForce(Physics.gravity = new Vector3(0, -9.81f, 0));
                 }
-
-                transform.Translate(0, 0, translation);
-                transform.Rotate(0, rotation, 0);
+                transform.Translate(rotation, 0, translation);
+                //transform.Rotate(0, rotation, 0);
             }
         }
     }
