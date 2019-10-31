@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 347831955}
   - component: {fileID: 347831954}
   - component: {fileID: 347831953}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tunnel Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -691,7 +691,7 @@ GameObject:
   - component: {fileID: 517822950}
   - component: {fileID: 517822949}
   - component: {fileID: 517822948}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1295,8 +1295,6 @@ MonoBehaviour:
   rotationSpeed: 200
   is_active_player: 0
   is_climbing: 0
-  jumpForce: 400
-  glide: -1
 --- !u!54 &1471317891
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1573,7 +1571,7 @@ MonoBehaviour:
   camRotateSpeed: 360
   CamOcclusion:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!1 &1835359149
 GameObject:
   m_ObjectHideFlags: 0
