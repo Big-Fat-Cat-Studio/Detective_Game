@@ -6,16 +6,9 @@ namespace Scripts
 {
     public class SwitchPlayer : MonoBehaviour
     {
-        public enum ActivePlayer
-        {
-            Grandpa,
-            Kid
-        }
-
         public GameObject grandpa;
         public GameObject kid;
         public GameObject main_camera;
-
         public static ActivePlayer active_player;
         // Start is called before the first frame update
         private void Start()

@@ -19,11 +19,11 @@ namespace Scripts
         // Update is called once per frame
         private void Update()
         {
-            if (SwitchPlayer.active_player == SwitchPlayer.ActivePlayer.Grandpa)
+            if (SwitchPlayer.active_player == ActivePlayer.Grandpa)
             {
                 this.gameObject.GetComponent<Text>().text = original_text;
             }
-            else if (SwitchPlayer.active_player == SwitchPlayer.ActivePlayer.Kid)
+            else if (SwitchPlayer.active_player == ActivePlayer.Kid)
             {
                 this.gameObject.GetComponent<Text>().text = scrambled_text;
             }
