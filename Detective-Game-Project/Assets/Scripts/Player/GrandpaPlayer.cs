@@ -14,12 +14,22 @@ public class GrandpaPlayer : MonoBehaviour
         if(is_active_player)
         {
             //print("grandpa is active");
-            float translation = Input.GetAxis("Vertical") * speed;
+            
             float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
-            translation *= Time.deltaTime;
             rotation *= Time.deltaTime;
-            transform.Translate(0, 0, translation);
             transform.Rotate(0, rotation, 0);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (is_active_player)
+        {
+            float translation = Input.GetAxis("Vertical") * speed;
+            translation *= Time.deltaTime;
+            Vector3 newPosition = transform.position + transform.forward * translation;
+
+            GetComponent<Rigidbody>().MovePosition(newPosition);
         }
     }
 }

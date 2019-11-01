@@ -12,11 +12,13 @@ namespace Scripts
 
         new BoxCollider collider;
         List<GameObject> pickupsInRange;
+        List<GameObject> wallsInRange;
 
         // Start is called before the first frame update
         void Start()
         {
             pickupsInRange = new List<GameObject>();
+            wallsInRange = new List<GameObject>();
             holding = null;
             collider = GetComponent<BoxCollider>();
             text.SetActive(false);
@@ -41,7 +43,7 @@ namespace Scripts
 
             if (holding != null)
             {
-                holding.transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+                holding.transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
             }
 
             if (Input.GetKeyDown(KeyCode.Z))
@@ -81,8 +83,12 @@ namespace Scripts
         void dropObject()
         {
             if (holding != null)
-            {
-                holding.transform.position = collider.bounds.center;
+            { 
+                if (wallsInRange.Count == 0)
+                {
+                    holding.transform.position = collider.bounds.center;
+                }
+                
                 holding.GetComponent<Rigidbody>().isKinematic = false;
                 holding.GetComponent<Rigidbody>().useGravity = true;
                 holding = null;
@@ -96,6 +102,11 @@ namespace Scripts
                 pickupsInRange.Add(other.gameObject);
                 text.SetActive(true);
             }
+
+            if (other.gameObject.layer == Constant.LAYER_WALL)
+            {
+                wallsInRange.Add(other.gameObject);
+            }
         }
 
         private void OnTriggerExit(Collider other)
@@ -108,6 +119,11 @@ namespace Scripts
                 {
                     text.SetActive(false);
                 }
+            }
+
+            if (other.gameObject.layer == Constant.LAYER_WALL)
+            {
+                wallsInRange.Remove(other.gameObject);
             }
         }
     }

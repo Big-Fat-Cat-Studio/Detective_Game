@@ -8,7 +8,9 @@ namespace Scripts
     public class Door : MonoBehaviour
     {
         public GameObject text;
-        public string interact_text;
+        public bool locked;
+        //public string interact_text;
+        public string after_interact_text;
 
         private bool can_interact = false;
 
@@ -20,8 +22,16 @@ namespace Scripts
         {
             if (can_interact && Input.GetKeyDown(KeyCode.X))
             {
-                text.SetActive(false);
-                Destroy(this.gameObject);
+                if (locked)
+                {
+                    text.GetComponent<Text>().text = after_interact_text;
+                    StartCoroutine(textDissappear());
+                }
+                else
+                {
+                    text.SetActive(false);
+                    Destroy(this.gameObject);
+                }
             }
         }
         private void OnTriggerEnter(Collider other)
@@ -29,7 +39,12 @@ namespace Scripts
             if (other.gameObject.tag == "Kid" || other.gameObject.tag == "Grandpa")
             {
                 can_interact = true;
-                text.GetComponent<Text>().text = interact_text;
+
+                if (text.GetComponent<Text>().text != after_interact_text)
+                {
+                    text.GetComponent<Text>().text = Constant.TEXT_DOOR;
+                }
+
                 text.SetActive(true);
             }
         }
@@ -38,6 +53,20 @@ namespace Scripts
             if (other.gameObject.tag == "Kid" || other.gameObject.tag == "Grandpa")
             {
                 can_interact = false;
+
+                if (text.GetComponent<Text>().text == Constant.TEXT_DOOR)
+                {
+                    text.SetActive(false);
+                }
+            }
+        }
+
+        IEnumerator textDissappear()
+        {
+            yield return new WaitForSecondsRealtime(6);
+            if (text.GetComponent<Text>().text == after_interact_text)
+            {
+                text.GetComponent<Text>().text = "";
                 text.SetActive(false);
             }
         }

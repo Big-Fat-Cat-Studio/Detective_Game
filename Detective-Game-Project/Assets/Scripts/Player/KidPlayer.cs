@@ -36,12 +36,6 @@ public class KidPlayer : MonoBehaviour
             }
             if(!is_climbing)
             {
-                float translation = Input.GetAxis("Vertical") * speed;
-                float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
-
-                translation *= Time.deltaTime;
-                rotation *= Time.deltaTime;
-
                 if (gameObject.GetComponent<Rigidbody>().velocity.y == 0)
                 {
                     if (Input.GetKeyDown(KeyCode.Space))
@@ -62,9 +56,24 @@ public class KidPlayer : MonoBehaviour
                     gameObject.GetComponent<Rigidbody>().drag = 0;
                 }
 
-                transform.Translate(0, 0, translation);
+
+                float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+                rotation *= Time.deltaTime;
                 transform.Rotate(0, rotation, 0);
+                //transform.Translate(0, 0, translation);
             }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!is_climbing && is_active_player)
+        {
+            float translation = Input.GetAxis("Vertical") * speed;
+            translation *= Time.deltaTime;
+            Vector3 newPosition = transform.position + transform.forward * translation;
+
+            GetComponent<Rigidbody>().MovePosition(newPosition);
         }
     }
 }

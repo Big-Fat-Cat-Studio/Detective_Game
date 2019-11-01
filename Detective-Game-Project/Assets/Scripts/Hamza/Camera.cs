@@ -32,7 +32,7 @@ public class Camera : MonoBehaviour
         rotateAround = target.eulerAngles.y - 45f;
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         if (target == null)
         {
