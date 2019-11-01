@@ -97,7 +97,7 @@ namespace Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == Constant.TAG_PICKUP)
+            if (other.gameObject.tag == Constant.TAG_PICKUP && !ReferenceEquals(holding, other.gameObject))
             {
                 pickupsInRange.Add(other.gameObject);
                 text.SetActive(true);

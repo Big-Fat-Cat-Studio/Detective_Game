@@ -85,7 +85,6 @@ namespace Scripts
                 Camera.GetComponent<Camera>().target = null;
                 ClueCamera.GetComponent<Camera>().target = null;
                 Kid.GetComponent<Rigidbody>().velocity = moveInDir;
-                Kid.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
                 Kid.GetComponent<Rigidbody>().useGravity = false;
                 Crawling = true;
                 StartCoroutine(MoveIn());
@@ -115,7 +114,6 @@ namespace Scripts
                 Kid.transform.position = TunnelA.transform.position;
             }
 
-            Kid.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
             if (Camera.GetComponent<Camera>().target == null)
             {
                 Camera.GetComponent<Camera>().target = Kid.transform;

@@ -6,9 +6,20 @@ public class JumpTrigger : MonoBehaviour
 {
     List<string> collidedObjects = new List<string>();
 
+    void OnTriggerStay(Collider other)
+    {
+        if (!collidedObjects.Contains(other.gameObject.name))
+        {
+            collidedObjects.Add(other.gameObject.name);
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
-        collidedObjects.Add(other.gameObject.name);
+        if (!collidedObjects.Contains(other.gameObject.name))
+        {
+            collidedObjects.Add(other.gameObject.name);
+        }
     }
 
     private void OnTriggerExit(Collider other)
