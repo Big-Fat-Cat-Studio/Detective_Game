@@ -10,16 +10,17 @@ public class KidPlayer : MonoBehaviour
     public bool is_active_player;
     public bool is_climbing = false;
 
+    public bool JumpTrigger = false;
     public float jumpForce;
     public float glide;
 
     // Update is called once per frame
     void Update()
     {
-        if(this.is_active_player)
+        if (this.is_active_player)
         {
             //print("kid is active");
-            if(is_climbing)
+            if (is_climbing)
             {
                 if (Input.GetKey(KeyCode.W))
                 {
@@ -34,9 +35,9 @@ public class KidPlayer : MonoBehaviour
                     this.gameObject.transform.Translate(new Vector3(0, 0, 0));
                 }
             }
-            if(!is_climbing)
+            if (!is_climbing)
             {
-                if (gameObject.GetComponent<Rigidbody>().velocity.y == 0)
+                if (JumpTrigger == true)
                 {
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
