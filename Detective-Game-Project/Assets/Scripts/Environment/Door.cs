@@ -15,7 +15,6 @@ namespace Scripts
         private void Start()
         {
             text.SetActive(false);
-            text.GetComponent<Text>().text = interact_text;
         }
         private void Update()
         {
@@ -30,6 +29,7 @@ namespace Scripts
             if (other.gameObject.tag == "Kid" || other.gameObject.tag == "Grandpa")
             {
                 can_interact = true;
+                text.GetComponent<Text>().text = interact_text;
                 text.SetActive(true);
             }
         }

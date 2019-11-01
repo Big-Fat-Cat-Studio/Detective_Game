@@ -542,7 +542,7 @@ PrefabInstance:
     - target: {fileID: 4690835973921454860, guid: c01ae55c108abea49a850c95832254f3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.35
+      value: 0.76
       objectReference: {fileID: 0}
     - target: {fileID: 4690835973921454860, guid: c01ae55c108abea49a850c95832254f3,
         type: 3}
@@ -2355,7 +2355,7 @@ PrefabInstance:
     - target: {fileID: 3477679397989512526, guid: 925949a64b94ec84797d936173974082,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3477679397989512526, guid: 925949a64b94ec84797d936173974082,
         type: 3}
@@ -2390,6 +2390,11 @@ PrefabInstance:
     - target: {fileID: 3477679397989512527, guid: 925949a64b94ec84797d936173974082,
         type: 3}
       propertyPath: main_camera2
+      value: 
+      objectReference: {fileID: 61923028}
+    - target: {fileID: 3477679397989512527, guid: 925949a64b94ec84797d936173974082,
+        type: 3}
+      propertyPath: clue_camera
       value: 
       objectReference: {fileID: 61923028}
     m_RemovedComponents: []
@@ -4309,15 +4314,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4247484869774668, guid: 4459fac03eb66bb4eb306681709ee5a5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 160.59
+      value: 160.75
       objectReference: {fileID: 0}
     - target: {fileID: 4247484869774668, guid: 4459fac03eb66bb4eb306681709ee5a5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.7727
+      value: 3.851
       objectReference: {fileID: 0}
     - target: {fileID: 4247484869774668, guid: 4459fac03eb66bb4eb306681709ee5a5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 158.06
+      value: 158.255
       objectReference: {fileID: 0}
     - target: {fileID: 4247484869774668, guid: 4459fac03eb66bb4eb306681709ee5a5, type: 3}
       propertyPath: m_LocalRotation.x
@@ -4353,15 +4358,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4247484869774668, guid: 4459fac03eb66bb4eb306681709ee5a5, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.36398792
+      value: 0.33870474
       objectReference: {fileID: 0}
     - target: {fileID: 4247484869774668, guid: 4459fac03eb66bb4eb306681709ee5a5, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.36665425
+      value: 0.34118584
       objectReference: {fileID: 0}
     - target: {fileID: 4247484869774668, guid: 4459fac03eb66bb4eb306681709ee5a5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.6071487
+      value: 1.2423239
       objectReference: {fileID: 0}
     - target: {fileID: 23292105919002506, guid: 4459fac03eb66bb4eb306681709ee5a5,
         type: 3}
@@ -7242,7 +7247,7 @@ PrefabInstance:
     - target: {fileID: 2573337914302454493, guid: f5a1bbd5e68e9514397f8ff4e464eadd,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.81
+      value: 0.468
       objectReference: {fileID: 0}
     - target: {fileID: 2573337914302454493, guid: f5a1bbd5e68e9514397f8ff4e464eadd,
         type: 3}
@@ -7292,7 +7297,7 @@ PrefabInstance:
     - target: {fileID: 2573337914302454488, guid: f5a1bbd5e68e9514397f8ff4e464eadd,
         type: 3}
       propertyPath: jumpForce
-      value: 250
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 2573337914302454488, guid: f5a1bbd5e68e9514397f8ff4e464eadd,
         type: 3}
@@ -7447,6 +7452,7 @@ MonoBehaviour:
   TunnelA: {fileID: 1273075643}
   TunnelB: {fileID: 1843519956}
   Camera: {fileID: 1626979484}
+  ClueCamera: {fileID: 61923028}
   facingTunnelA: 1
   facingTunnelB: 3
 --- !u!65 &1273075645
@@ -7460,8 +7466,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.8230696, z: 0.8565521}
-  m_Center: {x: 0, y: 0.057259083, z: 0.07172394}
+  m_Size: {x: 1, y: 0.7714367, z: 0.8565521}
+  m_Center: {x: 0, y: 0.2493062, z: 0.07172394}
 --- !u!4 &1273075646
 Transform:
   m_ObjectHideFlags: 0
@@ -7470,7 +7476,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273075643}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 159.889, y: 4.542, z: 158.992}
+  m_LocalPosition: {x: 159.84, y: 4.298, z: 158.913}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 739156330}
@@ -7907,7 +7913,7 @@ PrefabInstance:
     - target: {fileID: 8207223313938196710, guid: 95068f9bebc29cf45baf8472d5d214c1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8207223313938196710, guid: 95068f9bebc29cf45baf8472d5d214c1,
         type: 3}
@@ -10420,6 +10426,7 @@ MonoBehaviour:
   TunnelA: {fileID: 1273075643}
   TunnelB: {fileID: 1843519956}
   Camera: {fileID: 1626979484}
+  ClueCamera: {fileID: 61923028}
   facingTunnelA: 1
   facingTunnelB: 3
 --- !u!65 &1843519959
@@ -10485,7 +10492,7 @@ PrefabInstance:
     - target: {fileID: 8081319580228546860, guid: 39471ff913791fa46b92ac6367d25856,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8081319580228546860, guid: 39471ff913791fa46b92ac6367d25856,
         type: 3}
@@ -10536,6 +10543,21 @@ PrefabInstance:
         type: 3}
       propertyPath: maxDistance
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8081319580228546859, guid: 39471ff913791fa46b92ac6367d25856,
+        type: 3}
+      propertyPath: smooth
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8081319580228546859, guid: 39471ff913791fa46b92ac6367d25856,
+        type: 3}
+      propertyPath: cameraPan
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8081319580228546859, guid: 39471ff913791fa46b92ac6367d25856,
+        type: 3}
+      propertyPath: camRotateSpeed
+      value: 360
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39471ff913791fa46b92ac6367d25856, type: 3}
@@ -11448,7 +11470,7 @@ Transform:
   - {fileID: 965095747}
   - {fileID: 2010383187}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2032699113
 PrefabInstance:

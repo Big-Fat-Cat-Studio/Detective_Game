@@ -6,7 +6,7 @@ namespace Scripts
 {
     public class Tunnel : MonoBehaviour
     {
-        public GameObject Kid, TunnelA, TunnelB, Camera;
+        public GameObject Kid, TunnelA, TunnelB, Camera, ClueCamera;
         Vector3 moveInRot, moveOutRot, moveInDir, moveOutDir;
         bool Crawling = false;
         public enum FacingTunnelA {Front, Right, Back, Left};
@@ -83,6 +83,7 @@ namespace Scripts
                 Kid.GetComponent<CapsuleCollider>().enabled = false;
                 Kid.GetComponent<KidPlayer>().enabled = false;
                 Camera.GetComponent<Camera>().target = null;
+                ClueCamera.GetComponent<Camera>().target = null;
                 Kid.GetComponent<Rigidbody>().velocity = moveInDir;
                 Kid.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
                 Kid.GetComponent<Rigidbody>().useGravity = false;
@@ -118,6 +119,7 @@ namespace Scripts
             if (Camera.GetComponent<Camera>().target == null)
             {
                 Camera.GetComponent<Camera>().target = Kid.transform;
+                ClueCamera.GetComponent<Camera>().target = Kid.transform;
             }
 
 
