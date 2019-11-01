@@ -7,6 +7,12 @@ public class GrandpaPlayer : MonoBehaviour
     public float speed = 2.0f;
     public float rotationSpeed = 100.0f;
     public bool is_active_player;
+    Rigidbody rigidBody;
+
+    private void Start()
+    {
+        rigidBody = GetComponent<Rigidbody>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -26,10 +32,8 @@ public class GrandpaPlayer : MonoBehaviour
         if (is_active_player)
         {
             float translation = Input.GetAxis("Vertical") * speed;
-            translation *= Time.deltaTime;
-            Vector3 newPosition = transform.position + transform.forward * translation;
-
-            GetComponent<Rigidbody>().MovePosition(newPosition);
+            rigidBody.velocity =
+                new Vector3(transform.forward.x * translation, rigidBody.velocity.y, transform.forward.z * translation);
         }
     }
 }

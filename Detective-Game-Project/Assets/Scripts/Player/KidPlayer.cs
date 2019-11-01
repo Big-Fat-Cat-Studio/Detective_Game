@@ -13,6 +13,12 @@ public class KidPlayer : MonoBehaviour
     public bool JumpTrigger = false;
     public float jumpForce;
     public float glide;
+    Rigidbody rigidBody;
+
+    private void Start()
+    {
+        rigidBody = GetComponent<Rigidbody>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -41,27 +47,25 @@ public class KidPlayer : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
-                        gameObject.GetComponent<Rigidbody>().AddForce(0, jumpForce, 0);
+                        rigidBody.AddForce(transform.up * jumpForce);
                     }
                 }
-                else if (gameObject.GetComponent<Rigidbody>().velocity.y < 0)
+                else if (rigidBody.velocity.y < 0)
                 {
                     if (Input.GetKey(KeyCode.Space))
                     {
-                        gameObject.GetComponent<Rigidbody>().drag = glide;
+                        rigidBody.drag = glide;
                     }
 
                 }
                 if (Input.GetKeyUp(KeyCode.Space))
                 {
-                    gameObject.GetComponent<Rigidbody>().drag = 0;
+                    rigidBody.drag = 0;
                 }
-
 
                 float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
                 rotation *= Time.deltaTime;
                 transform.Rotate(0, rotation, 0);
-                //transform.Translate(0, 0, translation);
             }
         }
     }
@@ -71,10 +75,8 @@ public class KidPlayer : MonoBehaviour
         if (!is_climbing && is_active_player)
         {
             float translation = Input.GetAxis("Vertical") * speed;
-            translation *= Time.deltaTime;
-            Vector3 newPosition = transform.position + transform.forward * translation;
-
-            GetComponent<Rigidbody>().MovePosition(newPosition);
+            rigidBody.velocity = 
+                new Vector3(transform.forward.x * translation, rigidBody.velocity.y, transform.forward.z * translation);
         }
     }
 }
