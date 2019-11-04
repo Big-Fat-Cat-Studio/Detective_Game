@@ -1,27 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Cinemachine;
 
 namespace Scripts
 {
     public class SwitchPlayer : MonoBehaviour
     {
-        public GameObject grandpa;
-        public GameObject kid;
-        public GameObject main_camera;
-        public GameObject clue_camera;
-        public static ActivePlayer active_player;
-        // Start is called before the first frame update
+        public GameObject Grandpa;
+        public GameObject Kid;
+        public static ActivePlayer ActivePlayer;
+
+        [Header("Not for the actual cameras, place the \"FreeLookN\" objects here.\n")]
+        public GameObject CameraContext;
+        public GameObject CameraContextClue;
+
+        private float _PrevPlayerORotation; // Object X-Axis Rotation
+        private float _PrevPlayerCRotation; // Camera X-Axis Rotation
         private void Start()
         {
-            //grandpa = GameObject.FindGameObjectWithTag("Grandpa");
-            //kid = GameObject.FindGameObjectWithTag("Kid");
-            //main_camera = GameObject.FindGameObjectWithTag("MainCamera");
-            grandpa.GetComponent<GrandpaPlayer>().is_active_player = true;
-            grandpa.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
-            main_camera.GetComponent<Camera>().target = grandpa.transform;
-            clue_camera.GetComponent<Camera>().target = grandpa.transform;
-            active_player = ActivePlayer.Grandpa;
+
+            Grandpa.GetComponent<GrandpaPlayer>().is_active_player = true;
+            Grandpa.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
+
+            ActivePlayer = ActivePlayer.Grandpa;
         }
 
         // Update is called once per frame
@@ -29,25 +29,38 @@ namespace Scripts
         {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                if (SwitchPlayer.active_player == ActivePlayer.Grandpa)
+                CinemachineFreeLook cameraContext = CameraContext.GetComponent<CinemachineFreeLook>();
+                CinemachineFreeLook cameraContextClue = CameraContextClue.GetComponent<CinemachineFreeLook>();
+
+                if (SwitchPlayer.ActivePlayer == ActivePlayer.Grandpa)
                 {
-                    grandpa.GetComponent<GrandpaPlayer>().is_active_player = false;
-                    grandpa.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
-                    kid.GetComponent<KidPlayer>().is_active_player = true;
-                    kid.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
-                    main_camera.GetComponent<Camera>().target = kid.transform;
-                    clue_camera.GetComponent<Camera>().target = kid.transform;
-                    SwitchPlayer.active_player = ActivePlayer.Kid;
+                    Grandpa.GetComponent<GrandpaPlayer>().is_active_player = false;
+                    Grandpa.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
+                    Kid.GetComponent<KidPlayer>().is_active_player = true;
+                    Kid.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
+
+
+                    cameraContext.Follow = Kid.transform;
+                    cameraContext.LookAt = Kid.transform;
+                    SwitchPlayer.ActivePlayer = ActivePlayer.Kid;
+
+                    var tempX = cameraContext.m_XAxis.Value;
+                    cameraContext.m_XAxis.Value = _PrevPlayerCRotation;
+                    _PrevPlayerCRotation = tempX;
                 }
-                else if (SwitchPlayer.active_player == ActivePlayer.Kid)
+                else if (SwitchPlayer.ActivePlayer == ActivePlayer.Kid)
                 {
-                    kid.GetComponent<KidPlayer>().is_active_player = false;
-                    kid.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
-                    grandpa.GetComponent<GrandpaPlayer>().is_active_player = true;
-                    grandpa.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
-                    main_camera.GetComponent<Camera>().target = grandpa.transform;
-                    clue_camera.GetComponent<Camera>().target = grandpa.transform;
-                    SwitchPlayer.active_player = ActivePlayer.Grandpa;
+                    Kid.GetComponent<KidPlayer>().is_active_player = false;
+                    Kid.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
+                    Grandpa.GetComponent<GrandpaPlayer>().is_active_player = true;
+                    Grandpa.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
+                    cameraContext.Follow = Grandpa.transform;
+                    cameraContext.LookAt = Grandpa.transform;
+                    SwitchPlayer.ActivePlayer = ActivePlayer.Grandpa;
+
+                    var tempX = cameraContext.m_XAxis.Value;
+                    cameraContext.m_XAxis.Value = _PrevPlayerCRotation;
+                    _PrevPlayerCRotation = tempX;
                 }
             }
         }

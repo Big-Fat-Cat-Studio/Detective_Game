@@ -26,7 +26,7 @@ namespace Scripts
 
         private void Update()
         {
-            if (SwitchPlayer.active_player != currentPlayer)
+            if (SwitchPlayer.ActivePlayer != currentPlayer)
             {
                 if (text.activeSelf == true)
                 {

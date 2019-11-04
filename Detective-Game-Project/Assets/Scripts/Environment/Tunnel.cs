@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 namespace Scripts
@@ -14,8 +14,13 @@ namespace Scripts
         public FacingTunnelA facingTunnelA;
         public FacingTunnelB facingTunnelB;
 
+        public GameObject CinCamera;
+        private CinemachineFreeLook CinCameraConxtext;
+
         void Start()
         {
+            CinCameraConxtext = CinCamera.GetComponent<CinemachineFreeLook>();
+
             if (facingTunnelA == FacingTunnelA.Right)
             {
                 moveInRot = new Vector3(75, 0, 0);
@@ -120,7 +125,11 @@ namespace Scripts
                 ClueCamera.GetComponent<Camera>().target = Kid.transform;
             }
 
+            //TODO(Hamza): Pass just the pitch rotation, others cause the camera to bug out.
+            // Make it so the camera follows the player's forward vector regardless of the
+            // previous X-axis.
 
+            CinCameraConxtext.m_XAxis.Value = -90;
             Kid.transform.rotation = Quaternion.Euler(moveOutRot);
             Kid.GetComponent<Rigidbody>().velocity = moveOutDir;
             StartCoroutine(MoveOut());

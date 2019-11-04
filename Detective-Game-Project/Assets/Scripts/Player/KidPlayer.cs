@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Cinemachine;
 using UnityEngine;
 
 public class KidPlayer : MonoBehaviour
@@ -15,9 +14,12 @@ public class KidPlayer : MonoBehaviour
     public float glide;
     Rigidbody rigidBody;
 
+    public GameObject player_camera;
+    private CinemachineFreeLook context;
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        context = player_camera.GetComponent<CinemachineFreeLook>();
     }
 
     // Update is called once per frame
@@ -63,9 +65,11 @@ public class KidPlayer : MonoBehaviour
                     rigidBody.drag = 0;
                 }
 
-                float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
-                rotation *= Time.deltaTime;
-                transform.Rotate(0, rotation, 0);
+                float translationRH = Input.GetAxisRaw("Mouse X") * rotationSpeed;
+                translationRH *= Time.deltaTime;
+                context.m_XAxis.Value += translationRH;
+
+                transform.Rotate(0, translationRH, 0);
             }
         }
     }

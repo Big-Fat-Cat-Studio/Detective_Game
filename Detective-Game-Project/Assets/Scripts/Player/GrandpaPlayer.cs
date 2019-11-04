@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Cinemachine;
 
 public class GrandpaPlayer : MonoBehaviour
 {
@@ -9,9 +8,14 @@ public class GrandpaPlayer : MonoBehaviour
     public bool is_active_player;
     Rigidbody rigidBody;
 
+    public GameObject player_camera;
+    private CinemachineFreeLook context;
+
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        context = player_camera.GetComponent<CinemachineFreeLook>();
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -20,10 +24,13 @@ public class GrandpaPlayer : MonoBehaviour
         if(is_active_player)
         {
             //print("grandpa is active");
-            
-            float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
-            rotation *= Time.deltaTime;
-            transform.Rotate(0, rotation, 0);
+
+
+            float translationRH = Input.GetAxisRaw("Mouse X") * rotationSpeed;
+            translationRH *= Time.deltaTime;
+            context.m_XAxis.Value += translationRH;
+
+            transform.Rotate(0, translationRH, 0);
         }
     }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PostProcessing;
+using UnityEditor;
 
 namespace Scripts
 {
@@ -12,6 +13,19 @@ namespace Scripts
         private Bounds objectBounds;
         private bool active;
 
+        // Mesh materials
+        public Material Clues;
+
+        // Clue struct
+
+        private struct ClueMaterials
+        {
+            public Material InitMaterial;
+            public Material ClueMaterial;
+        }
+
+        private ClueMaterials currentObj;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -20,28 +34,39 @@ namespace Scripts
             objectBounds = gameObject.GetComponent<MeshRenderer>().bounds;
 
             toggleParticles(false, objectBounds.size);
+            ClueInitializer(); // Clues are of layer 9
+
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (SwitchPlayer.active_player != ActivePlayer.Grandpa && active)
+            if (SwitchPlayer.ActivePlayer != ActivePlayer.Grandpa && active)
             {
                 toggleParticles(false, Vector3.zero);
                 GameObject.Find("PlayerCamera").GetComponent<PostProcessingBehaviour>().enabled = false;
+                gameObject.GetComponent<MeshRenderer>().material = currentObj.InitMaterial;
+
             }
 
-            if (_auraPrefab == null || SwitchPlayer.active_player != ActivePlayer.Grandpa) return;
+            if (_auraPrefab == null || SwitchPlayer.ActivePlayer != ActivePlayer.Grandpa) return;
 
             if (Input.GetKeyDown("space") && !active)
             {
                 toggleParticles(true, Vector3.zero);
                 GameObject.Find("PlayerCamera").GetComponent<PostProcessingBehaviour>().enabled = true;
+
+                // Vision is enabled, apply clue mesh.
+                gameObject.GetComponent<MeshRenderer>().material = currentObj.ClueMaterial;
             }
             else if (Input.GetKeyDown("space") && active)
             {
                 toggleParticles(false, Vector3.zero);
                 GameObject.Find("PlayerCamera").GetComponent<PostProcessingBehaviour>().enabled = false;
+
+                // Vision disabled, switch back to old mesh.
+                gameObject.GetComponent<MeshRenderer>().material = currentObj.InitMaterial;
+
             }
         }
 
@@ -61,6 +86,15 @@ namespace Scripts
                 particleEmission.enabled = toggle;
                 active = toggle;
             }
+        }
+
+        void ClueInitializer()
+        {
+            currentObj = new ClueMaterials
+            {
+                InitMaterial = gameObject.GetComponent<MeshRenderer>().material,
+                ClueMaterial = Clues
+            };
         }
     }
 }

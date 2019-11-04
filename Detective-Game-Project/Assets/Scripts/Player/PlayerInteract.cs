@@ -22,7 +22,7 @@ namespace Scripts
         // Update is called once per frame
         void Update()
         {
-            if (SwitchPlayer.active_player != currentPlayer)
+            if (SwitchPlayer.ActivePlayer != currentPlayer)
             {
                 if (text.activeSelf == true)
                 {
