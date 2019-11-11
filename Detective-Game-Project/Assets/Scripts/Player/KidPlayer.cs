@@ -43,7 +43,19 @@ namespace Scripts {
                 }
                 if (!is_climbing)
                 {
-                    if (JumpTrigger == true)
+                    RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.down, 0.5f);
+                    bool hitFloor = false;
+
+                    foreach(RaycastHit hit in hits)
+                    {
+                        if (!ReferenceEquals(hit.collider.gameObject, GameManager.Instance.Kid) &&
+                            !ReferenceEquals(hit.collider.gameObject, GameManager.Instance.Grandpa))
+                        {
+                            hitFloor = true;
+                        }
+                    }
+
+                    if (hitFloor)
                     {
                         if (Input.GetKeyDown(KeyCode.Space))
                         {

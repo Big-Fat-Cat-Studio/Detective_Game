@@ -4350,7 +4350,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593476288}
-  m_LocalRotation: {x: -0.000000019672271, y: -0.9745226, z: -0.2242896, w: 0.000000018653413}
+  m_LocalRotation: {x: -0.000000019670747, y: -0.9745226, z: -0.2242896, w: 0.000000018653061}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8405,6 +8405,11 @@ PrefabInstance:
       propertyPath: player_camera
       value: 
       objectReference: {fileID: 903498567}
+    - target: {fileID: 2573337914302454488, guid: f5a1bbd5e68e9514397f8ff4e464eadd,
+        type: 3}
+      propertyPath: glide
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2573337913947129588, guid: f5a1bbd5e68e9514397f8ff4e464eadd,
         type: 3}
       propertyPath: m_RootOrder
@@ -8555,7 +8560,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eadf03ae7b7133146a3b1befadc8801c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Kid: {fileID: 131498383}
   TunnelA: {fileID: 1273075643}
   TunnelB: {fileID: 1843519956}
   Camera: {fileID: 1626979484}
@@ -8727,7 +8731,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1292719751}
-  m_LocalRotation: {x: 0.000000011181201, y: -0.988883, z: 0.14869565, w: 0.0000000016812861}
+  m_LocalRotation: {x: 0.000000013396939, y: -0.988883, z: 0.14869563, w: 0.000000016416793}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -10861,7 +10865,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690107779}
-  m_LocalRotation: {x: 0.000000022899778, y: -0.99142414, z: 0.13068376, w: -0.000000013743909}
+  m_LocalRotation: {x: 0.000000027396966, y: -0.99142414, z: 0.13068376, w: 0.000000020373733}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -11899,7 +11903,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eadf03ae7b7133146a3b1befadc8801c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Kid: {fileID: 131498383}
   TunnelA: {fileID: 1273075643}
   TunnelB: {fileID: 1843519956}
   Camera: {fileID: 1626979484}
@@ -11955,7 +11958,7 @@ PrefabInstance:
     - target: {fileID: 8081319580228546860, guid: 39471ff913791fa46b92ac6367d25856,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.000000008224099
+      value: 0.000000008224098
       objectReference: {fileID: 0}
     - target: {fileID: 8081319580228546860, guid: 39471ff913791fa46b92ac6367d25856,
         type: 3}
@@ -11970,7 +11973,7 @@ PrefabInstance:
     - target: {fileID: 8081319580228546860, guid: 39471ff913791fa46b92ac6367d25856,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.00000003573312
+      value: -0.000000035733116
       objectReference: {fileID: 0}
     - target: {fileID: 8081319580228546860, guid: 39471ff913791fa46b92ac6367d25856,
         type: 3}
@@ -12697,7 +12700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1943973926
 Transform:
   m_ObjectHideFlags: 0
@@ -12706,8 +12709,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1943973925}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.985, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -1.086, z: 0}
+  m_LocalScale: {x: 1.6256, y: 1.6256, z: 1.6256}
   m_Children: []
   m_Father: {fileID: 131498389}
   m_RootOrder: 0
@@ -12724,6 +12727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb03cd8722786b47aa2225e8de668b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collides: 0
 --- !u!54 &1943973928
 Rigidbody:
   m_ObjectHideFlags: 0
