@@ -22,7 +22,7 @@ namespace Scripts
         // Update is called once per frame
         void Update()
         {
-            if (SwitchPlayer.ActivePlayer != currentPlayer)
+            if (GameManager.Instance.ActivePlayer != currentPlayer)
             {
                 if (text.activeSelf == true)
                 {

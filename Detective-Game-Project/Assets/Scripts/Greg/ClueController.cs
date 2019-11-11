@@ -41,7 +41,7 @@ namespace Scripts
         // Update is called once per frame
         void Update()
         {
-            if (SwitchPlayer.ActivePlayer != ActivePlayer.Grandpa && active)
+            if (GameManager.Instance.ActivePlayer != ActivePlayer.Grandpa && active)
             {
                 toggleParticles(false, Vector3.zero);
                 GameObject.Find("PlayerCamera").GetComponent<PostProcessingBehaviour>().enabled = false;
@@ -49,9 +49,9 @@ namespace Scripts
 
             }
 
-            if (_auraPrefab == null || SwitchPlayer.ActivePlayer != ActivePlayer.Grandpa) return;
+            if (_auraPrefab == null || GameManager.Instance.ActivePlayer != ActivePlayer.Grandpa) return;
 
-            if (Input.GetKeyDown("space") && !active)
+            if (Input.GetKeyDown(KeyCode.Space) && !active)
             {
                 toggleParticles(true, Vector3.zero);
                 GameObject.Find("PlayerCamera").GetComponent<PostProcessingBehaviour>().enabled = true;
@@ -59,7 +59,7 @@ namespace Scripts
                 // Vision is enabled, apply clue mesh.
                 gameObject.GetComponent<MeshRenderer>().material = currentObj.ClueMaterial;
             }
-            else if (Input.GetKeyDown("space") && active)
+            else if (Input.GetKeyDown(KeyCode.Space) && active)
             {
                 toggleParticles(false, Vector3.zero);
                 GameObject.Find("PlayerCamera").GetComponent<PostProcessingBehaviour>().enabled = false;

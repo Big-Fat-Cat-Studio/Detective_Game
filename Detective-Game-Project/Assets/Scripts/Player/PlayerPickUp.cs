@@ -26,7 +26,7 @@ namespace Scripts
 
         private void Update()
         {
-            if (SwitchPlayer.ActivePlayer != currentPlayer)
+            if (GameManager.Instance.ActivePlayer != currentPlayer)
             {
                 if (text.activeSelf == true)
                 {

@@ -9,18 +9,6 @@ public class InteractableObject : MonoBehaviour
     public GameObject text;
     public string textMessage;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void interact(GameObject playerItem)
     {
         if (neededItem == null || ReferenceEquals(playerItem, neededItem))

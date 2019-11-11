@@ -2,41 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpTrigger : MonoBehaviour
+namespace Scripts
 {
-    List<string> collidedObjects = new List<string>();
-
-    void OnTriggerStay(Collider other)
+    public class JumpTrigger : MonoBehaviour
     {
-        if (!collidedObjects.Contains(other.gameObject.name))
+        List<string> collidedObjects = new List<string>();
+
+        void OnTriggerStay(Collider other)
         {
-            collidedObjects.Add(other.gameObject.name);
+            if (!collidedObjects.Contains(other.gameObject.name))
+            {
+                collidedObjects.Add(other.gameObject.name);
+            }
         }
-    }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (!collidedObjects.Contains(other.gameObject.name))
+        void OnTriggerEnter(Collider other)
         {
-            collidedObjects.Add(other.gameObject.name);
+            if (!collidedObjects.Contains(other.gameObject.name))
+            {
+                collidedObjects.Add(other.gameObject.name);
+            }
         }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        collidedObjects.Remove(other.gameObject.name);
-    }
-
-    void Update()
-    {
-        var numberOfColliders = collidedObjects.Count;
-        if (numberOfColliders > 1)
+        private void OnTriggerExit(Collider other)
         {
-            GetComponentInParent<KidPlayer>().JumpTrigger = true;
+            collidedObjects.Remove(other.gameObject.name);
         }
-        else
+
+        void Update()
         {
-            GetComponentInParent<KidPlayer>().JumpTrigger = false;
+            var numberOfColliders = collidedObjects.Count;
+            if (numberOfColliders > 1)
+            {
+                GetComponentInParent<KidPlayer>().JumpTrigger = true;
+            }
+            else
+            {
+                GetComponentInParent<KidPlayer>().JumpTrigger = false;
+            }
         }
     }
 }

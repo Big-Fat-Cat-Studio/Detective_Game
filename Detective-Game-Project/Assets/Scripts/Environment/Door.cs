@@ -36,7 +36,7 @@ namespace Scripts
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == "Kid" || other.gameObject.tag == "Grandpa")
+            if (ReferenceEquals(other.gameObject, GameManager.Instance.Kid) || ReferenceEquals(other.gameObject, GameManager.Instance.Grandpa))
             {
                 can_interact = true;
 
@@ -50,7 +50,7 @@ namespace Scripts
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.tag == "Kid" || other.gameObject.tag == "Grandpa")
+            if (ReferenceEquals(other.gameObject, GameManager.Instance.Kid) || ReferenceEquals(other.gameObject, GameManager.Instance.Grandpa))
             {
                 can_interact = false;
 

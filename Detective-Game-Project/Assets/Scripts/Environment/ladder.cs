@@ -2,24 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ladder : MonoBehaviour
+namespace Scripts
 {
-    private void OnTriggerEnter(Collider collision)
+    public class ladder : MonoBehaviour
     {
-        if(collision.gameObject.tag == "Kid")
+        private void OnTriggerEnter(Collider collision)
         {
-            print("boink");
-            collision.gameObject.GetComponent<KidPlayer>().is_climbing = true;
-            collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Kid))
+            {
+                collision.gameObject.GetComponent<KidPlayer>().is_climbing = true;
+                collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            }
         }
-    }
-    private void OnTriggerExit(Collider collision)
-    {
-        if(collision.gameObject.tag == "Kid")
+        private void OnTriggerExit(Collider collision)
         {
-            print("unboink");
-            collision.gameObject.GetComponent<KidPlayer>().is_climbing = false;
-            collision.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Kid))
+            {
+                collision.gameObject.GetComponent<KidPlayer>().is_climbing = false;
+                collision.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            }
         }
     }
 }

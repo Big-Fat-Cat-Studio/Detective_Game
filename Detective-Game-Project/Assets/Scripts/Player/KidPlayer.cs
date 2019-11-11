@@ -1,86 +1,85 @@
 ﻿using Cinemachine;
 using UnityEngine;
 
-public class KidPlayer : MonoBehaviour
-{
-    public float speed = 5.0f;
-    public float climbing_speed = 0.1f;
-    public float rotationSpeed = 100.0f;
-    public bool is_active_player;
-    public bool is_climbing = false;
-
-    public bool JumpTrigger = false;
-    public float jumpForce;
-    public float glide;
-    Rigidbody rigidBody;
-
-    public GameObject player_camera;
-    private CinemachineFreeLook context;
-    private void Start()
+namespace Scripts {
+    public class KidPlayer : MonoBehaviour
     {
-        rigidBody = GetComponent<Rigidbody>();
-        context = player_camera.GetComponent<CinemachineFreeLook>();
-    }
+        public float speed = 5.0f;
+        public float climbing_speed = 0.1f;
+        public float rotationSpeed = 100.0f;
+        public bool is_climbing = false;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (this.is_active_player)
+        public bool JumpTrigger = false;
+        public float jumpForce;
+        public float glide;
+        Rigidbody rigidBody;
+
+        private CinemachineFreeLook context;
+        private void Start()
         {
-            //print("kid is active");
-            if (is_climbing)
+            rigidBody = GetComponent<Rigidbody>();
+            context = GameManager.Instance.CameraContext.GetComponent<CinemachineFreeLook>();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (GameManager.Instance.ActivePlayer == ActivePlayer.Kid)
             {
-                if (Input.GetKey(KeyCode.W))
+                if (is_climbing)
                 {
-                    this.gameObject.transform.Translate(Vector3.up * climbing_speed);
-                }
-                else if (Input.GetKey(KeyCode.S))
-                {
-                    this.gameObject.transform.Translate(Vector3.down * climbing_speed);
-                }
-                else
-                {
-                    this.gameObject.transform.Translate(new Vector3(0, 0, 0));
-                }
-            }
-            if (!is_climbing)
-            {
-                if (JumpTrigger == true)
-                {
-                    if (Input.GetKeyDown(KeyCode.Space))
+                    if (Input.GetKey(KeyCode.W))
                     {
-                        rigidBody.AddForce(transform.up * jumpForce);
+                        this.gameObject.transform.Translate(Vector3.up * climbing_speed);
+                    }
+                    else if (Input.GetKey(KeyCode.S))
+                    {
+                        this.gameObject.transform.Translate(Vector3.down * climbing_speed);
+                    }
+                    else
+                    {
+                        this.gameObject.transform.Translate(new Vector3(0, 0, 0));
                     }
                 }
-                else if (rigidBody.velocity.y < 0)
+                if (!is_climbing)
                 {
-                    if (Input.GetKey(KeyCode.Space))
+                    if (JumpTrigger == true)
                     {
-                        rigidBody.drag = glide;
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
+                            rigidBody.AddForce(transform.up * jumpForce);
+                        }
+                    }
+                    else if (rigidBody.velocity.y < 0)
+                    {
+                        if (Input.GetKey(KeyCode.Space))
+                        {
+                            rigidBody.drag = glide;
+                        }
+
+                    }
+                    if (Input.GetKeyUp(KeyCode.Space))
+                    {
+                        rigidBody.drag = 0;
                     }
 
-                }
-                if (Input.GetKeyUp(KeyCode.Space))
-                {
-                    rigidBody.drag = 0;
-                }
+                    float translationRH = Input.GetAxisRaw("Mouse X") * rotationSpeed;
+                    translationRH *= Time.deltaTime;
+                    context.m_XAxis.Value += translationRH;
 
-                float translationRH = Input.GetAxisRaw("Mouse X") * rotationSpeed;
-                translationRH *= Time.deltaTime;
-                context.m_XAxis.Value += translationRH;
-
-                transform.Rotate(0, translationRH, 0);
+                    transform.Rotate(0, translationRH, 0);
+                }
             }
         }
-    }
 
-    private void FixedUpdate()
-    {
-        if (!is_climbing && is_active_player)
+        private void FixedUpdate()
         {
-            float translation = Input.GetAxis("Vertical") * speed;
-            rigidBody.velocity = 
-                new Vector3(transform.forward.x * translation, rigidBody.velocity.y, transform.forward.z * translation);
+            if (!is_climbing && GameManager.Instance.ActivePlayer == ActivePlayer.Kid)
+            {
+                float translation = Input.GetAxis("Vertical") * speed;
+                rigidBody.velocity =
+                    new Vector3(transform.forward.x * translation, rigidBody.velocity.y, transform.forward.z * translation);
+            }
         }
     }
 }

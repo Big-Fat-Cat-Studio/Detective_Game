@@ -6,7 +6,7 @@ namespace Scripts
 {
     public class Tunnel : MonoBehaviour
     {
-        public GameObject Kid, TunnelA, TunnelB, Camera, ClueCamera;
+        public GameObject TunnelA, TunnelB, Camera, ClueCamera;
         Vector3 moveInRot, moveOutRot, moveInDir, moveOutDir;
         bool Crawling = false;
         public enum FacingTunnelA {Front, Right, Back, Left};
@@ -76,21 +76,21 @@ namespace Scripts
         {
             if (Crawling)
             {
-                Kid.transform.Rotate(moveInRot * (Time.deltaTime * 1.5f));
+                GameManager.Instance.Kid.transform.Rotate(moveInRot * (Time.deltaTime * 1.5f));
             }
         }
 
 
         void OnCollisionEnter(Collision collision)
         {
-            if (collision.collider.name == "Kid")
+            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Kid))
             {
-                Kid.GetComponent<CapsuleCollider>().enabled = false;
-                Kid.GetComponent<KidPlayer>().enabled = false;
+                GameManager.Instance.Kid.GetComponent<CapsuleCollider>().enabled = false;
+                GameManager.Instance.Kid.GetComponent<KidPlayer>().enabled = false;
                 Camera.GetComponent<Camera>().target = null;
                 ClueCamera.GetComponent<Camera>().target = null;
-                Kid.GetComponent<Rigidbody>().velocity = moveInDir;
-                Kid.GetComponent<Rigidbody>().useGravity = false;
+                GameManager.Instance.Kid.GetComponent<Rigidbody>().velocity = moveInDir;
+                GameManager.Instance.Kid.GetComponent<Rigidbody>().useGravity = false;
                 Crawling = true;
                 StartCoroutine(MoveIn());
             }
@@ -101,7 +101,7 @@ namespace Scripts
         {
             yield return new WaitForSecondsRealtime(0.75f);
             Crawling = false;
-            Kid.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            GameManager.Instance.Kid.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             StartCoroutine(Delay());
         }
 
@@ -111,18 +111,18 @@ namespace Scripts
             yield return new WaitForSecondsRealtime(2);
             if (ReferenceEquals(gameObject, TunnelA))
             {
-                Kid.transform.position = TunnelB.transform.position;
+                GameManager.Instance.Kid.transform.position = TunnelB.transform.position;
 
             }
             if (ReferenceEquals(gameObject, TunnelB))
             {
-                Kid.transform.position = TunnelA.transform.position;
+                GameManager.Instance.Kid.transform.position = TunnelA.transform.position;
             }
 
             if (Camera.GetComponent<Camera>().target == null)
             {
-                Camera.GetComponent<Camera>().target = Kid.transform;
-                ClueCamera.GetComponent<Camera>().target = Kid.transform;
+                Camera.GetComponent<Camera>().target = GameManager.Instance.Kid.transform;
+                ClueCamera.GetComponent<Camera>().target = GameManager.Instance.Kid.transform;
             }
 
             //TODO(Hamza): Pass just the pitch rotation, others cause the camera to bug out.
@@ -130,8 +130,8 @@ namespace Scripts
             // previous X-axis.
 
             CinCameraConxtext.m_XAxis.Value = -90;
-            Kid.transform.rotation = Quaternion.Euler(moveOutRot);
-            Kid.GetComponent<Rigidbody>().velocity = moveOutDir;
+            GameManager.Instance.Kid.transform.rotation = Quaternion.Euler(moveOutRot);
+            GameManager.Instance.Kid.GetComponent<Rigidbody>().velocity = moveOutDir;
             StartCoroutine(MoveOut());
         }
 
@@ -139,10 +139,10 @@ namespace Scripts
         IEnumerator MoveOut()
         {
             yield return new WaitForSecondsRealtime(0.5f);
-            Kid.GetComponent<Rigidbody>().useGravity = true;
-            Kid.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-            Kid.GetComponent<CapsuleCollider>().enabled = true;
-            Kid.GetComponent<KidPlayer>().enabled = true;
+            GameManager.Instance.Kid.GetComponent<Rigidbody>().useGravity = true;
+            GameManager.Instance.Kid.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            GameManager.Instance.Kid.GetComponent<CapsuleCollider>().enabled = true;
+            GameManager.Instance.Kid.GetComponent<KidPlayer>().enabled = true;
         }
     }
 }
