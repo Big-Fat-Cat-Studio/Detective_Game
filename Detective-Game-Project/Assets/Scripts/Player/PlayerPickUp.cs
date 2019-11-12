@@ -36,7 +36,7 @@ namespace Scripts
                 return;
             }
 
-            if (pickupsInRange.Count > 0 && !showsText)
+            if (countObjectsInRange() > 0 && !showsText)
             {
                 GameManager.Instance.showPickupText(getClosestObject().GetComponent<Pickup>().pickupMessage, currentPlayer);
                 showsText = true;
@@ -58,10 +58,29 @@ namespace Scripts
                     holding.transform.rotation = transform.rotation;
                     holding.GetComponent<Rigidbody>().isKinematic = true;
                     holding.GetComponent<Rigidbody>().useGravity = false;
+
+                    if (countObjectsInRange() == 0)
+                    {
+                        GameManager.Instance.removePickupText(currentPlayer);
+                        showsText = false;
+                    }
                 }
             }
         }
 
+        int countObjectsInRange()
+        {
+            int count = 0;
+
+            foreach (GameObject pickup in pickupsInRange)
+            {
+                if (holding == null || !ReferenceEquals(pickup, holding))
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
         GameObject getClosestObject()
         {
             GameObject closestObject = null;
@@ -123,7 +142,7 @@ namespace Scripts
             {
                 pickupsInRange.Remove(other.gameObject);
 
-                if (pickupsInRange.Count == 0)
+                if (countObjectsInRange() == 0)
                 {
                     GameManager.Instance.removePickupText(currentPlayer);
                     showsText = true;
