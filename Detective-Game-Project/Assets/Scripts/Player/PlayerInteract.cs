@@ -6,17 +6,15 @@ namespace Scripts
 {
     public class PlayerInteract : MonoBehaviour
     {
-        public GameObject text;
         public ActivePlayer currentPlayer;
+        private bool showsText;
 
-        new BoxCollider collider;
         List<GameObject> interactableObjects;
 
         // Start is called before the first frame update
         void Start()
         {
             interactableObjects = new List<GameObject>();
-            text.SetActive(false);
         }
 
         // Update is called once per frame
@@ -24,39 +22,24 @@ namespace Scripts
         {
             if (GameManager.Instance.ActivePlayer != currentPlayer)
             {
-                if (text.activeSelf == true)
+                if (showsText)
                 {
-                    text.SetActive(false);
+                    GameManager.Instance.removeInteractText(currentPlayer);
+                    showsText = false;
                 }
 
                 return;
             }
 
-            if (interactableObjects.Count > 0 && text.activeSelf == false)
+            if (interactableObjects.Count > 0 && !showsText)
             {
-                text.SetActive(true);
+                GameManager.Instance.showInteractText(getClosestObject().GetComponent<InteractableObject>().interactMessage, currentPlayer);
+                showsText = true;
             }
 
             if (Input.GetKeyDown(KeyCode.X))
             {
-                GameObject closestInteractable = null;
-
-                //Check which object is closest to the player
-                foreach (GameObject interactable in interactableObjects)
-                {
-                    if (closestInteractable == null)
-                    {
-                        closestInteractable = interactable;
-                        continue;
-                    }
-
-                    float distance = Vector3.Distance(interactable.transform.position, transform.position);
-                    float distanceClosestInteractable = Vector3.Distance(closestInteractable.transform.position, transform.position);
-                    if (distance < distanceClosestInteractable)
-                    {
-                        closestInteractable = interactable;
-                    }
-                }
+                GameObject closestInteractable = getClosestObject();            
 
                 if (closestInteractable != null)
                 {
@@ -68,11 +51,37 @@ namespace Scripts
                         interactableObjects.Remove(closestInteractable);
                         if (interactableObjects.Count == 0)
                         {
-                            text.SetActive(false);
+                            GameManager.Instance.removeInteractText(currentPlayer);
                         }
                     }
                 }
             }
+        }
+
+        /**
+         * Returns the gameobject that's the closest to the player
+         */
+        private GameObject getClosestObject()
+        {
+            GameObject closestInteractable = null;
+
+            foreach (GameObject interactable in interactableObjects)
+            {
+                if (closestInteractable == null)
+                {
+                    closestInteractable = interactable;
+                    continue;
+                }
+
+                float distance = Vector3.Distance(interactable.transform.position, transform.position);
+                float distanceClosestInteractable = Vector3.Distance(closestInteractable.transform.position, transform.position);
+                if (distance < distanceClosestInteractable)
+                {
+                    closestInteractable = interactable;
+                }
+            }
+
+            return closestInteractable;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -80,7 +89,8 @@ namespace Scripts
             if (other.gameObject.tag == Constant.TAG_INTERACT)
             {
                 interactableObjects.Add(other.gameObject);
-                text.SetActive(true);
+                GameManager.Instance.showInteractText(getClosestObject().GetComponent<InteractableObject>().interactMessage, currentPlayer);
+                showsText = true;
             }
         }
 
@@ -92,7 +102,8 @@ namespace Scripts
 
                 if (interactableObjects.Count == 0)
                 {
-                    text.SetActive(false);
+                    GameManager.Instance.removeInteractText(currentPlayer);
+                    showsText = false;
                 }
             }
         }

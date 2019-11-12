@@ -3,33 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InteractableObject : MonoBehaviour
-{
-    public GameObject neededItem;
-    public GameObject text;
-    public string textMessage;
-
-    public void interact(GameObject playerItem)
+namespace Scripts {
+    public class InteractableObject : MonoBehaviour
     {
-        if (neededItem == null || ReferenceEquals(playerItem, neededItem))
-        {
-            this.gameObject.SetActive(false);
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            text.SetActive(true);
-            text.GetComponent<Text>().text = textMessage;
-            StartCoroutine(textDissappear());
-        }
-    }
+        public GameObject neededItem;
+        [Header("\"Press [x] to ---\"")]
+        public string interactMessage;
+        public string afterInteractMessage;
 
-    IEnumerator textDissappear()
-    {
-        yield return new WaitForSecondsRealtime(6);
-        if (text.GetComponent<Text>().text == textMessage)
+        public void interact(GameObject playerItem)
         {
-            text.SetActive(false);
+            if (neededItem == null || ReferenceEquals(playerItem, neededItem))
+            {
+                this.gameObject.SetActive(false);
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                GameManager.Instance.showAfterInteractText(afterInteractMessage);
+            }
         }
     }
 }

@@ -7,9 +7,9 @@ namespace Scripts {
         public float speed = 5.0f;
         public float climbing_speed = 0.1f;
         public float rotationSpeed = 100.0f;
+        [HideInInspector]
         public bool is_climbing = false;
 
-        public bool JumpTrigger = false;
         public float jumpForce;
         public float glide;
         Rigidbody rigidBody;

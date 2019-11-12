@@ -7,9 +7,9 @@ namespace Scripts
     public class PlayerPickUp : MonoBehaviour
     {
         public GameObject holding;
-        public GameObject text;
         public ActivePlayer currentPlayer;
 
+        private bool showsText;
         new BoxCollider collider;
         List<GameObject> pickupsInRange;
         List<GameObject> wallsInRange;
@@ -21,24 +21,25 @@ namespace Scripts
             wallsInRange = new List<GameObject>();
             holding = null;
             collider = GetComponent<BoxCollider>();
-            text.SetActive(false);
         }
 
         private void Update()
         {
             if (GameManager.Instance.ActivePlayer != currentPlayer)
             {
-                if (text.activeSelf == true)
+                if (showsText)
                 {
-                    text.SetActive(false);
+                    GameManager.Instance.removePickupText(currentPlayer);
+                    showsText = false;
                 }
-
+                
                 return;
             }
 
-            if (pickupsInRange.Count > 0 && text.activeSelf == false)
+            if (pickupsInRange.Count > 0 && !showsText)
             {
-                text.SetActive(true);
+                GameManager.Instance.showPickupText(getClosestObject().GetComponent<Pickup>().pickupMessage, currentPlayer);
+                showsText = true;
             }
 
             if (holding != null)
@@ -48,26 +49,7 @@ namespace Scripts
 
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                GameObject closestObject = null;
-
-                foreach (GameObject pickup in pickupsInRange)
-                {
-                    if (holding == null || !ReferenceEquals(pickup, holding))
-                    {
-                        if (closestObject == null)
-                        {
-                            closestObject = pickup;
-                            continue;
-                        }
-
-                        float distance = Vector3.Distance(pickup.transform.position, transform.position);
-                        float distanceClosestObject = Vector3.Distance(closestObject.transform.position, transform.position);
-                        if (distance < distanceClosestObject)
-                        {
-                            closestObject = pickup;
-                        }
-                    }
-                }
+                GameObject closestObject = getClosestObject();
 
                 dropObject();
                 if (closestObject != null)
@@ -78,6 +60,31 @@ namespace Scripts
                     holding.GetComponent<Rigidbody>().useGravity = false;
                 }
             }
+        }
+
+        GameObject getClosestObject()
+        {
+            GameObject closestObject = null;
+
+            foreach (GameObject pickup in pickupsInRange)
+            {
+                if (holding == null || !ReferenceEquals(pickup, holding))
+                {
+                    if (closestObject == null)
+                    {
+                        closestObject = pickup;
+                        continue;
+                    }
+
+                    float distance = Vector3.Distance(pickup.transform.position, transform.position);
+                    float distanceClosestObject = Vector3.Distance(closestObject.transform.position, transform.position);
+                    if (distance < distanceClosestObject)
+                    {
+                        closestObject = pickup;
+                    }
+                }
+            }
+            return closestObject;
         }
 
         void dropObject()
@@ -100,7 +107,8 @@ namespace Scripts
             if (other.gameObject.tag == Constant.TAG_PICKUP && !ReferenceEquals(holding, other.gameObject))
             {
                 pickupsInRange.Add(other.gameObject);
-                text.SetActive(true);
+                GameManager.Instance.showPickupText(getClosestObject().GetComponent<Pickup>().pickupMessage, currentPlayer);
+                showsText = true;
             }
 
             if (other.gameObject.layer == Constant.LAYER_WALL)
@@ -117,7 +125,8 @@ namespace Scripts
 
                 if (pickupsInRange.Count == 0)
                 {
-                    text.SetActive(false);
+                    GameManager.Instance.removePickupText(currentPlayer);
+                    showsText = true;
                 }
             }
 
