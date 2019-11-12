@@ -5,10 +5,10 @@ namespace Scripts {
     public class AnimalPlayer : MonoBehaviour
     {
         public float speed = 5.0f;
-        public float climbing_speed = 0.1f;
+        public float climbingSpeed = 0.1f;
         public float rotationSpeed = 100.0f;
         [HideInInspector]
-        public bool is_climbing = false;
+        public bool isClimbing = false;
 
         public float jumpForce;
         public float glide;
@@ -26,22 +26,22 @@ namespace Scripts {
         {
             if (GameManager.Instance.ActivePlayer == ActivePlayer.Animal)
             {
-                if (is_climbing)
+                if (isClimbing)
                 {
                     if (Input.GetKey(KeyCode.W))
                     {
-                        this.gameObject.transform.Translate(Vector3.up * climbing_speed);
+                        this.gameObject.transform.Translate(Vector3.up * climbingSpeed);
                     }
                     else if (Input.GetKey(KeyCode.S))
                     {
-                        this.gameObject.transform.Translate(Vector3.down * climbing_speed);
+                        this.gameObject.transform.Translate(Vector3.down * climbingSpeed);
                     }
                     else
                     {
                         this.gameObject.transform.Translate(new Vector3(0, 0, 0));
                     }
                 }
-                if (!is_climbing)
+                if (!isClimbing)
                 {
                     RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.down, 0.5f);
                     bool hitFloor = false;
@@ -86,7 +86,7 @@ namespace Scripts {
 
         private void FixedUpdate()
         {
-            if (!is_climbing && GameManager.Instance.ActivePlayer == ActivePlayer.Animal)
+            if (!isClimbing && GameManager.Instance.ActivePlayer == ActivePlayer.Animal)
             {
                 float translation = Input.GetAxis("Vertical") * speed;
                 rigidBody.velocity =

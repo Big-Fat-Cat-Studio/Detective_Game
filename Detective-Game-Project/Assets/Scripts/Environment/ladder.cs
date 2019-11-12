@@ -10,7 +10,7 @@ namespace Scripts
         {
             if (ReferenceEquals(collision.gameObject, GameManager.Instance.Animal))
             {
-                collision.gameObject.GetComponent<AnimalPlayer>().is_climbing = true;
+                collision.gameObject.GetComponent<AnimalPlayer>().isClimbing = true;
                 collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             }
         }
@@ -18,7 +18,7 @@ namespace Scripts
         {
             if (ReferenceEquals(collision.gameObject, GameManager.Instance.Animal))
             {
-                collision.gameObject.GetComponent<AnimalPlayer>().is_climbing = false;
+                collision.gameObject.GetComponent<AnimalPlayer>().isClimbing = false;
                 collision.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             }
         }
