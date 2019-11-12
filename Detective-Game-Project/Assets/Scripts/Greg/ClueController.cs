@@ -41,7 +41,7 @@ namespace Scripts
         // Update is called once per frame
         void Update()
         {
-            if (GameManager.Instance.ActivePlayer != ActivePlayer.Grandpa && active)
+            if (GameManager.Instance.ActivePlayer != ActivePlayer.Human && active)
             {
                 toggleParticles(false, Vector3.zero);
                 GameObject.Find("PlayerCamera").GetComponent<PostProcessingBehaviour>().enabled = false;
@@ -49,7 +49,7 @@ namespace Scripts
 
             }
 
-            if (_auraPrefab == null || GameManager.Instance.ActivePlayer != ActivePlayer.Grandpa) return;
+            if (_auraPrefab == null || GameManager.Instance.ActivePlayer != ActivePlayer.Human) return;
 
             if (Input.GetKeyDown(KeyCode.Space) && !active)
             {

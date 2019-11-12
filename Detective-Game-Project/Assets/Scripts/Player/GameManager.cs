@@ -5,6 +5,8 @@ namespace Scripts
 {
     public class GameManager : MonoBehaviour
     {
+
+        //Singleton, so we can access human/animal everywhere
         public static GameManager Instance { get; private set; }
 
         private void Awake()
@@ -19,8 +21,8 @@ namespace Scripts
             }
         }
 
-        public GameObject Grandpa;
-        public GameObject Kid;
+        public GameObject Human;
+        public GameObject Animal;
 
         [HideInInspector]
         public ActivePlayer ActivePlayer;
@@ -33,8 +35,8 @@ namespace Scripts
         private float _PrevPlayerCRotation; // Camera X-Axis Rotation
         private void Start()
         {
-            Grandpa.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
-            ActivePlayer = ActivePlayer.Grandpa;
+            Human.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
+            ActivePlayer = ActivePlayer.Human;
         }
 
         // Update is called once per frame
@@ -45,23 +47,23 @@ namespace Scripts
                 CinemachineFreeLook cameraContext = CameraContext.GetComponent<CinemachineFreeLook>();
                 CinemachineFreeLook cameraContextClue = CameraContextClue.GetComponent<CinemachineFreeLook>();
 
-                if (ActivePlayer == ActivePlayer.Grandpa)
+                if (ActivePlayer == ActivePlayer.Human)
                 {
-                    Grandpa.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
-                    Kid.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
+                    Human.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
+                    Animal.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
 
-                    cameraContext.Follow = Kid.transform;
-                    cameraContext.LookAt = Kid.transform;
-                    ActivePlayer = ActivePlayer.Kid;
+                    cameraContext.Follow = Animal.transform;
+                    cameraContext.LookAt = Animal.transform;
+                    ActivePlayer = ActivePlayer.Animal;
                 }
-                else if (ActivePlayer == ActivePlayer.Kid)
+                else if (ActivePlayer == ActivePlayer.Animal)
                 {
-                    Kid.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
-                    Grandpa.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
+                    Animal.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
+                    Human.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
 
-                    cameraContext.Follow = Grandpa.transform;
-                    cameraContext.LookAt = Grandpa.transform;
-                    ActivePlayer = ActivePlayer.Grandpa;
+                    cameraContext.Follow = Human.transform;
+                    cameraContext.LookAt = Human.transform;
+                    ActivePlayer = ActivePlayer.Human;
                 }
 
                 var tempX = cameraContext.m_XAxis.Value;

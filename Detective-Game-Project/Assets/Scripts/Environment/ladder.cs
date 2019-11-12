@@ -8,17 +8,17 @@ namespace Scripts
     {
         private void OnTriggerEnter(Collider collision)
         {
-            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Kid))
+            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Animal))
             {
-                collision.gameObject.GetComponent<KidPlayer>().is_climbing = true;
+                collision.gameObject.GetComponent<AnimalPlayer>().is_climbing = true;
                 collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             }
         }
         private void OnTriggerExit(Collider collision)
         {
-            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Kid))
+            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Animal))
             {
-                collision.gameObject.GetComponent<KidPlayer>().is_climbing = false;
+                collision.gameObject.GetComponent<AnimalPlayer>().is_climbing = false;
                 collision.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             }
         }

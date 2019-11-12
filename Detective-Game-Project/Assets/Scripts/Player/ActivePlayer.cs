@@ -2,7 +2,7 @@
 {
     public enum ActivePlayer
     {
-        Grandpa,
-        Kid
+        Human,
+        Animal
     }
 }

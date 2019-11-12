@@ -3,7 +3,7 @@ using Cinemachine;
 
 namespace Scripts
 {
-    public class GrandpaPlayer : MonoBehaviour
+    public class HumanPlayer : MonoBehaviour
     {
         public float speed = 2.0f;
         public float rotationSpeed = 100.0f;
@@ -21,7 +21,7 @@ namespace Scripts
         // Update is called once per frame
         void Update()
         {
-            if (GameManager.Instance.ActivePlayer == ActivePlayer.Grandpa)
+            if (GameManager.Instance.ActivePlayer == ActivePlayer.Human)
             {
                 float translationRH = Input.GetAxisRaw("Mouse X") * rotationSpeed;
                 translationRH *= Time.deltaTime;
@@ -33,7 +33,7 @@ namespace Scripts
 
         private void FixedUpdate()
         {
-            if (GameManager.Instance.ActivePlayer == ActivePlayer.Grandpa)
+            if (GameManager.Instance.ActivePlayer == ActivePlayer.Human)
             {
                 float translation = Input.GetAxis("Vertical") * speed;
                 rigidBody.velocity =

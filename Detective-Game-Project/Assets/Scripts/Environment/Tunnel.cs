@@ -76,21 +76,21 @@ namespace Scripts
         {
             if (Crawling)
             {
-                GameManager.Instance.Kid.transform.Rotate(moveInRot * (Time.deltaTime * 1.5f));
+                GameManager.Instance.Animal.transform.Rotate(moveInRot * (Time.deltaTime * 1.5f));
             }
         }
 
 
         void OnCollisionEnter(Collision collision)
         {
-            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Kid))
+            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Animal))
             {
-                GameManager.Instance.Kid.GetComponent<CapsuleCollider>().enabled = false;
-                GameManager.Instance.Kid.GetComponent<KidPlayer>().enabled = false;
+                GameManager.Instance.Animal.GetComponent<CapsuleCollider>().enabled = false;
+                GameManager.Instance.Animal.GetComponent<AnimalPlayer>().enabled = false;
                 Camera.GetComponent<Camera>().target = null;
                 ClueCamera.GetComponent<Camera>().target = null;
-                GameManager.Instance.Kid.GetComponent<Rigidbody>().velocity = moveInDir;
-                GameManager.Instance.Kid.GetComponent<Rigidbody>().useGravity = false;
+                GameManager.Instance.Animal.GetComponent<Rigidbody>().velocity = moveInDir;
+                GameManager.Instance.Animal.GetComponent<Rigidbody>().useGravity = false;
                 Crawling = true;
                 StartCoroutine(MoveIn());
             }
@@ -101,7 +101,7 @@ namespace Scripts
         {
             yield return new WaitForSecondsRealtime(0.75f);
             Crawling = false;
-            GameManager.Instance.Kid.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            GameManager.Instance.Animal.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             StartCoroutine(Delay());
         }
 
@@ -111,18 +111,18 @@ namespace Scripts
             yield return new WaitForSecondsRealtime(2);
             if (ReferenceEquals(gameObject, TunnelA))
             {
-                GameManager.Instance.Kid.transform.position = TunnelB.transform.position;
+                GameManager.Instance.Animal.transform.position = TunnelB.transform.position;
 
             }
             if (ReferenceEquals(gameObject, TunnelB))
             {
-                GameManager.Instance.Kid.transform.position = TunnelA.transform.position;
+                GameManager.Instance.Animal.transform.position = TunnelA.transform.position;
             }
 
             if (Camera.GetComponent<Camera>().target == null)
             {
-                Camera.GetComponent<Camera>().target = GameManager.Instance.Kid.transform;
-                ClueCamera.GetComponent<Camera>().target = GameManager.Instance.Kid.transform;
+                Camera.GetComponent<Camera>().target = GameManager.Instance.Animal.transform;
+                ClueCamera.GetComponent<Camera>().target = GameManager.Instance.Animal.transform;
             }
 
             //TODO(Hamza): Pass just the pitch rotation, others cause the camera to bug out.
@@ -130,8 +130,8 @@ namespace Scripts
             // previous X-axis.
 
             CinCameraConxtext.m_XAxis.Value = -90;
-            GameManager.Instance.Kid.transform.rotation = Quaternion.Euler(moveOutRot);
-            GameManager.Instance.Kid.GetComponent<Rigidbody>().velocity = moveOutDir;
+            GameManager.Instance.Animal.transform.rotation = Quaternion.Euler(moveOutRot);
+            GameManager.Instance.Animal.GetComponent<Rigidbody>().velocity = moveOutDir;
             StartCoroutine(MoveOut());
         }
 
@@ -139,10 +139,10 @@ namespace Scripts
         IEnumerator MoveOut()
         {
             yield return new WaitForSecondsRealtime(0.5f);
-            GameManager.Instance.Kid.GetComponent<Rigidbody>().useGravity = true;
-            GameManager.Instance.Kid.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-            GameManager.Instance.Kid.GetComponent<CapsuleCollider>().enabled = true;
-            GameManager.Instance.Kid.GetComponent<KidPlayer>().enabled = true;
+            GameManager.Instance.Animal.GetComponent<Rigidbody>().useGravity = true;
+            GameManager.Instance.Animal.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            GameManager.Instance.Animal.GetComponent<CapsuleCollider>().enabled = true;
+            GameManager.Instance.Animal.GetComponent<AnimalPlayer>().enabled = true;
         }
     }
 }

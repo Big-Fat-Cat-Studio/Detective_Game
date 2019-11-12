@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Scripts {
-    public class KidPlayer : MonoBehaviour
+    public class AnimalPlayer : MonoBehaviour
     {
         public float speed = 5.0f;
         public float climbing_speed = 0.1f;
@@ -24,7 +24,7 @@ namespace Scripts {
         // Update is called once per frame
         void Update()
         {
-            if (GameManager.Instance.ActivePlayer == ActivePlayer.Kid)
+            if (GameManager.Instance.ActivePlayer == ActivePlayer.Animal)
             {
                 if (is_climbing)
                 {
@@ -48,8 +48,8 @@ namespace Scripts {
 
                     foreach(RaycastHit hit in hits)
                     {
-                        if (!ReferenceEquals(hit.collider.gameObject, GameManager.Instance.Kid) &&
-                            !ReferenceEquals(hit.collider.gameObject, GameManager.Instance.Grandpa))
+                        if (!ReferenceEquals(hit.collider.gameObject, GameManager.Instance.Animal) &&
+                            !ReferenceEquals(hit.collider.gameObject, GameManager.Instance.Human))
                         {
                             hitFloor = true;
                         }
@@ -86,7 +86,7 @@ namespace Scripts {
 
         private void FixedUpdate()
         {
-            if (!is_climbing && GameManager.Instance.ActivePlayer == ActivePlayer.Kid)
+            if (!is_climbing && GameManager.Instance.ActivePlayer == ActivePlayer.Animal)
             {
                 float translation = Input.GetAxis("Vertical") * speed;
                 rigidBody.velocity =

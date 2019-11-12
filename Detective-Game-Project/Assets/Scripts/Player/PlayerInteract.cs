@@ -41,6 +41,7 @@ namespace Scripts
             {
                 GameObject closestInteractable = null;
 
+                //Check which object is closest to the player
                 foreach (GameObject interactable in interactableObjects)
                 {
                     if (closestInteractable == null)
@@ -61,6 +62,7 @@ namespace Scripts
                 {
                     closestInteractable.GetComponent<InteractableObject>().interact(GetComponent<PlayerPickUp>().holding);
 
+                    //Check if the object disappeared (probably will be different later)
                     if (closestInteractable == null || closestInteractable.activeSelf == false)
                     {
                         interactableObjects.Remove(closestInteractable);
