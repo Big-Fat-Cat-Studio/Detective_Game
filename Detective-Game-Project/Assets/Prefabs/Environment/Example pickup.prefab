@@ -15,10 +15,9 @@ GameObject:
   - component: {fileID: 7083565146128169963}
   - component: {fileID: 7194724348600523194}
   - component: {fileID: 7194724348600523137}
-  - component: {fileID: 7194724348600523141}
   - component: {fileID: 7194724348600523140}
   m_Layer: 9
-  m_Name: Tool_Box_1
+  m_Name: Example pickup
   m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1d25aeeafef05074988284a5d1e8da5d, type: 2}
+  - {fileID: 2100000, guid: b76810ad04608c54bbf2c8d2630961d6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -142,19 +141,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.48000014, y: 0.20538524, z: 0.22950983}
   m_Center: {x: -0.000000009993989, y: 0.0026916978, z: 0.11475489}
---- !u!114 &7194724348600523141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7196278866424772425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48eb102c1a642124284fa0d9a20b351b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Clues: {fileID: 2100000, guid: 976f33a3b48771b4cb966b22d5054a6e, type: 2}
 --- !u!114 &7194724348600523140
 MonoBehaviour:
   m_ObjectHideFlags: 0
