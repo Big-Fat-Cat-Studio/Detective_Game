@@ -9,6 +9,7 @@ namespace Scripts
         public GameObject holding;
         public ActivePlayer currentPlayer;
 
+        private float timePickupKeyHolded;
         private bool showsText;
         new BoxCollider collider;
         List<GameObject> pickupsInRange;
@@ -21,6 +22,7 @@ namespace Scripts
             wallsInRange = new List<GameObject>();
             holding = null;
             collider = GetComponent<BoxCollider>();
+            timePickupKeyHolded = 0f;
         }
 
         private void Update()
@@ -45,26 +47,41 @@ namespace Scripts
             if (holding != null)
             {
                 holding.transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
+                holding.transform.rotation = this.transform.rotation;
             }
 
-            if (Input.GetKeyDown(KeyCode.Z))
+            if (Input.GetKey(KeyCode.Z))
             {
-                GameObject closestObject = getClosestObject();
+                timePickupKeyHolded += Time.deltaTime;
+            }
 
-                dropObject();
-                if (closestObject != null)
+            if (Input.GetKeyUp(KeyCode.Z))
+            {
+                if (currentPlayer == ActivePlayer.Human && timePickupKeyHolded > 1 && holding != null)
                 {
-                    holding = closestObject;
-                    holding.transform.rotation = transform.rotation;
-                    holding.GetComponent<Rigidbody>().isKinematic = true;
-                    holding.GetComponent<Rigidbody>().useGravity = false;
+                    throwObject();
+                }
+                else
+                {
+                    GameObject closestObject = getClosestObject();
 
-                    if (countObjectsInRange() == 0)
+                    dropObject();
+                    if (closestObject != null)
                     {
-                        GameManager.Instance.removePickupText(currentPlayer);
-                        showsText = false;
+                        holding = closestObject;
+                        holding.transform.rotation = transform.rotation;
+                        holding.GetComponent<Rigidbody>().isKinematic = true;
+                        holding.GetComponent<Rigidbody>().useGravity = false;
+
+                        if (countObjectsInRange() == 0)
+                        {
+                            GameManager.Instance.removePickupText(currentPlayer);
+                            showsText = false;
+                        }
                     }
                 }
+
+                timePickupKeyHolded = 0f;
             }
         }
 
@@ -117,6 +134,18 @@ namespace Scripts
                 
                 holding.GetComponent<Rigidbody>().isKinematic = false;
                 holding.GetComponent<Rigidbody>().useGravity = true;
+                holding = null;
+            }
+        }
+
+        void throwObject()
+        {
+            if (holding != null)
+            {
+                Rigidbody holdingRigidBody = holding.GetComponent<Rigidbody>();
+                holdingRigidBody.isKinematic = false;
+                holdingRigidBody.useGravity = true;
+                holdingRigidBody.AddRelativeForce(new Vector3(0f, holdingRigidBody.mass * 100, holdingRigidBody.mass * 500));
                 holding = null;
             }
         }
