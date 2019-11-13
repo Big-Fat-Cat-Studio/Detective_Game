@@ -57,7 +57,7 @@ namespace Scripts
 
             if (Input.GetKeyUp(KeyCode.Z))
             {
-                if (timePickupKeyHolded > 1 && holding != null)
+                if (currentPlayer == ActivePlayer.Human && timePickupKeyHolded > 1 && holding != null)
                 {
                     throwObject();
                 }
