@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ConveyorBelt : MonoBehaviour
 {
-    public GameObject belt;
-    public Transform endpoint;
-    public float speed;
+    public GameObject belt; // the parent belt that acts like a conveyor belt
+    public Transform endpoint; // the empty gameobject child of the belt
+    public float speed; // speed in which the objects move
 
     // Steps:
     // 1: add 2nd collider to belt object and check Is Trigger on
