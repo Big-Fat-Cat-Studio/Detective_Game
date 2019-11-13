@@ -54,6 +54,9 @@ namespace Scripts
             InteractText.SetActive(false);
             PickupText.SetActive(false);
             currentCourotine = null;
+
+            CameraContext.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
+            CameraContext.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
         }
 
         // Update is called once per frame
