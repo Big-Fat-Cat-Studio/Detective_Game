@@ -11,8 +11,10 @@ public class PressurePlate : MonoBehaviour
     [SerializeField] [Tooltip("Debug Size Collider")] private Vector3 ObjectSizeCollider;
     [SerializeField] [Tooltip("Debug Size Renderer")] private Vector3 ObjectSizeRenderer;
 
-    private Vector3 ObjectPressedSize;
+    [SerializeField] [Tooltip("Which object to manipulate")] private GameObject ObjectToManipulate;
 
+    private Vector3 ObjectPressedSize;
+    private bool Pressed;
 
 
     // Start is called before the first frame update
@@ -24,21 +26,21 @@ public class PressurePlate : MonoBehaviour
         ObjectPressedSize = new Vector3(0, (ObjectSizeCollider.y/2), 0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnChildTriggerEnter(Collider c, GameObject g)
     {
         gameObject.transform.position -= ObjectPressedSize;
-
+        Pressed = !Pressed;
         
     }
 
     public void OnChildTriggerExit(Collider c, GameObject g)
     {
         gameObject.transform.position += ObjectPressedSize;
+        Pressed = !Pressed;
+    }
+
+    public void ManipulateObject()
+    {
+        // Do something with the object this plate is supposed to manipulate.
     }
 }
