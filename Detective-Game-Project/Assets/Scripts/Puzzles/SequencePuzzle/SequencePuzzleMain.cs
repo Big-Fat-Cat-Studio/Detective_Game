@@ -9,8 +9,8 @@ namespace Scripts
         //Variables
         public List<GameObject> solution;
 
-        public List<int> convertedSolution;
-        public List<int> input;
+        private List<int> convertedSolution;
+        private List<int> input;
         private bool sequenceStillCorrect = true;
 
         //Unity functions
