@@ -16,6 +16,7 @@ namespace Scripts
         //Unity functions
         private void Start()
         {
+            this.input = new List<int>();
             this.convertedSolution = this.ConvertSolution();
             StartCoroutine(this.CheckSolution());
         }
