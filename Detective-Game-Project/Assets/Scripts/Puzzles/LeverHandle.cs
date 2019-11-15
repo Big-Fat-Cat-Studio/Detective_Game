@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ public class LeverHandle : MonoBehaviour
     [SerializeField] private Material BaseColor;
     [SerializeField] private Material RangeColor;
 
+    [SerializeField] [Tooltip("Object to manipulate")] private GameObject Manipulated;
+
     private Quaternion StartRotation;
     private Quaternion EndRotation;
     private bool Flipped;
@@ -27,8 +30,8 @@ public class LeverHandle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartAngle = new Vector3(-30, 0, 0);
-        TargetAngle = new Vector3(30, 0, 0);
+        StartAngle  = new Vector3(-30, 0, 0);
+        TargetAngle = new Vector3( 30, 0, 0);
 
         StartRotation = EndRotation = Quaternion.identity;
         StartRotation.eulerAngles = StartAngle;
@@ -51,27 +54,27 @@ public class LeverHandle : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.X))
                 {
                     // Rotate the lever && set interacted to !interacted on X
-                    StartCoroutine(Rotate(10));
-                    Flipped = !Flipped;
-                    Debug.Log(Flipped);
+                    StartCoroutine(Rotate(2, () => { Flipped = !Flipped; Debug.Log($"Switch flipped : {Flipped}"); }));
                 }
             }
+        } else
+        {
+            // Highlight the lever TODO(HAMZA:Change colorchange to shaderchange)
+            LeverRenderer.material = BaseColor;
+            BaseRenderer.material = BaseColor;
         }
-        // Highlight the lever TODO(HAMZA:Change colorchange to shaderchange)
-        LeverRenderer.material = BaseColor;
-        BaseRenderer.material = BaseColor;
     }
 
-    private IEnumerator Rotate(float time)
+    private IEnumerator Rotate(float time, Action cb)
     {
         while (time > 0.0f)
         {
-            yield return null;
-
             RotationBasePivotPoint.transform.rotation = (Flipped) ?
                 Quaternion.Lerp(RotationBasePivotPoint.transform.rotation, StartRotation, Time.deltaTime) :
                 Quaternion.Lerp(RotationBasePivotPoint.transform.rotation, EndRotation, Time.deltaTime);
             time -= Time.deltaTime;
+            yield return null;
         }
+        cb();
     }
 }
