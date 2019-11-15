@@ -10,18 +10,34 @@ namespace Scripts {
         [Header("\"Press [x] to ---\"")]
         public string interactMessage;
         public string afterInteractMessage;
+        public Clue clue;
 
         public void interact(GameObject playerItem)
         {
             if (neededItem == null || ReferenceEquals(playerItem, neededItem))
             {
-                this.gameObject.SetActive(false);
-                Destroy(this.gameObject);
+                if (clue != null)
+                {
+                    addClueToBoard();
+                }
+
+                destroyObject();
             }
             else
             {
                 GameManager.Instance.showAfterInteractText(afterInteractMessage);
             }
+        }
+
+        private void destroyObject()
+        {
+            this.gameObject.SetActive(false);
+            Destroy(this.gameObject);
+        }
+
+        private void addClueToBoard()
+        {
+            GameManager.Instance.addClueToBoard(clue);
         }
     }
 }

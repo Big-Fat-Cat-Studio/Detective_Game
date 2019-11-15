@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using Cinemachine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Scripts
 {
@@ -46,6 +47,11 @@ namespace Scripts
 
         private float _PrevPlayerORotation; // Object X-Axis Rotation
         private float _PrevPlayerCRotation; // Camera X-Axis Rotation
+
+        private List<Clue> clues = new List<Clue>();
+        public GameObject ClueBoard;
+        public GameObject ClueBoardContent;
+
         private void Start()
         {
             Human.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
@@ -53,6 +59,7 @@ namespace Scripts
             AfterInteractText.SetActive(false);
             InteractText.SetActive(false);
             PickupText.SetActive(false);
+            ClueBoard.SetActive(false);
             currentCourotine = null;
 
             CameraContext.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
@@ -89,6 +96,33 @@ namespace Scripts
                 var tempX = cameraContext.m_XAxis.Value;
                 cameraContext.m_XAxis.Value = _PrevPlayerCRotation;
                 _PrevPlayerCRotation = tempX;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                showAllClues();
+            }
+        }
+
+        public void addClueToBoard(Clue clue)
+        {
+            clues.Add(clue);
+            showAfterInteractText("Added " + clue.name + " to the list of clues.");
+        }
+
+        public void showAllClues()
+        {
+            if (ClueBoard.activeSelf)
+            {
+                ClueBoard.SetActive(false);
+            }
+            else
+            {
+                ClueBoard.SetActive(true);
+                foreach (Clue clue in clues)
+                {
+                    clue.getClueBoardClue().transform.SetParent(ClueBoardContent.transform, false);
+                }
             }
         }
 
