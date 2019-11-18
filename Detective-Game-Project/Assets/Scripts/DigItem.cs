@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DigItem : MonoBehaviour
 {
+    private bool collidewithdog = false;
     public GameObject Item;
     // Start is called before the first frame update
     void Start()
@@ -14,22 +15,26 @@ public class DigItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    void OnCollisionStay(Collision collision)
-    {
-        
-        if (collision.gameObject.tag == "Kid")
-        {
-            
-            if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X) && collidewithdog)
             {
-                Debug.Log("ouch");
                 gameObject.SetActive(false);
                 Instantiate(Item, gameObject.transform.position, gameObject.transform.rotation);
             }
-            
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Kid")
+        {
+            collidewithdog = true; 
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Kid")
+        {
+            collidewithdog = false; 
         }
     }
 }
