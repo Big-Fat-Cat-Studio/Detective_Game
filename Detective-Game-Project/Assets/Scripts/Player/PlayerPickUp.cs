@@ -69,9 +69,7 @@ namespace Scripts
                     if (closestObject != null)
                     {
                         holding = closestObject;
-                        holding.transform.rotation = transform.rotation;
-                        holding.GetComponent<Rigidbody>().isKinematic = true;
-                        holding.GetComponent<Rigidbody>().useGravity = false;
+                        holding.GetComponent<Pickup>().interact(gameObject);
 
                         if (countObjectsInRange() == 0)
                         {
