@@ -61,8 +61,6 @@ namespace Scripts
                         moveDirection.y = jumpHeight;
                     }
                 }
-                moveDirection.y -= gravity * Time.deltaTime;
-                characterController.Move(moveDirection * Time.deltaTime);
 
                 float translationRH = Input.GetAxisRaw("Mouse X") * rotationSpeed;
                 translationRH *= Time.deltaTime;
@@ -78,6 +76,8 @@ namespace Scripts
                 moveDirection *= climbingSpeed;
                 characterController.Move(moveDirection * Time.deltaTime);
             }
+            moveDirection.y -= gravity * Time.deltaTime;
+            characterController.Move(moveDirection * Time.deltaTime);
         }
 
     }

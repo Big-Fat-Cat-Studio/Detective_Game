@@ -36,14 +36,14 @@ namespace Scripts {
                         moveDirection.y = jumpHeight;
                     }
                 }
-                moveDirection.y -= gravity * Time.deltaTime;
-                characterController.Move(moveDirection * Time.deltaTime);
 
                 float translationRH = Input.GetAxisRaw("Mouse X") * rotationSpeed;
                 translationRH *= Time.deltaTime;
                 context.m_XAxis.Value += translationRH;
                 transform.Rotate(0, translationRH, 0);
             }
+            moveDirection.y -= gravity * Time.deltaTime;
+            characterController.Move(moveDirection * Time.deltaTime);
         }
     }
 }
