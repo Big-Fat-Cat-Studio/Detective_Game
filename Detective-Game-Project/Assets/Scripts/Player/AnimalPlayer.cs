@@ -42,6 +42,11 @@ namespace Scripts {
                 context.m_XAxis.Value += translationRH;
                 transform.Rotate(0, translationRH, 0);
             }
+            if (GameManager.Instance.ActivePlayer != ActivePlayer.Animal)
+            {
+                moveDirection.x = 0.0f;
+                moveDirection.z = 0.0f;
+            }
             moveDirection.y -= gravity * Time.deltaTime;
             characterController.Move(moveDirection * Time.deltaTime);
         }

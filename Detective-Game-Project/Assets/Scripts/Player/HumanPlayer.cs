@@ -74,7 +74,11 @@ namespace Scripts
                 moveDirection = new Vector3(0.0f, Input.GetAxis("Vertical"), Input.GetAxis("Vertical") * 0.2f);
                 moveDirection = transform.TransformDirection(moveDirection);
                 moveDirection *= climbingSpeed;
-                characterController.Move(moveDirection * Time.deltaTime);
+            }
+            if (GameManager.Instance.ActivePlayer != ActivePlayer.Human)
+            {
+                moveDirection.x = 0.0f;
+                moveDirection.z = 0.0f;
             }
             moveDirection.y -= gravity * Time.deltaTime;
             characterController.Move(moveDirection * Time.deltaTime);
