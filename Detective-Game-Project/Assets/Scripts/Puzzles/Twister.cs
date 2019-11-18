@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Twister : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public Vector3 EulAngle;
+
+
+    private void Update()
     {
-        
+        EulAngle = gameObject.transform.eulerAngles;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
