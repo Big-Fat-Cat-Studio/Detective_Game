@@ -7,6 +7,8 @@ namespace Scripts
     {
         [HideInInspector]
         public bool isClimbing = false;
+        [HideInInspector]
+        public bool canPushPull = false;
 
         private CinemachineFreeLook context;
 
@@ -18,6 +20,7 @@ namespace Scripts
         public float gravity = 20f;
         private Vector3 moveDirection = Vector3.zero;
 
+        Rigidbody body;
 
         private void Start()
         {
@@ -46,9 +49,30 @@ namespace Scripts
         }
 
 
+        void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            body = hit.collider.attachedRigidbody;
+
+            if (body == null)
+            {
+                return;
+            }
+            else if (Input.GetButton("Fire1") && hit.gameObject.tag == "Moveable")
+            {
+                Debug.Log("!");
+                canPushPull = true;
+                body.gameObject.transform.Translate(moveDirection * Time.deltaTime);
+            }
+            else
+            {
+                canPushPull = false;
+            }
+        }
+
+
         private void FixedUpdate()
         {
-            if (!isClimbing && GameManager.Instance.ActivePlayer == ActivePlayer.Human)
+            if (!isClimbing && !canPushPull && GameManager.Instance.ActivePlayer == ActivePlayer.Human)
             {
                 if (characterController.isGrounded)
                 {
@@ -75,6 +99,16 @@ namespace Scripts
                 moveDirection = transform.TransformDirection(moveDirection);
                 moveDirection *= climbingSpeed;
             }
+
+
+            if (canPushPull && GameManager.Instance.ActivePlayer == ActivePlayer.Human)
+            {
+                moveDirection = new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical"));
+                moveDirection = transform.TransformDirection(moveDirection);
+                moveDirection *= movementSpeed / 2;
+            }
+
+
             if (GameManager.Instance.ActivePlayer != ActivePlayer.Human)
             {
                 moveDirection.x = 0.0f;
