@@ -21,7 +21,14 @@ namespace Scripts
 
         private void Start()
         {
-            context = GameManager.Instance.CameraFollow.GetComponent<CinemachineFreeLook>();
+            if (GameManager.Instance.PlayerOne == ActivePlayer.Human)
+            {
+                context = GameManager.Instance.CameraFollow.GetComponent<CinemachineFreeLook>();
+            }
+            else
+            {
+                context = GameManager.Instance.CameraFollowP2.GetComponent<CinemachineFreeLook>();
+            }
             characterController = GetComponent<CharacterController>();
         }
 
@@ -72,13 +79,14 @@ namespace Scripts
                             moveDirection.y = jumpHeight;
                         }
                     }
+
                     float translationRH = GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Camera X", AxisType.AxisRaw) * rotationSpeed;
                     translationRH *= Time.deltaTime;
                     context.m_XAxis.Value += translationRH;
                     transform.Rotate(0, translationRH, 0);
                 }
             }
-            if (GameManager.Instance.ActivePlayer != ActivePlayer.Human)
+            else
             {
                 moveDirection.x = 0.0f;
                 moveDirection.z = 0.0f;
