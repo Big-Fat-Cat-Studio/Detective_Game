@@ -59,7 +59,6 @@ namespace Scripts
             }
             else if (Input.GetButton("Fire1") && hit.gameObject.tag == "Moveable")
             {
-                Debug.Log("!");
                 canPushPull = true;
                 body.gameObject.transform.Translate(moveDirection * Time.deltaTime);
             }
