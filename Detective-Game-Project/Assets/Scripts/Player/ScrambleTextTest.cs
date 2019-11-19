@@ -19,11 +19,11 @@ namespace Scripts
         // Update is called once per frame
         private void Update()
         {
-            if (GameManager.Instance.ActivePlayer == ActivePlayer.Human)
+            if (GameManager.Instance.PlayerOne == ActivePlayer.Human)
             {
                 this.gameObject.GetComponent<Text>().text = original_text;
             }
-            else if (GameManager.Instance.ActivePlayer == ActivePlayer.Animal)
+            else if (GameManager.Instance.PlayerOne == ActivePlayer.Animal)
             {
                 this.gameObject.GetComponent<Text>().text = scrambled_text;
             }

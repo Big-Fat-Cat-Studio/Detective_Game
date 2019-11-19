@@ -16,22 +16,31 @@ namespace Scripts {
 
         private void Start()
         {
-            context = GameManager.Instance.CameraContext.GetComponent<CinemachineFreeLook>();
+            if (GameManager.Instance.GameType == GameType.SinglePlayer)
+            {
+                context = GameManager.Instance.CameraHumanFollow.GetComponent<CinemachineFreeLook>();
+            }
+            else
+            {
+                context = GameManager.Instance.CameraAnimalFollow.GetComponent<CinemachineFreeLook>();
+            }
+
             characterController = GetComponent<CharacterController>();
         }
 
 
         private void FixedUpdate()
         {
-            if (GameManager.Instance.ActivePlayer == ActivePlayer.Animal)
+            if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Animal))
             {
                 if (characterController.isGrounded)
                 {
-                    moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+                    moveDirection = new Vector3(GameManager.Instance.getAxisForPlayer(ActivePlayer.Animal, "Horizontal", AxisType.Axis), 0.0f,
+                       GameManager.Instance.getAxisForPlayer(ActivePlayer.Animal, "Vertical", AxisType.Axis));
                     moveDirection = transform.TransformDirection(moveDirection);
                     moveDirection *= movementSpeed;
 
-                    if (Input.GetButton("Jump"))
+                    if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Animal, "Jump", ButtonPress.Press))
                     {
                         moveDirection.y = jumpHeight;
                     }
@@ -39,7 +48,7 @@ namespace Scripts {
                 moveDirection.y -= gravity * Time.deltaTime;
                 characterController.Move(moveDirection * Time.deltaTime);
 
-                float translationRH = Input.GetAxisRaw("Mouse X") * rotationSpeed;
+                float translationRH = GameManager.Instance.getAxisForPlayer(ActivePlayer.Animal, "Camera X", AxisType.AxisRaw) * rotationSpeed;
                 translationRH *= Time.deltaTime;
                 context.m_XAxis.Value += translationRH;
                 transform.Rotate(0, translationRH, 0);

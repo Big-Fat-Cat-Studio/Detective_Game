@@ -11,7 +11,7 @@ namespace Scripts {
         public string interactMessage;
         public string afterInteractMessage;
 
-        public void interact(GameObject playerItem)
+        public void interact(ActivePlayer player, GameObject playerItem)
         {
             if (neededItem == null || ReferenceEquals(playerItem, neededItem))
             {
@@ -20,7 +20,7 @@ namespace Scripts {
             }
             else
             {
-                GameManager.Instance.showAfterInteractText(afterInteractMessage);
+                GameManager.Instance.showAfterInteractText(player, afterInteractMessage);
             }
         }
     }

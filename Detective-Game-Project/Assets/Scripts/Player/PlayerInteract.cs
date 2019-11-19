@@ -20,7 +20,7 @@ namespace Scripts
         // Update is called once per frame
         void Update()
         {
-            if (GameManager.Instance.ActivePlayer != currentPlayer)
+            if (!GameManager.Instance.checkIfPlayerIsActive(currentPlayer))
             {
                 if (showsText)
                 {
@@ -37,13 +37,13 @@ namespace Scripts
                 showsText = true;
             }
 
-            if (Input.GetKeyDown(KeyCode.X))
+            if (GameManager.Instance.getButtonPressForPlayer(currentPlayer, "Interact", ButtonPress.Down))
             {
                 GameObject closestInteractable = getClosestObject();            
 
                 if (closestInteractable != null)
                 {
-                    closestInteractable.GetComponent<InteractableObject>().interact(GetComponent<PlayerPickUp>().holding);
+                    closestInteractable.GetComponent<InteractableObject>().interact(currentPlayer, GetComponent<PlayerPickUp>().holding);
 
                     //Check if the object disappeared (probably will be different later)
                     if (closestInteractable == null || closestInteractable.activeSelf == false)
