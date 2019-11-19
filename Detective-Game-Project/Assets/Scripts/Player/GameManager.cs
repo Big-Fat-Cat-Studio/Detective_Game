@@ -71,8 +71,7 @@ namespace Scripts
                 PlayerCamera.GetComponent<Camera>().rect = new Rect(0,0,1,1);
                 PlayerCameraP2.SetActive(false);
             }
-
-            if (PlayerTwo == ActivePlayer.Human) {
+            else if (PlayerTwo == ActivePlayer.Human) {
                 CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X";
                 CameraFollowP2.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y";
                 PlayerCameraP2.GetComponent<Camera>().rect = new Rect(0, 0.5f, 1, 1);

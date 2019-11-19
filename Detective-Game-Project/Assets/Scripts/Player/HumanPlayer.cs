@@ -24,7 +24,7 @@ namespace Scripts
 
         private void Start()
         {
-            if (GameManager.Instance.PlayerOne == ActivePlayer.Human)
+            if (GameManager.Instance.GameType == GameType.SinglePlayer || GameManager.Instance.PlayerOne == ActivePlayer.Human)
             {
                 context = GameManager.Instance.CameraFollow.GetComponent<CinemachineFreeLook>();
             }

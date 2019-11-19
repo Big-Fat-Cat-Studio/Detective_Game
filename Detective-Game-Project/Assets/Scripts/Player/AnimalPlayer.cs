@@ -16,7 +16,7 @@ namespace Scripts {
 
         private void Start()
         {
-            if (GameManager.Instance.PlayerOne == ActivePlayer.Animal)
+            if (GameManager.Instance.GameType == GameType.SinglePlayer || GameManager.Instance.PlayerOne == ActivePlayer.Animal)
             {
                 context = GameManager.Instance.CameraFollow.GetComponent<CinemachineFreeLook>();
             }
