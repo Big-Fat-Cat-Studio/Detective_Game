@@ -50,5 +50,14 @@ namespace Scripts {
             moveDirection.y -= gravity * Time.deltaTime;
             characterController.Move(moveDirection * Time.deltaTime);
         }
+
+        void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if(hit.gameObject.tag == "Jump")
+        {
+            Debug.Log("yeet");
+            moveDirection.y = jumpHeight * 2;
+        }
+    }
     }
 }
