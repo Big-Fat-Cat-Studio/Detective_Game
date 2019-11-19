@@ -76,8 +76,6 @@ namespace Scripts
                 TunnelA.GetComponent<BoxCollider>().enabled = true;
                 TunnelB.GetComponent<BoxCollider>().enabled = false;
                 GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = false;
-                Camera.GetComponent<Camera>().target = null;
-                ClueCamera.GetComponent<Camera>().target = null;
                 StartCoroutine(MoveIn());
             }
         }

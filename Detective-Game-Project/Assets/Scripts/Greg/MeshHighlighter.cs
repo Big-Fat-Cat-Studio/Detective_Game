@@ -23,27 +23,27 @@ namespace Scripts
         // Update is called once per frame
         void Update()
         {
-            if (GameManager.Instance.ActivePlayer != ActivePlayer.Human && active)
+            if (!GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human) && active)
             {
-                toggleClues("off");
+                toggleClues(false);
             }
             
-            if (highlightShader == null || GameManager.Instance.ActivePlayer != ActivePlayer.Human) return;
+            if (highlightShader == null || !GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human)) return;
 
-            if (Input.GetKeyDown(KeyCode.Space) && !active)
+            if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Special", ButtonPress.Down) && !active)
             {
-                toggleClues("on");
+                toggleClues(true);
             }
-            else if (Input.GetKeyDown(KeyCode.Space) && active)
+            else if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Special", ButtonPress.Down) && active)
             {
-                toggleClues("off");
+                toggleClues(false);
             }
         }
 
         // Toggle the highlighting effect on the object
-        void toggleClues(string toggle)
+        void toggleClues(bool toggle)
         {
-            if(rend.material.shader == defaultShader && toggle == "on")
+            if(rend.material.shader == defaultShader && toggle)
             {
                 rend.material.shader = highlightShader;
                 active = true;

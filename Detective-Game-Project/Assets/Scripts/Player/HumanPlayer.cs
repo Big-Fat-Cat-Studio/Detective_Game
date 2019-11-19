@@ -21,7 +21,7 @@ namespace Scripts
 
         private void Start()
         {
-            context = GameManager.Instance.CameraContext.GetComponent<CinemachineFreeLook>();
+            context = GameManager.Instance.CameraFollow.GetComponent<CinemachineFreeLook>();
             characterController = GetComponent<CharacterController>();
         }
 
@@ -48,32 +48,35 @@ namespace Scripts
 
         private void FixedUpdate()
         {
-            if (!isClimbing && GameManager.Instance.ActivePlayer == ActivePlayer.Human)
+            if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human))
             {
-                if (characterController.isGrounded)
+                if (isClimbing)
                 {
-                    moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+                    moveDirection = new Vector3(0.0f, GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis),
+                        GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis) * 0.5f);
                     moveDirection = transform.TransformDirection(moveDirection);
-                    moveDirection *= movementSpeed;
-
-                    if (Input.GetButton("Jump"))
-                    {
-                        moveDirection.y = jumpHeight;
-                    }
+                    moveDirection *= climbingSpeed;
+                    characterController.Move(moveDirection * Time.deltaTime);
                 }
+                else
+                {
+                    if (characterController.isGrounded)
+                    {
+                        moveDirection = new Vector3(GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Horizontal", AxisType.Axis), 0.0f,
+                            GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis));
+                        moveDirection = transform.TransformDirection(moveDirection);
+                        moveDirection *= movementSpeed;
 
-                float translationRH = Input.GetAxisRaw("Mouse X") * rotationSpeed;
-                translationRH *= Time.deltaTime;
-                context.m_XAxis.Value += translationRH;
-                transform.Rotate(0, translationRH, 0);
-            }
-
-
-            if (isClimbing && GameManager.Instance.ActivePlayer == ActivePlayer.Human)
-            {
-                moveDirection = new Vector3(0.0f, Input.GetAxis("Vertical"), Input.GetAxis("Vertical") * 0.2f);
-                moveDirection = transform.TransformDirection(moveDirection);
-                moveDirection *= climbingSpeed;
+                        if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Jump", ButtonPress.Press))
+                        {
+                            moveDirection.y = jumpHeight;
+                        }
+                    }
+                    float translationRH = GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Camera X", AxisType.AxisRaw) * rotationSpeed;
+                    translationRH *= Time.deltaTime;
+                    context.m_XAxis.Value += translationRH;
+                    transform.Rotate(0, translationRH, 0);
+                }
             }
             if (GameManager.Instance.ActivePlayer != ActivePlayer.Human)
             {

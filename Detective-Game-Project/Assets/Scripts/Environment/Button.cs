@@ -12,7 +12,7 @@ namespace Scripts
         //Unity functions
         private void OnTriggerEnter(Collider collision)
         {
-            if (collision.gameObject.tag == "Grandpa")//nog aanpassen naar correcte player tag
+            if (ReferenceEquals(GameManager.Instance.Human, collision.gameObject))
             {
                 target.GetComponent<ButtonTarget>().Activate();
             }

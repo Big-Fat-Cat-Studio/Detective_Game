@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5423633435951879934
+--- !u!1 &7066186651349780012
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8468046440334764598}
-  - component: {fileID: 6840936745759194812}
+  - component: {fileID: 7066186651349780010}
+  - component: {fileID: 7066186651349780011}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8468046440334764598
+--- !u!4 &7066186651349780010
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5423633435951879934}
+  m_GameObject: {fileID: 7066186651349780012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.08083296, y: 1.1674666, z: 3.142764}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,22 +31,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6840936745759194812
+--- !u!114 &7066186651349780011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5423633435951879934}
+  m_GameObject: {fileID: 7066186651349780012}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60c018b34feddbc4693623ebbaead95c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Human: {fileID: 0}
-  Animal: {fileID: 0}
-  ActivePlayer: 0
+  GameType: 2
+  Human: {fileID: 7913109846678831333, guid: 8f5e2f5899c226244a07570c887453b5, type: 3}
+  Animal: {fileID: 2915859389683786147, guid: 7ce125847d389294bbc5ccb140b7eccf, type: 3}
+  PlayerOne: 0
+  PlayerTwo: 1
   AfterInteractText: {fileID: 0}
   InteractText: {fileID: 0}
   PickupText: {fileID: 0}
-  CameraContext: {fileID: 0}
+  AfterInteractTextPlayerOne: {fileID: 0}
+  InteractTextPlayerOne: {fileID: 0}
+  PickupTextPlayerOne: {fileID: 0}
+  PlayerCamera: {fileID: 4772239009522117805, guid: 3805d7c0c78b8b44b8dcd0c904bff8d7,
+    type: 3}
+  PlayerCameraP2: {fileID: 3764697595661400766, guid: 9331b53fd394960449f0c93315806e33,
+    type: 3}
+  CameraFollow: {fileID: 2094728729927391409, guid: 6ed21601b2bd97947b682ee747bf6a62,
+    type: 3}
+  CameraFollowP2: {fileID: 4035866929001378665, guid: 0e8512b9443eb1e4abc2faa438e2d153,
+    type: 3}
