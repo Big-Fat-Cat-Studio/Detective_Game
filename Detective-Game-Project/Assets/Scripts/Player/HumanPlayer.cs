@@ -21,7 +21,7 @@ namespace Scripts
 
         private void Start()
         {
-            context = GameManager.Instance.CameraHumanFollow.GetComponent<CinemachineFreeLook>();
+            context = GameManager.Instance.CameraFollow.GetComponent<CinemachineFreeLook>();
             characterController = GetComponent<CharacterController>();
         }
 

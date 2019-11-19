@@ -53,11 +53,11 @@ namespace Scripts
 
         [Header("Camera objects")]
         public GameObject PlayerCamera;
-        public GameObject AnimalCamera;
+        public GameObject PlayerCameraP2;
 
         [Header("Freelook objects")]
-        public GameObject CameraHumanFollow;
-        public GameObject CameraAnimalFollow;
+        public GameObject CameraFollow;
+        public GameObject CameraFollowP2;
 
         private float _PrevPlayerORotation; // Object X-Axis Rotation
         private float _PrevPlayerCRotation; // Camera X-Axis Rotation
@@ -69,16 +69,16 @@ namespace Scripts
                 PlayerOne = ActivePlayer.Human;
 
                 PlayerCamera.GetComponent<Camera>().rect = new Rect(0,0,1,1);
-                AnimalCamera.SetActive(false);
+                PlayerCameraP2.SetActive(false);
             }
 
             if (PlayerTwo == ActivePlayer.Human) {
-                CameraAnimalFollow.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X";
-                CameraAnimalFollow.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y";
-                AnimalCamera.GetComponent<Camera>().rect = new Rect(0, 0.5f, 1, 1);
+                CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X";
+                CameraFollowP2.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y";
+                PlayerCameraP2.GetComponent<Camera>().rect = new Rect(0, 0.5f, 1, 1);
 
-                CameraHumanFollow.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X P2";
-                CameraHumanFollow.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y P2";
+                CameraFollow.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X P2";
+                CameraFollow.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y P2";
                 PlayerCamera.GetComponent<Camera>().rect = new Rect(0, -0.5f, 1, 1);
             }
 
@@ -98,7 +98,7 @@ namespace Scripts
         {
             if (GameType == GameType.SinglePlayer && Input.GetButtonDown("Swap"))
             {
-                CinemachineFreeLook cameraContext = CameraHumanFollow.GetComponent<CinemachineFreeLook>();
+                CinemachineFreeLook cameraContext = CameraFollow.GetComponent<CinemachineFreeLook>();
 
                 if (PlayerOne == ActivePlayer.Human)
                 {

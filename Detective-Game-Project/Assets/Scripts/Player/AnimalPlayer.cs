@@ -18,11 +18,11 @@ namespace Scripts {
         {
             if (GameManager.Instance.GameType == GameType.SinglePlayer)
             {
-                context = GameManager.Instance.CameraHumanFollow.GetComponent<CinemachineFreeLook>();
+                context = GameManager.Instance.CameraFollow.GetComponent<CinemachineFreeLook>();
             }
             else
             {
-                context = GameManager.Instance.CameraAnimalFollow.GetComponent<CinemachineFreeLook>();
+                context = GameManager.Instance.CameraFollowP2.GetComponent<CinemachineFreeLook>();
             }
 
             characterController = GetComponent<CharacterController>();
