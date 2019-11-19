@@ -8,12 +8,14 @@ public class Twister : MonoBehaviour
     private GameObject DoorGO;
 
     [SerializeField] [Tooltip("How much to move door in Y axis/up")]
-    private float OpenStep = 0.0001f;
+    private float OpenStep = 0.001f;
     [SerializeField] [Tooltip("How far the twister has been spun.")]
     private int OpenPercent = 1;
 
     private Vector3 EulAngle;
     private Rigidbody TwisterRB;
+
+    [SerializeField] private bool OpenStatus;
 
     private void Start()
     {
@@ -29,7 +31,13 @@ public class Twister : MonoBehaviour
         EulAngle = gameObject.transform.eulerAngles;
 
         if (OpenPercent > 99)
+        {
             TwisterRB.constraints = RigidbodyConstraints.FreezeAll;
+            OpenStatus = true;
+        }
+
+        // Once OpenStatus == true -> Open DoorGO. Put the functionality in the
+        // TODO around line 61~
 
     }
 
@@ -40,27 +48,16 @@ public class Twister : MonoBehaviour
         {
             // PingPong to make the min/max values 0-100
             OpenPercent = (int) Mathf.PingPong(--OpenPercent, 100);
-            StartCoroutine(MoveDoor(OpenPercent));
+            // MoveDoor(-1 * Mathf.Pow((float)OpenPercent, -1f)
         }
         // Lever is being spun in the positive direction / raise
         else if ((int)gameObject.transform.eulerAngles.y > (int)EulAngle.y)
         {
             OpenPercent = (int) Mathf.PingPong(++OpenPercent, 100);
-            StartCoroutine(MoveDoor((OpenPercent)));
+            // MoveDoor(Mathf.Pow((float)OpenPercent, -1f)
         }
     }
 
-    private IEnumerator MoveDoor(int p)
-    {
-        while (p != 0)
-        {
-            DoorGO.transform.position = Vector3.Lerp(
-                DoorGO.transform.position,
-                new Vector3(DoorGO.transform.position.x, DoorGO.transform.position.y + (p * OpenStep), DoorGO.transform.position.z),
-                Time.deltaTime);
-            p--;
-        }
-        yield return null;
-    }
+    // TODO(HAMZA) // Coroutine for opening the door.
 
 }
