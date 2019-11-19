@@ -64,21 +64,25 @@ namespace Scripts
             {
                 return;
             }
-            else if (Input.GetButton("Fire1") && hit.gameObject.tag == "Moveable")
+            else if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press) && hit.gameObject.tag == "Movable")
             {
                 canPushPull = true;
                 body.gameObject.transform.Translate(moveDirection * Time.deltaTime);
-            }
-            else
-            {
-                canPushPull = false;
             }
         }
 
 
         private void FixedUpdate()
         {
-            if (!isClimbing && !canPushPull && GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human))
+            if (canPushPull)
+            {
+                if (!GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press))
+                {
+                    canPushPull = false;
+                }
+            }
+
+            if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human))
             {
                 if (isClimbing)
                 {
@@ -88,7 +92,14 @@ namespace Scripts
                     moveDirection *= climbingSpeed;
                     characterController.Move(moveDirection * Time.deltaTime);
                 }
-                else
+                if (canPushPull)
+                {
+                    moveDirection = new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical"));
+                    moveDirection = transform.TransformDirection(moveDirection);
+                    moveDirection *= movementSpeed / 1.5f;
+                }
+
+                if (!isClimbing && !canPushPull)
                 {
                     if (characterController.isGrounded)
                     {
@@ -109,15 +120,7 @@ namespace Scripts
                     transform.Rotate(0, translationRH, 0);
                 }
             }
-
-            if (canPushPull && GameManager.Instance.ActivePlayer == ActivePlayer.Human)
-            {
-                moveDirection = new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical"));
-                moveDirection = transform.TransformDirection(moveDirection);
-                moveDirection *= movementSpeed / 2;
-            }
-
-            if (GameManager.Instance.ActivePlayer != ActivePlayer.Human)
+            else
             {
                 moveDirection.x = 0.0f;
                 moveDirection.z = 0.0f;
