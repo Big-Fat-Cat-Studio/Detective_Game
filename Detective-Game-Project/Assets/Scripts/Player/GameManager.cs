@@ -42,7 +42,7 @@ namespace Scripts
 
         [Header("Not for the actual cameras, place the \"FreeLookN\" objects here.\n")]
         public GameObject CameraContext;
-        public GameObject CameraContextClue;
+        //public GameObject CameraContextClue;
 
         private float _PrevPlayerORotation; // Object X-Axis Rotation
         private float _PrevPlayerCRotation; // Camera X-Axis Rotation
@@ -54,6 +54,9 @@ namespace Scripts
             InteractText.SetActive(false);
             PickupText.SetActive(false);
             currentCourotine = null;
+
+            CameraContext.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
+            CameraContext.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
         }
 
         // Update is called once per frame
@@ -62,7 +65,7 @@ namespace Scripts
             if (Input.GetKeyDown(KeyCode.Tab))
             {
                 CinemachineFreeLook cameraContext = CameraContext.GetComponent<CinemachineFreeLook>();
-                CinemachineFreeLook cameraContextClue = CameraContextClue.GetComponent<CinemachineFreeLook>();
+                //CinemachineFreeLook cameraContextClue = CameraContextClue.GetComponent<CinemachineFreeLook>();
 
                 if (ActivePlayer == ActivePlayer.Human)
                 {
