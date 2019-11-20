@@ -105,21 +105,18 @@ namespace Scripts
                         moveDirection = transform.TransformDirection(moveDirection);
                         moveDirection *= movementSpeed;
 
-                        if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press))
+                        if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Special2", ButtonPress.Down))
                         {
-                            umbrella.SetActive(true);
+                            umbrella.SetActive(!umbrella.activeSelf);
                         }
-                        else
-                        {
-                            umbrella.SetActive(false);
-                        }
+
                         if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Jump", ButtonPress.Press))
                         {
                             moveDirection.y = jumpHeight;
                         }
                     }
 
-                    float translationRH = GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Camera X", AxisType.AxisRaw) * rotationSpeed;
+                    float translationRH = GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Mouse X", AxisType.AxisRaw) * rotationSpeed;
                     translationRH *= Time.deltaTime;
                     context.m_XAxis.Value += translationRH;
                     transform.Rotate(0, translationRH, 0);

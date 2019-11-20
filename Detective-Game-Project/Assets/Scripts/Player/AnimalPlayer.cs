@@ -54,7 +54,7 @@ namespace Scripts {
                     }
                 }
 
-                float translationRH = GameManager.Instance.getAxisForPlayer(ActivePlayer.Animal, "Camera X", AxisType.AxisRaw) * rotationSpeed;
+                float translationRH = GameManager.Instance.getAxisForPlayer(ActivePlayer.Animal, "Mouse X", AxisType.AxisRaw) * rotationSpeed;
                 translationRH *= Time.deltaTime;
                 context.m_XAxis.Value += translationRH;
                 transform.Rotate(0, translationRH, 0);
@@ -68,7 +68,7 @@ namespace Scripts {
             characterController.Move(moveDirection * Time.deltaTime);
         }
 
-        void OnControllerColliderHit(ControllerColliderHit hit)
+        void OnControllerTriggerHit(ControllerColliderHit hit)
         {
             if(hit.gameObject.tag == "Umbrella")
             {
