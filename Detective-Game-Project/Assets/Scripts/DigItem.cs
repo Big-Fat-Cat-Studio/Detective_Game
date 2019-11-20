@@ -19,15 +19,13 @@ public class DigItem : MonoBehaviour
     {
         if (diggable)
         {
-             if (Input.GetKeyDown(KeyCode.X))
+             if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Down))
             {
                     collide.SetActive(false);
                     Instantiate(Item, collide.transform.position, collide.transform.rotation);
                     diggable = false;
-                
             }
         }
-       
     }
 
     void OnTriggerEnter(Collider collision)

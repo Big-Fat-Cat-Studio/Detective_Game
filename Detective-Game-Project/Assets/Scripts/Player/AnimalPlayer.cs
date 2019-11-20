@@ -61,12 +61,13 @@ namespace Scripts {
         }
 
         void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if(hit.gameObject.tag == "Jump")
         {
-            Debug.Log("yeet");
-            moveDirection.y = jumpHeight * 2;
+            if(hit.gameObject.tag == "Umbrella")
+            {
+                moveDirection = Vector3.zero;
+                moveDirection = new Vector3(0f, jumpHeight * 9f, 0f);
+                characterController.Move(moveDirection * Time.deltaTime);
+            }
         }
-    }
     }
 }

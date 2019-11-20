@@ -9,9 +9,7 @@ namespace Scripts
         public bool isClimbing = false;
         [HideInInspector]
         public bool canPushPull = false;
-
         private CinemachineFreeLook context;
-
         CharacterController characterController;
         public float movementSpeed = 3.0f;
         public float climbingSpeed = 2.0f;
@@ -19,12 +17,15 @@ namespace Scripts
         public float jumpHeight = 8.0f;
         public float gravity = 20f;
         private Vector3 moveDirection = Vector3.zero;
-
         Rigidbody body;
+        public GameObject umbrella;
 
         private void Start()
         {
+            umbrella.transform.parent = gameObject.transform;
+            umbrella.SetActive(false);
             if (GameManager.Instance.GameType == GameType.SinglePlayer || GameManager.Instance.PlayerOne == ActivePlayer.Human)
+            if (GameManager.Instance.PlayerOne == ActivePlayer.Human)
             {
                 context = GameManager.Instance.CameraFollow.GetComponent<CinemachineFreeLook>();
             }
@@ -35,7 +36,6 @@ namespace Scripts
             characterController = GetComponent<CharacterController>();
         }
 
-
         private void OnTriggerEnter(Collider collision)
         {
             if (collision.tag == "Ladder")
@@ -45,7 +45,6 @@ namespace Scripts
             }
         }
 
-
         private void OnTriggerExit(Collider collision)
         {
             if (collision.tag == "Ladder")
@@ -54,7 +53,6 @@ namespace Scripts
                 isClimbing = false;
             }
         }
-
 
         void OnControllerColliderHit(ControllerColliderHit hit)
         {
@@ -70,7 +68,6 @@ namespace Scripts
                 body.gameObject.transform.Translate(moveDirection * Time.deltaTime);
             }
         }
-
 
         private void FixedUpdate()
         {
@@ -108,6 +105,14 @@ namespace Scripts
                         moveDirection = transform.TransformDirection(moveDirection);
                         moveDirection *= movementSpeed;
 
+                        if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press))
+                        {
+                            umbrella.SetActive(true);
+                        }
+                        else
+                        {
+                            umbrella.SetActive(false);
+                        }
                         if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Jump", ButtonPress.Press))
                         {
                             moveDirection.y = jumpHeight;
