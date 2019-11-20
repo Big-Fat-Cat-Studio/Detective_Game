@@ -12,6 +12,7 @@ namespace Scripts {
         public float jumpHeight = 8.0f;
         public float gravity = 20f;
         private Vector3 moveDirection = Vector3.zero;
+        bool bounce = false;
 
 
         private void Start()
@@ -40,9 +41,16 @@ namespace Scripts {
                     moveDirection = transform.TransformDirection(moveDirection);
                     moveDirection *= movementSpeed;
 
-                    if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Animal, "Jump", ButtonPress.Press))
+                    if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Animal, "Jump", ButtonPress.Press) || bounce)
                     {
-                        moveDirection.y = jumpHeight;
+                        if (bounce)
+                        {
+                            moveDirection.y = jumpHeight * 2;
+                        }
+                        else
+                        {
+                            moveDirection.y = jumpHeight;
+                        }
                     }
                 }
 
@@ -64,9 +72,11 @@ namespace Scripts {
         {
             if(hit.gameObject.tag == "Umbrella")
             {
-                moveDirection = Vector3.zero;
-                moveDirection = new Vector3(0f, jumpHeight * 9f, 0f);
-                characterController.Move(moveDirection * Time.deltaTime);
+                bounce = true;
+            }
+            else
+            {
+                bounce = false;
             }
         }
     }
