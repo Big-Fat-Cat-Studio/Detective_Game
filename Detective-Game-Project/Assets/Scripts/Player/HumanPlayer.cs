@@ -7,9 +7,9 @@ namespace Scripts
     {
         [HideInInspector]
         public bool isClimbing = false;
-
+        [HideInInspector]
+        public bool canPushPull = false;
         private CinemachineFreeLook context;
-
         CharacterController characterController;
         public float movementSpeed = 3.0f;
         public float climbingSpeed = 2.0f;
@@ -17,14 +17,24 @@ namespace Scripts
         public float jumpHeight = 8.0f;
         public float gravity = 20f;
         private Vector3 moveDirection = Vector3.zero;
-
+        Rigidbody body;
+        public GameObject umbrella;
 
         private void Start()
         {
-            context = GameManager.Instance.CameraContext.GetComponent<CinemachineFreeLook>();
+            umbrella.transform.parent = gameObject.transform;
+            umbrella.SetActive(false);
+            if (GameManager.Instance.GameType == GameType.SinglePlayer || GameManager.Instance.PlayerOne == ActivePlayer.Human)
+            if (GameManager.Instance.PlayerOne == ActivePlayer.Human)
+            {
+                context = GameManager.Instance.CameraFollow.GetComponent<CinemachineFreeLook>();
+            }
+            else
+            {
+                context = GameManager.Instance.CameraFollowP2.GetComponent<CinemachineFreeLook>();
+            }
             characterController = GetComponent<CharacterController>();
         }
-
 
         private void OnTriggerEnter(Collider collision)
         {
@@ -35,7 +45,6 @@ namespace Scripts
             }
         }
 
-
         private void OnTriggerExit(Collider collision)
         {
             if (collision.tag == "Ladder")
@@ -45,37 +54,75 @@ namespace Scripts
             }
         }
 
+        void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            body = hit.collider.attachedRigidbody;
+
+            if (body == null)
+            {
+                return;
+            }
+            else if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press) && hit.gameObject.tag == "Movable")
+            {
+                canPushPull = true;
+                body.gameObject.transform.Translate(moveDirection * Time.deltaTime);
+            }
+        }
 
         private void FixedUpdate()
         {
-            if (!isClimbing && GameManager.Instance.ActivePlayer == ActivePlayer.Human)
+            if (canPushPull)
             {
-                if (characterController.isGrounded)
+                if (!GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press))
                 {
-                    moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
-                    moveDirection = transform.TransformDirection(moveDirection);
-                    moveDirection *= movementSpeed;
+                    canPushPull = false;
+                }
+            }
 
-                    if (Input.GetButton("Jump"))
-                    {
-                        moveDirection.y = jumpHeight;
-                    }
+            if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human))
+            {
+                if (isClimbing)
+                {
+                    moveDirection = new Vector3(0.0f, GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis),
+                        GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis) * 0.5f);
+                    moveDirection = transform.TransformDirection(moveDirection);
+                    moveDirection *= climbingSpeed;
+                    characterController.Move(moveDirection * Time.deltaTime);
+                }
+                if (canPushPull)
+                {
+                    moveDirection = new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical"));
+                    moveDirection = transform.TransformDirection(moveDirection);
+                    moveDirection *= movementSpeed / 1.5f;
                 }
 
-                float translationRH = Input.GetAxisRaw("Mouse X") * rotationSpeed;
-                translationRH *= Time.deltaTime;
-                context.m_XAxis.Value += translationRH;
-                transform.Rotate(0, translationRH, 0);
-            }
+                if (!isClimbing && !canPushPull)
+                {
+                    if (characterController.isGrounded)
+                    {
+                        moveDirection = new Vector3(GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Horizontal", AxisType.Axis), 0.0f,
+                            GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis));
+                        moveDirection = transform.TransformDirection(moveDirection);
+                        moveDirection *= movementSpeed;
 
+                        if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Special2", ButtonPress.Down))
+                        {
+                            umbrella.SetActive(!umbrella.activeSelf);
+                        }
 
-            if (isClimbing && GameManager.Instance.ActivePlayer == ActivePlayer.Human)
-            {
-                moveDirection = new Vector3(0.0f, Input.GetAxis("Vertical"), Input.GetAxis("Vertical") * 0.2f);
-                moveDirection = transform.TransformDirection(moveDirection);
-                moveDirection *= climbingSpeed;
+                        if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Jump", ButtonPress.Press))
+                        {
+                            moveDirection.y = jumpHeight;
+                        }
+                    }
+
+                    float translationRH = GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Mouse X", AxisType.AxisRaw) * rotationSpeed;
+                    translationRH *= Time.deltaTime;
+                    context.m_XAxis.Value += translationRH;
+                    transform.Rotate(0, translationRH, 0);
+                }
             }
-            if (GameManager.Instance.ActivePlayer != ActivePlayer.Human)
+            else
             {
                 moveDirection.x = 0.0f;
                 moveDirection.z = 0.0f;

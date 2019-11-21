@@ -15,13 +15,9 @@ namespace Scripts
         public FacingTunnelB facingTunnelB;
 
         public GameObject CinCamera;
-        private CinemachineFreeLook CinCameraConxtext;
 
         void Start()
         {
-            CinCameraConxtext = CinCamera.GetComponent<CinemachineFreeLook>();
-
-
             //Currently not used, might come in handy later - Martin
 
             // if (facingTunnelA == FacingTunnelA.Right)
@@ -76,8 +72,6 @@ namespace Scripts
                 TunnelA.GetComponent<BoxCollider>().enabled = true;
                 TunnelB.GetComponent<BoxCollider>().enabled = false;
                 GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = false;
-                Camera.GetComponent<Camera>().target = null;
-                ClueCamera.GetComponent<Camera>().target = null;
                 StartCoroutine(MoveIn());
             }
         }

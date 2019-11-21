@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Scripts {
 public class DigItem : MonoBehaviour
 {
-    public GameObject Item;
+    private GameObject Item;
+    private GameObject collide;
+    bool diggable = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,22 +17,36 @@ public class DigItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (diggable)
+        {
+             if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Down))
+            {
+                    collide.SetActive(false);
+                    Instantiate(Item, collide.transform.position, collide.transform.rotation);
+                    diggable = false;
+            }
+        }
+    }
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "Dig")
+        {
+            Item = collision.gameObject.GetComponent<InteractableObject>().neededItem;
+            diggable = true;
+            collide = collision.gameObject;
+        }
         
     }
 
-    void OnCollisionStay(Collision collision)
+     void OnTriggerExit(Collider collision)
     {
         
-        if (collision.gameObject.tag == "Kid")
+        if (collision.gameObject.tag == "Dig")
         {
-            
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                Debug.Log("ouch");
-                gameObject.SetActive(false);
-                Instantiate(Item, gameObject.transform.position, gameObject.transform.rotation);
-            }
+            diggable = false;
             
         }
     }
+}
 }

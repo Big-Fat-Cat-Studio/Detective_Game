@@ -27,7 +27,7 @@ namespace Scripts
 
         private void Update()
         {
-            if (GameManager.Instance.ActivePlayer != currentPlayer)
+            if (!GameManager.Instance.checkIfPlayerIsActive(currentPlayer))
             {
                 if (showsText)
                 {
@@ -50,12 +50,12 @@ namespace Scripts
                 holding.transform.rotation = this.transform.rotation;
             }
 
-            if (Input.GetKey(KeyCode.Z))
+            if (GameManager.Instance.getButtonPressForPlayer(currentPlayer, "Pickup", ButtonPress.Press))
             {
                 timePickupKeyHolded += Time.deltaTime;
             }
 
-            if (Input.GetKeyUp(KeyCode.Z))
+            if (GameManager.Instance.getButtonPressForPlayer(currentPlayer, "Pickup", ButtonPress.Up))
             {
                 if (currentPlayer == ActivePlayer.Human && timePickupKeyHolded > 1 && holding != null)
                 {

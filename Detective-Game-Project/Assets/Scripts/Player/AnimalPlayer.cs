@@ -12,43 +12,72 @@ namespace Scripts {
         public float jumpHeight = 8.0f;
         public float gravity = 20f;
         private Vector3 moveDirection = Vector3.zero;
+        bool bounce = false;
 
 
         private void Start()
         {
-            context = GameManager.Instance.CameraContext.GetComponent<CinemachineFreeLook>();
+            if (GameManager.Instance.GameType == GameType.SinglePlayer || GameManager.Instance.PlayerOne == ActivePlayer.Animal)
+            {
+                context = GameManager.Instance.CameraFollow.GetComponent<CinemachineFreeLook>();
+            }
+            else
+            {
+                context = GameManager.Instance.CameraFollowP2.GetComponent<CinemachineFreeLook>();
+            }
+
             characterController = GetComponent<CharacterController>();
         }
 
 
         private void FixedUpdate()
         {
-            if (GameManager.Instance.ActivePlayer == ActivePlayer.Animal)
+            if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Animal))
             {
                 if (characterController.isGrounded)
                 {
-                    moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+                    moveDirection = new Vector3(GameManager.Instance.getAxisForPlayer(ActivePlayer.Animal, "Horizontal", AxisType.Axis), 0.0f,
+                       GameManager.Instance.getAxisForPlayer(ActivePlayer.Animal, "Vertical", AxisType.Axis));
                     moveDirection = transform.TransformDirection(moveDirection);
                     moveDirection *= movementSpeed;
 
-                    if (Input.GetButton("Jump"))
+                    if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Animal, "Jump", ButtonPress.Press) || bounce)
                     {
-                        moveDirection.y = jumpHeight;
+                        if (bounce)
+                        {
+                            moveDirection.y = jumpHeight * 2;
+                        }
+                        else
+                        {
+                            moveDirection.y = jumpHeight;
+                        }
                     }
                 }
 
-                float translationRH = Input.GetAxisRaw("Mouse X") * rotationSpeed;
+                float translationRH = GameManager.Instance.getAxisForPlayer(ActivePlayer.Animal, "Mouse X", AxisType.AxisRaw) * rotationSpeed;
                 translationRH *= Time.deltaTime;
                 context.m_XAxis.Value += translationRH;
                 transform.Rotate(0, translationRH, 0);
             }
-            if (GameManager.Instance.ActivePlayer != ActivePlayer.Animal)
+            else
             {
                 moveDirection.x = 0.0f;
                 moveDirection.z = 0.0f;
             }
             moveDirection.y -= gravity * Time.deltaTime;
             characterController.Move(moveDirection * Time.deltaTime);
+        }
+
+        void OnControllerTriggerHit(ControllerColliderHit hit)
+        {
+            if(hit.gameObject.tag == "Umbrella")
+            {
+                bounce = true;
+            }
+            else
+            {
+                bounce = false;
+            }
         }
     }
 }
