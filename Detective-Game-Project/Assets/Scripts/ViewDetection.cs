@@ -29,12 +29,11 @@ public class ViewDetection : MonoBehaviour
         {
             Gizmos.color = Color.green;
         }
-        Gizmos.DrawRay(transform.position, (player.position - transform.position).normalized * maxRadius);
+        Gizmos.DrawRay(transform.position, (player.position - transform.position + Vector3.up - (Vector3.up / 2)).normalized * maxRadius);
 
         Gizmos.color = Color.black;
-        Gizmos.DrawRay(transform.position, player.forward * maxRadius);
+        Gizmos.DrawRay(transform.position, gameObject.transform.forward * maxRadius);
     }
-
 
     public bool inFOV(Transform checkingObject, Transform target, float maxAngle, float maxRadius) 
     { 
@@ -42,15 +41,13 @@ public class ViewDetection : MonoBehaviour
         directionBetween.y *= 0; 
         RaycastHit hit; 
         Debug.Log("0");
-        if ( Physics.Raycast(checkingObject.position , (target.position - checkingObject.position).normalized, out hit, maxRadius)) 
+        if ( Physics.Raycast(checkingObject.position + Vector3.up - (Vector3.up / 2), (target.position - checkingObject.position).normalized, out hit, maxRadius)) 
         {
             Debug.Log("1");
             if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Human") 
-            { 
+            {
                 Debug.Log("2");
                 float angle = Vector3.Angle(checkingObject.forward, directionBetween);
-                 Debug.Log(angle);
-                  Debug.Log(maxAngle);
                 if (angle <= maxAngle) 
                 { 
                     Debug.Log("3");
