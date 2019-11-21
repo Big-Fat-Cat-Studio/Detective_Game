@@ -272,6 +272,7 @@ namespace Scripts
                 }
 
                 currentCourotinePlayerOne = afterInteractTextDisappear(PlayerOne);
+                StartCoroutine(currentCourotinePlayerOne);
             }
             else
             {
@@ -299,7 +300,7 @@ namespace Scripts
         IEnumerator afterInteractTextDisappear(ActivePlayer player)
         {
             yield return new WaitForSecondsRealtime(6);
-            if (player == PlayerOne)
+            if (player == PlayerOne && GameType == GameType.MultiPlayerSplitScreen)
             {
                 AfterInteractTextPlayerOne.SetActive(false);
                 currentCourotinePlayerOne = null;

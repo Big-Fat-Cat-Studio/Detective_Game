@@ -62,10 +62,23 @@ namespace Scripts
             {
                 return;
             }
-            else if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press) && hit.gameObject.tag == "Movable")
+            if (hit.gameObject.tag == "Movable")
+            {
+                
+            }
+            if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press) && hit.gameObject.tag == "Movable")
             {
                 canPushPull = true;
                 body.gameObject.transform.Translate(moveDirection * Time.deltaTime);
+            }
+        }
+
+        private void Update()
+        {
+            if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human) && !canPushPull && !isClimbing &&
+                GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Special2", ButtonPress.Down))
+            {
+                umbrella.SetActive(!umbrella.activeSelf);
             }
         }
 
@@ -83,8 +96,9 @@ namespace Scripts
             {
                 if (isClimbing)
                 {
+
                     moveDirection = new Vector3(0.0f, GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis),
-                        GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis) * 0.5f);
+                        GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis) * 0.3f);
                     moveDirection = transform.TransformDirection(moveDirection);
                     moveDirection *= climbingSpeed;
                     characterController.Move(moveDirection * Time.deltaTime);
@@ -98,17 +112,13 @@ namespace Scripts
 
                 if (!isClimbing && !canPushPull)
                 {
+
                     if (characterController.isGrounded)
                     {
                         moveDirection = new Vector3(GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Horizontal", AxisType.Axis), 0.0f,
                             GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis));
                         moveDirection = transform.TransformDirection(moveDirection);
                         moveDirection *= movementSpeed;
-
-                        if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Special2", ButtonPress.Down))
-                        {
-                            umbrella.SetActive(!umbrella.activeSelf);
-                        }
 
                         if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Jump", ButtonPress.Press))
                         {

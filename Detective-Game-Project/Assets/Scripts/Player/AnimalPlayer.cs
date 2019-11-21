@@ -68,7 +68,7 @@ namespace Scripts {
             characterController.Move(moveDirection * Time.deltaTime);
         }
 
-        void OnControllerTriggerHit(ControllerColliderHit hit)
+        void OnControllerColliderHit(ControllerColliderHit hit)
         {
             if(hit.gameObject.tag == "Umbrella")
             {

@@ -7,20 +7,25 @@ namespace Scripts {
     public class InteractableObject : MonoBehaviour
     {
         public GameObject neededItem;
+        public ActivePlayer PlayerThatCanInteract;
+
         [Header("\"Press [x] to ---\"")]
         public string interactMessage;
         public string afterInteractMessage;
 
         public void interact(ActivePlayer player, GameObject playerItem)
         {
-            if (neededItem == null || ReferenceEquals(playerItem, neededItem))
+            if (player == PlayerThatCanInteract)
             {
-                this.gameObject.SetActive(false);
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                GameManager.Instance.showAfterInteractText(player, afterInteractMessage);
+                if (neededItem == null || ReferenceEquals(playerItem, neededItem))
+                {
+                    this.gameObject.SetActive(false);
+                    Destroy(this.gameObject);
+                }
+                else
+                {
+                    GameManager.Instance.showAfterInteractText(player, afterInteractMessage);
+                }
             }
         }
     }
