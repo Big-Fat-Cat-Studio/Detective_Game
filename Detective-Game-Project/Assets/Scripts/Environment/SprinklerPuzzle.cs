@@ -38,7 +38,6 @@ namespace Scripts {
                     ActivateSprinkler.instance.placed += 1;
                 }
                 GameManager.Instance.Human.GetComponentInChildren<PlayerPickUp>().removeHoldingObject();
-                Debug.Log(playerItem.name);
                 playerItem.GetComponent<BoxCollider>().enabled = false;
                 playerItem.transform.localRotation = Quaternion.identity;
                 playerItem.tag = "Untagged";

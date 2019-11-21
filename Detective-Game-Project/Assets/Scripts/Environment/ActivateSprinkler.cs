@@ -16,8 +16,7 @@ public class ActivateSprinkler : MonoBehaviour
     {
         if (placed == 5)
         {
-            //destroy object blocking path
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }
