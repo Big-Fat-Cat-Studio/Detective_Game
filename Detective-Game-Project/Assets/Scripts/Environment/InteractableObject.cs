@@ -10,8 +10,10 @@ namespace Scripts {
         [Header("\"Press [x] to ---\"")]
         public string interactMessage;
         public string afterInteractMessage;
+        [HideInInspector]
+        public bool interactable = true;
 
-        public void interact(ActivePlayer player, GameObject playerItem)
+        public virtual void interact(ActivePlayer player, GameObject playerItem)
         {
             if (neededItem == null || ReferenceEquals(playerItem, neededItem))
             {
