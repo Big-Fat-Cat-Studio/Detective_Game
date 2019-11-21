@@ -86,7 +86,8 @@ namespace Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == Constant.TAG_INTERACT && other.gameObject.GetComponent<InteractableObject>().interactable)
+            if (other.gameObject.tag == Constant.TAG_INTERACT && other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == currentPlayer 
+            && other.gameObject.GetComponent<InteractableObject>().interactable)
             {
                 interactableObjects.Add(other.gameObject);
                 GameManager.Instance.showInteractText(getClosestObject().GetComponent<InteractableObject>().interactMessage, currentPlayer);
