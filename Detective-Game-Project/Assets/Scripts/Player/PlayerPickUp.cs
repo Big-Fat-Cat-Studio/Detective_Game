@@ -34,7 +34,7 @@ namespace Scripts
                     GameManager.Instance.removePickupText(currentPlayer);
                     showsText = false;
                 }
-                
+
                 return;
             }
 
@@ -85,6 +85,11 @@ namespace Scripts
             }
         }
 
+        public void removeHoldingObject() {
+            pickupsInRange.Remove(holding);
+            holding = null;
+        }
+
         int countObjectsInRange()
         {
             int count = 0;
@@ -126,12 +131,12 @@ namespace Scripts
         void dropObject()
         {
             if (holding != null)
-            { 
+            {
                 if (wallsInRange.Count == 0)
                 {
                     holding.transform.position = collider.bounds.center;
                 }
-                
+
                 holding.GetComponent<Rigidbody>().isKinematic = false;
                 holding.GetComponent<Rigidbody>().useGravity = true;
                 holding = null;
