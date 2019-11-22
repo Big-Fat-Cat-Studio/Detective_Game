@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3026311348131585989}
   - component: {fileID: 3026311348131585988}
   - component: {fileID: 3026311348131585991}
+  - component: {fileID: 1242346706}
   m_Layer: 0
   m_Name: Animal
   m_TagString: Kid
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3026311348131585990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 187.99, y: 0.505, z: 173.79}
-  m_LocalScale: {x: 0.8578429, y: 0.43201715, z: 0.9110083}
+  m_LocalScale: {x: 0.7, y: 0.3, z: 0.7}
   m_Children:
   - {fileID: 3026311349306587092}
   - {fileID: 3026311348203986412}
@@ -127,12 +128,25 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 0
-  m_Radius: 0.5
+  m_Radius: 0.45
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1242346706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3026311348131585990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a59f23ced0a3d042ba1d3b3e941e503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yDeathLevel: -5
 --- !u!1 &3026311348203986415
 GameObject:
   m_ObjectHideFlags: 0

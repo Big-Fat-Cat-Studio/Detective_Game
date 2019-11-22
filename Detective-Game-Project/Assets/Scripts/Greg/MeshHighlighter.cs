@@ -23,18 +23,18 @@ namespace Scripts
         // Update is called once per frame
         void Update()
         {
-            if (!GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human) && active)
+            if (!GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Animal) && active)
             {
                 toggleClues(false);
             }
             
-            if (highlightShader == null || !GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human)) return;
+            if (highlightShader == null || !GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Animal)) return;
 
-            if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Special", ButtonPress.Down) && !active)
+            if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Animal, "Special", ButtonPress.Down) && !active)
             {
                 toggleClues(true);
             }
-            else if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Special", ButtonPress.Down) && active)
+            else if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Animal, "Special", ButtonPress.Down) && active)
             {
                 toggleClues(false);
             }

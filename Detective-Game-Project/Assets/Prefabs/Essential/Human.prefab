@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 1650951389504171936}
   - component: {fileID: 1650951389504171937}
   - component: {fileID: 1650951389504171938}
+  - component: {fileID: 972482878}
   m_Layer: 0
   m_Name: Human
   m_TagString: Grandpa
@@ -209,13 +210,26 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2.0000002
+  m_Height: 2.1
   m_Radius: 0.45
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.02, z: 0}
+--- !u!114 &972482878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650951389504171939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a59f23ced0a3d042ba1d3b3e941e503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yDeathLevel: -5
 --- !u!1 &1650951389662829091
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,8 +315,6 @@ GameObject:
   - component: {fileID: 1650951389863210882}
   - component: {fileID: 1650951389863210887}
   - component: {fileID: 1650951389863210880}
-  - component: {fileID: 1650951389863210883}
-  - component: {fileID: 1650951389863210892}
   m_Layer: 0
   m_Name: Umbrella
   m_TagString: Umbrella
@@ -379,34 +391,8 @@ MeshCollider:
   m_GameObject: {fileID: 1650951389863210893}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &1650951389863210883
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1650951389863210893}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.99999994, y: 1.0000002, z: 6.123235e-17}
-  m_Center: {x: -0.000015258789, y: 0, z: 0.02}
---- !u!65 &1650951389863210892
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1650951389863210893}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.99999994, y: 1.0000002, z: 6.123235e-17}
-  m_Center: {x: -0.000015258789, y: 0, z: 0}
