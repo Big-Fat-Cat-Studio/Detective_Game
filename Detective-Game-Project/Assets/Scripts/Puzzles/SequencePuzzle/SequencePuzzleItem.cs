@@ -14,7 +14,7 @@ namespace Scripts
         //Unity functions
         void Update()
         {
-            if(Input.GetKeyDown(key))
+            if(Input.GetKeyDown(this.key))
             {
                 sequencePuzzleManager.GetComponent<SequencePuzzleMain>().InsertInput(this.sequenceItemID);
             }

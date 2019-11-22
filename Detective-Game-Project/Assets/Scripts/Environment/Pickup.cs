@@ -6,7 +6,7 @@ namespace Scripts
 {
     public class Pickup : MonoBehaviour
     {
-        [Header("Press [Z] to pick up ---")]
+        [Header("Press [X] to pick up ---")]
         public string pickupMessage;
         [Header("If this variable is 0 then the item doesn't break.")]
         public int destroyAfterXUsages;
