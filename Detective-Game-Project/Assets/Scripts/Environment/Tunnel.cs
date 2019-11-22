@@ -79,7 +79,7 @@ namespace Scripts
 
         IEnumerator MoveIn()
         {
-            yield return new WaitForSecondsRealtime(2);
+            yield return new WaitForSecondsRealtime(1);
             if (ReferenceEquals(gameObject, TunnelA))
             {
                 GameManager.Instance.Animal.transform.position = TunnelB.transform.position;
