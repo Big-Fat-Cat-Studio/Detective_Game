@@ -19,6 +19,7 @@ namespace Scripts
         private Vector3 moveDirection = Vector3.zero;
         Rigidbody body;
         public GameObject umbrella;
+        public bool umbrellaActiveOnStart;
 
         private void Start()
         {
@@ -34,6 +35,11 @@ namespace Scripts
                 context = GameManager.Instance.CameraFollowP2.GetComponent<CinemachineFreeLook>();
             }
             characterController = GetComponent<CharacterController>();
+
+            if (umbrellaActiveOnStart)
+            {
+                umbrella.SetActive(true);
+            }
         }
 
         private void OnTriggerEnter(Collider collision)
