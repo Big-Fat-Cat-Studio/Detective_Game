@@ -45,7 +45,7 @@ namespace Scripts {
                     {
                         if (bounce)
                         {
-                            moveDirection.y = jumpHeight * 2;
+                            moveDirection.y = jumpHeight * 1.5f;
                         }
                         else
                         {

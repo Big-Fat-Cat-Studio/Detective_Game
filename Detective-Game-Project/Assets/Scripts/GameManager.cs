@@ -190,7 +190,7 @@ namespace Scripts
             }
             else
             {
-                if (PickupTextActivePlayer == player)
+                if (InteractTextActivePlayer == player)
                 {
                     InteractText.SetActive(false);
                     InteractTextActivePlayer = null;
