@@ -8,6 +8,7 @@ public static class Constant
 
     public static string TAG_PICKUP = "Pickup";
     public static string TAG_INTERACT = "Interact";
+    public static string TAG_MOVABLE = "Movable";
 
     public static int LAYER_WALL = 8;
 }

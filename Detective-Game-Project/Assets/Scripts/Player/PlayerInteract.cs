@@ -10,6 +10,7 @@ namespace Scripts
         private bool showsText;
 
         List<GameObject> interactableObjects;
+        List<GameObject> movableObjects;
 
         // Start is called before the first frame update
         void Start()
@@ -33,7 +34,16 @@ namespace Scripts
 
             if (interactableObjects.Count > 0 && !showsText)
             {
-                GameManager.Instance.showInteractText(getClosestObject().GetComponent<InteractableObject>().interactMessage, currentPlayer);
+                GameObject closest = getClosestObject();
+
+                if (closest.gameObject.tag == Constant.TAG_INTERACT)
+                {
+                    GameManager.Instance.showInteractText(getClosestObject().GetComponent<InteractableObject>().interactMessage, currentPlayer);
+                }
+                else
+                {
+                    GameManager.Instance.showInteractText(getClosestObject().GetComponent<MovableObject>().interactMessage, currentPlayer);
+                }
                 showsText = true;
             }
 
@@ -41,7 +51,7 @@ namespace Scripts
             {
                 GameObject closestInteractable = getClosestObject();
 
-                if (closestInteractable != null)
+                if (closestInteractable != null && closestInteractable.gameObject.tag == Constant.TAG_INTERACT)
                 {
                     closestInteractable.GetComponent<InteractableObject>().interact(currentPlayer, GetComponent<PlayerPickUp>().holding);
 
@@ -86,18 +96,25 @@ namespace Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == Constant.TAG_INTERACT && other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == currentPlayer 
-            && other.gameObject.GetComponent<InteractableObject>().interactable)
+            if (other.gameObject.tag == Constant.TAG_INTERACT 
+                && other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == currentPlayer 
+                && other.gameObject.GetComponent<InteractableObject>().interactable)
             {
                 interactableObjects.Add(other.gameObject);
                 GameManager.Instance.showInteractText(getClosestObject().GetComponent<InteractableObject>().interactMessage, currentPlayer);
+                showsText = true;
+            }
+            else if (other.gameObject.tag == Constant.TAG_MOVABLE && currentPlayer == ActivePlayer.Human)
+            {
+                interactableObjects.Add(other.gameObject);
+                GameManager.Instance.showInteractText(getClosestObject().GetComponent<MovableObject>().interactMessage, currentPlayer);
                 showsText = true;
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.tag == Constant.TAG_INTERACT)
+            if (other.gameObject.tag == Constant.TAG_INTERACT || other.gameObject.tag == Constant.TAG_MOVABLE)
             {
                 interactableObjects.Remove(other.gameObject);
 
