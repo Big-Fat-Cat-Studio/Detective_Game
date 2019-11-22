@@ -50,12 +50,16 @@ namespace Scripts
                 holding.transform.rotation = this.transform.rotation;
             }
 
-            if (GameManager.Instance.getButtonPressForPlayer(currentPlayer, "Pickup", ButtonPress.Press))
+            if (GameManager.Instance.getButtonPressForPlayer(currentPlayer, "Interact", ButtonPress.Press))
             {
+                if (GameManager.Instance.InteractText.activeSelf)
+                {
+                    return;
+                }
                 timePickupKeyHolded += Time.deltaTime;
             }
 
-            if (GameManager.Instance.getButtonPressForPlayer(currentPlayer, "Pickup", ButtonPress.Up))
+            if (GameManager.Instance.getButtonPressForPlayer(currentPlayer, "Interact", ButtonPress.Up) && !GameManager.Instance.InteractText.activeSelf)
             {
                 if (currentPlayer == ActivePlayer.Human && timePickupKeyHolded > 1 && holding != null)
                 {
