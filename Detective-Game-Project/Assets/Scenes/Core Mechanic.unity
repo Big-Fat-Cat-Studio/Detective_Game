@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1819,6 +1819,7 @@ MonoBehaviour:
   interactMessage: open the door
   afterInteractMessage: The door is stuck! You can't open it.
   interactable: 1
+  destroy: 1
 --- !u!1001 &104966421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6478,6 +6479,7 @@ MonoBehaviour:
   afterInteractMessage: Hmm, the panel doesn't seem to do anything right now. Maybe
     it's because you reached the end of our demo
   interactable: 1
+  destroy: 1
 --- !u!1001 &418798300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6677,6 +6679,7 @@ MonoBehaviour:
   interactMessage: place pipe.
   afterInteractMessage: This pipe doesn't fit here.
   interactable: 1
+  destroy: 1
   solved: 0
   placed: 0
 --- !u!65 &428693372
@@ -8641,6 +8644,7 @@ MonoBehaviour:
   interactMessage: open the door
   afterInteractMessage: The door is locked!
   interactable: 1
+  destroy: 1
 --- !u!114 &597359606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12112,6 +12116,7 @@ MonoBehaviour:
   interactMessage: place pipe.
   afterInteractMessage: This pipe doesn't fit here.
   interactable: 1
+  destroy: 1
   solved: 0
   placed: 0
 --- !u!65 &940610639
@@ -14231,6 +14236,7 @@ MonoBehaviour:
   interactMessage: place pipe.
   afterInteractMessage: This pipe doesn't fit here.
   interactable: 1
+  destroy: 1
   solved: 0
   placed: 0
 --- !u!65 &1135342079
@@ -15840,6 +15846,7 @@ MonoBehaviour:
   afterInteractMessage: I can't seem to open this! Maybe I can force it open with
     tools.
   interactable: 1
+  destroy: 1
 --- !u!114 &1254848758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18291,6 +18298,7 @@ MonoBehaviour:
   interactMessage: place pipe.
   afterInteractMessage: This pipe doesn't fit here.
   interactable: 1
+  destroy: 1
   solved: 0
   placed: 0
 --- !u!65 &1461359238
@@ -27074,6 +27082,7 @@ MonoBehaviour:
   interactMessage: place pipe.
   afterInteractMessage: This pipe doesn't fit here.
   interactable: 1
+  destroy: 1
   solved: 0
   placed: 0
 --- !u!65 &2102045349
@@ -27540,17 +27549,17 @@ PrefabInstance:
     - target: {fileID: 522312602543124946, guid: 6ed21601b2bd97947b682ee747bf6a62,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.12993278
+      value: 0.1299328
       objectReference: {fileID: 0}
     - target: {fileID: 522312602543124946, guid: 6ed21601b2bd97947b682ee747bf6a62,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000031728526
+      value: -0.000000018580106
       objectReference: {fileID: 0}
     - target: {fileID: 522312602543124946, guid: 6ed21601b2bd97947b682ee747bf6a62,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000020499128
+      value: -0.000000013906495
       objectReference: {fileID: 0}
     - target: {fileID: 522312602543124946, guid: 6ed21601b2bd97947b682ee747bf6a62,
         type: 3}
@@ -27575,12 +27584,12 @@ PrefabInstance:
     - target: {fileID: 522312602186779655, guid: 6ed21601b2bd97947b682ee747bf6a62,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000014328928
+      value: 0.0000000143289265
       objectReference: {fileID: 0}
     - target: {fileID: 522312602186779655, guid: 6ed21601b2bd97947b682ee747bf6a62,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000022674083
+      value: 0.000000022674103
       objectReference: {fileID: 0}
     - target: {fileID: 522312602186779655, guid: 6ed21601b2bd97947b682ee747bf6a62,
         type: 3}
@@ -27595,12 +27604,12 @@ PrefabInstance:
     - target: {fileID: 522312602063788746, guid: 6ed21601b2bd97947b682ee747bf6a62,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000042222714
+      value: -0.000000004222266
       objectReference: {fileID: 0}
     - target: {fileID: 522312602063788746, guid: 6ed21601b2bd97947b682ee747bf6a62,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000001986351
+      value: 0.000000019863542
       objectReference: {fileID: 0}
     - target: {fileID: 522312602063788746, guid: 6ed21601b2bd97947b682ee747bf6a62,
         type: 3}
@@ -27713,17 +27722,17 @@ PrefabInstance:
     - target: {fileID: 1587246834886360155, guid: 9331b53fd394960449f0c93315806e33,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.22428967
+      value: -0.22428963
       objectReference: {fileID: 0}
     - target: {fileID: 1587246834886360155, guid: 9331b53fd394960449f0c93315806e33,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000020536529
+      value: -0.000000006015014
       objectReference: {fileID: 0}
     - target: {fileID: 1587246834886360155, guid: 9331b53fd394960449f0c93315806e33,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000047265516
+      value: -0.0000000013843756
       objectReference: {fileID: 0}
     - target: {fileID: 1587246834886360155, guid: 9331b53fd394960449f0c93315806e33,
         type: 3}
@@ -27998,7 +28007,7 @@ PrefabInstance:
     - target: {fileID: 2244735703440746332, guid: 925949a64b94ec84797d936173974082,
         type: 3}
       propertyPath: GameType
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 925949a64b94ec84797d936173974082, type: 3}
@@ -28577,17 +28586,17 @@ PrefabInstance:
     - target: {fileID: 8017372698582405628, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000097705515
+      value: 0.000000010765979
       objectReference: {fileID: 0}
     - target: {fileID: 8017372698582405628, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000001730044
+      value: 0.00000002202699
       objectReference: {fileID: 0}
     - target: {fileID: 8017372698582405628, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.22428961
+      value: 0.22428958
       objectReference: {fileID: 0}
     - target: {fileID: 8017372698582405628, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}

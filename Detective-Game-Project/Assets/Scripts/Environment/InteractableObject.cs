@@ -14,12 +14,17 @@ namespace Scripts {
         public string afterInteractMessage;
         [HideInInspector]
         public bool interactable = true;
+        public bool destroy = true;
 
         public virtual void interact(ActivePlayer player, GameObject playerItem)
         {
             if (player == PlayerThatCanInteract)
             {
-                if (neededItem == null || ReferenceEquals(playerItem, neededItem))
+                if (!destroy && gameObject.name.Contains("cookieDispenser"))
+                {
+                    gameObject.GetComponent<CookieDispenser>().Use(GameManager.Instance.Animal);
+                }
+                else if ((neededItem == null || ReferenceEquals(playerItem, neededItem)))
                 {
                     this.gameObject.SetActive(false);
                     Destroy(this.gameObject);

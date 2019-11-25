@@ -11,6 +11,7 @@ namespace Scripts {
         public float rotationSpeed = 100.0f;
         public float jumpHeight = 8.0f;
         public float gravity = 20f;
+        public float boostTimer = 0f;
         private Vector3 moveDirection = Vector3.zero;
         bool bounce = false;
 
@@ -58,6 +59,8 @@ namespace Scripts {
                 translationRH *= Time.deltaTime;
                 context.m_XAxis.Value += translationRH;
                 transform.Rotate(0, translationRH, 0);
+
+                speedBoostHandler();
             }
             else
             {
@@ -77,6 +80,20 @@ namespace Scripts {
             else
             {
                 bounce = false;
+            }
+        }
+
+        public void speedBoostHandler()
+        {
+            if(boostTimer <= 0f)
+            {
+                movementSpeed = 6f;
+                boostTimer = 0f;
+            }
+            else
+            {
+                movementSpeed = 12f;
+                boostTimer -= Time.deltaTime;
             }
         }
     }
