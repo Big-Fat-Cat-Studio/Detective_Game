@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
 public class LightBeam : MonoBehaviour
 {
     // public int points;
@@ -67,21 +68,25 @@ public class LightBeam : MonoBehaviour
 
         for(int i = 0; i < rayCount; i++)
         {
+            
             Ray ray = new Ray(position, direction);
             RaycastHit hit;
 
-            if(Physics.Raycast(ray, out hit, 10, 1))
+            if(Physics.Raycast(ray, out hit, 30, 1))
             {
                 if(hit.collider.tag == "Reflectable")
                 {
                     Debug.DrawLine(position, hit.point, Color.red);
-                    position = hit.point;
-                    direction = hit.normal;
 
+                    position = hit.point;
                     positions.Add(hit.point);
+
+
+                    direction = Vector3.Reflect(direction, hit.normal);
                 }
                 else {
                     Debug.DrawLine(position, hit.point, Color.blue);
+
                     positions.Add(hit.point);
                     break;
                 }
@@ -89,7 +94,7 @@ public class LightBeam : MonoBehaviour
             else
             {
                 Debug.DrawRay(position, direction * 30, Color.blue);
-                positions.Add(direction * 30);
+                positions.Add(direction * 30 + position);
                 break;
             }
         }
