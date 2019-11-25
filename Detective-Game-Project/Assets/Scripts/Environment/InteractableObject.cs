@@ -6,14 +6,17 @@ using UnityEngine.UI;
 namespace Scripts {
     public class InteractableObject : MonoBehaviour
     {
-        public GameObject neededItem;
         public ActivePlayer PlayerThatCanInteract;
 
         [Header("\"Press [x] to ---\"")]
         public string interactMessage;
+        public GameObject neededItem;
         public string afterInteractMessage;
+
         [HideInInspector]
         public bool interactable = true;
+        [HideInInspector]
+        public InteractableType interactableType = InteractableType.Unlockable;
 
         public virtual void interact(ActivePlayer player, GameObject playerItem)
         {

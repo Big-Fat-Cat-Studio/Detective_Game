@@ -7,10 +7,12 @@ namespace Scripts
     public class PlayerInteract : MonoBehaviour
     {
         public ActivePlayer currentPlayer;
+        public GameObject holding;
+
         private bool showsText;
+        private float timePickupKeyHeld;
 
         List<GameObject> interactableObjects;
-        List<GameObject> movableObjects;
 
         // Start is called before the first frame update
         void Start()
@@ -21,6 +23,7 @@ namespace Scripts
         // Update is called once per frame
         void Update()
         {
+            //Remove the text when the player is not active anymore
             if (!GameManager.Instance.checkIfPlayerIsActive(currentPlayer))
             {
                 if (showsText)
@@ -32,39 +35,115 @@ namespace Scripts
                 return;
             }
 
-            if (interactableObjects.Count > 0 && !showsText)
+            //Show the text again when the player is active
+            if (countObjectsInRange() > 0 && !showsText)
             {
-                GameObject closest = getClosestObject();
-
-                if (closest.gameObject.tag == Constant.TAG_INTERACT)
-                {
-                    GameManager.Instance.showInteractText(getClosestObject().GetComponent<InteractableObject>().interactMessage, currentPlayer);
-                }
-                else
-                {
-                    GameManager.Instance.showInteractText(getClosestObject().GetComponent<MovableObject>().interactMessage, currentPlayer);
-                }
+                GameManager.Instance.showInteractText(getClosestObject().GetComponent<InteractableObject>().interactMessage, currentPlayer);
                 showsText = true;
             }
 
-            if (GameManager.Instance.getButtonPressForPlayer(currentPlayer, "Interact", ButtonPress.Down))
+            //Make the held object follow the player
+            if (holding != null)
             {
+                holding.transform.position = new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z);
+                holding.transform.rotation = this.transform.rotation;
+
+                //Checks how long the human held the interact button, but it's only relevant when the human holds an item.
+                if (currentPlayer == ActivePlayer.Human && GameManager.Instance.getButtonPressForPlayer(currentPlayer, "Interact", ButtonPress.Press))
+                {
+                    timePickupKeyHeld += Time.deltaTime;
+                }
+            }
+
+            if (GameManager.Instance.getButtonPressForPlayer(currentPlayer, "Interact", ButtonPress.Up))
+            {
+                if (timePickupKeyHeld > 1)
+                {
+                    throwObject();
+                    return;
+                }
+
                 GameObject closestInteractable = getClosestObject();
 
-                if (closestInteractable != null && closestInteractable.gameObject.tag == Constant.TAG_INTERACT)
+                if (closestInteractable != null)
                 {
-                    closestInteractable.GetComponent<InteractableObject>().interact(currentPlayer, GetComponent<PlayerPickUp>().holding);
+                    InteractableObject interactableObject = closestInteractable.GetComponent<InteractableObject>();
 
-                    //Check if the object disappeared (probably will be different later)
-                    if (closestInteractable == null || closestInteractable.activeSelf == false)
+                    if (interactableObject.interactableType == InteractableType.Unlockable)
                     {
-                        interactableObjects.Remove(closestInteractable);
-                        if (interactableObjects.Count == 0)
+                        interactableObject.interact(currentPlayer, holding);
+
+                        //Check if the object disappeared or if the player can't interact with it anymore
+                        if (closestInteractable == null || closestInteractable.activeSelf == false || !interactableObject.interactable)
                         {
-                            GameManager.Instance.removeInteractText(currentPlayer);
+                            interactableObjects.Remove(closestInteractable);
                         }
                     }
+                    else if (interactableObject.interactableType == InteractableType.Pickup)
+                    {
+                        dropObject();
+                        holding = closestInteractable;
+                        holding.transform.rotation = transform.rotation;
+                        holding.GetComponent<Rigidbody>().isKinematic = true;
+                        holding.GetComponent<Rigidbody>().useGravity = false;
+                        interactableObjects.Remove(closestInteractable);
+                    }
                 }
+                else
+                {
+                    dropObject();
+                }
+
+                if (countObjectsInRange() == 0)
+                {
+                    GameManager.Instance.removeInteractText(currentPlayer);
+                    showsText = false;
+                }
+
+                timePickupKeyHeld = 0f;
+            }
+        }
+
+        public void removeHoldingObject()
+        {
+            interactableObjects.Remove(holding);
+            holding = null;
+        }
+
+        int countObjectsInRange()
+        {
+            int count = 0;
+
+            foreach (GameObject pickup in interactableObjects)
+            {
+                if (holding == null || !ReferenceEquals(pickup, holding))
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        void dropObject()
+        {
+            if (holding != null)
+            {
+                holding.GetComponent<Rigidbody>().isKinematic = false;
+                holding.GetComponent<Rigidbody>().useGravity = true;
+                holding = null;
+            }
+        }
+
+        void throwObject()
+        {
+            if (holding != null)
+            {
+                Rigidbody holdingRigidBody = holding.GetComponent<Rigidbody>();
+                holdingRigidBody.isKinematic = false;
+                holdingRigidBody.useGravity = true;
+                holdingRigidBody.AddRelativeForce(new Vector3(0f, holdingRigidBody.mass * 100, holdingRigidBody.mass * 500));
+                holding = null;
+                timePickupKeyHeld = 0f;
             }
         }
 
@@ -97,31 +176,31 @@ namespace Scripts
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.tag == Constant.TAG_INTERACT 
-                && other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == currentPlayer 
+                && !ReferenceEquals(other.gameObject, holding)
+                && (other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == currentPlayer
+                    || other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == ActivePlayer.Both) 
                 && other.gameObject.GetComponent<InteractableObject>().interactable)
             {
                 interactableObjects.Add(other.gameObject);
                 GameManager.Instance.showInteractText(getClosestObject().GetComponent<InteractableObject>().interactMessage, currentPlayer);
                 showsText = true;
             }
-            else if (other.gameObject.tag == Constant.TAG_MOVABLE && currentPlayer == ActivePlayer.Human)
-            {
-                interactableObjects.Add(other.gameObject);
-                GameManager.Instance.showInteractText(getClosestObject().GetComponent<MovableObject>().interactMessage, currentPlayer);
-                showsText = true;
-            }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.tag == Constant.TAG_INTERACT || other.gameObject.tag == Constant.TAG_MOVABLE)
+            if (other.gameObject.tag == Constant.TAG_INTERACT)
             {
                 interactableObjects.Remove(other.gameObject);
 
-                if (interactableObjects.Count == 0)
+                if (countObjectsInRange() == 0)
                 {
                     GameManager.Instance.removeInteractText(currentPlayer);
                     showsText = false;
+                }
+                else
+                {
+                    GameManager.Instance.showInteractText(getClosestObject().GetComponent<InteractableObject>().interactMessage, currentPlayer);
                 }
             }
         }

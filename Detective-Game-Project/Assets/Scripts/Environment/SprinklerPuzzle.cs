@@ -37,7 +37,7 @@ namespace Scripts {
                     playerItem.transform.localPosition = new Vector3(8.25f, 0, 1.5f);
                     ActivateSprinkler.instance.placed += 1;
                 }
-                GameManager.Instance.Human.GetComponentInChildren<PlayerPickUp>().removeHoldingObject();
+                GameManager.Instance.Human.GetComponentInChildren<PlayerInteract>().removeHoldingObject();
                 playerItem.GetComponent<BoxCollider>().enabled = false;
                 playerItem.transform.localRotation = Quaternion.identity;
                 playerItem.tag = "Untagged";

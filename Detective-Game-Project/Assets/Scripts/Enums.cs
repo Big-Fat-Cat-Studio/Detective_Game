@@ -3,7 +3,8 @@
     public enum ActivePlayer
     {
         Human,
-        Animal
+        Animal,
+        Both
     }
 
     public enum GameType
@@ -11,6 +12,13 @@
         SinglePlayer,
         MultiPlayer,
         MultiPlayerSplitScreen
+    }
+
+    public enum InteractableType
+    {
+        Unlockable,
+        Pickup,
+        Movable
     }
 
     public enum ButtonPress

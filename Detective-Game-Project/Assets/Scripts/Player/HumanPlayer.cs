@@ -68,11 +68,8 @@ namespace Scripts
             {
                 return;
             }
-            if (hit.gameObject.tag == "Movable")
-            {
-                
-            }
-            if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press) && hit.gameObject.tag == "Movable")
+            if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press) && hit.gameObject.tag == Constant.TAG_INTERACT
+                && hit.gameObject.GetComponent<InteractableObject>().interactableType == InteractableType.Movable)
             {
                 canPushPull = true;
                 body.gameObject.transform.Translate(moveDirection * Time.deltaTime);
