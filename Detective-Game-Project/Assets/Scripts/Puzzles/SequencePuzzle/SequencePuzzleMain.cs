@@ -8,10 +8,12 @@ namespace Scripts
     {
         //Variables
         public List<GameObject> solution;
+        public float maxCountdown;
 
         private List<int> convertedSolution;
         private List<int> input;
-        private bool sequenceStillCorrect = true;
+        private float timer = 0;
+        private bool sequenceStillCorrect = true; 
 
         //Unity functions
         private void Start()
@@ -19,6 +21,13 @@ namespace Scripts
             this.input = new List<int>();
             this.convertedSolution = this.ConvertSolution();
             StartCoroutine(this.CheckSolution());
+        }
+        private void Update()
+        {
+            if(true)//check of de puzzle gestart is
+            {
+                this.timer += Time.deltaTime;
+            }
         }
 
         //Custom functions
@@ -40,9 +49,13 @@ namespace Scripts
         }
         private SequencePuzzleStatus Compare()
         {
-            if(this.input.Count < this.convertedSolution.Count)
+            if (this.input.Count < this.convertedSolution.Count && this.maxCountdown <= 0)
             {
                 return SequencePuzzleStatus.Incomplete;
+            }
+            else if(this.input.Count < this.convertedSolution.Count && this.maxCountdown > 0 && this.timer >= this.maxCountdown)
+            {
+                return SequencePuzzleStatus.Wrong;
             }
             else
             {
@@ -72,6 +85,7 @@ namespace Scripts
         {
             this.input.Clear();
             this.sequenceStillCorrect = true;
+            this.timer = 0;
         }
 
         //Coroutines
