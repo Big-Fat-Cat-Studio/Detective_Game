@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Scripts
 {
-    public class ButtonDoor : MonoBehaviour, ButtonTarget
+    public class ButtonDoor : MonoBehaviour, IButtonTarget
     {
         //Variables
         private bool isActive = true;
