@@ -121,6 +121,7 @@ namespace Scripts
                         moveDirection = new Vector3(GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Horizontal", AxisType.Axis), 0.0f,
                             GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis));
                         moveDirection = transform.TransformDirection(moveDirection);
+                        moveDirection = Vector3.ClampMagnitude(moveDirection, 1f);
                         moveDirection *= movementSpeed;
 
                         if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Jump", ButtonPress.Press))
