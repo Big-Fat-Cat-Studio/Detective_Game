@@ -29,7 +29,7 @@ public class ViewDetection : MonoBehaviour
         {
             Gizmos.color = Color.green;
         }
-        Gizmos.DrawRay(transform.position, (player.position - transform.position + Vector3.up - (Vector3.up / 2)).normalized * maxRadius);
+        Gizmos.DrawRay(transform.position, (player.position - transform.position + Vector3.up * heightMultiplayer).normalized * maxRadius);
 
         Gizmos.color = Color.black;
         Gizmos.DrawRay(transform.position, gameObject.transform.forward * maxRadius);
@@ -41,7 +41,7 @@ public class ViewDetection : MonoBehaviour
         directionBetween.y *= 0; 
         RaycastHit hit; 
         
-        if ( Physics.Raycast(checkingObject.position + Vector3.up - (Vector3.up / 2), (target.position - checkingObject.position).normalized, out hit, maxRadius)) 
+        if ( Physics.Raycast(checkingObject.position , (target.position - checkingObject.position + Vector3.up * heightMultiplayer).normalized, out hit, maxRadius)) 
         {
             
             if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Human") 
