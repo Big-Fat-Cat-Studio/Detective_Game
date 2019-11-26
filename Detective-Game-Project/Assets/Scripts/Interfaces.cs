@@ -3,8 +3,13 @@ using System.Collections.Generic;
 
 namespace Scripts
 {
-    public interface ButtonTarget
+    public interface IButtonTarget
     {
         void Activate();
+    }
+    public interface IInteractable
+    {
+        void InRange();
+        void OutRange();
     }
 }
