@@ -65,7 +65,6 @@ namespace Scripts
         {
             if (GameType == GameType.SinglePlayer)
             {
-                Human.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
                 PlayerOne = ActivePlayer.Human;
 
                 PlayerCamera.GetComponent<Camera>().rect = new Rect(0,0,1,1);
