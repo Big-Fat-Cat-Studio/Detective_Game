@@ -111,11 +111,13 @@ namespace Scripts
                     moveDirection = new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical"));
                     moveDirection = transform.TransformDirection(moveDirection);
                     moveDirection *= movementSpeed / 1.5f;
+                    gameObject.GetComponent<Animator>().SetBool("pushing", true);
                 }
 
                 if (!isClimbing && !canPushPull)
                 {
                     gameObject.GetComponent<Animator>().SetBool("climbing", false);
+                    gameObject.GetComponent<Animator>().SetBool("pushing", false);
                     if (characterController.isGrounded)
                     {
                         moveDirection = new Vector3(GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Horizontal", AxisType.Axis), 0.0f,
@@ -144,7 +146,14 @@ namespace Scripts
                     translationRH *= Time.deltaTime;
                     context.m_XAxis.Value += translationRH;
                     transform.Rotate(0, translationRH, 0);
-                    
+                    if (moveDirection.x == 0 && moveDirection.z == 0 && moveDirection.y == 0 && translationRH != 0)
+                    {
+                        gameObject.GetComponent<Animator>().SetBool("turning", true);
+                    }
+                    else
+                    {
+                        gameObject.GetComponent<Animator>().SetBool("turning", false);
+                    }
                 }
             }
             else
