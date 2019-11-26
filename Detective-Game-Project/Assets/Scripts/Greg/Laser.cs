@@ -4,13 +4,13 @@ using UnityEngine;
 
 public struct RayHit
 {
-    public bool isHit;
+    public string type;
     public Vector3 hitPosition;
     public Vector3 hitDirection;
     
-    public RayHit(bool _isHit, Vector3 _hitPosition, Vector3 _hitDirection)
+    public RayHit(string _type, Vector3 _hitPosition, Vector3 _hitDirection)
     {
-        isHit = _isHit;
+        type = _type;
         hitPosition = _hitPosition;
         hitDirection = _hitDirection;
     }
@@ -20,7 +20,7 @@ public struct RayHit
 public class Laser : MonoBehaviour
 {
     Mesh mesh;
-    List<Vector3> vertices;
+    public List<Vector3> vertices;
     public List<Vector3> allVertices;
     List<int> triangles;
 
@@ -34,8 +34,8 @@ public class Laser : MonoBehaviour
     void Update()
     {
         InitializeLaser(transform.position, transform.forward);
-        Debug.Log(allVertices.ToArray().Length);
-        if(allVertices.Count % 8 != 0 && allVertices.Count <= 0) return;
+
+        if(allVertices.Count % 8 != 0 || allVertices.Count <= 0) return;
 
         MakeCubes();
         UpdateMesh();
@@ -114,29 +114,8 @@ public class Laser : MonoBehaviour
 
         for(int i = 0; i < 30; i++)
         {
-            Ray ray = new Ray(position, direction);
-            RaycastHit hit;
-
-            int hitCount = 0;
-
-            if(Physics.Raycast(ray, out hit, 30, 1))
-            {
-                if(hit.collider.tag == "Reflectable")
-                {
-                    Debug.DrawLine(position, hit.point, Color.red);
-                    position = hit.point;
-                    
-                    direction = Vector3.Reflect(direction, hit.normal);
-                }
-
-                hitCount ++;
-            }
-            else
-            {
-                Debug.DrawRay(position, direction * 30, Color.blue);
-            }
-
             Vector3[] tempArray = new Vector3[8];
+            bool non_reflectable = false;
 
             for(int j = 0; j < 4; j++)
             {
@@ -166,7 +145,7 @@ public class Laser : MonoBehaviour
                 {
                     result = CastRay(position3, direction3);
                     
-                    tempArray[7] = position3;
+                    tempArray[6] = position3;
                     tempArray[3] = result.hitPosition;
 
                     position3 = result.hitPosition;
@@ -176,15 +155,17 @@ public class Laser : MonoBehaviour
                 {
                     result = CastRay(position4, direction4);
                     
-                    tempArray[6] = position4;
+                    tempArray[7] = position4;
                     tempArray[2] = result.hitPosition;
 
                     position4 = result.hitPosition;
                     direction4 = result.hitDirection;
                 }
+                if(result.type == "none") non_reflectable = true;
             }
 
             allVertices.AddRange(tempArray);
+            if(non_reflectable) break;
         }
     }
 
@@ -198,18 +179,18 @@ public class Laser : MonoBehaviour
             if(hit.collider.tag == "Reflectable")
             {
                 Debug.DrawLine(position, hit.point, Color.red);
-                return new RayHit(true, hit.point, Vector3.Reflect(direction, hit.normal));
+                return new RayHit("reflect", hit.point, Vector3.Reflect(direction, hit.normal));
             }
             else
             {
                 Debug.DrawLine(position, hit.point, Color.red);
-                return new RayHit(false, hit.point, Vector3.zero);
+                return new RayHit("normal", hit.point, hit.point);
             }
         }
         else
         {
             Debug.DrawRay(position, direction * 30, Color.blue);
-            return new RayHit(false, hit.point, Vector3.zero);
+            return new RayHit("none", position + direction * 30, position);
         }
     }
 
