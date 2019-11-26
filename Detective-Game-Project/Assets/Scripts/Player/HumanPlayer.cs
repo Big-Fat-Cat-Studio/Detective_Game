@@ -99,12 +99,12 @@ namespace Scripts
             {
                 if (isClimbing)
                 {
-
                     moveDirection = new Vector3(0.0f, GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis),
                         GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis) * 0.3f);
                     moveDirection = transform.TransformDirection(moveDirection);
                     moveDirection *= climbingSpeed;
                     characterController.Move(moveDirection * Time.deltaTime);
+                    gameObject.GetComponent<Animator>().SetBool("climbing", true);
                 }
                 if (canPushPull)
                 {
@@ -115,7 +115,7 @@ namespace Scripts
 
                 if (!isClimbing && !canPushPull)
                 {
-
+                    gameObject.GetComponent<Animator>().SetBool("climbing", false);
                     if (characterController.isGrounded)
                     {
                         moveDirection = new Vector3(GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Horizontal", AxisType.Axis), 0.0f,
