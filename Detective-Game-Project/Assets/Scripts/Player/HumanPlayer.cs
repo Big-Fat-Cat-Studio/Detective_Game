@@ -131,6 +131,7 @@ namespace Scripts
                         gameObject.GetComponent<Animator>().SetFloat("forward/backward", moveDirection.z);
                         gameObject.GetComponent<Animator>().SetFloat("sidewalk", moveDirection.x);
                         moveDirection = transform.TransformDirection(moveDirection);
+                        moveDirection = Vector3.ClampMagnitude(moveDirection, 1f);
                         moveDirection *= movementSpeed;
                         if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Jump", ButtonPress.Press))
                         {
