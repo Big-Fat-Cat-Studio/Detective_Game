@@ -120,19 +120,30 @@ namespace Scripts
                     {
                         moveDirection = new Vector3(GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Horizontal", AxisType.Axis), 0.0f,
                             GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis));
+                        if (moveDirection.x != 0)
+                        {
+                            gameObject.GetComponent<Animator>().SetBool("walksideways", true);
+                        }
+                        else
+                        {
+                            gameObject.GetComponent<Animator>().SetBool("walksideways", false);
+                        }
+                        gameObject.GetComponent<Animator>().SetFloat("forward/backward", moveDirection.z);
+                        gameObject.GetComponent<Animator>().SetFloat("sidewalk", moveDirection.x);
                         moveDirection = transform.TransformDirection(moveDirection);
                         moveDirection *= movementSpeed;
-
                         if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Jump", ButtonPress.Press))
                         {
                             moveDirection.y = jumpHeight;
                         }
+                        
                     }
 
                     float translationRH = GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Mouse X", AxisType.AxisRaw) * rotationSpeed;
                     translationRH *= Time.deltaTime;
                     context.m_XAxis.Value += translationRH;
                     transform.Rotate(0, translationRH, 0);
+                    
                 }
             }
             else
