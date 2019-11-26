@@ -6,15 +6,11 @@ namespace Scripts
 {
     public class Rope : MonoBehaviour, IInteractable
     {
-        public GameObject Player;
-        public GameObject Ladder;
-
-        public float LadderMoveRange = 0.5f;
-        public float RopeMoveRange = 0.5f;
+        public GameObject Player, Ladder;
+        public float LadderMoveRange, RopeMoveRange = 0.5f;
         public int MoveTime;
 
         private bool RopeActive;
-
         private Vector3 RopeStartPos, RopeEndPos;
         private Vector3 LadderStartPos, LadderEndPos;
 
@@ -42,10 +38,7 @@ namespace Scripts
             }
         }
 
-        public void OutRange()
-        {
-
-        }
+        public void OutRange() { }
 
 
         private IEnumerator Move(GameObject ob, Tuple<Vector3, Vector3> pos, float time, Action c)
