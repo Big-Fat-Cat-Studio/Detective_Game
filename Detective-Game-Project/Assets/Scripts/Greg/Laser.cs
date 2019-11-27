@@ -43,6 +43,8 @@ public class Laser : MonoBehaviour
 
     void MakeCubes()
     {
+        vertices = new List<Vector3>();
+        triangles = new List<int>();
         int cubeCount = allVertices.Count / 8;
 
         for(int i = 0; i < cubeCount; i++)
@@ -53,9 +55,6 @@ public class Laser : MonoBehaviour
 
     void MakeCube(int cubeIndex)
     {
-        vertices = new List<Vector3>();
-        triangles = new List<int>();
-
         for(int i = 0; i < 6; i++)
         {
             MakeFace(i, cubeIndex);
@@ -125,8 +124,8 @@ public class Laser : MonoBehaviour
                 {
                     result = CastRay(position1, direction1);
 
-                    tempArray[4] = position1;
-                    tempArray[1] = result.hitPosition;
+                    tempArray[4] = transform.InverseTransformPoint(position1);
+                    tempArray[1] = transform.InverseTransformPoint(result.hitPosition);
 
                     position1 = result.hitPosition;
                     direction1 = result.hitDirection;
@@ -135,8 +134,8 @@ public class Laser : MonoBehaviour
                 {
                     result = CastRay(position2, direction2);
                     
-                    tempArray[5] = position2;
-                    tempArray[0] = result.hitPosition;
+                    tempArray[5] = transform.InverseTransformPoint(position2);
+                    tempArray[0] = transform.InverseTransformPoint(result.hitPosition);
 
                     position2 = result.hitPosition;
                     direction2 = result.hitDirection;
@@ -145,8 +144,8 @@ public class Laser : MonoBehaviour
                 {
                     result = CastRay(position3, direction3);
                     
-                    tempArray[6] = position3;
-                    tempArray[3] = result.hitPosition;
+                    tempArray[6] = transform.InverseTransformPoint(position3);
+                    tempArray[3] = transform.InverseTransformPoint(result.hitPosition);
 
                     position3 = result.hitPosition;
                     direction3 = result.hitDirection;
@@ -155,13 +154,13 @@ public class Laser : MonoBehaviour
                 {
                     result = CastRay(position4, direction4);
                     
-                    tempArray[7] = position4;
-                    tempArray[2] = result.hitPosition;
+                    tempArray[7] = transform.InverseTransformPoint(position4);
+                    tempArray[2] = transform.InverseTransformPoint(result.hitPosition);
 
                     position4 = result.hitPosition;
                     direction4 = result.hitDirection;
                 }
-                if(result.type == "none") non_reflectable = true;
+                if(result.type == "none" || result.type == "normal") non_reflectable = true;
             }
 
             allVertices.AddRange(tempArray);
