@@ -59,12 +59,19 @@ namespace Scripts
         private float _PrevPlayerCRotation; // Camera X-Axis Rotation
         private void Start()
         {
+            CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
+            CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
+            CameraFollowP2.GetComponent<CinemachineFreeLook>().Follow = Animal.transform;
+            CameraFollowP2.GetComponent<CinemachineFreeLook>().LookAt = Animal.transform;
+
             if (GameType == GameType.SinglePlayer)
             {
                 PlayerOne = ActivePlayer.Human;
 
                 PlayerCamera.GetComponent<Camera>().rect = new Rect(0,0,1,1);
                 PlayerCameraP2.SetActive(false);
+                CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
+                CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
             }
             else if (PlayerTwo == ActivePlayer.Human) {
                 CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X";
@@ -74,6 +81,11 @@ namespace Scripts
                 CameraFollow.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X P2";
                 CameraFollow.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y P2";
                 PlayerCamera.GetComponent<Camera>().rect = new Rect(0, -0.5f, 1, 1);
+
+                CameraFollowP2.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
+                CameraFollowP2.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
+                CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Animal.transform;
+                CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Animal.transform;
             }
 
             AfterInteractText.SetActive(false);
