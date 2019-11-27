@@ -8,54 +8,86 @@ namespace Scripts
     {
         //Variables
         public List<GameObject> solution;
+        public Light lamp;
         public float maxCountdown;
 
-        private List<int> convertedSolution;
-        private List<int> input;
+        private List<Color> colorSequence;
+        private List<string> convertedSolution;
+        private List<string> input;
+        private int currentColor = 0;
         private float timer = 0;
-        private bool sequenceStillCorrect = true; 
+        private bool sequenceStillCorrect = true;
+        private bool puzzleHasStarted = false;
 
         //Unity functions
         private void Start()
         {
-            this.input = new List<int>();
+            this.colorSequence = new List<Color>();
+            this.input = new List<string>();
             this.convertedSolution = this.ConvertSolution();
+            this.colorSequence.Add(Color.white);
+            this.InsertColors();
             StartCoroutine(this.CheckSolution());
+            StartCoroutine(this.ShowSequence());
+            
         }
         private void Update()
         {
-            if(true)//check of de puzzle gestart is
+            if(puzzleHasStarted)
             {
                 this.timer += Time.deltaTime;
             }
         }
 
         //Custom functions
-        public void InsertInput(int sequenceItemID)
+        public void InsertInput(string sequenceItemColor)
         {
-            if(this.input.Count < this.convertedSolution.Count)
+            if (this.input.Count < this.convertedSolution.Count)
             {
-                this.input.Add(sequenceItemID);
+                this.input.Add(sequenceItemColor);
+                if(this.input.Count > 0)
+                {
+                    this.puzzleHasStarted = true;
+                }
             }
         }
-        private List<int> ConvertSolution()
+        public void InsertColors()
         {
-            List<int> result = new List<int>();
+            for(int i = 0; i < this.solution.Count; i++)
+            {
+                this.colorSequence.Add(this.solution[i].gameObject.GetComponent<SequencePuzzlePressurePlate>().plateColor);
+            }
+        }
+        private List<string> ConvertSolution()
+        {
+            List<string> result = new List<string>();
             foreach(GameObject sequenceItem in solution)
             {
-                result.Add(sequenceItem.GetComponent<SequencePuzzleItem>().sequenceItemID);
+                result.Add(sequenceItem.GetComponent<SequencePuzzlePressurePlate>().sequenceItemColorID);
             }
             return result;
         }
         private SequencePuzzleStatus Compare()
         {
-            if (this.input.Count < this.convertedSolution.Count && this.maxCountdown <= 0)
+            if (this.input.Count < this.convertedSolution.Count)
             {
-                return SequencePuzzleStatus.Incomplete;
-            }
-            else if(this.input.Count < this.convertedSolution.Count && this.maxCountdown > 0 && this.timer >= this.maxCountdown)
-            {
-                return SequencePuzzleStatus.Wrong;
+                if(this.maxCountdown == 0)
+                {
+                    return SequencePuzzleStatus.Incomplete;
+                }
+                else
+                {
+                    if(this.timer >= this.maxCountdown)
+                    {
+                        print("te laat");
+                        return SequencePuzzleStatus.Wrong;
+                    }
+                    else
+                    {
+                        return SequencePuzzleStatus.Incomplete;
+                    }
+                }
+                
             }
             else
             {
@@ -86,6 +118,7 @@ namespace Scripts
             this.input.Clear();
             this.sequenceStillCorrect = true;
             this.timer = 0;
+            this.puzzleHasStarted = false;
         }
 
         //Coroutines
@@ -109,6 +142,28 @@ namespace Scripts
                     print("player has entered wrong solution");
                 }
                 yield return checkTimer;
+            }
+        }
+        private IEnumerator ShowSequence()
+        {
+            for(; ; )
+            {
+                WaitForSeconds switchTimer = new WaitForSeconds(1.0f);
+                WaitForSeconds pauseTimer = new WaitForSeconds(2.0f);
+                this.currentColor += 1;
+                if (this.currentColor >= this.colorSequence.Count)
+                {
+                    this.currentColor = 0;
+                }
+                this.lamp.color = this.colorSequence[currentColor];
+                if (this.currentColor == 0)
+                {
+                    yield return pauseTimer;
+                }
+                else
+                {
+                    yield return switchTimer;
+                }
             }
         }
     }
