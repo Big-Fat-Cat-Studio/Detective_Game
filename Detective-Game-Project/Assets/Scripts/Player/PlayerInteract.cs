@@ -69,15 +69,19 @@ namespace Scripts
                 {
                     InteractableObject interactableObject = closestInteractable.GetComponent<InteractableObject>();
 
-                    if (interactableObject.interactableType == InteractableType.Unlockable)
+                    if (interactableObject.interactableType == InteractableType.Destroyable)
                     {
-                        interactableObject.interact(currentPlayer, holding);
+                        ((DestroyableObject)interactableObject).interact(currentPlayer, holding);
 
                         //Check if the object disappeared or if the player can't interact with it anymore
                         if (closestInteractable == null || closestInteractable.activeSelf == false || !interactableObject.interactable)
                         {
                             interactableObjects.Remove(closestInteractable);
                         }
+                    }
+                    else if (interactableObject.interactableType == InteractableType.LiftsAnObject)
+                    {
+                        ((LiftsAnObject)interactableObject).interact();
                     }
                     else if (interactableObject.interactableType == InteractableType.Pickup)
                     {
@@ -86,6 +90,7 @@ namespace Scripts
                         holding.transform.rotation = transform.rotation;
                         holding.GetComponent<Rigidbody>().isKinematic = true;
                         holding.GetComponent<Rigidbody>().useGravity = false;
+                        interactableObject.interactable = false;
                         interactableObjects.Remove(closestInteractable);
                     }
                 }
@@ -130,6 +135,7 @@ namespace Scripts
             {
                 holding.GetComponent<Rigidbody>().isKinematic = false;
                 holding.GetComponent<Rigidbody>().useGravity = true;
+                holding.GetComponent<Pickup>().interactable = true;
                 holding = null;
             }
         }
@@ -177,9 +183,9 @@ namespace Scripts
         {
             if (other.gameObject.tag == Constant.TAG_INTERACT 
                 && !ReferenceEquals(other.gameObject, holding)
+                && other.gameObject.GetComponent<InteractableObject>().interactable
                 && (other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == currentPlayer
-                    || other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == ActivePlayer.Both) 
-                && other.gameObject.GetComponent<InteractableObject>().interactable)
+                    || other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == ActivePlayer.Both))
             {
                 interactableObjects.Add(other.gameObject);
                 GameManager.Instance.showInteractText(getClosestObject().GetComponent<InteractableObject>().interactMessage, currentPlayer);

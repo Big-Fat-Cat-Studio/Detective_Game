@@ -6,9 +6,12 @@ using UnityEngine.UI;
 namespace Scripts {
     public class SprinklerPuzzle : InteractableObject
     {
+        public GameObject neededItem;
+        public string afterInteractMessage;
+
         public bool solved = false;
         public int placed = 0;
-        public override void interact(ActivePlayer player, GameObject playerItem)
+        public void interact(ActivePlayer player, GameObject playerItem)
         {
             if (neededItem == null || ReferenceEquals(playerItem, neededItem))
             {
