@@ -33,20 +33,16 @@ namespace Scripts
 
         [HideInInspector]
         public ActivePlayer? InteractTextActivePlayer;
-        [HideInInspector]
-        public ActivePlayer? PickupTextActivePlayer;
 
         [Header("Text game objects")]
         public GameObject AfterInteractText;
         public GameObject InteractText;
-        public GameObject PickupText;
 
         [Header("PLAYER ONE Text game objects")]
         //Player one gameobjects instead of putting player two gameobjects because 
         //the text game objects are on the right spot for player two
         public GameObject AfterInteractTextPlayerOne;
         public GameObject InteractTextPlayerOne;
-        public GameObject PickupTextPlayerOne;
 
         private IEnumerator currentCourotine;
         private IEnumerator currentCourotinePlayerOne;
@@ -63,13 +59,19 @@ namespace Scripts
         private float _PrevPlayerCRotation; // Camera X-Axis Rotation
         private void Start()
         {
+            CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
+            CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
+            CameraFollowP2.GetComponent<CinemachineFreeLook>().Follow = Animal.transform;
+            CameraFollowP2.GetComponent<CinemachineFreeLook>().LookAt = Animal.transform;
+
             if (GameType == GameType.SinglePlayer)
             {
-                Human.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
                 PlayerOne = ActivePlayer.Human;
 
                 PlayerCamera.GetComponent<Camera>().rect = new Rect(0,0,1,1);
                 PlayerCameraP2.SetActive(false);
+                CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
+                CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
             }
             else if (PlayerTwo == ActivePlayer.Human) {
                 CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X";
@@ -79,14 +81,17 @@ namespace Scripts
                 CameraFollow.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X P2";
                 CameraFollow.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y P2";
                 PlayerCamera.GetComponent<Camera>().rect = new Rect(0, -0.5f, 1, 1);
+
+                CameraFollowP2.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
+                CameraFollowP2.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
+                CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Animal.transform;
+                CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Animal.transform;
             }
 
             AfterInteractText.SetActive(false);
             InteractText.SetActive(false);
-            PickupText.SetActive(false);
             AfterInteractTextPlayerOne.SetActive(false);
             InteractTextPlayerOne.SetActive(false);
-            PickupTextPlayerOne.SetActive(false);
 
             currentCourotine = null;
             currentCourotinePlayerOne = null;
@@ -101,18 +106,12 @@ namespace Scripts
 
                 if (PlayerOne == ActivePlayer.Human)
                 {
-                    Human.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
-                    Animal.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
-
                     cameraContext.Follow = Animal.transform;
                     cameraContext.LookAt = Animal.transform;
                     PlayerOne = ActivePlayer.Animal;
                 }
                 else if (PlayerOne == ActivePlayer.Animal)
                 {
-                    Animal.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
-                    Human.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
-
                     cameraContext.Follow = Human.transform;
                     cameraContext.LookAt = Human.transform;
                     PlayerOne = ActivePlayer.Human;
@@ -198,29 +197,6 @@ namespace Scripts
             }
         }
 
-        public void removePickupText(ActivePlayer player)
-        {
-            if (GameType == GameType.MultiPlayerSplitScreen)
-            {
-                if (player == PlayerOne)
-                {
-                    PickupTextPlayerOne.SetActive(false);
-                }
-                else
-                {
-                    PickupText.SetActive(false);
-                }
-            }
-            else
-            {
-                if (PickupTextActivePlayer == player)
-                {
-                    PickupText.SetActive(false);
-                    PickupTextActivePlayer = null;
-                }
-            }
-        }
-
         public void showInteractText(string message, ActivePlayer player)
         {
             if (GameType == GameType.MultiPlayerSplitScreen && player == PlayerOne)
@@ -236,25 +212,6 @@ namespace Scripts
                 if (GameType == GameType.SinglePlayer)
                 {
                     InteractTextActivePlayer = player;
-                }
-            }
-        }
-
-        public void showPickupText(string message, ActivePlayer player)
-        {
-            if (GameType == GameType.MultiPlayerSplitScreen && player == PlayerOne)
-            {
-                PickupTextPlayerOne.GetComponent<Text>().text = Constant.PICKUP_TEXT + message;
-                PickupTextPlayerOne.SetActive(true);
-            }
-            else
-            {
-                PickupText.GetComponent<Text>().text = Constant.PICKUP_TEXT + message;
-                PickupText.SetActive(true);
-
-                if (GameType == GameType.SinglePlayer)
-                {
-                    PickupTextActivePlayer = player;
                 }
             }
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Scripts
 {
@@ -8,41 +9,87 @@ namespace Scripts
     {
         //Variables
         public List<GameObject> solution;
+        public Light lamp;
+        public float maxCountdown;
 
-        private List<int> convertedSolution;
-        private List<int> input;
+        private List<Color> colorSequence;
+        private List<string> convertedSolution;
+        private List<string> input;
+        private Text timerText;
+        private int currentColor = 0;
+        private float timer = 0;
         private bool sequenceStillCorrect = true;
+        private bool puzzleHasStarted = false;
 
         //Unity functions
         private void Start()
         {
-            this.input = new List<int>();
+            this.timer = this.maxCountdown;
+            this.timerText = GameObject.FindGameObjectWithTag("Timer").GetComponent<Text>();
+            this.colorSequence = new List<Color>();
+            this.input = new List<string>();
             this.convertedSolution = this.ConvertSolution();
+            this.colorSequence.Add(Color.white);
+            this.InsertColors();
             StartCoroutine(this.CheckSolution());
+            StartCoroutine(this.ShowSequence());
+            
+        }
+        private void Update()
+        {
+            if(puzzleHasStarted)
+            {
+                this.timer -= Time.deltaTime;
+                this.timerText.text = "Timer: " + this.timer.ToString();
+            }
         }
 
         //Custom functions
-        public void InsertInput(int sequenceItemID)
+        public void InsertInput(string sequenceItemColor)
         {
-            if(this.input.Count < this.convertedSolution.Count)
+            if (this.input.Count < this.convertedSolution.Count)
             {
-                this.input.Add(sequenceItemID);
+                this.input.Add(sequenceItemColor);
+                this.puzzleHasStarted = true;
             }
         }
-        private List<int> ConvertSolution()
+        public void InsertColors()
         {
-            List<int> result = new List<int>();
+            for(int i = 0; i < this.solution.Count; i++)
+            {
+                this.colorSequence.Add(this.solution[i].gameObject.GetComponent<SequencePuzzlePressurePlate>().plateColor);
+            }
+        }
+        private List<string> ConvertSolution()
+        {
+            List<string> result = new List<string>();
             foreach(GameObject sequenceItem in solution)
             {
-                result.Add(sequenceItem.GetComponent<SequencePuzzleItem>().sequenceItemID);
+                result.Add(sequenceItem.GetComponent<SequencePuzzlePressurePlate>().sequenceItemColorID);
             }
             return result;
         }
         private SequencePuzzleStatus Compare()
         {
-            if(this.input.Count < this.convertedSolution.Count)
+            if (this.input.Count < this.convertedSolution.Count)
             {
-                return SequencePuzzleStatus.Incomplete;
+                if(this.maxCountdown == 0)
+                {
+                    return SequencePuzzleStatus.Incomplete;
+                }
+                else
+                {
+                    if(this.timer <= 0)
+                    {
+                        print("te laat");
+                        return SequencePuzzleStatus.Wrong;
+                    }
+                    else
+                    {
+                        return SequencePuzzleStatus.Incomplete;
+                    }
+                }
+                
             }
             else
             {
@@ -72,6 +119,9 @@ namespace Scripts
         {
             this.input.Clear();
             this.sequenceStillCorrect = true;
+            this.timer = this.maxCountdown;
+            this.puzzleHasStarted = false;
+            this.timerText.text = "";
         }
 
         //Coroutines
@@ -95,6 +145,28 @@ namespace Scripts
                     print("player has entered wrong solution");
                 }
                 yield return checkTimer;
+            }
+        }
+        private IEnumerator ShowSequence()
+        {
+            for(; ; )
+            {
+                WaitForSeconds switchTimer = new WaitForSeconds(1.0f);
+                WaitForSeconds pauseTimer = new WaitForSeconds(2.0f);
+                this.currentColor += 1;
+                if (this.currentColor >= this.colorSequence.Count)
+                {
+                    this.currentColor = 0;
+                }
+                this.lamp.color = this.colorSequence[currentColor];
+                if (this.currentColor == 0)
+                {
+                    yield return pauseTimer;
+                }
+                else
+                {
+                    yield return switchTimer;
+                }
             }
         }
     }

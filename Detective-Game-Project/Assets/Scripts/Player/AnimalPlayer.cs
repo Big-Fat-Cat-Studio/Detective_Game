@@ -40,6 +40,7 @@ namespace Scripts {
                     moveDirection = new Vector3(GameManager.Instance.getAxisForPlayer(ActivePlayer.Animal, "Horizontal", AxisType.Axis), 0.0f,
                        GameManager.Instance.getAxisForPlayer(ActivePlayer.Animal, "Vertical", AxisType.Axis));
                     moveDirection = transform.TransformDirection(moveDirection);
+                    moveDirection = Vector3.ClampMagnitude(moveDirection, 1f);
                     moveDirection *= movementSpeed;
 
                     if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Animal, "Jump", ButtonPress.Press) || bounce)

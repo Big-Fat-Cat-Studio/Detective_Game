@@ -6,9 +6,12 @@ using UnityEngine.UI;
 namespace Scripts {
     public class SprinklerPuzzle : InteractableObject
     {
+        public GameObject neededItem;
+        public string afterInteractMessage;
+
         public bool solved = false;
         public int placed = 0;
-        public override void interact(ActivePlayer player, GameObject playerItem)
+        public void interact(ActivePlayer player, GameObject playerItem)
         {
             if (neededItem == null || ReferenceEquals(playerItem, neededItem))
             {
@@ -37,7 +40,7 @@ namespace Scripts {
                     playerItem.transform.localPosition = new Vector3(8.25f, 0, 1.5f);
                     ActivateSprinkler.instance.placed += 1;
                 }
-                GameManager.Instance.Human.GetComponentInChildren<PlayerPickUp>().removeHoldingObject();
+                GameManager.Instance.Human.GetComponentInChildren<PlayerInteract>().removeHoldingObject();
                 playerItem.GetComponent<BoxCollider>().enabled = false;
                 playerItem.transform.localRotation = Quaternion.identity;
                 playerItem.tag = "Untagged";

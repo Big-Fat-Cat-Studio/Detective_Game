@@ -68,11 +68,8 @@ namespace Scripts
             {
                 return;
             }
-            if (hit.gameObject.tag == "Movable")
-            {
-                
-            }
-            if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press) && hit.gameObject.tag == "Movable")
+            if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press) && hit.gameObject.tag == Constant.TAG_INTERACT
+                && hit.gameObject.GetComponent<InteractableObject>().interactableType == InteractableType.Movable)
             {
                 canPushPull = true;
                 body.gameObject.transform.Translate(moveDirection * Time.deltaTime);
@@ -90,6 +87,7 @@ namespace Scripts
 
         private void FixedUpdate()
         {
+            
             if (canPushPull)
             {
                 if (!GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press))
@@ -102,40 +100,65 @@ namespace Scripts
             {
                 if (isClimbing)
                 {
-
+                    gameObject.GetComponent<Animator>().SetBool("jumping", false);
                     moveDirection = new Vector3(0.0f, GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis),
                         GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis) * 0.3f);
                     moveDirection = transform.TransformDirection(moveDirection);
                     moveDirection *= climbingSpeed;
                     characterController.Move(moveDirection * Time.deltaTime);
+                    gameObject.GetComponent<Animator>().SetBool("climbing", true);
                 }
                 if (canPushPull)
                 {
+                    gameObject.GetComponent<Animator>().SetBool("jumping", false);
                     moveDirection = new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical"));
                     moveDirection = transform.TransformDirection(moveDirection);
                     moveDirection *= movementSpeed / 1.5f;
+                    gameObject.GetComponent<Animator>().SetBool("pushing", true);
                 }
 
                 if (!isClimbing && !canPushPull)
                 {
-
+                    gameObject.GetComponent<Animator>().SetBool("climbing", false);
+                    gameObject.GetComponent<Animator>().SetBool("pushing", false);
                     if (characterController.isGrounded)
                     {
+                        gameObject.GetComponent<Animator>().SetBool("jumping", false);
                         moveDirection = new Vector3(GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Horizontal", AxisType.Axis), 0.0f,
                             GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis));
+                        if (moveDirection.x != 0)
+                        {
+                            gameObject.GetComponent<Animator>().SetBool("walksideways", true);
+                        }
+                        else
+                        {
+                            gameObject.GetComponent<Animator>().SetBool("walksideways", false);
+                        }
+                        gameObject.GetComponent<Animator>().SetFloat("forward/backward", moveDirection.z);
+                        gameObject.GetComponent<Animator>().SetFloat("sidewalk", moveDirection.x);
                         moveDirection = transform.TransformDirection(moveDirection);
+                        moveDirection = Vector3.ClampMagnitude(moveDirection, 1f);
                         moveDirection *= movementSpeed;
-
                         if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Jump", ButtonPress.Press))
                         {
+                            gameObject.GetComponent<Animator>().SetBool("jumping", true);
                             moveDirection.y = jumpHeight;
                         }
+                        
                     }
 
                     float translationRH = GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Mouse X", AxisType.AxisRaw) * rotationSpeed;
                     translationRH *= Time.deltaTime;
                     context.m_XAxis.Value += translationRH;
                     transform.Rotate(0, translationRH, 0);
+                    if (moveDirection.x == 0 && moveDirection.z == 0 && moveDirection.y == 0 && translationRH != 0)
+                    {
+                        gameObject.GetComponent<Animator>().SetBool("turning", true);
+                    }
+                    else
+                    {
+                        gameObject.GetComponent<Animator>().SetBool("turning", false);
+                    }
                 }
             }
             else

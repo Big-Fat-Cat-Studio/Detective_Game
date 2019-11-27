@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovableObject : MonoBehaviour
+namespace Scripts
 {
-    [Header("\"Press [x] to ---\"")]
-    public string interactMessage;
+    public class MovableObject : InteractableObject
+    {
+        private void Start()
+        {
+            interactableType = InteractableType.Movable;
+        }
+    }
 }
