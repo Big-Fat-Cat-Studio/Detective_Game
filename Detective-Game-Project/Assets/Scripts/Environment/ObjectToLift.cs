@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts
@@ -140,12 +139,21 @@ namespace Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-            other.gameObject.transform.parent = this.gameObject.transform;
+            if (ReferenceEquals(other.gameObject, GameManager.Instance.Human) ||
+                ReferenceEquals(other.gameObject, GameManager.Instance.Animal))
+            {
+                other.gameObject.transform.parent = this.gameObject.transform;
+            }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            other.gameObject.transform.parent = null;
+            if (ReferenceEquals(other.gameObject, GameManager.Instance.Human) ||
+                ReferenceEquals(other.gameObject, GameManager.Instance.Animal))
+            {
+                other.gameObject.transform.parent = null;
+
+            }
         }
     }
 }

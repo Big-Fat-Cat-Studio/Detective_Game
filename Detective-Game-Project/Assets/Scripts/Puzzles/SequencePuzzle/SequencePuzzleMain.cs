@@ -124,6 +124,12 @@ namespace Scripts
             this.puzzleHasStarted = false;
             this.timerText.text = "";
         }
+        private void StopPuzzle()
+        {
+            this.puzzleHasStarted = false;
+            this.timerText.text = "";
+            StopCoroutine(CheckSolution());
+        }
 
         //Coroutines
         private IEnumerator CheckSolution()
@@ -135,6 +141,7 @@ namespace Scripts
                 if (status == SequencePuzzleStatus.Correct)
                 {
                     this.victoryInteraction.GetComponent<TempSolution>().ActivateSolution();
+                    this.StopPuzzle();
                     print("player entered correct solution");
                 }
                 else if (status == SequencePuzzleStatus.Incomplete)
