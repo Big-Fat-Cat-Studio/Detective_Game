@@ -1625,7 +1625,7 @@ Transform:
   m_LocalScale: {x: 4.8, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &92806470
 PrefabInstance:
@@ -1814,12 +1814,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80339c3c68b974f49bfe20d4572ed6ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerThatCanInteract: 0
-  interactMessage: open the door
-  neededItem: {fileID: 0}
-  afterInteractMessage: The door is stuck! You can't open it.
-  interactable: 1
-  interactableType: 0
 --- !u!1001 &104966421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3656,7 +3650,7 @@ Transform:
   m_LocalScale: {x: 12.080946, y: 5.6571765, z: 0.61995}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &231576666
 MonoBehaviour:
@@ -4571,7 +4565,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &286801802
 PrefabInstance:
@@ -6473,13 +6467,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80339c3c68b974f49bfe20d4572ed6ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerThatCanInteract: 0
-  interactMessage: use the panel
-  neededItem: {fileID: 0}
-  afterInteractMessage: Hmm, the panel doesn't seem to do anything right now. Maybe
-    it's because you reached the end of our demo
-  interactable: 1
-  interactableType: 0
 --- !u!1001 &418798300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6676,10 +6663,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerThatCanInteract: 0
   interactMessage: place pipe.
-  neededItem: {fileID: 607596700}
-  afterInteractMessage: This pipe doesn't fit here.
   interactable: 1
   interactableType: 0
+  neededItem: {fileID: 607596700}
+  afterInteractMessage: This pipe doesn't fit here.
   solved: 0
   placed: 0
 --- !u!65 &428693372
@@ -8630,12 +8617,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80339c3c68b974f49bfe20d4572ed6ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerThatCanInteract: 0
-  interactMessage: open the door
-  neededItem: {fileID: 703893310}
-  afterInteractMessage: The door is locked!
-  interactable: 1
-  interactableType: 0
 --- !u!114 &597359606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8753,6 +8734,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4020851476729268202, guid: bb78d08a51c04d14d8255d510a214784,
     type: 3}
   m_PrefabInstance: {fileID: 699430975}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &627249476 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 471950096650628185, guid: 9f5cca76864787947997e8796ea27c14,
+    type: 3}
+  m_PrefabInstance: {fileID: 1392190795}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &627249477 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3519543060570873418, guid: 9f5cca76864787947997e8796ea27c14,
+    type: 3}
+  m_PrefabInstance: {fileID: 1392190795}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &627879438
 PrefabInstance:
@@ -9611,7 +9604,7 @@ Transform:
   - {fileID: 428693370}
   - {fileID: 1533998996}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 270, y: 180, z: 0}
 --- !u!1001 &699430975
 PrefabInstance:
@@ -9718,8 +9711,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerThatCanInteract: 0
   interactMessage: 
-  neededItem: {fileID: 0}
-  afterInteractMessage: 
   interactable: 1
   interactableType: 0
   destroyAfterXUsages: 1
@@ -9794,7 +9785,7 @@ Transform:
   m_LocalScale: {x: 0.28287, y: 0.28287, z: 0.28287}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &703893316
 Rigidbody:
@@ -11635,8 +11626,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerThatCanInteract: 2
   interactMessage: pick up the toolbox.
-  neededItem: {fileID: 0}
-  afterInteractMessage: 
   interactable: 1
   interactableType: 0
   destroyAfterXUsages: 2
@@ -12195,10 +12184,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerThatCanInteract: 0
   interactMessage: place pipe.
-  neededItem: {fileID: 1446100117}
-  afterInteractMessage: This pipe doesn't fit here.
   interactable: 1
   interactableType: 0
+  neededItem: {fileID: 1446100117}
+  afterInteractMessage: This pipe doesn't fit here.
   solved: 0
   placed: 0
 --- !u!65 &940610639
@@ -13373,6 +13362,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.85826296
       objectReference: {fileID: 0}
+    - target: {fileID: 2862308002375225256, guid: 737981832f573c54e8b7c67e2930587a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 287228894716022424, guid: 737981832f573c54e8b7c67e2930587a,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -14296,10 +14290,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerThatCanInteract: 0
   interactMessage: place pipe.
-  neededItem: {fileID: 428930464}
-  afterInteractMessage: This pipe doesn't fit here.
   interactable: 1
   interactableType: 0
+  neededItem: {fileID: 428930464}
+  afterInteractMessage: This pipe doesn't fit here.
   solved: 0
   placed: 0
 --- !u!65 &1135342079
@@ -15122,11 +15116,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TunnelA: {fileID: 286757449}
   TunnelB: {fileID: 1179381273}
-  Camera: {fileID: 0}
-  ClueCamera: {fileID: 0}
   facingTunnelA: 0
   facingTunnelB: 0
-  CinCamera: {fileID: 0}
 --- !u!65 &1179381275
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15198,7 +15189,7 @@ Transform:
   m_LocalScale: {x: 0.42666, y: 0.42666, z: 0.42666}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1191380346
 PrefabInstance:
@@ -15891,13 +15882,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80339c3c68b974f49bfe20d4572ed6ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerThatCanInteract: 0
-  interactMessage: remove the vent
-  neededItem: {fileID: 875841502}
-  afterInteractMessage: I can't seem to open this! Maybe I can force it open with
-    tools.
-  interactable: 1
-  interactableType: 0
 --- !u!114 &1254848758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16170,11 +16154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TunnelA: {fileID: 1273075643}
   TunnelB: {fileID: 1843519956}
-  Camera: {fileID: 0}
-  ClueCamera: {fileID: 0}
   facingTunnelA: 1
   facingTunnelB: 3
-  CinCamera: {fileID: 0}
 --- !u!65 &1273075645
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17696,6 +17677,75 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1383292448}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1392190795
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 471950096650628185, guid: 9f5cca76864787947997e8796ea27c14,
+        type: 3}
+      propertyPath: m_Name
+      value: Corgi
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519543060570873418, guid: 9f5cca76864787947997e8796ea27c14,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 191.62263
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519543060570873418, guid: 9f5cca76864787947997e8796ea27c14,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.000000014901161
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519543060570873418, guid: 9f5cca76864787947997e8796ea27c14,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 171.70808
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519543060570873418, guid: 9f5cca76864787947997e8796ea27c14,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519543060570873418, guid: 9f5cca76864787947997e8796ea27c14,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519543060570873418, guid: 9f5cca76864787947997e8796ea27c14,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519543060570873418, guid: 9f5cca76864787947997e8796ea27c14,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519543060570873418, guid: 9f5cca76864787947997e8796ea27c14,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519543060570873418, guid: 9f5cca76864787947997e8796ea27c14,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519543060570873418, guid: 9f5cca76864787947997e8796ea27c14,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519543060570873418, guid: 9f5cca76864787947997e8796ea27c14,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9f5cca76864787947997e8796ea27c14, type: 3}
 --- !u!1001 &1397716966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18346,10 +18396,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerThatCanInteract: 0
   interactMessage: place pipe.
-  neededItem: {fileID: 2054626657}
-  afterInteractMessage: This pipe doesn't fit here.
   interactable: 1
   interactableType: 0
+  neededItem: {fileID: 2054626657}
+  afterInteractMessage: This pipe doesn't fit here.
   solved: 0
   placed: 0
 --- !u!65 &1461359238
@@ -19874,8 +19924,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerThatCanInteract: 0
   interactMessage: push the box.
-  neededItem: {fileID: 0}
-  afterInteractMessage: 
   interactable: 1
   interactableType: 0
 --- !u!1001 &1556874336
@@ -22168,8 +22216,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerThatCanInteract: 0
   interactMessage: push the box.
-  neededItem: {fileID: 0}
-  afterInteractMessage: 
   interactable: 1
   interactableType: 0
 --- !u!1001 &1726807060
@@ -23743,11 +23789,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TunnelA: {fileID: 1273075643}
   TunnelB: {fileID: 1843519956}
-  Camera: {fileID: 0}
-  ClueCamera: {fileID: 0}
   facingTunnelA: 1
   facingTunnelB: 3
-  CinCamera: {fileID: 0}
 --- !u!65 &1843519959
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27004,6 +27047,22 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2090020106}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2099968816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5006512735556155875}
+  m_Layer: 0
+  m_Name: Recovery GameObject (5006512735556155875)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &2102045346
 GameObject:
   m_ObjectHideFlags: 0
@@ -27052,10 +27111,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerThatCanInteract: 0
   interactMessage: place pipe.
-  neededItem: {fileID: 1724550822}
-  afterInteractMessage: This pipe doesn't fit here.
   interactable: 1
   interactableType: 0
+  neededItem: {fileID: 1724550822}
+  afterInteractMessage: This pipe doesn't fit here.
   solved: 0
   placed: 0
 --- !u!65 &2102045349
@@ -27442,17 +27501,17 @@ PrefabInstance:
     - target: {fileID: 7953791636705678875, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 191.84627
+      value: 191.62263
       objectReference: {fileID: 0}
     - target: {fileID: 7953791636705678875, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.3999999
+      value: 0.39999998
       objectReference: {fileID: 0}
     - target: {fileID: 7953791636705678875, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 171.26451
+      value: 170.40808
       objectReference: {fileID: 0}
     - target: {fileID: 7953791636705678875, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
@@ -27477,7 +27536,7 @@ PrefabInstance:
     - target: {fileID: 7953791636705678875, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 7953791636705678875, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
@@ -27498,26 +27557,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LookAt
       value: 
-      objectReference: {fileID: 5006512735556155875}
+      objectReference: {fileID: 627249477}
     - target: {fileID: 6103178438044020617, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
       propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 5006512735556155875}
+      objectReference: {fileID: 627249477}
     - target: {fileID: 6828289199536578442, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.14869566
+      value: 0.14869563
       objectReference: {fileID: 0}
     - target: {fileID: 6828289199536578442, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000017678179
+      value: -0.000000013194288
       objectReference: {fileID: 0}
     - target: {fileID: 6828289199536578442, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000011756662
+      value: -0.0000000080339495
       objectReference: {fileID: 0}
     - target: {fileID: 6828289199536578442, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
@@ -27542,12 +27601,12 @@ PrefabInstance:
     - target: {fileID: 7426583030139113593, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000011549859
+      value: -0.000000004923705
       objectReference: {fileID: 0}
     - target: {fileID: 7426583030139113593, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000024038746
+      value: -0.000000026230152
       objectReference: {fileID: 0}
     - target: {fileID: 7426583030139113593, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
@@ -27562,22 +27621,22 @@ PrefabInstance:
     - target: {fileID: 599884998598731370, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000011169342
+      value: 0.0000000020257758
       objectReference: {fileID: 0}
     - target: {fileID: 599884998598731370, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000019897413
+      value: 0.000000008801853
       objectReference: {fileID: 0}
     - target: {fileID: 599884998598731370, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.22428958
+      value: 0.22428963
       objectReference: {fileID: 0}
     - target: {fileID: 599884998598731370, guid: 0e8512b9443eb1e4abc2faa438e2d153,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.9745226
+      value: -0.97452253
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e8512b9443eb1e4abc2faa438e2d153, type: 3}
@@ -27700,7 +27759,7 @@ PrefabInstance:
     - target: {fileID: 1327187454661001880, guid: 3805d7c0c78b8b44b8dcd0c904bff8d7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1327187454661001880, guid: 3805d7c0c78b8b44b8dcd0c904bff8d7,
         type: 3}
@@ -27769,7 +27828,7 @@ PrefabInstance:
     - target: {fileID: 5862851104961851458, guid: 6ed21601b2bd97947b682ee747bf6a62,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5862851104961851458, guid: 6ed21601b2bd97947b682ee747bf6a62,
         type: 3}
@@ -27834,12 +27893,12 @@ PrefabInstance:
     - target: {fileID: 5658090680877232553, guid: 6ed21601b2bd97947b682ee747bf6a62,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000017280547
+      value: 0.000000017126526
       objectReference: {fileID: 0}
     - target: {fileID: 5658090680877232553, guid: 6ed21601b2bd97947b682ee747bf6a62,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000045461004
+      value: -0.00000000392015
       objectReference: {fileID: 0}
     - target: {fileID: 5658090680877232553, guid: 6ed21601b2bd97947b682ee747bf6a62,
         type: 3}
@@ -27888,32 +27947,32 @@ PrefabInstance:
     - target: {fileID: 5418225392678410061, guid: 9331b53fd394960449f0c93315806e33,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 191.84627
+      value: 191.62263
       objectReference: {fileID: 0}
     - target: {fileID: 5418225392678410061, guid: 9331b53fd394960449f0c93315806e33,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.3999999
+      value: 0.39999998
       objectReference: {fileID: 0}
     - target: {fileID: 5418225392678410061, guid: 9331b53fd394960449f0c93315806e33,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 171.26451
+      value: 170.40808
       objectReference: {fileID: 0}
     - target: {fileID: 5418225392678410061, guid: 9331b53fd394960449f0c93315806e33,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.22428963
+      value: -0.22428967
       objectReference: {fileID: 0}
     - target: {fileID: 5418225392678410061, guid: 9331b53fd394960449f0c93315806e33,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000060150103
+      value: 0.00000001452152
       objectReference: {fileID: 0}
     - target: {fileID: 5418225392678410061, guid: 9331b53fd394960449f0c93315806e33,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000013843747
+      value: 0.0000000033421768
       objectReference: {fileID: 0}
     - target: {fileID: 5418225392678410061, guid: 9331b53fd394960449f0c93315806e33,
         type: 3}
@@ -27923,7 +27982,7 @@ PrefabInstance:
     - target: {fileID: 5418225392678410061, guid: 9331b53fd394960449f0c93315806e33,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5418225392678410061, guid: 9331b53fd394960449f0c93315806e33,
         type: 3}
@@ -28011,12 +28070,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d11c47e3f744498469e0ebcb0781a013, type: 3}
---- !u!4 &5006512735556155875 stripped
+--- !u!4 &5006512735556155875
 Transform:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 3519543060570873418, guid: 9f5cca76864787947997e8796ea27c14,
     type: 3}
-  m_PrefabInstance: {fileID: 8479531575163201449}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099968816}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5085070054796297771
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28093,7 +28161,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Animal
       value: 
-      objectReference: {fileID: 8296172668443282416}
+      objectReference: {fileID: 627249476}
     - target: {fileID: 1191985205652557913, guid: 925949a64b94ec84797d936173974082,
         type: 3}
       propertyPath: AfterInteractText
