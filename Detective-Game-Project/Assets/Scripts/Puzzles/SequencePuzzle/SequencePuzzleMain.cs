@@ -9,6 +9,7 @@ namespace Scripts
     {
         //Variables
         public List<GameObject> solution;
+        public GameObject victoryInteraction;
         public Light lamp;
         public float maxCountdown;
 
@@ -133,6 +134,7 @@ namespace Scripts
                 SequencePuzzleStatus status = this.Compare();
                 if (status == SequencePuzzleStatus.Correct)
                 {
+                    this.victoryInteraction.GetComponent<TempSolution>().ActivateSolution();
                     print("player entered correct solution");
                 }
                 else if (status == SequencePuzzleStatus.Incomplete)
