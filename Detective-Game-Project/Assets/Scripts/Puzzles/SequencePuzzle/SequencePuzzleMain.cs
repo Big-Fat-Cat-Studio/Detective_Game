@@ -40,7 +40,7 @@ namespace Scripts
             if(puzzleHasStarted)
             {
                 this.timer -= Time.deltaTime;
-                this.timerText.text = "Timer: " + (this.timer * -1).ToString();
+                this.timerText.text = "Timer: " + this.timer.ToString();
             }
         }
 
