@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Scripts
 {
@@ -14,6 +15,7 @@ namespace Scripts
         private List<Color> colorSequence;
         private List<string> convertedSolution;
         private List<string> input;
+        private Text timerText;
         private int currentColor = 0;
         private float timer = 0;
         private bool sequenceStillCorrect = true;
@@ -22,6 +24,8 @@ namespace Scripts
         //Unity functions
         private void Start()
         {
+            this.timer = this.maxCountdown;
+            this.timerText = GameObject.FindGameObjectWithTag("Timer").GetComponent<Text>();
             this.colorSequence = new List<Color>();
             this.input = new List<string>();
             this.convertedSolution = this.ConvertSolution();
@@ -35,7 +39,8 @@ namespace Scripts
         {
             if(puzzleHasStarted)
             {
-                this.timer += Time.deltaTime;
+                this.timer -= Time.deltaTime;
+                this.timerText.text = "Timer: " + (this.timer * -1).ToString();
             }
         }
 
@@ -45,10 +50,7 @@ namespace Scripts
             if (this.input.Count < this.convertedSolution.Count)
             {
                 this.input.Add(sequenceItemColor);
-                if(this.input.Count > 0)
-                {
-                    this.puzzleHasStarted = true;
-                }
+                this.puzzleHasStarted = true;
             }
         }
         public void InsertColors()
@@ -77,7 +79,7 @@ namespace Scripts
                 }
                 else
                 {
-                    if(this.timer >= this.maxCountdown)
+                    if(this.timer <= 0)
                     {
                         print("te laat");
                         return SequencePuzzleStatus.Wrong;
@@ -117,8 +119,9 @@ namespace Scripts
         {
             this.input.Clear();
             this.sequenceStillCorrect = true;
-            this.timer = 0;
+            this.timer = this.maxCountdown;
             this.puzzleHasStarted = false;
+            this.timerText.text = "";
         }
 
         //Coroutines
