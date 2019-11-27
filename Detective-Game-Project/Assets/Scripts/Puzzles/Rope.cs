@@ -33,9 +33,14 @@ namespace Scripts
         {
             if (Input.GetKeyDown(KeyCode.X))
             {
-                StartCoroutine(Move(gameObject, new Tuple<Vector3, Vector3>(RopeStartPos, RopeEndPos), 2f, () => { RopeActive = !RopeActive; }));
-                StartCoroutine(Move(Ladder, new Tuple<Vector3, Vector3>(LadderStartPos, LadderEndPos), 2f, () => { return; }));
+                StartCoroutine(Move(gameObject, new Tuple<Vector3, Vector3>(RopeStartPos, RopeEndPos), 2f, CallBack));
+                StartCoroutine(Move(Ladder, new Tuple<Vector3, Vector3>(LadderStartPos, LadderEndPos), 2f, () => { }));
             }
+        }
+
+        public void CallBack()
+        {
+            RopeActive = !RopeActive;
         }
 
         public void OutRange() { }
@@ -43,11 +48,14 @@ namespace Scripts
 
         private IEnumerator Move(GameObject ob, Tuple<Vector3, Vector3> pos, float time, Action c)
         {
-            while (time > 0.0f)
+            while (Input.GetKey(KeyCode.X) && Helper.WithinRange(Player, this.gameObject, 2f))
             {
-                ob.transform.position = (!RopeActive) ?
-                    Vector3.Lerp(ob.transform.position, pos.Item2, Time.deltaTime) :
-                    Vector3.Lerp(ob.transform.position, pos.Item1, Time.deltaTime);
+                ob.transform.position = Vector3.Lerp(ob.transform.position, pos.Item2, Time.deltaTime);
+                yield return null;
+            }
+            while (time > 0 && !Input.GetKeyDown(KeyCode.X))
+            {
+                ob.transform.position = Vector3.Lerp(ob.transform.position, pos.Item1, Time.deltaTime);
                 time -= Time.deltaTime;
                 yield return null;
             }
