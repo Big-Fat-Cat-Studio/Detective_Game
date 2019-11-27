@@ -87,6 +87,7 @@ namespace Scripts
 
         private void FixedUpdate()
         {
+            
             if (canPushPull)
             {
                 if (!GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press))
@@ -99,6 +100,7 @@ namespace Scripts
             {
                 if (isClimbing)
                 {
+                    gameObject.GetComponent<Animator>().SetBool("jumping", false);
                     moveDirection = new Vector3(0.0f, GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis),
                         GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis) * 0.3f);
                     moveDirection = transform.TransformDirection(moveDirection);
@@ -108,16 +110,20 @@ namespace Scripts
                 }
                 if (canPushPull)
                 {
+                    gameObject.GetComponent<Animator>().SetBool("jumping", false);
                     moveDirection = new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical"));
                     moveDirection = transform.TransformDirection(moveDirection);
                     moveDirection *= movementSpeed / 1.5f;
+                    gameObject.GetComponent<Animator>().SetBool("pushing", true);
                 }
 
                 if (!isClimbing && !canPushPull)
                 {
                     gameObject.GetComponent<Animator>().SetBool("climbing", false);
+                    gameObject.GetComponent<Animator>().SetBool("pushing", false);
                     if (characterController.isGrounded)
                     {
+                        gameObject.GetComponent<Animator>().SetBool("jumping", false);
                         moveDirection = new Vector3(GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Horizontal", AxisType.Axis), 0.0f,
                             GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis));
                         if (moveDirection.x != 0)
@@ -135,6 +141,7 @@ namespace Scripts
                         moveDirection *= movementSpeed;
                         if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Jump", ButtonPress.Press))
                         {
+                            gameObject.GetComponent<Animator>().SetBool("jumping", true);
                             moveDirection.y = jumpHeight;
                         }
                         
@@ -144,7 +151,14 @@ namespace Scripts
                     translationRH *= Time.deltaTime;
                     context.m_XAxis.Value += translationRH;
                     transform.Rotate(0, translationRH, 0);
-                    
+                    if (moveDirection.x == 0 && moveDirection.z == 0 && moveDirection.y == 0 && translationRH != 0)
+                    {
+                        gameObject.GetComponent<Animator>().SetBool("turning", true);
+                    }
+                    else
+                    {
+                        gameObject.GetComponent<Animator>().SetBool("turning", false);
+                    }
                 }
             }
             else
