@@ -69,21 +69,7 @@ namespace Scripts
                 {
                     InteractableObject interactableObject = closestInteractable.GetComponent<InteractableObject>();
 
-                    if (interactableObject.interactableType == InteractableType.Destroyable)
-                    {
-                        ((DestroyableObject)interactableObject).interact(currentPlayer, holding);
-
-                        //Check if the object disappeared or if the player can't interact with it anymore
-                        if (closestInteractable == null || closestInteractable.activeSelf == false || !interactableObject.interactable)
-                        {
-                            interactableObjects.Remove(closestInteractable);
-                        }
-                    }
-                    else if (interactableObject.interactableType == InteractableType.LiftsAnObject)
-                    {
-                        ((LiftsAnObject)interactableObject).interact();
-                    }
-                    else if (interactableObject.interactableType == InteractableType.Pickup)
+                    if (interactableObject.interactableType == InteractableType.Pickup)
                     {
                         dropObject();
                         holding = closestInteractable;
@@ -92,6 +78,23 @@ namespace Scripts
                         holding.GetComponent<Rigidbody>().useGravity = false;
                         interactableObject.interactable = false;
                         interactableObjects.Remove(closestInteractable);
+                    }
+                    else
+                    {
+                        if (interactableObject.interactableType == InteractableType.Destroyable)
+                        {
+                            ((DestroyableObject)interactableObject).interact(currentPlayer, holding);
+                        }
+                        else if (interactableObject.interactableType != InteractableType.Movable)
+                        {
+                            interactableObject.interact();
+                        }
+
+                        //Check if the object disappeared or if the player can't interact with it anymore
+                        if (closestInteractable == null || closestInteractable.activeSelf == false || !interactableObject.interactable)
+                        {
+                            interactableObjects.Remove(closestInteractable);
+                        }
                     }
                 }
                 else

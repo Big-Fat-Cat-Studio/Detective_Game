@@ -16,7 +16,7 @@ namespace Scripts
             interactableType = InteractableType.Pickup;
         }
 
-        public void useItem()
+        public override void interact()
         {
             timesUsed++;
 

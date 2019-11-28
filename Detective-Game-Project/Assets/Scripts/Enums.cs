@@ -16,10 +16,10 @@
 
     public enum InteractableType
     {
+        Normal,
         Destroyable,
         Pickup,
-        Movable,
-        LiftsAnObject
+        Movable
     }
 
     public enum ButtonPress

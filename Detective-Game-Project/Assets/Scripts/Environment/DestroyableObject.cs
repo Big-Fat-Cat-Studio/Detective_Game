@@ -17,18 +17,15 @@ namespace Scripts
 
         public void interact(ActivePlayer player, GameObject playerItem)
         {
-            if (player == PlayerThatCanInteract)
+           if (neededItem == null || ReferenceEquals(playerItem, neededItem))
             {
-                if (neededItem == null || ReferenceEquals(playerItem, neededItem))
-                {
-                    this.gameObject.SetActive(false);
-                    Destroy(this.gameObject);
-                }
-                else
-                {
-                    GameManager.Instance.showAfterInteractText(player, afterInteractMessage);
-                }
+                this.gameObject.SetActive(false);
+                Destroy(this.gameObject);
             }
+            else
+            {
+                GameManager.Instance.showAfterInteractText(player, afterInteractMessage);
+            } 
         }
     }
 }

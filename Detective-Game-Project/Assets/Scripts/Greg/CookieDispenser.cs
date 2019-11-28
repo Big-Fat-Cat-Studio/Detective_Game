@@ -4,16 +4,19 @@ using UnityEngine;
 
 namespace Scripts
 {
-    public class CookieDispenser : MonoBehaviour
+    public class CookieDispenser : InteractableObject
     {
         public float cooldown = 10f;
-        bool available = true;
-        
         public float timer = 0f;
+
+        private void Start()
+        {
+            interactableType = InteractableType.Normal;
+        }
 
         void Update()
         {
-            if(available) return;
+            if(interactable) return;
 
             if (timer < cooldown)
             {
@@ -21,17 +24,17 @@ namespace Scripts
             }
             else
             {
-                available = true;
+                interactable = true;
                 timer = 0f;
             }
         }
 
-        public void Use(GameObject animal)
+        public override void interact()
         {
-            if(!available) return;
+            if(!interactable) return;
 
-            available = false;
-            animal.GetComponent<AnimalPlayer>().boostTimer = 5f;
+            interactable = false;
+            GameManager.Instance.Animal.GetComponent<AnimalPlayer>().boostTimer = 5f;
         }
     }
 }
