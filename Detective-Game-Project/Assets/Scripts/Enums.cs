@@ -16,9 +16,10 @@
 
     public enum InteractableType
     {
-        Unlockable,
+        Destroyable,
         Pickup,
-        Movable
+        Movable,
+        LiftsAnObject
     }
 
     public enum ButtonPress
@@ -39,5 +40,15 @@
         Correct,
         Incomplete,
         Wrong
+    }
+
+    public enum Direction
+    {
+        XPlus,
+        XMinus,
+        YPlus,
+        YMinus,
+        ZPlus,
+        ZMinus,
     }
 }
