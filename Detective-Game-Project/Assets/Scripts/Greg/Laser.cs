@@ -66,12 +66,24 @@ public class Laser : MonoBehaviour
         vertices.AddRange(faceVertices(dir, cubeIndex));
         int vCount = vertices.Count;
 
-        triangles.Add(vCount - 4);
-        triangles.Add(vCount - 4 + 1);
-        triangles.Add(vCount - 4 + 2);
-        triangles.Add(vCount - 4);
-        triangles.Add(vCount - 4 + 2);
-        triangles.Add(vCount - 4 + 3);
+        if(cubeIndex % 2 == 0)
+        {
+            triangles.Add(vCount - 4);
+            triangles.Add(vCount - 4 + 1);
+            triangles.Add(vCount - 4 + 2);
+            triangles.Add(vCount - 4);
+            triangles.Add(vCount - 4 + 2);
+            triangles.Add(vCount - 4 + 3);
+        }
+        else
+        {
+            triangles.Add(vCount - 4 + 2);
+            triangles.Add(vCount - 4 + 1);
+            triangles.Add(vCount - 4);
+            triangles.Add(vCount - 4 + 3);
+            triangles.Add(vCount - 4 + 2);
+            triangles.Add(vCount - 4);
+        }
     }
 
     Vector3[] faceVertices(int dir, int cubeIndex)
@@ -177,18 +189,15 @@ public class Laser : MonoBehaviour
         {
             if(hit.collider.tag == "Reflectable")
             {
-                Debug.DrawLine(position, hit.point, Color.red);
                 return new RayHit("reflect", hit.point, Vector3.Reflect(direction, hit.normal));
             }
             else
             {
-                Debug.DrawLine(position, hit.point, Color.red);
                 return new RayHit("normal", hit.point, hit.point);
             }
         }
         else
         {
-            Debug.DrawRay(position, direction * 30, Color.blue);
             return new RayHit("none", position + direction * 30, position);
         }
     }
