@@ -15,5 +15,10 @@ namespace Scripts {
         public bool interactable = true;
         [HideInInspector]
         public InteractableType interactableType;
+
+        public virtual void interact()
+        {
+
+        }
     }
 }

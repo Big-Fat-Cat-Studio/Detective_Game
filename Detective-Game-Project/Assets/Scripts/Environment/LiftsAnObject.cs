@@ -14,16 +14,11 @@ namespace Scripts
         // Start is called before the first frame update
         void Start()
         {
-            interactableType = InteractableType.LiftsAnObject;
+            interactableType = InteractableType.Normal;
             objectToLift.GetComponent<ObjectToLift>().addVariables(direction, amountOfMovement, speed);
         }
 
-        private void Update()
-        {
-            
-        }
-
-        public void interact()
+        public override void interact()
         {
             objectToLift.GetComponent<ObjectToLift>().startMoving();
         }
