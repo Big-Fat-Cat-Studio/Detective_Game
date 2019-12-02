@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Scripts
 {
-    public class SequencePuzzleMain : MonoBehaviour
+    public class SequencePuzzleMain : MonoBehaviour, IPuzzleManager
     {
         //Variables
         public List<GameObject> solution;
@@ -21,6 +21,7 @@ namespace Scripts
         private float timer = 0;
         private bool sequenceStillCorrect = true;
         private bool puzzleHasStarted = false;
+        private bool isCompleted = false;
 
         //Unity functions
         private void Start()
@@ -46,6 +47,19 @@ namespace Scripts
         }
 
         //Custom functions
+        //public bool IsCompleted()
+        //{
+        //    return this.isCompleted;
+        //}
+        //public void SetCompleted(bool status)
+        //{
+        //    this.isCompleted = status;
+        //}
+        public void CompletePuzzle()
+        {
+            this.victoryInteraction.GetComponent<TempSolution>().ActivateSolution();
+            this.StopPuzzle();
+        }
         public void InsertInput(string sequenceItemColor)
         {
             if (this.input.Count < this.convertedSolution.Count)
@@ -138,10 +152,9 @@ namespace Scripts
             for (; ; )
             {
                 SequencePuzzleStatus status = this.Compare();
-                if (status == SequencePuzzleStatus.Correct)
+                if (status == SequencePuzzleStatus.Correct || this.isCompleted)
                 {
-                    this.victoryInteraction.GetComponent<TempSolution>().ActivateSolution();
-                    this.StopPuzzle();
+                    CompletePuzzle();
                     print("player entered correct solution");
                 }
                 else if (status == SequencePuzzleStatus.Incomplete)

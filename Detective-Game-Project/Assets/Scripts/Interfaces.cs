@@ -12,4 +12,10 @@ namespace Scripts
         void InRange();
         void OutRange();
     }
+    public interface IPuzzleManager
+    {
+        //bool IsCompleted();
+        //void SetCompleted(bool status);
+        void CompletePuzzle();
+    }
 }
