@@ -23,6 +23,7 @@ namespace Scripts
         // Update is called once per frame
         void Update()
         {
+            return;
             if (!GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Animal) && active)
             {
                 toggleClues(false);
