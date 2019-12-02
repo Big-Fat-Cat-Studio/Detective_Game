@@ -86,6 +86,8 @@ namespace Scripts {
 
         public void speedBoostHandler()
         {
+            if(boostTimer == 0 && movementSpeed == 6f) return;
+
             if(boostTimer <= 0f)
             {
                 movementSpeed = 6f;
