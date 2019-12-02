@@ -13,6 +13,7 @@ namespace Scripts
     private void Start()
         {
             this.savedData = SaveSystem.LoadProgress();
+            this.CompletePuzzles();
         }
 
         //Custom functions
@@ -23,6 +24,17 @@ namespace Scripts
                 IPuzzleManager currentPuzzle = this.transform.Find(puzzle).gameObject.GetComponent<IPuzzleManager>();
                 currentPuzzle.CompletePuzzle();
             }
+        }
+        private void SetPlayerLocations()
+        {
+            //set human position
+            GameManager.Instance.Human.GetComponent<CharacterController>().enabled = false;
+            GameManager.Instance.Human.transform.position = savedData.playerHPos;
+            GameManager.Instance.Human.GetComponent<CharacterController>().enabled = true;
+            //set dog position
+            GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = false;
+            GameManager.Instance.Animal.transform.position = savedData.playerDPos;
+            GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = true;
         }
     }
 }
