@@ -14,8 +14,6 @@ namespace Scripts
     }
     public interface IPuzzleManager
     {
-        //bool IsCompleted();
-        //void SetCompleted(bool status);
         void CompletePuzzle();
     }
 }

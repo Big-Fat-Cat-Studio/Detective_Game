@@ -21,7 +21,6 @@ namespace Scripts
         private float timer = 0;
         private bool sequenceStillCorrect = true;
         private bool puzzleHasStarted = false;
-        private bool isCompleted = false;
 
         //Unity functions
         private void Start()
@@ -47,14 +46,6 @@ namespace Scripts
         }
 
         //Custom functions
-        //public bool IsCompleted()
-        //{
-        //    return this.isCompleted;
-        //}
-        //public void SetCompleted(bool status)
-        //{
-        //    this.isCompleted = status;
-        //}
         public void CompletePuzzle()
         {
             this.victoryInteraction.GetComponent<TempSolution>().ActivateSolution();
@@ -152,10 +143,11 @@ namespace Scripts
             for (; ; )
             {
                 SequencePuzzleStatus status = this.Compare();
-                if (status == SequencePuzzleStatus.Correct || this.isCompleted)
+                if (status == SequencePuzzleStatus.Correct)
                 {
                     CompletePuzzle();
                     print("player entered correct solution");
+                    break;
                 }
                 else if (status == SequencePuzzleStatus.Incomplete)
                 {
