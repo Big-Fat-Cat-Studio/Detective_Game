@@ -6,7 +6,7 @@ namespace Scripts
 {
     public class Rope : MonoBehaviour, IInteractable
     {
-        public GameObject Player, Ladder;
+        public GameObject Ladder;
         public float LadderMoveRange, RopeMoveRange = 0.5f;
         public int MoveTime;
 
@@ -25,14 +25,15 @@ namespace Scripts
 
         void Update()
         {
-            Helper.InteractGeneral(this.gameObject, Player, 2, new Tuple<Action, Action>(InRange, OutRange));
+            Helper.InteractGeneral(this.gameObject, GameManager.Instance.Animal, 5f, new Tuple<Action, Action>(InRange, OutRange));
 
         }
 
         public void InRange()
         {
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.X) || GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Animal, "Interact", ButtonPress.Press))
             {
+                print("test1");
                 StartCoroutine(Move(gameObject, new Tuple<Vector3, Vector3>(RopeStartPos, RopeEndPos), 2f, CallBack));
                 StartCoroutine(Move(Ladder, new Tuple<Vector3, Vector3>(LadderStartPos, LadderEndPos), 2f, () => { }));
             }
@@ -48,7 +49,7 @@ namespace Scripts
 
         private IEnumerator Move(GameObject ob, Tuple<Vector3, Vector3> pos, float time, Action c)
         {
-            while (Input.GetKey(KeyCode.X) && Helper.WithinRange(Player, this.gameObject, 2f))
+            while (Input.GetKey(KeyCode.X) && (Helper.WithinRange(GameManager.Instance.Animal, this.gameObject, 20f)))
             {
                 ob.transform.position = Vector3.Lerp(ob.transform.position, pos.Item2, Time.deltaTime);
                 yield return null;

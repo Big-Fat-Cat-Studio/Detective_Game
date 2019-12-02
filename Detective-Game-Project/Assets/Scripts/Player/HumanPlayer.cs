@@ -165,6 +165,13 @@ namespace Scripts
             {
                 moveDirection.x = 0.0f;
                 moveDirection.z = 0.0f;
+                gameObject.GetComponent<Animator>().SetFloat("forward/backward", moveDirection.z);
+                gameObject.GetComponent<Animator>().SetFloat("sidewalk", moveDirection.x);
+                gameObject.GetComponent<Animator>().SetBool("jumping", false);
+                gameObject.GetComponent<Animator>().SetBool("climbing", false);
+                gameObject.GetComponent<Animator>().SetBool("turning", false);
+                gameObject.GetComponent<Animator>().SetBool("pushing", false);
+                gameObject.GetComponent<Animator>().SetBool("walksideways", false);
             }
             moveDirection.y -= gravity * Time.deltaTime;
             characterController.Move(moveDirection * Time.deltaTime);

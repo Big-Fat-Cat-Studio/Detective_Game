@@ -9,6 +9,7 @@ namespace Scripts
     {
         //Variables
         public List<GameObject> solution;
+        public GameObject victoryInteraction;
         public Light lamp;
         public float maxCountdown;
 
@@ -123,6 +124,12 @@ namespace Scripts
             this.puzzleHasStarted = false;
             this.timerText.text = "";
         }
+        private void StopPuzzle()
+        {
+            this.puzzleHasStarted = false;
+            this.timerText.text = "";
+            StopCoroutine(CheckSolution());
+        }
 
         //Coroutines
         private IEnumerator CheckSolution()
@@ -133,6 +140,8 @@ namespace Scripts
                 SequencePuzzleStatus status = this.Compare();
                 if (status == SequencePuzzleStatus.Correct)
                 {
+                    this.victoryInteraction.GetComponent<TempSolution>().ActivateSolution();
+                    this.StopPuzzle();
                     print("player entered correct solution");
                 }
                 else if (status == SequencePuzzleStatus.Incomplete)
