@@ -33,7 +33,6 @@ namespace Scripts
         {
             if (Input.GetKeyDown(KeyCode.X) || GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Animal, "Interact", ButtonPress.Press))
             {
-                print("test1");
                 StartCoroutine(Move(gameObject, new Tuple<Vector3, Vector3>(RopeStartPos, RopeEndPos), 2f, CallBack));
                 StartCoroutine(Move(Ladder, new Tuple<Vector3, Vector3>(LadderStartPos, LadderEndPos), 2f, () => { }));
             }
