@@ -48,7 +48,7 @@ namespace Scripts
         //Custom functions
         public void CompletePuzzle()
         {
-            this.victoryInteraction.GetComponent<TempSolution>().ActivateSolution();
+            this.victoryInteraction.GetComponent<IPuzzleResult>().ActivateSolution();
             this.StopPuzzle();
         }
         public void InsertInput(string sequenceItemColor)

@@ -16,4 +16,8 @@ namespace Scripts
     {
         void CompletePuzzle();
     }
+    public interface IPuzzleResult
+    {
+        void ActivateSolution();
+    }
 }

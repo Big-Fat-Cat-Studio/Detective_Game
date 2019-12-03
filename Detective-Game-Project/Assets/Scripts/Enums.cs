@@ -51,4 +51,8 @@
         ZPlus,
         ZMinus,
     }
+    public enum SolutionType
+    {
+        Destroy
+    }
 }
