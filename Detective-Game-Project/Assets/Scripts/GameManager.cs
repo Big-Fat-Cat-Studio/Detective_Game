@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using Cinemachine;
 using System.Collections;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 
 namespace Scripts
 {
@@ -134,6 +136,22 @@ namespace Scripts
                 return false;
             }
             return true;
+        }
+
+        public void assignController(ActivePlayer player, InputType inputType, params InputDevice[] inputs)
+        {
+            if (player == ActivePlayer.Animal)
+            {
+                Animal.GetComponent<Player>().inputType = inputType;
+                Animal.GetComponent<PlayerInput>().SwitchCurrentControlScheme(inputType.ToString(), inputs);
+                print(Animal.GetComponent<PlayerInput>().currentControlScheme);
+            }
+            else
+            {
+                Human.GetComponent<Player>().inputType = inputType;
+                Human.GetComponent<PlayerInput>().SwitchCurrentControlScheme(inputType.ToString(), inputs);
+                print(Human.GetComponent<PlayerInput>().currentControlScheme);
+            }
         }
 
         public bool getButtonPressForPlayer(ActivePlayer player, string buttonName, ButtonPress buttonPress)

@@ -2,23 +2,17 @@ using Cinemachine;
 using UnityEngine;
 
 namespace Scripts {
-    public class AnimalPlayer : MonoBehaviour
+    public class AnimalPlayer : Player
     {
-        private CinemachineFreeLook context;
-
-        CharacterController characterController;
-        public float movementSpeed = 6.0f;
-        public float rotationSpeed = 100.0f;
-        public float jumpHeight = 8.0f;
-        public float gravity = 20f;
         public float boostTimer = 0f;
-        private Vector3 moveDirection = Vector3.zero;
-        bool bounce = false;
-
+        private bool bounce = false;
 
         private void Start()
         {
-            if (GameManager.Instance.GameType == GameType.SinglePlayer || GameManager.Instance.PlayerOne == ActivePlayer.Animal)
+            playerInteract = GetComponentInChildren<PlayerInteract>();
+            currentPlayer = ActivePlayer.Animal;
+
+            if (GameManager.Instance.GameType == GameType.SinglePlayer || GameManager.Instance.PlayerOne == currentPlayer)
             {
                 context = GameManager.Instance.CameraFollow.GetComponent<CinemachineFreeLook>();
             }
@@ -33,34 +27,30 @@ namespace Scripts {
 
         private void FixedUpdate()
         {
-            if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Animal))
+            if (GameManager.Instance.checkIfPlayerIsActive(currentPlayer))
             {
-                if (characterController.isGrounded)
+                if (moveCamera)
                 {
-                    moveDirection = new Vector3(GameManager.Instance.getAxisForPlayer(ActivePlayer.Animal, "Horizontal", AxisType.Axis), 0.0f,
-                       GameManager.Instance.getAxisForPlayer(ActivePlayer.Animal, "Vertical", AxisType.Axis));
-                    moveDirection = transform.TransformDirection(moveDirection);
-                    moveDirection = Vector3.ClampMagnitude(moveDirection, 1f);
-                    moveDirection *= movementSpeed;
+                    MoveCamera();
 
-                    if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Animal, "Jump", ButtonPress.Press) || bounce)
+                    //print(cameraDirection.x);
+                    if (inputType == InputType.Keyboard || (inputType == InputType.Controller && cameraDirection.x > -0.6 && cameraDirection.x < 0.6))
                     {
-                        if (bounce)
-                        {
-                            moveDirection.y = jumpHeight * 1.5f;
-                        }
-                        else
-                        {
-                            moveDirection.y = jumpHeight;
-                        }
+                        moveCamera = false;
                     }
                 }
 
-                float translationRH = GameManager.Instance.getAxisForPlayer(ActivePlayer.Animal, "Mouse X", AxisType.AxisRaw) * rotationSpeed;
-                translationRH *= Time.deltaTime;
-                context.m_XAxis.Value += translationRH;
-                transform.Rotate(0, translationRH, 0);
+                if (characterController.isGrounded && move)
+                {
+                    Move();
+                    move = false;
+                }
 
+                if (jump)
+                {
+                    Jump();
+                    jump = false;
+                }
                 speedBoostHandler();
             }
             else
@@ -68,6 +58,13 @@ namespace Scripts {
                 moveDirection.x = 0.0f;
                 moveDirection.z = 0.0f;
             }
+
+            if (bounce)
+            {
+                moveDirection.y = jumpHeight * 1.5f;
+                bounce = false;
+            }
+
             moveDirection.y -= gravity * Time.deltaTime;
             characterController.Move(moveDirection * Time.deltaTime);
         }

@@ -51,4 +51,10 @@
         ZPlus,
         ZMinus,
     }
+
+    public enum InputType
+    {
+        Keyboard,
+        Controller
+    }
 }
