@@ -71,6 +71,7 @@ namespace Scripts
             if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press) && hit.gameObject.tag == Constant.TAG_INTERACT
                 && hit.gameObject.GetComponent<InteractableObject>().interactableType == InteractableType.Movable)
             {
+                hit.gameObject.transform.parent = gameObject.transform;
                 canPushPull = true;
                 body.gameObject.transform.Translate(moveDirection * Time.deltaTime);
             }
@@ -92,6 +93,10 @@ namespace Scripts
             {
                 if (!GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press))
                 {
+            
+                    var objectA = gameObject.transform.GetChild(gameObject.transform.childCount-1);
+                    objectA.transform.parent = null;
+                
                     canPushPull = false;
                 }
             }
