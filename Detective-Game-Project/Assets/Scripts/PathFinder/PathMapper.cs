@@ -70,9 +70,9 @@ public class PathMapper : MonoBehaviour
         }
 
         // Draw temporary path indicators
-        Scripts.DrawArrow.ForDebug((node.Value.transform.position + YOffset),
-            (node.Next.Value.transform.position - node.Value.transform.position).normalized, Color
-            .cyan);
+        // Scripts.DrawArrow.ForDebug((node.Value.transform.position + YOffset),
+        //     (node.Next.Value.transform.position - node.Value.transform.position).normalized, Color
+        //     .cyan);
 
         PathPoints.AddLast(new Dictionary<bool, Dictionary<Vector3, Vector3>>()
         {
@@ -129,9 +129,13 @@ public class PathMapper : MonoBehaviour
 
     public Material LineMaterial;
 
-    private void OnDrawGizmos()
+    private void OnRenderObject()
     {
-        TempRender();
+
+        if(Input.GetKey(KeyCode.X))
+        {
+            TempRender();
+        }
     }
 
     // Will be called after all regular rendering is done
@@ -174,7 +178,6 @@ public class PathMapper : MonoBehaviour
                             Vector3 TotalRightVector = (right * 0.25f) + TotalDirectionVector;
                             Vector3 TotalLeftVector = (left * 0.25f) + TotalDirectionVector;
 
-
                             GL.Vertex3(TotalDirectionVector.x, TotalDirectionVector.y, TotalDirectionVector.z);
                             GL.Vertex3(TotalRightVector.x, TotalRightVector.y, TotalRightVector.z);
 
@@ -183,6 +186,7 @@ public class PathMapper : MonoBehaviour
                         } else
                         {
                             // We're dealing with the final tile, do some custom rendering
+
                             GL.Vertex3(inner.Key.x, inner.Key.y, inner.Key.z);
                             GL.Vertex3(inner.Key.x, (inner.Key.y + ObjectScaleUp) + ObjectScaleUpFactor, inner.Key.z);
                         }
