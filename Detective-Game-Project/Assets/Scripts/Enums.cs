@@ -52,8 +52,15 @@
         ZPlus,
         ZMinus,
     }
+    
     public enum SolutionType
     {
         Destroy
+    }
+
+    public enum InputType
+    {
+        Keyboard,
+        Controller
     }
 }
