@@ -175,23 +175,6 @@ namespace Scripts
                 return Input.GetButton(buttonName);
             }
         }
-        
-        public float getAxisForPlayer(ActivePlayer player, string axisName, AxisType axisType)
-        {
-            if (GameType == GameType.MultiPlayerSplitScreen && player == PlayerTwo)
-            {
-                axisName += " P2";
-            }
-
-            if (axisType == AxisType.Axis)
-            {
-                return Input.GetAxis(axisName);
-            }
-            else
-            {
-                return Input.GetAxisRaw(axisName);
-            }
-        }
 
         public void removeInteractText(ActivePlayer player)
         {
