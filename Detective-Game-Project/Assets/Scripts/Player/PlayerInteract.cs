@@ -10,7 +10,6 @@ namespace Scripts
         public GameObject holding;
 
         private bool showsText;
-        private float timePickupKeyHeld;
 
         List<GameObject> interactableObjects;
 
@@ -47,68 +46,67 @@ namespace Scripts
             {
                 holding.transform.position = new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z);
                 holding.transform.rotation = this.transform.rotation;
-
-                //Checks how long the human held the interact button, but it's only relevant when the human holds an item.
-                if (currentPlayer == ActivePlayer.Human && GameManager.Instance.getButtonPressForPlayer(currentPlayer, "Interact", ButtonPress.Press))
-                {
-                    timePickupKeyHeld += Time.deltaTime;
-                }
             }
+        }
 
-            if (GameManager.Instance.getButtonPressForPlayer(currentPlayer, "Interact", ButtonPress.Up))
+        public void interact()
+        {
+            GameObject closestInteractable = getClosestObject();
+
+            if (closestInteractable != null)
             {
-                if (timePickupKeyHeld > 1)
+                InteractableObject interactableObject = closestInteractable.GetComponent<InteractableObject>();
+
+                if (interactableObject.interactableType == InteractableType.Pickup)
                 {
-                    throwObject();
-                    return;
-                }
-
-                GameObject closestInteractable = getClosestObject();
-
-                if (closestInteractable != null)
-                {
-                    InteractableObject interactableObject = closestInteractable.GetComponent<InteractableObject>();
-
-                    if (interactableObject.interactableType == InteractableType.Pickup)
-                    {
-                        dropObject();
-                        holding = closestInteractable;
-                        holding.transform.rotation = transform.rotation;
-                        holding.GetComponent<Rigidbody>().isKinematic = true;
-                        holding.GetComponent<Rigidbody>().useGravity = false;
-                        interactableObject.interactable = false;
-                        interactableObjects.Remove(closestInteractable);
-                    }
-                    else
-                    {
-                        if (interactableObject.interactableType == InteractableType.Destroyable)
-                        {
-                            ((DestroyableObject)interactableObject).interact(currentPlayer, holding);
-                        }
-                        else if (interactableObject.interactableType != InteractableType.Movable)
-                        {
-                            interactableObject.interact();
-                        }
-
-                        //Check if the object disappeared or if the player can't interact with it anymore
-                        if (closestInteractable == null || closestInteractable.activeSelf == false || !interactableObject.interactable)
-                        {
-                            interactableObjects.Remove(closestInteractable);
-                        }
-                    }
+                    dropObject();
+                    holding = closestInteractable;
+                    holding.transform.rotation = transform.rotation;
+                    holding.GetComponent<Rigidbody>().isKinematic = true;
+                    holding.GetComponent<Rigidbody>().useGravity = false;
+                    interactableObject.interactable = false;
+                    interactableObjects.Remove(closestInteractable);
                 }
                 else
                 {
-                    dropObject();
-                }
+                    if (interactableObject.interactableType == InteractableType.Destroyable)
+                    {
+                        ((DestroyableObject)interactableObject).interact(currentPlayer, holding);
+                    }
+                    else if (interactableObject.interactableType != InteractableType.Movable)
+                    {
+                        interactableObject.interact();
+                    }
 
-                if (countObjectsInRange() == 0)
-                {
-                    GameManager.Instance.removeInteractText(currentPlayer);
-                    showsText = false;
+                    //Check if the object disappeared or if the player can't interact with it anymore
+                    if (closestInteractable == null || closestInteractable.activeSelf == false || !interactableObject.interactable)
+                    {
+                        interactableObjects.Remove(closestInteractable);
+                    }
                 }
+            }
+            else
+            {
+                dropObject();
+            }
 
-                timePickupKeyHeld = 0f;
+            if (countObjectsInRange() == 0)
+            {
+                GameManager.Instance.removeInteractText(currentPlayer);
+                showsText = false;
+            }
+        }
+
+        public void throwObject()
+        {
+            if (holding != null)
+            {
+                Rigidbody holdingRigidBody = holding.GetComponent<Rigidbody>();
+                holding.GetComponent<Pickup>().interactable = true;
+                holdingRigidBody.isKinematic = false;
+                holdingRigidBody.useGravity = true;
+                holdingRigidBody.AddRelativeForce(new Vector3(0f, holdingRigidBody.mass * 100, holdingRigidBody.mass * 500));
+                holding = null;
             }
         }
 
@@ -140,19 +138,6 @@ namespace Scripts
                 holding.GetComponent<Rigidbody>().useGravity = true;
                 holding.GetComponent<Pickup>().interactable = true;
                 holding = null;
-            }
-        }
-
-        void throwObject()
-        {
-            if (holding != null)
-            {
-                Rigidbody holdingRigidBody = holding.GetComponent<Rigidbody>();
-                holdingRigidBody.isKinematic = false;
-                holdingRigidBody.useGravity = true;
-                holdingRigidBody.AddRelativeForce(new Vector3(0f, holdingRigidBody.mass * 100, holdingRigidBody.mass * 500));
-                holding = null;
-                timePickupKeyHeld = 0f;
             }
         }
 

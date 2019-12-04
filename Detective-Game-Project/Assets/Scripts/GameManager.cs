@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 using Cinemachine;
 using System.Collections;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
+using System.Collections.Generic;
 
 namespace Scripts
 {
@@ -57,6 +60,8 @@ namespace Scripts
 
         private float _PrevPlayerORotation; // Object X-Axis Rotation
         private float _PrevPlayerCRotation; // Camera X-Axis Rotation
+        private List<MeshHighlighter> clues = new List<MeshHighlighter>();
+
         private void Start()
         {
             CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
@@ -134,6 +139,20 @@ namespace Scripts
                 return false;
             }
             return true;
+        }
+
+        public void assignController(ActivePlayer player, InputType inputType, params InputDevice[] inputs)
+        {
+            if (player == ActivePlayer.Animal)
+            {
+                Animal.GetComponent<Player>().setInputType(inputType);
+                Animal.GetComponent<PlayerInput>().SwitchCurrentControlScheme(inputType.ToString(), inputs);
+            }
+            else
+            {
+                Human.GetComponent<Player>().setInputType(inputType);
+                Human.GetComponent<PlayerInput>().SwitchCurrentControlScheme(inputType.ToString(), inputs);
+            }
         }
 
         public bool getButtonPressForPlayer(ActivePlayer player, string buttonName, ButtonPress buttonPress)
@@ -268,6 +287,16 @@ namespace Scripts
                 currentCourotine = null;
             }
             
+        }
+
+        public void addCluesToList(MeshHighlighter clue)
+        {
+            clues.Add(clue);
+        }
+
+        public void toggleVision()
+        {
+            clues.ForEach(clue => clue.toggleClues());
         }
     }
 }
