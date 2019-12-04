@@ -142,15 +142,13 @@ namespace Scripts
         {
             if (player == ActivePlayer.Animal)
             {
-                Animal.GetComponent<Player>().inputType = inputType;
+                Animal.GetComponent<Player>().setInputType(inputType);
                 Animal.GetComponent<PlayerInput>().SwitchCurrentControlScheme(inputType.ToString(), inputs);
-                print(Animal.GetComponent<PlayerInput>().currentControlScheme);
             }
             else
             {
-                Human.GetComponent<Player>().inputType = inputType;
+                Human.GetComponent<Player>().setInputType(inputType);
                 Human.GetComponent<PlayerInput>().SwitchCurrentControlScheme(inputType.ToString(), inputs);
-                print(Human.GetComponent<PlayerInput>().currentControlScheme);
             }
         }
 

@@ -116,5 +116,14 @@ namespace Scripts
                 }
             }
         }
+
+        public void setInputType(InputType inputType)
+        {
+            this.inputType = inputType;
+            if (inputType == InputType.Controller)
+            {
+                rotationSpeed /= 2;
+            }
+        }
     }
 }

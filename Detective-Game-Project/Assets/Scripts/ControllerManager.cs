@@ -16,7 +16,7 @@ namespace Scripts
         private GameObject playerTwo;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             if (GameManager.Instance.GameType == GameType.MultiPlayerSplitScreen)
             {
@@ -30,22 +30,22 @@ namespace Scripts
             }
             else
             {
+                var gamepads = Gamepad.all;
+
                 if (inputDeviceP1 == InputType.Controller && inputDeviceP2 == InputType.Controller && Gamepad.all.Count > 1)
                 {
-                    var gamepads = Gamepad.all;
-
                     GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, gamepads[0]);
                     GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, gamepads[1]);
                 }
                 else if (inputDeviceP1 == InputType.Controller && inputDeviceP2 == InputType.Keyboard)
                 {
-                    GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, Gamepad.current);
+                    GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, gamepads[0]);
                     GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Keyboard, Keyboard.current, Mouse.current);
                 }
                 else
                 {
                     GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Keyboard, Keyboard.current, Mouse.current);
-                    GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, Gamepad.current);
+                    GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, gamepads[0]);
                 }
             }
         }

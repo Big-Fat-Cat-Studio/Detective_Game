@@ -131,7 +131,7 @@ namespace Scripts
                         gameObject.GetComponent<Animator>().SetFloat("forward/backward", Mathf.Round(direction.y));
                         gameObject.GetComponent<Animator>().SetFloat("sidewalk", Mathf.Round(direction.x));
                         
-                        if (direction.x != 0)
+                        if (Mathf.Round(direction.x) != 0)
                         {
                             gameObject.GetComponent<Animator>().SetBool("walksideways", true);
                         }
@@ -150,11 +150,12 @@ namespace Scripts
                     jump = false;
                 }
 
-                if (moveDirection == Vector3.zero)
+                if (moveDirection == Vector3.zero && characterController.isGrounded)
                 {
                     gameObject.GetComponent<Animator>().SetFloat("forward/backward", moveDirection.z);
                     gameObject.GetComponent<Animator>().SetFloat("sidewalk", moveDirection.x);
                     gameObject.GetComponent<Animator>().SetBool("climbing", false);
+                    gameObject.GetComponent<Animator>().SetBool("jumping", false);
                     gameObject.GetComponent<Animator>().SetBool("turning", false);
                     gameObject.GetComponent<Animator>().SetBool("pushing", false);
                     gameObject.GetComponent<Animator>().SetBool("walksideways", false);
