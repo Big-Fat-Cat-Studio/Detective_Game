@@ -4,34 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Scripts {
-    public class InteractableObject : MonoBehaviour
+    public abstract class InteractableObject : MonoBehaviour
     {
         public ActivePlayer PlayerThatCanInteract;
 
         [Header("\"Press [x] to ---\"")]
         public string interactMessage;
-        public GameObject neededItem;
-        public string afterInteractMessage;
 
         [HideInInspector]
         public bool interactable = true;
         [HideInInspector]
-        public InteractableType interactableType = InteractableType.Unlockable;
+        public InteractableType interactableType;
 
-        public virtual void interact(ActivePlayer player, GameObject playerItem)
+        public virtual void interact()
         {
-            if (player == PlayerThatCanInteract)
-            {
-                if (neededItem == null || ReferenceEquals(playerItem, neededItem))
-                {
-                    this.gameObject.SetActive(false);
-                    Destroy(this.gameObject);
-                }
-                else
-                {
-                    GameManager.Instance.showAfterInteractText(player, afterInteractMessage);
-                }
-            }
+
         }
     }
 }

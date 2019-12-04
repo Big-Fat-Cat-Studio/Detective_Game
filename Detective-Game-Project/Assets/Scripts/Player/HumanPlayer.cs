@@ -71,6 +71,7 @@ namespace Scripts
             if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press) && hit.gameObject.tag == Constant.TAG_INTERACT
                 && hit.gameObject.GetComponent<InteractableObject>().interactableType == InteractableType.Movable)
             {
+                hit.gameObject.transform.parent = gameObject.transform;
                 canPushPull = true;
                 body.gameObject.transform.Translate(moveDirection * Time.deltaTime);
             }
@@ -92,6 +93,10 @@ namespace Scripts
             {
                 if (!GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press))
                 {
+            
+                    var objectA = gameObject.transform.GetChild(gameObject.transform.childCount-1);
+                    objectA.transform.parent = null;
+                
                     canPushPull = false;
                 }
             }
@@ -165,6 +170,13 @@ namespace Scripts
             {
                 moveDirection.x = 0.0f;
                 moveDirection.z = 0.0f;
+                gameObject.GetComponent<Animator>().SetFloat("forward/backward", moveDirection.z);
+                gameObject.GetComponent<Animator>().SetFloat("sidewalk", moveDirection.x);
+                gameObject.GetComponent<Animator>().SetBool("jumping", false);
+                gameObject.GetComponent<Animator>().SetBool("climbing", false);
+                gameObject.GetComponent<Animator>().SetBool("turning", false);
+                gameObject.GetComponent<Animator>().SetBool("pushing", false);
+                gameObject.GetComponent<Animator>().SetBool("walksideways", false);
             }
             moveDirection.y -= gravity * Time.deltaTime;
             characterController.Move(moveDirection * Time.deltaTime);

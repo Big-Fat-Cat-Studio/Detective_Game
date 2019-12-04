@@ -32,7 +32,7 @@ public class DigItem : MonoBehaviour
     {
         if (collision.gameObject.tag == "Dig")
         {
-            Item = collision.gameObject.GetComponent<InteractableObject>().neededItem;
+            Item = collision.gameObject.GetComponent<DestroyableObject>().neededItem;
             diggable = true;
             collide = collision.gameObject;
         }

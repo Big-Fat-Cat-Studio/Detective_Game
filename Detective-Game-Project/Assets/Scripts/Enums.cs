@@ -16,7 +16,8 @@
 
     public enum InteractableType
     {
-        Unlockable,
+        Normal,
+        Destroyable,
         Pickup,
         Movable
     }
@@ -39,5 +40,19 @@
         Correct,
         Incomplete,
         Wrong
+    }
+
+    public enum Direction
+    {
+        XPlus,
+        XMinus,
+        YPlus,
+        YMinus,
+        ZPlus,
+        ZMinus,
+    }
+    public enum SolutionType
+    {
+        Destroy
     }
 }

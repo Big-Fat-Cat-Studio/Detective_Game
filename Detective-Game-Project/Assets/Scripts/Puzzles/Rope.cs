@@ -6,7 +6,7 @@ namespace Scripts
 {
     public class Rope : MonoBehaviour, IInteractable
     {
-        public GameObject Player, Ladder;
+        public GameObject Ladder;
         public float LadderMoveRange, RopeMoveRange = 0.5f;
         public int MoveTime;
 
@@ -25,17 +25,22 @@ namespace Scripts
 
         void Update()
         {
-            Helper.InteractGeneral(this.gameObject, Player, 2, new Tuple<Action, Action>(InRange, OutRange));
+            Helper.InteractGeneral(this.gameObject, GameManager.Instance.Animal, 5f, new Tuple<Action, Action>(InRange, OutRange));
 
         }
 
         public void InRange()
         {
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.X) || GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Animal, "Interact", ButtonPress.Press))
             {
-                StartCoroutine(Move(gameObject, new Tuple<Vector3, Vector3>(RopeStartPos, RopeEndPos), 2f, () => { RopeActive = !RopeActive; }));
-                StartCoroutine(Move(Ladder, new Tuple<Vector3, Vector3>(LadderStartPos, LadderEndPos), 2f, () => { return; }));
+                StartCoroutine(Move(gameObject, new Tuple<Vector3, Vector3>(RopeStartPos, RopeEndPos), 2f, CallBack));
+                StartCoroutine(Move(Ladder, new Tuple<Vector3, Vector3>(LadderStartPos, LadderEndPos), 2f, () => { }));
             }
+        }
+
+        public void CallBack()
+        {
+            RopeActive = !RopeActive;
         }
 
         public void OutRange() { }
@@ -43,11 +48,14 @@ namespace Scripts
 
         private IEnumerator Move(GameObject ob, Tuple<Vector3, Vector3> pos, float time, Action c)
         {
-            while (time > 0.0f)
+            while (Input.GetKey(KeyCode.X) && (Helper.WithinRange(GameManager.Instance.Animal, this.gameObject, 20f)))
             {
-                ob.transform.position = (!RopeActive) ?
-                    Vector3.Lerp(ob.transform.position, pos.Item2, Time.deltaTime) :
-                    Vector3.Lerp(ob.transform.position, pos.Item1, Time.deltaTime);
+                ob.transform.position = Vector3.Lerp(ob.transform.position, pos.Item2, Time.deltaTime);
+                yield return null;
+            }
+            while (time > 0 && !Input.GetKeyDown(KeyCode.X))
+            {
+                ob.transform.position = Vector3.Lerp(ob.transform.position, pos.Item1, Time.deltaTime);
                 time -= Time.deltaTime;
                 yield return null;
             }

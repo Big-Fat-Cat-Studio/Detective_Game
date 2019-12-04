@@ -12,4 +12,12 @@ namespace Scripts
         void InRange();
         void OutRange();
     }
+    public interface IPuzzleManager
+    {
+        void CompletePuzzle();
+    }
+    public interface IPuzzleResult
+    {
+        void ActivateSolution();
+    }
 }
