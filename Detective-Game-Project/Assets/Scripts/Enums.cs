@@ -19,7 +19,8 @@
         Normal,
         Destroyable,
         Pickup,
-        Movable
+        Movable,
+        EndLevel
     }
 
     public enum ButtonPress
