@@ -173,9 +173,19 @@ namespace Scripts
 
         protected void OnSpecial()
         {
+
+        }
+
+        protected void OnSpecial2()
+        {
             if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human))
             {
                 umbrella.SetActive(!umbrella.activeSelf);
+
+                if (umbrellaActiveOnStart)
+                {
+                    umbrellaActiveOnStart = false;
+                }
             }
         }
     }

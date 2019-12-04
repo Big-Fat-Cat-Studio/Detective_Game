@@ -81,6 +81,11 @@ namespace Scripts {
             }
         }
 
+        protected void OnSpecial()
+        {
+            GameManager.Instance.toggleVision();
+        }
+
         public void speedBoostHandler()
         {
             if(boostTimer <= 0f)

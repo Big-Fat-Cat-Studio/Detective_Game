@@ -35,10 +35,10 @@
                     "id": "88c5f0c2-d103-4a4a-bd93-ca626de6675b",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Press(behavior=1)"
+                    "interactions": ""
                 },
                 {
-                    "name": "Swap",
+                    "name": "Special2",
                     "type": "Button",
                     "id": "87779882-cb1b-439b-9ede-0b6f3ae0ef51",
                     "expectedControlType": "",
@@ -46,9 +46,17 @@
                     "interactions": "Press(behavior=1)"
                 },
                 {
-                    "name": "Jump",
+                    "name": "Swap",
                     "type": "Button",
                     "id": "baaf3dfc-f4a5-45f7-9e64-b01ac15a8aa2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)"
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "95f0957c-ef42-4115-a604-eaafa0127971",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press(behavior=2)"
@@ -56,7 +64,7 @@
                 {
                     "name": "CameraMove",
                     "type": "Value",
-                    "id": "95f0957c-ef42-4115-a604-eaafa0127971",
+                    "id": "4d865517-017e-4310-8011-58191cdc9035",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
@@ -154,22 +162,22 @@
                 {
                     "name": "",
                     "id": "fb850603-6660-4f15-912d-04a47d49823a",
-                    "path": "<Keyboard>/c",
+                    "path": "<Keyboard>/v",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Special",
+                    "action": "Special2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "bd5d861b-09b0-4c6e-b0b5-98751e6a08e6",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "Special",
+                    "action": "Special2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -258,6 +266,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "InteractHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2ecc306d-331e-406f-b320-849b36e8674f",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Special",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "535aa54b-b604-4b8b-bb5d-dda1157d28e8",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Special",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

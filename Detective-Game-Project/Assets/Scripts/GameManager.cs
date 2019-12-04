@@ -4,6 +4,7 @@ using Cinemachine;
 using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
+using System.Collections.Generic;
 
 namespace Scripts
 {
@@ -59,6 +60,8 @@ namespace Scripts
 
         private float _PrevPlayerORotation; // Object X-Axis Rotation
         private float _PrevPlayerCRotation; // Camera X-Axis Rotation
+        private List<MeshHighlighter> clues = new List<MeshHighlighter>();
+
         private void Start()
         {
             CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
@@ -284,6 +287,16 @@ namespace Scripts
                 currentCourotine = null;
             }
             
+        }
+
+        public void addCluesToList(MeshHighlighter clue)
+        {
+            clues.Add(clue);
+        }
+
+        public void toggleVision()
+        {
+            clues.ForEach(clue => clue.toggleClues());
         }
     }
 }
