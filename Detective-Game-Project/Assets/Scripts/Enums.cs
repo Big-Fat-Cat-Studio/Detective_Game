@@ -20,6 +20,8 @@
         Destroyable,
         Pickup,
         HoldButton
+        Movable,
+        EndLevel
     }
 
     public enum ButtonPress
