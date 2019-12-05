@@ -53,6 +53,7 @@ namespace Scripts
         [Header("Camera objects")]
         public GameObject PlayerCamera;
         public GameObject PlayerCameraP2;
+        public GameObject CutsceneCamera;
 
         [Header("Freelook objects")]
         public GameObject CameraFollow;
