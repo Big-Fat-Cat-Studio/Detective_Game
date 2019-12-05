@@ -18,6 +18,7 @@ namespace Scripts
             active = false;
             defaultShader = rend.material.shader;
             highlightShader = Shader.Find("Shader Graphs/glow");
+            GameManager.Instance.addCluesToList(this);
         }
 
         // Update is called once per frame
@@ -26,33 +27,22 @@ namespace Scripts
             return;
             if (!GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Animal) && active)
             {
-                toggleClues(false);
-            }
-            
-            if (highlightShader == null || !GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Animal)) return;
-
-            if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Animal, "Special", ButtonPress.Down) && !active)
-            {
-                toggleClues(true);
-            }
-            else if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Animal, "Special", ButtonPress.Down) && active)
-            {
-                toggleClues(false);
+                toggleClues();
             }
         }
 
         // Toggle the highlighting effect on the object
-        void toggleClues(bool toggle)
+        public void toggleClues()
         {
-            if(rend.material.shader == defaultShader && toggle)
-            {
-                rend.material.shader = highlightShader;
-                active = true;
-            }
-            else
+            if(active)
             {
                 rend.material.shader = defaultShader;
                 active = false;
+            }
+            else
+            {
+                rend.material.shader = highlightShader;
+                active = true;
             }
         }
     }

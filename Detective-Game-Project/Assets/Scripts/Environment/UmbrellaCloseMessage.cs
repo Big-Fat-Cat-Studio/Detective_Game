@@ -6,27 +6,32 @@ namespace Scripts {
     public class UmbrellaCloseMessage : MonoBehaviour
     {
         public string message;
+        private HumanPlayer human;
 
         private void OnTriggerEnter(Collider other)
         {
-            if (ReferenceEquals(other.gameObject, GameManager.Instance.Human))
+            if (ReferenceEquals(other.gameObject, human.gameObject))
             {
-                GameManager.Instance.showAfterInteractText(ActivePlayer.Human, message);
+                if (human.umbrellaActiveOnStart)
+                {
+                    GameManager.Instance.showAfterInteractText(ActivePlayer.Human, message);
+                }
+                else
+                {
+                    Destroy(this.gameObject);
+                }
             }
         }
 
         private void Start()
         {
-            if (!GameManager.Instance.Human.GetComponent<HumanPlayer>().umbrellaActiveOnStart)
-            {
-                Destroy(this.gameObject);
-            }
+            human = GameManager.Instance.Human.GetComponent<HumanPlayer>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Special2", ButtonPress.Down))
+            if (!human.umbrellaActiveOnStart)
             {
                 Destroy(this.gameObject);
             }

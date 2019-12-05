@@ -19,7 +19,8 @@
         Normal,
         Destroyable,
         Pickup,
-        Movable
+        Movable,
+        EndLevel
     }
 
     public enum ButtonPress
@@ -51,8 +52,15 @@
         ZPlus,
         ZMinus,
     }
+    
     public enum SolutionType
     {
         Destroy
+    }
+
+    public enum InputType
+    {
+        Keyboard,
+        Controller
     }
 }
