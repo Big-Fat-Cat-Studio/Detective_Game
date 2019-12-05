@@ -16,7 +16,6 @@ namespace Scripts
         {
             if(other.gameObject.tag == "Animal" || other.gameObject.tag == "Human")
             {
-                print("test");
                 sequencePuzzleManager.GetComponent<SequencePuzzleMain>().InsertInput(this.sequenceItemColorID);
             }
         }

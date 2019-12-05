@@ -23,7 +23,8 @@ namespace Scripts
             {
                 if(!endCutscene.isPlaying)
                 {
-
+                    this.cutsceneHasStarted = false;
+                    LoadNextLevel();
                 }
             }
         }
@@ -33,8 +34,6 @@ namespace Scripts
         {
             GameManager.Instance.PlayerCamera.SetActive(false);
             GameManager.Instance.PlayerCameraP2.SetActive(false);
-            //GameManager.Instance.CameraFollow.SetActive(false);
-            //GameManager.Instance.CameraFollowP2.SetActive(false);
             GameManager.Instance.InteractTextPlayerOne.SetActive(false);
             GameManager.Instance.InteractText.SetActive(false);
             GameManager.Instance.AfterInteractTextPlayerOne.SetActive(false);
@@ -43,10 +42,18 @@ namespace Scripts
             GameManager.Instance.Animal.SetActive(false);
             GameManager.Instance.CutsceneCamera.SetActive(true);
             this.endCutscene.Play();
+            StartCoroutine(StartupTimer());
         }
         private void LoadNextLevel()
         {
 
+        }
+
+        //Coroutines
+        private IEnumerator StartupTimer()
+        {
+            yield return new WaitForSeconds(2.0f);
+            this.cutsceneHasStarted = true;
         }
     }
 }
