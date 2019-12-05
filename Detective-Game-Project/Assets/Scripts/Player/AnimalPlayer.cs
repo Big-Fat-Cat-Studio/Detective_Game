@@ -42,8 +42,16 @@ namespace Scripts {
 
                 if (characterController.isGrounded && move)
                 {
-                    Move();
-                    move = false;
+                    if (canPushPull)
+                    {
+                        Push();
+                        move = false;
+                    }
+                    else
+                    {
+                        Move();
+                        move = false;
+                    }
                 }
 
                 if (jump)

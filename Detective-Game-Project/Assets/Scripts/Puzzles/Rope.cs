@@ -4,18 +4,21 @@ using System.Collections;
 
 namespace Scripts
 {
-    public class Rope : MonoBehaviour, IInteractable
+    public class Rope : InteractableObject
     {
         public GameObject Ladder;
         public float LadderMoveRange, RopeMoveRange = 0.5f;
-        public int MoveTime;
+        public float MoveTime = 2f;
 
+        private bool pulling;
         private bool RopeActive;
         private Vector3 RopeStartPos, RopeEndPos;
         private Vector3 LadderStartPos, LadderEndPos;
 
         void Start()
         {
+            interactableType = InteractableType.HoldButton;
+
             RopeStartPos = gameObject.transform.position;
             RopeEndPos = new Vector3(RopeStartPos.x, RopeStartPos.y - RopeMoveRange, RopeStartPos.z);
 
@@ -25,17 +28,13 @@ namespace Scripts
 
         void Update()
         {
-            Helper.InteractGeneral(this.gameObject, GameManager.Instance.Animal, 5f, new Tuple<Action, Action>(InRange, OutRange));
-
+            StartCoroutine(Move(gameObject, new Tuple<Vector3, Vector3>(RopeStartPos, RopeEndPos), MoveTime, CallBack));
+            StartCoroutine(Move(Ladder, new Tuple<Vector3, Vector3>(LadderStartPos, LadderEndPos), MoveTime, () => { }));
         }
 
-        public void InRange()
+        public override void interact()
         {
-            if (Input.GetKeyDown(KeyCode.X) || GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Animal, "Interact", ButtonPress.Press))
-            {
-                StartCoroutine(Move(gameObject, new Tuple<Vector3, Vector3>(RopeStartPos, RopeEndPos), 2f, CallBack));
-                StartCoroutine(Move(Ladder, new Tuple<Vector3, Vector3>(LadderStartPos, LadderEndPos), 2f, () => { }));
-            }
+            pulling = !pulling;
         }
 
         public void CallBack()
@@ -43,18 +42,15 @@ namespace Scripts
             RopeActive = !RopeActive;
         }
 
-        public void OutRange() { }
-
-
         private IEnumerator Move(GameObject ob, Tuple<Vector3, Vector3> pos, float time, Action c)
         {
-            while (Input.GetKey(KeyCode.X) && (Helper.WithinRange(GameManager.Instance.Animal, this.gameObject, 20f)))
-            {
+            if (pulling)
+            { 
                 ob.transform.position = Vector3.Lerp(ob.transform.position, pos.Item2, Time.deltaTime);
                 yield return null;
             }
-            while (time > 0 && !Input.GetKeyDown(KeyCode.X))
-            {
+            else
+            { 
                 ob.transform.position = Vector3.Lerp(ob.transform.position, pos.Item1, Time.deltaTime);
                 time -= Time.deltaTime;
                 yield return null;

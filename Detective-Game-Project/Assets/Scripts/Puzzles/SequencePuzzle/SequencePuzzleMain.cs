@@ -156,7 +156,7 @@ namespace Scripts
                 }
                 else if (status == SequencePuzzleStatus.Incomplete)
                 {
-                    print("result is incomplete");
+                    //print("result is incomplete");
                 }
                 else
                 {

@@ -79,19 +79,34 @@ namespace Scripts
                 CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
                 CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
             }
-            else if (PlayerTwo == ActivePlayer.Human) {
-                CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X";
-                CameraFollowP2.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y";
-                PlayerCameraP2.GetComponent<Camera>().rect = new Rect(0, 0.5f, 1, 1);
+            else if (GameType == GameType.MultiPlayerSplitScreen) {
+                if (PlayerOne == ActivePlayer.Human)
+                {
+                    CameraFollow.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X";
+                    CameraFollow.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y";
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X P2";
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y P2";
 
-                CameraFollow.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X P2";
-                CameraFollow.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y P2";
-                PlayerCamera.GetComponent<Camera>().rect = new Rect(0, -0.5f, 1, 1);
+                    CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
+                    CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().Follow = Animal.transform;
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().LookAt = Animal.transform;
+                }
+                else if (PlayerTwo == ActivePlayer.Human)
+                {
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X";
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y";
+                    PlayerCameraP2.GetComponent<Camera>().rect = new Rect(0, 0.5f, 1, 1);
 
-                CameraFollowP2.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
-                CameraFollowP2.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
-                CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Animal.transform;
-                CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Animal.transform;
+                    CameraFollow.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X P2";
+                    CameraFollow.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y P2";
+                    PlayerCamera.GetComponent<Camera>().rect = new Rect(0, -0.5f, 1, 1);
+
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
+                    CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Animal.transform;
+                    CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Animal.transform;
+                }
             }
 
             AfterInteractText.SetActive(false);
@@ -153,27 +168,6 @@ namespace Scripts
             {
                 Human.GetComponent<Player>().setInputType(inputType);
                 Human.GetComponent<PlayerInput>().SwitchCurrentControlScheme(inputType.ToString(), inputs);
-            }
-        }
-
-        public bool getButtonPressForPlayer(ActivePlayer player, string buttonName, ButtonPress buttonPress)
-        { 
-            if (GameType == GameType.MultiPlayerSplitScreen && player == PlayerTwo)
-            {
-                buttonName += " P2";
-            }
-            
-            if(buttonPress == ButtonPress.Down)
-            {
-                return Input.GetButtonDown(buttonName);
-            }
-            else if (buttonPress == ButtonPress.Up)
-            {
-                return Input.GetButtonUp(buttonName);
-            }
-            else 
-            {
-                return Input.GetButton(buttonName);
             }
         }
 
