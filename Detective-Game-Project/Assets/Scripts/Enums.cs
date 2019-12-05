@@ -19,7 +19,7 @@
         Normal,
         Destroyable,
         Pickup,
-        HoldButton
+        HoldButton,
         Movable,
         EndLevel
     }
