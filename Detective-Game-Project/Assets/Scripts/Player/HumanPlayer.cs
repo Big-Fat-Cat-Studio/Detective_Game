@@ -122,7 +122,7 @@ namespace Scripts
                     jump = false;
                 }
 
-                if (moveDirection == Vector3.zero && characterController.isGrounded)
+                if (moveDirection == Vector3.zero)
                 {
                     gameObject.GetComponent<Animator>().SetFloat("forward/backward", moveDirection.z);
                     gameObject.GetComponent<Animator>().SetFloat("sidewalk", moveDirection.x);
