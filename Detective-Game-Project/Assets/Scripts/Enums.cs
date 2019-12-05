@@ -19,14 +19,13 @@
         Normal,
         Destroyable,
         Pickup,
-        Movable
+        HoldButton
     }
 
     public enum ButtonPress
     {
         Down,
-        Up,
-        Press
+        Hold
     }
 
     public enum AxisType

@@ -16,7 +16,7 @@ namespace Scripts
         private GameObject playerTwo;
 
         // Start is called before the first frame update
-        void Awake()
+        void Start()
         {
             if (GameManager.Instance.GameType == GameType.MultiPlayerSplitScreen)
             {

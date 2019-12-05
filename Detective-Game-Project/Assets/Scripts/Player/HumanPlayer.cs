@@ -8,8 +8,6 @@ namespace Scripts
     {
         [HideInInspector]
         public bool isClimbing = false;
-        [HideInInspector]
-        public bool canPushPull = false;
         public float climbingSpeed = 2.0f;
 
         Rigidbody body;
@@ -58,38 +56,8 @@ namespace Scripts
             }
         }
 
-        void OnControllerColliderHit(ControllerColliderHit hit)
-        {
-            body = hit.collider.attachedRigidbody;
-
-            if (body == null)
-            {
-                return;
-            }
-            //TODO: rewrite this
-            if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press) && hit.gameObject.tag == Constant.TAG_INTERACT
-                && hit.gameObject.GetComponent<InteractableObject>().interactableType == InteractableType.Movable)
-            {
-                hit.gameObject.transform.parent = gameObject.transform;
-                canPushPull = true;
-                body.gameObject.transform.Translate(moveDirection.x * Time.deltaTime, 0.0f, moveDirection.z * Time.deltaTime);
-            }
-        }
-
         private void FixedUpdate()
         {
-            if (canPushPull)
-            {
-                if (!GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press))
-                {
-            
-                    var objectA = gameObject.transform.GetChild(gameObject.transform.childCount-1);
-                    objectA.transform.parent = null;
-                
-                    canPushPull = false;
-                }
-            }
-
             if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human))
             {
                 if (moveCamera)
@@ -119,10 +87,9 @@ namespace Scripts
                     }
                     else if (canPushPull)
                     {
+                        Push();
+
                         gameObject.GetComponent<Animator>().SetBool("jumping", false);
-                        moveDirection = new Vector3(0.0f, 0.0f, direction.y);
-                        moveDirection = transform.TransformDirection(moveDirection);
-                        moveDirection *= movementSpeed / 1.5f;
                         gameObject.GetComponent<Animator>().SetBool("pushing", true);
                         move = false;
                     }
@@ -169,11 +136,6 @@ namespace Scripts
                 moveDirection.y -= gravity * Time.deltaTime;
                 characterController.Move(moveDirection * Time.deltaTime);
             }
-        }
-
-        private void OnInteractHold()
-        {
-            playerInteract.throwObject();
         }
 
         protected void OnSpecial()
