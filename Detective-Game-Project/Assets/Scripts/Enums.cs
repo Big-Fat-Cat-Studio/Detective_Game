@@ -19,7 +19,7 @@
         Normal,
         Destroyable,
         Pickup,
-        HoldButton
+        HoldButton,
         Movable,
         EndLevel
     }
@@ -52,7 +52,7 @@
         ZPlus,
         ZMinus,
     }
-    
+
     public enum SolutionType
     {
         Destroy
