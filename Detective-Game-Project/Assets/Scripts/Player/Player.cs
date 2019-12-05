@@ -19,6 +19,8 @@ namespace Scripts
         protected bool jump;
         protected bool move;
         protected bool moveCamera;
+        [HideInInspector]
+        protected bool canPushPull = false;
 
         [HideInInspector]
         public InputType inputType;
@@ -30,6 +32,7 @@ namespace Scripts
         public float gravity = 20f;
         private InputActionMap map;
         private Vector2 LookDelta;
+        private bool released;
 
 
         // Start is called before the first frame update
@@ -43,13 +46,16 @@ namespace Scripts
             float translationRH = cameraDirection.x * rotationSpeed;
 
             //this check will be changed laterrrr
-            if (direction.x == 0 && direction.y == 0 && (translationRH > 10f || translationRH < -10f) && currentPlayer == ActivePlayer.Human)
+            if (currentPlayer == ActivePlayer.Human)
             {
-                gameObject.GetComponent<Animator>().SetBool("turning", true);
-            }
-            else
-            {
-                gameObject.GetComponent<Animator>().SetBool("turning", false);
+                if (direction.x == 0 && direction.y == 0 && (translationRH > 10f || translationRH < -10f))
+                {
+                    gameObject.GetComponent<Animator>().SetBool("turning", true);
+                }
+                else
+                {
+                    gameObject.GetComponent<Animator>().SetBool("turning", false);
+                }
             }
 
             translationRH *= Time.deltaTime;
@@ -60,6 +66,13 @@ namespace Scripts
             {
                 move = true;
             }
+        }
+
+        protected void Push()
+        {
+            moveDirection = new Vector3(0.0f, 0.0f, direction.y);
+            moveDirection = transform.TransformDirection(moveDirection);
+            moveDirection *= movementSpeed / 1.5f;
         }
 
         protected void Move()
@@ -97,13 +110,22 @@ namespace Scripts
         {
             if (GameManager.Instance.checkIfPlayerIsActive(currentPlayer))
             {
-                playerInteract.interact();
+                //playerInteract.interact(true);
+            }
+        }
+
+        protected void OnInteractHold()
+        {
+            if (GameManager.Instance.checkIfPlayerIsActive(currentPlayer))
+            {
+                playerInteract.interact(released);
+                released = !released;
             }
         }
 
         protected void OnSwap()
         {
-
+            
         }
 
         protected void OnJump()
@@ -123,6 +145,15 @@ namespace Scripts
             if (inputType == InputType.Controller)
             {
                 rotationSpeed /= 2;
+            }
+        }
+
+        public void togglePush()
+        {
+            canPushPull = !canPushPull;
+            if (!canPushPull)
+            {
+                gameObject.GetComponent<Animator>().SetBool("pushing", false);
             }
         }
     }

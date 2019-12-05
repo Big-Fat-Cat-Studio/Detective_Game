@@ -7,7 +7,6 @@ namespace Scripts {
     public abstract class InteractableObject : MonoBehaviour
     {
         public ActivePlayer PlayerThatCanInteract;
-
         [Header("\"Press [x] to ---\"")]
         public string interactMessage;
 
