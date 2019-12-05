@@ -19,6 +19,9 @@ public class PathMapper : MonoBehaviour
     // Positioning variables
     private float ObjectScaleUp;
 
+    // Last tile's mesh; this one is used for highlighting the digsite
+    private MeshRenderer IndicatorMesh;
+
     #endregion
 
     #region Public settings
@@ -66,6 +69,9 @@ public class PathMapper : MonoBehaviour
         {
             // Insert dummy node as final tile for the renderer and return
             PathPoints.AddLast(new Dictionary<bool, Dictionary<Vector3, Vector3>>() { { false, new Dictionary<Vector3, Vector3>() { { node.Value.transform.position, Vector3.one} } } });
+            // Disable the meshrenderer
+            IndicatorMesh = node.Value.GetComponent<MeshRenderer>();
+            IndicatorMesh.enabled = false;
             return;
         }
 
@@ -131,11 +137,12 @@ public class PathMapper : MonoBehaviour
 
     private void OnRenderObject()
     {
-
         if(Input.GetKey(KeyCode.X))
         {
             TempRender();
-        }
+            IndicatorMesh.enabled = true;
+        } else {IndicatorMesh.enabled = false;}
+
     }
 
     // Will be called after all regular rendering is done
@@ -183,6 +190,7 @@ public class PathMapper : MonoBehaviour
 
                             GL.Vertex3(TotalDirectionVector.x, TotalDirectionVector.y, TotalDirectionVector.z);
                             GL.Vertex3(TotalLeftVector.x, TotalLeftVector.y, TotalLeftVector.z);
+                            
                         } else
                         {
                             // We're dealing with the final tile, do some custom rendering
@@ -196,6 +204,5 @@ public class PathMapper : MonoBehaviour
         }
 
         GL.End();
-        //GL.PopMatrix();
     }
 }
