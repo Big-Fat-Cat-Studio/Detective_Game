@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public struct RayHit
 {
     public string type;
     public Vector3 hitPosition;
     public Vector3 hitDirection;
+    public Vector3 hitNormal;
     
-    public RayHit(string _type, Vector3 _hitPosition, Vector3 _hitDirection)
+    public RayHit(string _type, Vector3 _hitPosition, Vector3 _hitDirection, Vector3 _hitNormal)
     {
         type = _type;
         hitPosition = _hitPosition;
         hitDirection = _hitDirection;
+        hitNormal = _hitNormal;
     }
 }
 
@@ -24,7 +27,7 @@ public class Laser : MonoBehaviour
     public List<Vector3> allVertices;
     List<int> triangles;
 
-    public float THICCness;
+    public float THICCness = 0.1f;
 
     void Awake()
     {
@@ -111,22 +114,23 @@ public class Laser : MonoBehaviour
         allVertices = new List<Vector3>();
 
         //set unique position and direction for initial raycast
-        Vector3 position1 = position + (transform.TransformDirection(-Vector3.right) * 0.1f) + (transform.TransformDirection(Vector3.up) * 0.1f);
+        Vector3 position1 = position + (transform.TransformDirection(-Vector3.right) * THICCness) + (transform.TransformDirection(Vector3.up) * THICCness);
         Vector3 direction1 = direction;
 
-        Vector3 position2 = position + (transform.TransformDirection(Vector3.right) * 0.1f) + (transform.TransformDirection(Vector3.up) * 0.1f);
+        Vector3 position2 = position + (transform.TransformDirection(Vector3.right) * THICCness) + (transform.TransformDirection(Vector3.up) * THICCness);
         Vector3 direction2 = direction;
 
-        Vector3 position3 = position + (transform.TransformDirection(Vector3.right) * 0.1f) + (transform.TransformDirection(-Vector3.up) * 0.1f);
+        Vector3 position3 = position + (transform.TransformDirection(Vector3.right) * THICCness) + (transform.TransformDirection(-Vector3.up) * THICCness);
         Vector3 direction3 = direction;
 
-        Vector3 position4 = position + (transform.TransformDirection(-Vector3.right) * 0.1f) + (transform.TransformDirection(-Vector3.up) * 0.1f);
+        Vector3 position4 = position + (transform.TransformDirection(-Vector3.right) * THICCness) + (transform.TransformDirection(-Vector3.up) * THICCness);
         Vector3 direction4 = direction;
 
         for(int i = 0; i < 30; i++)
         {
             Vector3[] tempArray = new Vector3[8];
             bool non_reflectable = false;
+            List<Vector3> normals = new List<Vector3>();
 
             for(int j = 0; j < 4; j++)
             {
@@ -172,11 +176,19 @@ public class Laser : MonoBehaviour
                     position4 = result.hitPosition;
                     direction4 = result.hitDirection;
                 }
-                if(result.type == "none" || result.type == "normal") non_reflectable = true;
+
+                if(result.type == "none" || result.type == "normal")
+                {
+                    non_reflectable = true;
+                }
+                else
+                {
+                    normals.Add(result.hitNormal);
+                }
             }
 
             allVertices.AddRange(tempArray);
-            if(non_reflectable) break;
+            if(non_reflectable || normals.Distinct().Count() != 1) break;
         }
     }
 
@@ -189,16 +201,16 @@ public class Laser : MonoBehaviour
         {
             if(hit.collider.tag == "Reflectable")
             {
-                return new RayHit("reflect", hit.point, Vector3.Reflect(direction, hit.normal));
+                return new RayHit("reflect", hit.point, Vector3.Reflect(direction, hit.normal), hit.normal);
             }
             else
             {
-                return new RayHit("normal", hit.point, hit.point);
+                return new RayHit("normal", hit.point, hit.point, Vector3.zero);
             }
         }
         else
         {
-            return new RayHit("none", position + direction * 30, position);
+            return new RayHit("none", position + direction * 30, position, Vector3.zero);
         }
     }
 
