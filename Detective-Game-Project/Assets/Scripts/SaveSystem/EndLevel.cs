@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 
 namespace Scripts
 {
@@ -9,7 +10,7 @@ namespace Scripts
     {
         //Variables
         public VideoPlayer endCutscene;
-
+        public string nextLevelName;
         private bool cutsceneHasStarted = false;
 
         //Unity functions
@@ -46,10 +47,8 @@ namespace Scripts
         }
         private void LoadNextLevel()
         {
-
+            SceneManager.LoadScene(this.nextLevelName);
         }
-
-        //Coroutines
         private IEnumerator StartupTimer()
         {
             yield return new WaitForSeconds(2.0f);
