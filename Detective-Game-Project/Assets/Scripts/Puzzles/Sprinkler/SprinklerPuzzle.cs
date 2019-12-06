@@ -8,7 +8,6 @@ namespace Scripts
     {
         // ElEMENTS / IMAGES NEED TO BE ADDED IN FOLLOWING ORDER: 4, 3, 5, 1, 2
         public GameObject victoryInteraction;
-        public GameObject human;
         public GameObject puzzleCamera;
         public GameObject indicator;
         public GameObject[] elementArray;
@@ -50,13 +49,13 @@ namespace Scripts
 
         void OnTriggerStay(Collider collision)
         {
-            if (collision.tag == "Human")
+            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Human))
             {
                 if (Input.GetKeyDown (KeyCode.X))
                 {
                     puzzleCamera.SetActive(true);
                     indicator.SetActive(true);
-                    human.GetComponent<CharacterController>().enabled = false;
+                    GameManager.Instance.Human.GetComponent<CharacterController>().enabled = false;
                 }
             }
         }
@@ -292,7 +291,7 @@ namespace Scripts
         {
             puzzleCamera.SetActive(false);
             indicator.SetActive(false);
-            human.GetComponent<CharacterController>().enabled = true;
+            GameManager.Instance.Human.GetComponent<CharacterController>().enabled = true;
             if (solved == 5)
             {
                 victoryInteraction.GetComponent<IPuzzleResult>().ActivateSolution();
