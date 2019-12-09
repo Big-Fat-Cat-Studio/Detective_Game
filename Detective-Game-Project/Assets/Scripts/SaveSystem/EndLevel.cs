@@ -33,6 +33,9 @@ namespace Scripts
         //Custom functions
         public override void interact()
         {
+
+            SaveData new_save = new SaveData(recalculateCompletedLevels(), this.nextLevelName, false);
+            SaveSystem.SaveProgress(new_save);
             GameManager.Instance.PlayerCamera.SetActive(false);
             GameManager.Instance.PlayerCameraP2.SetActive(false);
             GameManager.Instance.InteractTextPlayerOne.SetActive(false);
@@ -49,6 +52,13 @@ namespace Scripts
         {
             SceneManager.LoadScene(this.nextLevelName);
         }
+        private string[] recalculateCompletedLevels(string[] completedLevelsOld)
+        {
+            string[] result = new string[completedLevelsOld.Length + 1];
+            return result;
+        }
+
+        //Coroutines
         private IEnumerator StartupTimer()
         {
             yield return new WaitForSeconds(2.0f);
