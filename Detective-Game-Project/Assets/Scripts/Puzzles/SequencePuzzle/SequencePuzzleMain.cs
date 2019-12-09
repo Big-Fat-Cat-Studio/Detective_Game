@@ -13,6 +13,7 @@ namespace Scripts
         public Light lamp;
         public float maxCountdown;
 
+        private Color victoryColor = new Color(0, 1, 0, 0);
         private List<Color> colorSequence;
         private List<string> convertedSolution;
         private List<string> input;
@@ -21,6 +22,7 @@ namespace Scripts
         private float timer = 0;
         private bool sequenceStillCorrect = true;
         private bool puzzleHasStarted = false;
+        private bool puzzleIsDone = false;
 
         //Unity functions
         private void Start()
@@ -48,7 +50,8 @@ namespace Scripts
         //Custom functions
         public void CompletePuzzle()
         {
-            this.victoryInteraction.GetComponent<TempSolution>().ActivateSolution();
+            this.puzzleIsDone = true;
+            this.victoryInteraction.GetComponent<IPuzzleResult>().ActivateSolution();
             this.StopPuzzle();
         }
         public void InsertInput(string sequenceItemColor)
@@ -134,6 +137,8 @@ namespace Scripts
             this.puzzleHasStarted = false;
             this.timerText.text = "";
             StopCoroutine(CheckSolution());
+            StopCoroutine(ShowSequence());
+            this.lamp.color = this.victoryColor;
         }
 
         //Coroutines
@@ -151,7 +156,7 @@ namespace Scripts
                 }
                 else if (status == SequencePuzzleStatus.Incomplete)
                 {
-                    print("result is incomplete");
+                    //print("result is incomplete");
                 }
                 else
                 {
@@ -163,23 +168,31 @@ namespace Scripts
         }
         private IEnumerator ShowSequence()
         {
-            for(; ; )
+            WaitForSeconds switchTimer = new WaitForSeconds(1.0f);
+            WaitForSeconds pauseTimer = new WaitForSeconds(2.0f);
+            for (; ; )
             {
-                WaitForSeconds switchTimer = new WaitForSeconds(1.0f);
-                WaitForSeconds pauseTimer = new WaitForSeconds(2.0f);
-                this.currentColor += 1;
-                if (this.currentColor >= this.colorSequence.Count)
+                if(this.puzzleIsDone)
                 {
-                    this.currentColor = 0;
-                }
-                this.lamp.color = this.colorSequence[currentColor];
-                if (this.currentColor == 0)
-                {
-                    yield return pauseTimer;
+                    this.lamp.color = this.victoryColor;
+                    break;
                 }
                 else
                 {
-                    yield return switchTimer;
+                    this.currentColor += 1;
+                    if (this.currentColor >= this.colorSequence.Count)
+                    {
+                        this.currentColor = 0;
+                    }
+                    this.lamp.color = this.colorSequence[currentColor];
+                    if (this.currentColor == 0)
+                    {
+                        yield return pauseTimer;
+                    }
+                    else
+                    {
+                        yield return switchTimer;
+                    }
                 }
             }
         }

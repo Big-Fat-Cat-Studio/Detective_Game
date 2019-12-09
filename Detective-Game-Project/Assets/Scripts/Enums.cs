@@ -19,14 +19,15 @@
         Normal,
         Destroyable,
         Pickup,
-        Movable
+        HoldButton,
+        Movable,
+        EndLevel
     }
 
     public enum ButtonPress
     {
         Down,
-        Up,
-        Press
+        Hold
     }
 
     public enum AxisType
@@ -50,5 +51,16 @@
         YMinus,
         ZPlus,
         ZMinus,
+    }
+
+    public enum SolutionType
+    {
+        Destroy
+    }
+
+    public enum InputType
+    {
+        Keyboard,
+        Controller
     }
 }

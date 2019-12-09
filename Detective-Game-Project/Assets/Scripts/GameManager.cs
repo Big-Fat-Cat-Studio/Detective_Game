@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 using Cinemachine;
 using System.Collections;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
+using System.Collections.Generic;
 
 namespace Scripts
 {
@@ -50,6 +53,7 @@ namespace Scripts
         [Header("Camera objects")]
         public GameObject PlayerCamera;
         public GameObject PlayerCameraP2;
+        public GameObject CutsceneCamera;
 
         [Header("Freelook objects")]
         public GameObject CameraFollow;
@@ -57,6 +61,8 @@ namespace Scripts
 
         private float _PrevPlayerORotation; // Object X-Axis Rotation
         private float _PrevPlayerCRotation; // Camera X-Axis Rotation
+        private List<MeshHighlighter> clues = new List<MeshHighlighter>();
+
         private void Start()
         {
             CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
@@ -73,19 +79,34 @@ namespace Scripts
                 CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
                 CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
             }
-            else if (PlayerTwo == ActivePlayer.Human) {
-                CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X";
-                CameraFollowP2.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y";
-                PlayerCameraP2.GetComponent<Camera>().rect = new Rect(0, 0.5f, 1, 1);
+            else if (GameType == GameType.MultiPlayerSplitScreen) {
+                if (PlayerOne == ActivePlayer.Human)
+                {
+                    CameraFollow.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X";
+                    CameraFollow.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y";
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X P2";
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y P2";
 
-                CameraFollow.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X P2";
-                CameraFollow.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y P2";
-                PlayerCamera.GetComponent<Camera>().rect = new Rect(0, -0.5f, 1, 1);
+                    CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
+                    CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().Follow = Animal.transform;
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().LookAt = Animal.transform;
+                }
+                else if (PlayerTwo == ActivePlayer.Human)
+                {
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X";
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y";
+                    PlayerCameraP2.GetComponent<Camera>().rect = new Rect(0, 0.5f, 1, 1);
 
-                CameraFollowP2.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
-                CameraFollowP2.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
-                CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Animal.transform;
-                CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Animal.transform;
+                    CameraFollow.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X P2";
+                    CameraFollow.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y P2";
+                    PlayerCamera.GetComponent<Camera>().rect = new Rect(0, -0.5f, 1, 1);
+
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
+                    CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Animal.transform;
+                    CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Animal.transform;
+                }
             }
 
             AfterInteractText.SetActive(false);
@@ -136,41 +157,17 @@ namespace Scripts
             return true;
         }
 
-        public bool getButtonPressForPlayer(ActivePlayer player, string buttonName, ButtonPress buttonPress)
-        { 
-            if (GameType == GameType.MultiPlayerSplitScreen && player == PlayerTwo)
-            {
-                buttonName += " P2";
-            }
-            
-            if(buttonPress == ButtonPress.Down)
-            {
-                return Input.GetButtonDown(buttonName);
-            }
-            else if (buttonPress == ButtonPress.Up)
-            {
-                return Input.GetButtonUp(buttonName);
-            }
-            else 
-            {
-                return Input.GetButton(buttonName);
-            }
-        }
-        
-        public float getAxisForPlayer(ActivePlayer player, string axisName, AxisType axisType)
+        public void assignController(ActivePlayer player, InputType inputType, params InputDevice[] inputs)
         {
-            if (GameType == GameType.MultiPlayerSplitScreen && player == PlayerTwo)
+            if (player == ActivePlayer.Animal)
             {
-                axisName += " P2";
-            }
-
-            if (axisType == AxisType.Axis)
-            {
-                return Input.GetAxis(axisName);
+                Animal.GetComponent<Player>().setInputType(inputType);
+                Animal.GetComponent<PlayerInput>().SwitchCurrentControlScheme(inputType.ToString(), inputs);
             }
             else
             {
-                return Input.GetAxisRaw(axisName);
+                Human.GetComponent<Player>().setInputType(inputType);
+                Human.GetComponent<PlayerInput>().SwitchCurrentControlScheme(inputType.ToString(), inputs);
             }
         }
 
@@ -268,6 +265,16 @@ namespace Scripts
                 currentCourotine = null;
             }
             
+        }
+
+        public void addCluesToList(MeshHighlighter clue)
+        {
+            clues.Add(clue);
+        }
+
+        public void toggleVision()
+        {
+            clues.ForEach(clue => clue.toggleClues());
         }
     }
 }
