@@ -33,7 +33,7 @@ namespace Scripts
             if (holding != null)
             {
                 holding.transform.rotation = transform.rotation;
-                holding.transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
+                holding.transform.position = new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z);
             }
 
             //Remove the text when the player is not active anymore
@@ -238,6 +238,11 @@ namespace Scripts
             if (other.gameObject.tag == Constant.TAG_INTERACT)
             {
                 interactableObjects.Remove(other.gameObject);
+
+                if (interactableObjects.Contains(null))
+                {
+                    interactableObjects.Remove(null);
+                }
 
                 if (countObjectsInRange() == 0)
                 {
