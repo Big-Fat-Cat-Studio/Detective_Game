@@ -58,6 +58,10 @@ namespace Scripts
             }
         }
 
+        public void stopInteract(){
+            objectInteractedWith = null;
+        }
+
         public void interact(bool buttonReleased)
         {
             if (objectInteractedWith != null && buttonReleased)
