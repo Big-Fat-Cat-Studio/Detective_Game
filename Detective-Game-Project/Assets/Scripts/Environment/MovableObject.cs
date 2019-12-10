@@ -8,6 +8,10 @@ namespace Scripts
     {
         private Rigidbody rigidBody;
         private bool pushing;
+        private GameObject playerObject;
+        private Vector3 pushforce;
+
+        public bool both;
 
         private void Start()
         {
@@ -17,31 +21,38 @@ namespace Scripts
 
         public void interact(ActivePlayer player)
         {
-            GameObject playerObject;
-
+            
             if(player == ActivePlayer.Human)
             {
                 playerObject = GameManager.Instance.Human;
             }
-            else
+            else if (both)
             {
                 playerObject = GameManager.Instance.Animal;
             }
 
             playerObject.GetComponent<Player>().togglePush();
+            pushing = !pushing;
 
+            //rigidBody.gameObject.transform.Translate(moveDirection.x * Time.deltaTime, 0.0f, moveDirection.z * Time.deltaTime);
+        }
+
+        private void Update()
+        {
+            // if (gameObject.GetComponent<Rigidbody>())
+            // {
+            //     stopInteract();
+            // }
             if (pushing)
             {
-                gameObject.transform.parent = null;
+                pushforce = playerObject.GetComponent<Player>().moveDirection;
             }
             else
             {
-                gameObject.transform.parent = playerObject.transform;
+                pushforce = new Vector3(0,-2,0);
             }
-
-            pushing = !pushing;
-            
-            //rigidBody.gameObject.transform.Translate(moveDirection.x * Time.deltaTime, 0.0f, moveDirection.z * Time.deltaTime);
+            rigidBody.gameObject.transform.Translate(pushforce.x * Time.deltaTime, 0.0f, pushforce.z * Time.deltaTime);
         }
+
     }
 }
