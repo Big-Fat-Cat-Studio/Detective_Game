@@ -13,6 +13,7 @@ namespace Scripts
         bool dogispushing = false;
         public bool both;
         int count = 0;
+        bool humanispushing = false;
 
         private void Start()
         {
@@ -43,7 +44,6 @@ namespace Scripts
               pushing = !pushing;  
             }
             
-            
             if (both && playerObject == GameManager.Instance.Animal && !dogispushing)
             {
                 playerObject.transform.parent = gameObject.transform;
@@ -59,7 +59,7 @@ namespace Scripts
                 foreach (Transform eachChild in transform) {
                     if (eachChild.gameObject.tag == "Animal")
                     {
-                        count += 1;
+                        count = 1;
                     }
                 }
             }
@@ -71,7 +71,15 @@ namespace Scripts
             {
                 dogispushing = false;
             }
-            if (both && dogispushing)
+            if (playerObject == GameManager.Instance.Human)
+            {
+                humanispushing = true;
+            }
+            else
+            {
+                humanispushing = false;
+            }
+            if (both && dogispushing && humanispushing)
             {
                 pushing = !pushing;
             }
