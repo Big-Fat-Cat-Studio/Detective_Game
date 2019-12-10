@@ -8,6 +8,7 @@ namespace Scripts
     {
         public ActivePlayer currentPlayer;
         public GameObject holding;
+        public List<GameObject> smallItemsHeld;
 
         private bool showsText;
         private InteractableObject objectInteractedWith;
@@ -19,6 +20,7 @@ namespace Scripts
         void Start()
         {
             interactableObjects = new List<GameObject>();
+            smallItemsHeld = new List<GameObject>();
             objectInteractedWith = null;
         }
 
@@ -108,10 +110,40 @@ namespace Scripts
                 }
                 else if (interactableObject.interactableType == InteractableType.Pickup)
                 {
-                    dropObject();
-                    holding = closestInteractable;
-                    holding.GetComponent<InteractableObject>().interact();
-                    interactableObjects.Remove(closestInteractable);
+                    if (interactableObject is Key && currentPlayer == ActivePlayer.Human)
+                    {
+                        closestInteractable.SetActive(false);
+                        interactableObjects.Remove(closestInteractable);
+                        smallItemsHeld.Add(closestInteractable);
+
+                        if (smallItemsHeld.Count >= closestInteractable.GetComponent<Key>().amountNeeded)
+                        {
+                            for (int i = smallItemsHeld.Count - 1; i >= 0; i--)
+                            {
+                                if (smallItemsHeld[i].GetComponent<InteractableObject>() is Key)
+                                {
+                                    smallItemsHeld.RemoveAt(i);
+                                }
+                            }
+
+                            GameManager.Instance.showAfterInteractText(currentPlayer, interactableObject.GetComponent<Key>().fullItemText);
+                            GameObject newItem = Instantiate(closestInteractable.GetComponent<Key>().fullItem);
+                            holding = newItem;
+                            holding.GetComponent<InteractableObject>().interact();
+                            interactableObjects.Remove(holding);
+                        }
+                        else
+                        {
+                            GameManager.Instance.showAfterInteractText(currentPlayer, interactableObject.GetComponent<Key>().getFullAfterInteractText(smallItemsHeld.Count));
+                        }
+                    }
+                    else
+                    {
+                        dropObject();
+                        holding = closestInteractable;
+                        holding.GetComponent<InteractableObject>().interact();
+                        interactableObjects.Remove(closestInteractable);
+                    }
                 }
                 else
                 {
@@ -128,6 +160,7 @@ namespace Scripts
                     if (closestInteractable == null || closestInteractable.activeSelf == false || !interactableObject.interactable)
                     {
                         interactableObjects.Remove(closestInteractable);
+                        destroyObject();
                     }
                 }
             }
@@ -188,9 +221,13 @@ namespace Scripts
             }
         }
 
-        void holdObject(GameObject pickup)
+        void destroyObject()
         {
-
+            if (holding != null && holding.GetComponent<Pickup>().breakOnUse)
+            {
+                Destroy(holding);
+                holding = null;
+            }
         }
 
         /**

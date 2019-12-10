@@ -5,9 +5,10 @@ namespace Scripts
 {
     public class ObjectToLift : MonoBehaviour
     {
-        private Direction direction;
-        private float amountOfMovement;
-        private float speed;
+        public Direction direction;
+        public float amountOfMovement;
+        public float speed;
+        public bool moveAutomatically = false;
 
         private List<GameObject> objectsOnPlatform;
         private float originalPosition;
@@ -17,8 +18,25 @@ namespace Scripts
         // Start is called before the first frame update
         void Start()
         {
+            if (direction == Direction.XMinus || direction == Direction.XPlus)
+            {
+                originalPosition = transform.position.x;
+            }
+            else if (direction == Direction.YMinus || direction == Direction.YPlus)
+            {
+                originalPosition = transform.position.y;
+            }
+            else
+            {
+                originalPosition = transform.position.z;
+            }
             objectsOnPlatform = new List<GameObject>();
             rigidBody = GetComponent<Rigidbody>();
+
+            if (moveAutomatically)
+            {
+                startMoving();
+            }
         }
 
         // Update is called once per frame
@@ -75,6 +93,11 @@ namespace Scripts
                         move = false;
                     }
                 }
+
+                if (!move && moveAutomatically)
+                {
+                    startMoving();
+                }
             }
         }
 
@@ -114,26 +137,6 @@ namespace Scripts
                     originalPosition = transform.position.z;
                     direction = Direction.ZMinus;
                 }
-            }
-        }
-
-        public void addVariables(Direction direction, float amountOfMovement, float speed)
-        {
-            this.direction = direction;
-            this.amountOfMovement = amountOfMovement;
-            this.speed = speed;
-
-            if (direction == Direction.XMinus || direction == Direction.XPlus)
-            {
-                originalPosition = transform.position.x;
-            }
-            else if (direction == Direction.YMinus || direction == Direction.YPlus)
-            {
-                originalPosition = transform.position.y;
-            }
-            else
-            {
-                originalPosition = transform.position.z;
             }
         }
 
