@@ -23,7 +23,7 @@ namespace Scripts
 
         public void interact(ActivePlayer player)
         {
-            Debug.Log(count);
+            
             if (count == 1)
             {
                 dogispushing = true;
