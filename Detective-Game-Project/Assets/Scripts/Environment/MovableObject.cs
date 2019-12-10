@@ -10,8 +10,9 @@ namespace Scripts
         private bool pushing;
         private GameObject playerObject;
         private Vector3 pushforce;
-
+        bool dogispushing = false;
         public bool both;
+        int count = 0;
 
         private void Start()
         {
@@ -21,19 +22,59 @@ namespace Scripts
 
         public void interact(ActivePlayer player)
         {
-            
+            Debug.Log(count);
+            if (count == 1)
+            {
+                dogispushing = true;
+            }
             if(player == ActivePlayer.Human)
             {
                 playerObject = GameManager.Instance.Human;
             }
-            else if (both)
+            else
             {
                 playerObject = GameManager.Instance.Animal;
             }
 
             playerObject.GetComponent<Player>().togglePush();
-            pushing = !pushing;
 
+            if (!both)
+            {
+              pushing = !pushing;  
+            }
+            
+            
+            if (both && playerObject == GameManager.Instance.Animal && !dogispushing)
+            {
+                playerObject.transform.parent = gameObject.transform;
+            }
+            else if(both && playerObject == GameManager.Instance.Animal)
+            {
+                count = 0;
+                playerObject.transform.parent = null;
+            }
+
+            if (both && playerObject == GameManager.Instance.Animal)
+            {   
+                foreach (Transform eachChild in transform) {
+                    if (eachChild.gameObject.tag == "Animal")
+                    {
+                        count += 1;
+                    }
+                }
+            }
+            if (count > 0)
+            {
+                dogispushing = true;
+            }
+            else
+            {
+                dogispushing = false;
+            }
+            if (both && dogispushing)
+            {
+                pushing = !pushing;
+            }
             //rigidBody.gameObject.transform.Translate(moveDirection.x * Time.deltaTime, 0.0f, moveDirection.z * Time.deltaTime);
         }
 
@@ -43,7 +84,7 @@ namespace Scripts
             // {
             //     stopInteract();
             // }
-            if (pushing)
+            if (pushing && playerObject == GameManager.Instance.Human)
             {
                 pushforce = playerObject.GetComponent<Player>().moveDirection;
             }
