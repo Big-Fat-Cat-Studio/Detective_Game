@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Scripts
 {
-    public class CharacterSelect
+    public class CharacterSelect : MonoBehaviour
     {
         private ActivePlayer player1 = ActivePlayer.Human;
         private ActivePlayer player2 = ActivePlayer.Animal;
