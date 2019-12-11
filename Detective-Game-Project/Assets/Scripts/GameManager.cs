@@ -63,11 +63,11 @@ namespace Scripts
         private float _PrevPlayerCRotation; // Camera X-Axis Rotation
         private List<MeshHighlighter> clues = new List<MeshHighlighter>();
 
-        public SaveData saveData;
+        //public SaveData saveData;
 
         private void Start()
         {
-            saveData = SaveSystem.LoadProgress();
+            //saveData = SaveSystem.LoadProgress();
             CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
             CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
             CameraFollowP2.GetComponent<CinemachineFreeLook>().Follow = Animal.transform;
