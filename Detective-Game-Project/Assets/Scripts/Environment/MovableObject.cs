@@ -8,6 +8,12 @@ namespace Scripts
     {
         private Rigidbody rigidBody;
         private bool pushing;
+        private GameObject playerObject;
+        private Vector3 pushforce;
+        bool dogispushing = false;
+        public bool both;
+        int count = 0;
+        bool humanispushing = false;
 
         private void Start()
         {
@@ -17,8 +23,11 @@ namespace Scripts
 
         public void interact(ActivePlayer player)
         {
-            GameObject playerObject;
-
+            
+            if (count == 1)
+            {
+                dogispushing = true;
+            }
             if(player == ActivePlayer.Human)
             {
                 playerObject = GameManager.Instance.Human;
@@ -30,18 +39,69 @@ namespace Scripts
 
             playerObject.GetComponent<Player>().togglePush();
 
-            if (pushing)
+            if (!both)
             {
-                gameObject.transform.parent = null;
+              pushing = !pushing;  
+            }
+            
+            if (both && playerObject == GameManager.Instance.Animal && !dogispushing)
+            {
+                playerObject.transform.parent = gameObject.transform;
+            }
+            else if(both && playerObject == GameManager.Instance.Animal)
+            {
+                count = 0;
+                playerObject.transform.parent = null;
+            }
+
+            if (both && playerObject == GameManager.Instance.Animal)
+            {   
+                foreach (Transform eachChild in transform) {
+                    if (eachChild.gameObject.tag == "Animal")
+                    {
+                        count = 1;
+                    }
+                }
+            }
+            if (count > 0)
+            {
+                dogispushing = true;
             }
             else
             {
-                gameObject.transform.parent = playerObject.transform;
+                dogispushing = false;
             }
-
-            pushing = !pushing;
-            
+            if (playerObject == GameManager.Instance.Human)
+            {
+                humanispushing = true;
+            }
+            else
+            {
+                humanispushing = false;
+            }
+            if (both && dogispushing && humanispushing)
+            {
+                pushing = !pushing;
+            }
             //rigidBody.gameObject.transform.Translate(moveDirection.x * Time.deltaTime, 0.0f, moveDirection.z * Time.deltaTime);
         }
+
+        private void Update()
+        {
+            // if (gameObject.GetComponent<Rigidbody>())
+            // {
+            //     stopInteract();
+            // }
+            if (pushing && playerObject == GameManager.Instance.Human)
+            {
+                pushforce = playerObject.GetComponent<Player>().moveDirection;
+            }
+            else
+            {
+                pushforce = new Vector3(0,-2,0);
+            }
+            rigidBody.gameObject.transform.Translate(pushforce.x * Time.deltaTime, 0.0f, pushforce.z * Time.deltaTime);
+        }
+
     }
 }

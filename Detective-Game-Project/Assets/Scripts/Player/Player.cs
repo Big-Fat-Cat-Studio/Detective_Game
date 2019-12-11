@@ -15,7 +15,7 @@ namespace Scripts
         protected Vector2 direction;
         [HideInInspector]
         public Vector2 cameraDirection = Vector2.zero;
-        protected Vector3 moveDirection = Vector2.zero;
+        public Vector3 moveDirection = Vector2.zero;
         protected bool jump;
         protected bool move;
         protected bool moveCamera;

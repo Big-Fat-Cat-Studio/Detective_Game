@@ -35,7 +35,10 @@ namespace Scripts
             this.colorSequence.Add(Color.white);
             this.InsertColors();
             StartCoroutine(this.CheckSolution());
-            StartCoroutine(this.ShowSequence());
+            if (lamp != null)
+            {
+                StartCoroutine(this.ShowSequence());
+            }
             
         }
         private void Update()
@@ -137,8 +140,12 @@ namespace Scripts
             this.puzzleHasStarted = false;
             this.timerText.text = "";
             StopCoroutine(CheckSolution());
-            StopCoroutine(ShowSequence());
-            this.lamp.color = this.victoryColor;
+
+            if (lamp != null)
+            {
+                StopCoroutine(ShowSequence());
+                this.lamp.color = this.victoryColor;
+            }       
         }
 
         //Coroutines

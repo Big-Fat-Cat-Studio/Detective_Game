@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Scripts
@@ -17,7 +18,8 @@ namespace Scripts
 
         public void interact(ActivePlayer player, GameObject playerItem)
         {
-           if (neededItem == null || ReferenceEquals(playerItem, neededItem))
+            if (neededItem == null || ReferenceEquals(playerItem, neededItem) ||
+                playerItem.name.Substring(0, playerItem.name.Length - 7) == neededItem.name)
             {
                 this.gameObject.SetActive(false);
                 Destroy(this.gameObject);
