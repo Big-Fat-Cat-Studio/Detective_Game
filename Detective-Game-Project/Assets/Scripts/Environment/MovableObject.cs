@@ -23,10 +23,13 @@ namespace Scripts
 
         public void interact(ActivePlayer player)
         {
-            
-            if (count == 1)
+            if (player == ActivePlayer.Animal)
             {
-                dogispushing = true;
+                dogispushing = !dogispushing;
+            }
+            if (player == ActivePlayer.Human)
+            {
+                humanispushing = !humanispushing;
             }
             if(player == ActivePlayer.Human)
             {
@@ -39,51 +42,10 @@ namespace Scripts
 
             playerObject.GetComponent<Player>().togglePush();
 
-            if (!both)
-            {
-              pushing = !pushing;  
-            }
-            
-            if (both && playerObject == GameManager.Instance.Animal && !dogispushing)
-            {
-                playerObject.transform.parent = gameObject.transform;
-            }
-            else if(both && playerObject == GameManager.Instance.Animal)
-            {
-                count = 0;
-                playerObject.transform.parent = null;
-            }
-
-            if (both && playerObject == GameManager.Instance.Animal)
-            {   
-                foreach (Transform eachChild in transform) {
-                    if (eachChild.gameObject.tag == "Animal")
-                    {
-                        count = 1;
-                    }
-                }
-            }
-            if (count > 0)
-            {
-                dogispushing = true;
-            }
-            else
-            {
-                dogispushing = false;
-            }
-            if (playerObject == GameManager.Instance.Human)
-            {
-                humanispushing = true;
-            }
-            else
-            {
-                humanispushing = false;
-            }
-            if (both && dogispushing && humanispushing)
-            {
-                pushing = !pushing;
-            }
             //rigidBody.gameObject.transform.Translate(moveDirection.x * Time.deltaTime, 0.0f, moveDirection.z * Time.deltaTime);
+            Debug.Log(dogispushing);
+            Debug.Log(humanispushing);
+            Debug.Log(pushing);
         }
 
         private void Update()
@@ -92,7 +54,23 @@ namespace Scripts
             // {
             //     stopInteract();
             // }
-            if (pushing && playerObject == GameManager.Instance.Human)
+            if (both && dogispushing && humanispushing)
+            {
+                pushing = true;
+            }
+            else if (!both)
+            {
+              pushing = !pushing;  
+            }
+            else
+            {
+                pushing = false;
+            }
+            if (pushing && humanispushing && !both)
+            {
+                pushforce = playerObject.GetComponent<Player>().moveDirection;
+            }
+            else if (pushing && humanispushing && dogispushing)
             {
                 pushforce = playerObject.GetComponent<Player>().moveDirection;
             }
