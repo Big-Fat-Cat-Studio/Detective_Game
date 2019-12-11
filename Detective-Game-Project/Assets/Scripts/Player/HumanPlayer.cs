@@ -88,6 +88,15 @@ namespace Scripts
                         moveDirection = new Vector3(0, 0, 0);
                         move = true;
                     }
+                    else if (canPushPull)
+                    {
+                        Push();
+
+                        gameObject.GetComponent<Animator>().SetBool("jumping", false);
+                        gameObject.GetComponent<Animator>().SetBool("pushing", true);
+                        move = false;
+                        return;
+                    }
                     else if (isClimbing)
                     {
                         gameObject.GetComponent<Animator>().SetBool("jumping", false);
@@ -100,14 +109,6 @@ namespace Scripts
                         characterController.Move(moveDirection * Time.deltaTime);
                         move = false;
                         return;
-                    }
-                    else if (canPushPull)
-                    {
-                        Push();
-
-                        gameObject.GetComponent<Animator>().SetBool("jumping", false);
-                        gameObject.GetComponent<Animator>().SetBool("pushing", true);
-                        move = false;
                     }
                     else if (characterController.isGrounded)
                     {
