@@ -41,12 +41,11 @@ public class ViewDetection : MonoBehaviour
         directionBetween.y *= 0; 
         RaycastHit hit; 
         
-        if ( Physics.Raycast(checkingObject.position , (target.position - checkingObject.position + Vector3.up * heightMultiplayer).normalized, out hit, maxRadius)) 
+        if ( Physics.Raycast(checkingObject.position, (target.position - checkingObject.position + Vector3.up * heightMultiplayer).normalized, out hit, maxRadius)) 
         {
             
             if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Human") 
             {
-                
                 float angle = Vector3.Angle(checkingObject.forward, directionBetween);
                 if (angle <= maxAngle) 
                 { 
