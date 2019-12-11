@@ -14,6 +14,12 @@ namespace Scripts
         public GameObject umbrella;
         public bool umbrellaActiveOnStart;
 
+        public void handleSlow(float _jumpHeight, float _movementSpeed)
+        {
+            jumpHeight = _jumpHeight;
+            movementSpeed = _movementSpeed;
+        }
+
         private void Start()
         {
             playerInteract = GetComponentInChildren<PlayerInteract>();
