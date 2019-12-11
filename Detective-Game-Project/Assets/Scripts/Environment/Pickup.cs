@@ -17,6 +17,11 @@ namespace Scripts
 
         public override void interact()
         {
+            pickUpItem();
+        }
+
+        protected void pickUpItem()
+        {
             if (interactable)
             {
                 transform.rotation = transform.rotation;

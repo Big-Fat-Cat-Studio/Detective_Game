@@ -45,7 +45,6 @@ namespace Scripts
         private IEnumerator pressurePlateUp()
         {
             yield return new WaitForSeconds(timePressed);
-            print("finis");
             transform.position = new Vector3(transform.position.x, transform.position.y + 0.08f, transform.position.z);
             pressed = false;
             currentCouroutine = null;

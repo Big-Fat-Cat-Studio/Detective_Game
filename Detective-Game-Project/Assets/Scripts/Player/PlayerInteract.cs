@@ -7,7 +7,9 @@ namespace Scripts
     public class PlayerInteract : MonoBehaviour
     {
         public ActivePlayer currentPlayer;
+        [HideInInspector]
         public GameObject holding;
+        [HideInInspector]
         public List<GameObject> smallItemsHeld;
 
         private bool showsText;
@@ -22,6 +24,7 @@ namespace Scripts
             interactableObjects = new List<GameObject>();
             smallItemsHeld = new List<GameObject>();
             objectInteractedWith = null;
+            holding = null;
         }
 
         // Update is called once per frame
@@ -116,37 +119,12 @@ namespace Scripts
                 {
                     if (interactableObject is Key && currentPlayer == ActivePlayer.Human)
                     {
-                        closestInteractable.SetActive(false);
-                        interactableObjects.Remove(closestInteractable);
-                        smallItemsHeld.Add(closestInteractable);
-
-                        if (smallItemsHeld.Count >= closestInteractable.GetComponent<Key>().amountNeeded)
-                        {
-                            for (int i = smallItemsHeld.Count - 1; i >= 0; i--)
-                            {
-                                if (smallItemsHeld[i].GetComponent<InteractableObject>() is Key)
-                                {
-                                    smallItemsHeld.RemoveAt(i);
-                                }
-                            }
-
-                            GameManager.Instance.showAfterInteractText(currentPlayer, interactableObject.GetComponent<Key>().fullItemText);
-                            GameObject newItem = Instantiate(closestInteractable.GetComponent<Key>().fullItem);
-                            holding = newItem;
-                            holding.GetComponent<InteractableObject>().interact();
-                            interactableObjects.Remove(holding);
-                        }
-                        else
-                        {
-                            GameManager.Instance.showAfterInteractText(currentPlayer, interactableObject.GetComponent<Key>().getFullAfterInteractText(smallItemsHeld.Count));
-                        }
+                        holdKey(closestInteractable);
                     }
                     else
                     {
-                        dropObject();
-                        holding = closestInteractable;
+                        giveItem(closestInteractable);
                         holding.GetComponent<InteractableObject>().interact();
-                        interactableObjects.Remove(closestInteractable);
                     }
                 }
                 else
@@ -184,6 +162,13 @@ namespace Scripts
             }
         }
 
+        public void giveItem(GameObject item)
+        {
+            dropObject();
+            holding = item;
+            interactableObjects.Remove(item);
+        }
+
         public void throwObject()
         {
             if (holding != null)
@@ -200,6 +185,36 @@ namespace Scripts
         {
             interactableObjects.Remove(holding);
             holding = null;
+        }
+
+        void holdKey(GameObject keyObject)
+        {
+            keyObject.SetActive(false);
+            smallItemsHeld.Add(keyObject);
+            Key key = keyObject.GetComponent<Key>();
+
+            if (smallItemsHeld.Count >= key.amountNeeded)
+            {
+                for (int i = smallItemsHeld.Count - 1; i >= 0; i--)
+                {
+                    if (smallItemsHeld[i].GetComponent<InteractableObject>() is Key)
+                    {
+                        smallItemsHeld.RemoveAt(i);
+                    }
+                }
+
+                GameManager.Instance.showAfterInteractText(currentPlayer, key.fullItemText);
+                GameObject newItem = Instantiate(key.fullItem);
+                holding = newItem;
+                holding.GetComponent<Pickup>().interact();
+                interactableObjects.Remove(holding);
+            }
+            else
+            {
+                GameManager.Instance.showAfterInteractText(currentPlayer, key.getFullAfterInteractText(smallItemsHeld.Count));
+            }
+
+            interactableObjects.Remove(keyObject);
         }
 
         int countObjectsInRange()
