@@ -7,18 +7,20 @@ namespace Scripts
     public class Pickup : InteractableObject
     {
         private Rigidbody rigidBody;
-        [Header("If this variable is 0 then the item doesn't break.")]
-        public int destroyAfterXUsages;
-        [HideInInspector]
-        private int timesUsed = 0;
+        public bool breakOnUse;
 
-        private void Start()
+        private void Awake()
         {
             interactableType = InteractableType.Pickup;
             rigidBody = GetComponent<Rigidbody>();
         }
 
         public override void interact()
+        {
+            pickUpItem();
+        }
+
+        protected void pickUpItem()
         {
             if (interactable)
             {

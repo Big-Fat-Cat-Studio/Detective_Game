@@ -7,7 +7,10 @@ namespace Scripts
     public class PlayerInteract : MonoBehaviour
     {
         public ActivePlayer currentPlayer;
+        [HideInInspector]
         public GameObject holding;
+        [HideInInspector]
+        public List<GameObject> smallItemsHeld;
 
         private bool showsText;
         private InteractableObject objectInteractedWith;
@@ -19,7 +22,9 @@ namespace Scripts
         void Start()
         {
             interactableObjects = new List<GameObject>();
+            smallItemsHeld = new List<GameObject>();
             objectInteractedWith = null;
+            holding = null;
         }
 
         // Update is called once per frame
@@ -112,10 +117,15 @@ namespace Scripts
                 }
                 else if (interactableObject.interactableType == InteractableType.Pickup)
                 {
-                    dropObject();
-                    holding = closestInteractable;
-                    holding.GetComponent<InteractableObject>().interact();
-                    interactableObjects.Remove(closestInteractable);
+                    if (interactableObject is Key && currentPlayer == ActivePlayer.Human)
+                    {
+                        holdKey(closestInteractable);
+                    }
+                    else
+                    {
+                        giveItem(closestInteractable);
+                        holding.GetComponent<InteractableObject>().interact();
+                    }
                 }
                 else
                 {
@@ -132,6 +142,7 @@ namespace Scripts
                     if (closestInteractable == null || closestInteractable.activeSelf == false || !interactableObject.interactable)
                     {
                         interactableObjects.Remove(closestInteractable);
+                        destroyObject();
                     }
                 }
             }
@@ -151,6 +162,13 @@ namespace Scripts
             }
         }
 
+        public void giveItem(GameObject item)
+        {
+            dropObject();
+            holding = item;
+            interactableObjects.Remove(item);
+        }
+
         public void throwObject()
         {
             if (holding != null)
@@ -167,6 +185,36 @@ namespace Scripts
         {
             interactableObjects.Remove(holding);
             holding = null;
+        }
+
+        void holdKey(GameObject keyObject)
+        {
+            keyObject.SetActive(false);
+            smallItemsHeld.Add(keyObject);
+            Key key = keyObject.GetComponent<Key>();
+
+            if (smallItemsHeld.Count >= key.amountNeeded)
+            {
+                for (int i = smallItemsHeld.Count - 1; i >= 0; i--)
+                {
+                    if (smallItemsHeld[i].GetComponent<InteractableObject>() is Key)
+                    {
+                        smallItemsHeld.RemoveAt(i);
+                    }
+                }
+
+                GameManager.Instance.showAfterInteractText(currentPlayer, key.fullItemText);
+                GameObject newItem = Instantiate(key.fullItem);
+                holding = newItem;
+                holding.GetComponent<Pickup>().interact();
+                interactableObjects.Remove(holding);
+            }
+            else
+            {
+                GameManager.Instance.showAfterInteractText(currentPlayer, key.getFullAfterInteractText(smallItemsHeld.Count));
+            }
+
+            interactableObjects.Remove(keyObject);
         }
 
         int countObjectsInRange()
@@ -192,9 +240,13 @@ namespace Scripts
             }
         }
 
-        void holdObject(GameObject pickup)
+        void destroyObject()
         {
-
+            if (holding != null && holding.GetComponent<Pickup>().breakOnUse)
+            {
+                Destroy(holding);
+                holding = null;
+            }
         }
 
         /**

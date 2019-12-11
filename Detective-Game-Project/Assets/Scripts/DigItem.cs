@@ -3,44 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts {
-public class DigItem : InteractableObject
-{
-    private GameObject Item;
-    private GameObject collide;
-    bool diggable = false;
-
-    // Start is called before the first frame update
-    void Start()
+    public class DigItem : Pickup
     {
-        interactableType = InteractableType.Destroyable;
-    }
+        public string pickupItemText;
 
-    public override void interact()
-    {
-        if (diggable)
+        // Start is called before the first frame update
+        void Start()
         {
-            collide.SetActive(false);
-            Instantiate(Item, collide.transform.position, collide.transform.rotation);
-            diggable = false;
+            interactableType = InteractableType.Normal;
+            interactable = true;
+        }
+
+        public override void interact()
+        {
+            if (interactableType == InteractableType.Pickup)
+            {
+                pickUpItem();
+            }
+            else
+            {
+                GameManager.Instance.Animal.GetComponentInChildren<PlayerInteract>().giveItem(this.gameObject);
+                interactable = false;
+                interactableType = InteractableType.Pickup;
+                PlayerThatCanInteract = ActivePlayer.Both;
+                interactMessage = pickupItemText;
+            }
         }
     }
-
-    void OnTriggerEnter(Collider collision)
-    {
-        if (collision.gameObject.tag == "Dig")
-        {
-            Item = collision.gameObject.GetComponent<DestroyableObject>().neededItem;
-            diggable = true;
-            collide = collision.gameObject;
-        }
-    }
-
-     void OnTriggerExit(Collider collision)
-    {
-        if (collision.gameObject.tag == "Dig")
-        {
-            diggable = false;
-        }
-    }
-}
 }

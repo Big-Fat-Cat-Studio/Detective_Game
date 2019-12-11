@@ -7,15 +7,11 @@ namespace Scripts
     public class LiftsAnObject : InteractableObject
     {
         public GameObject objectToLift;
-        public float amountOfMovement;
-        public float speed;
-        public Direction direction;
 
         // Start is called before the first frame update
         void Start()
         {
             interactableType = InteractableType.Normal;
-            objectToLift.GetComponent<ObjectToLift>().addVariables(direction, amountOfMovement, speed);
         }
 
         public override void interact()
