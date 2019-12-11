@@ -42,7 +42,7 @@ namespace Scripts
         public GameObject InteractText;
 
         [Header("PLAYER ONE Text game objects")]
-        //Player one gameobjects instead of putting player two gameobjects because 
+        //Player one gameobjects instead of putting player two gameobjects because
         //the text game objects are on the right spot for player two
         public GameObject AfterInteractTextPlayerOne;
         public GameObject InteractTextPlayerOne;
@@ -67,7 +67,7 @@ namespace Scripts
 
         private void Start()
         {
-            //saveData = SaveSystem.LoadProgress();
+            // saveData = SaveSystem.LoadProgress();
             CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
             CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
             CameraFollowP2.GetComponent<CinemachineFreeLook>().Follow = Animal.transform;
@@ -267,7 +267,7 @@ namespace Scripts
                 AfterInteractText.SetActive(false);
                 currentCourotine = null;
             }
-            
+
         }
 
         public void addCluesToList(MeshHighlighter clue)
