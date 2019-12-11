@@ -6,7 +6,7 @@ namespace Scripts
 {
     public class DogSpecial : MonoBehaviour
     {
-        float lifeTime = 1000f;
+        float lifeTime = 15f;
         bool triggered = false;
 
         // Start is called before the first frame update
