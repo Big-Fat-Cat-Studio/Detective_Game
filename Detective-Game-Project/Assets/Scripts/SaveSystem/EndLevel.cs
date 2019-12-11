@@ -33,8 +33,7 @@ namespace Scripts
         //Custom functions
         public override void interact()
         {
-
-            //SaveData new_save = new SaveData(recalculateCompletedLevels(), this.nextLevelName, false);
+            //SaveData new_save = new SaveData(recalculateCompletedLevels(GameManager.Instance.saveData.completedLevels), this.nextLevelName, false);
             //SaveSystem.SaveProgress(new_save);
             GameManager.Instance.PlayerCamera.SetActive(false);
             GameManager.Instance.PlayerCameraP2.SetActive(false);
@@ -55,6 +54,11 @@ namespace Scripts
         private string[] recalculateCompletedLevels(string[] completedLevelsOld)
         {
             string[] result = new string[completedLevelsOld.Length + 1];
+            for(int current = 0; current < completedLevelsOld.Length; current++)
+            {
+                result[current] = completedLevelsOld[current];
+            }
+            result[result.Length - 1] = SceneManager.GetActiveScene().name;
             return result;
         }
 
