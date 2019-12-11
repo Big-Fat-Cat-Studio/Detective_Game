@@ -19,7 +19,7 @@ namespace Scripts
         {
             if (triggered) return;
 
-            if (collision.gameObject.name == "Human")
+            if (collision.tag == "Human")
             {
                 triggered = true;
                 collision.gameObject.GetComponent<HumanPlayer>().handleSlow(_jumpHeight: 4f, _movementSpeed: 2f);
@@ -30,11 +30,17 @@ namespace Scripts
         {
             if (!triggered) return;
 
-            if (collision.gameObject.name == "Human")
+            if (collision.tag == "Human")
             {
                 triggered = false;
                 collision.gameObject.GetComponent<HumanPlayer>().handleSlow(_jumpHeight: 6f, _movementSpeed: 4f);
             }
+        }
+
+        void OnDestroy()
+        {
+            if (!triggered) return;
+            GameManager.Instance.Human.GetComponent<HumanPlayer>().handleSlow(_jumpHeight: 6f, _movementSpeed: 4f);
         }
     }
 }
