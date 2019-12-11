@@ -33,8 +33,8 @@ namespace Scripts
         //Custom functions
         public override void interact()
         {
-            SaveData new_save = new SaveData(recalculateCompletedLevels(GameManager.Instance.saveData.completedLevels), this.nextLevelName, false);
-            SaveSystem.SaveProgress(new_save);
+            //SaveData new_save = new SaveData(recalculateCompletedLevels(GameManager.Instance.saveData.completedLevels), this.nextLevelName, false);
+            //SaveSystem.SaveProgress(new_save);
             GameManager.Instance.PlayerCamera.SetActive(false);
             GameManager.Instance.PlayerCameraP2.SetActive(false);
             GameManager.Instance.InteractTextPlayerOne.SetActive(false);

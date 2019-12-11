@@ -63,7 +63,7 @@ namespace Scripts
         private float _PrevPlayerCRotation; // Camera X-Axis Rotation
         private List<MeshHighlighter> clues = new List<MeshHighlighter>();
 
-        public SaveData saveData;
+        //public SaveData saveData;
 
         private void Start()
         {

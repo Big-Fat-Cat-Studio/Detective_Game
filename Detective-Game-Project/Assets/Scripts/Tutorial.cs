@@ -7,7 +7,7 @@ public class Tutorial : MonoBehaviour
     public GameObject Tutorialpanel;
     public GameObject Tutorialstart;
 
-    public GameObject TutorialItem = null;
+    private GameObject TutorialItem = null;
 
     // Start is called before the first frame update
     void Start()

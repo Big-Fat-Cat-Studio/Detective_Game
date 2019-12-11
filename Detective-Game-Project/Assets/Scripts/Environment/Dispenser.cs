@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,9 +19,8 @@ namespace Scripts
         public override void interact()
         {
             if(timer > 0) return;
-            Debug.Log("using");
 
-            GameManager.Instance.Animal.GetComponent<AnimalPlayer>().boostTimer = 3f;
+            GameManager.Instance.Animal.GetComponent<AnimalPlayer>().activateAbilityTimer("speedBoost");
             timer = cooldown;
         }
 
@@ -28,15 +28,7 @@ namespace Scripts
         {
             if(timer == 0f) return;
 
-            if(timer <= 0f)
-            {
-                timer = 0f;
-            }
-            else
-            {
-                timer -= Time.deltaTime;
-            }
-
+            timer = Math.Max(0f, timer - Time.deltaTime);
         }
     }
 }
