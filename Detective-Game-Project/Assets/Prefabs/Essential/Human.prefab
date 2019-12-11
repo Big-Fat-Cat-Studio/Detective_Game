@@ -520,13 +520,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.69
-  m_Radius: 0.31
+  m_Height: 2.8
+  m_Radius: 0.2
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.92, z: 0}
+  m_Center: {x: 0.065, y: 1.54, z: 0}
 --- !u!114 &5378064895059592471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,6 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraDirection: {x: 0, y: 0}
+  moveDirection: {x: 0, y: 0, z: 0}
   inputType: 0
   currentPlayer: 0
   movementSpeed: 4
@@ -547,7 +548,6 @@ MonoBehaviour:
   jumpHeight: 6
   gravity: 20
   isClimbing: 0
-  canPushPull: 0
   climbingSpeed: 2
   umbrella: {fileID: 5378064896241686426}
   umbrellaActiveOnStart: 1
@@ -587,7 +587,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Human
   m_SplitScreenIndex: -1
@@ -1349,6 +1349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentPlayer: 0
   holding: {fileID: 0}
+  smallItemsHeld: []
 --- !u!1 &5378064895692446515
 GameObject:
   m_ObjectHideFlags: 0
