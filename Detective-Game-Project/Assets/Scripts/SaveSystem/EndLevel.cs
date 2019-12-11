@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 
 namespace Scripts
 {
@@ -9,7 +10,7 @@ namespace Scripts
     {
         //Variables
         public VideoPlayer endCutscene;
-
+        public string nextLevelName;
         private bool cutsceneHasStarted = false;
 
         //Unity functions
@@ -32,6 +33,8 @@ namespace Scripts
         //Custom functions
         public override void interact()
         {
+            //SaveData new_save = new SaveData(recalculateCompletedLevels(GameManager.Instance.saveData.completedLevels), this.nextLevelName, false);
+            //SaveSystem.SaveProgress(new_save);
             GameManager.Instance.PlayerCamera.SetActive(false);
             GameManager.Instance.PlayerCameraP2.SetActive(false);
             GameManager.Instance.InteractTextPlayerOne.SetActive(false);
@@ -46,7 +49,17 @@ namespace Scripts
         }
         private void LoadNextLevel()
         {
-
+            SceneManager.LoadScene(this.nextLevelName);
+        }
+        private string[] recalculateCompletedLevels(string[] completedLevelsOld)
+        {
+            string[] result = new string[completedLevelsOld.Length + 1];
+            for(int current = 0; current < completedLevelsOld.Length; current++)
+            {
+                result[current] = completedLevelsOld[current];
+            }
+            result[result.Length - 1] = SceneManager.GetActiveScene().name;
+            return result;
         }
 
         //Coroutines

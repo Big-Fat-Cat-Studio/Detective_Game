@@ -10,6 +10,9 @@ namespace Scripts
         public bool isClimbing = false;
         public float climbingSpeed = 2.0f;
 
+        [HideInInspector]
+        public bool isInPuzzle = false;
+
         Rigidbody body;
         public GameObject umbrella;
         public bool umbrellaActiveOnStart;
@@ -68,17 +71,39 @@ namespace Scripts
             {
                 if (moveCamera)
                 {
-                    MoveCamera();
-
-                    if (inputType == InputType.Keyboard || (inputType == InputType.Controller && cameraDirection.x > -0.6 && cameraDirection.x < 0.6))
+                    if (isInPuzzle)
                     {
                         moveCamera = false;
+                    }
+
+                    else
+                    {
+                        MoveCamera();
+
+                        if (inputType == InputType.Keyboard || (inputType == InputType.Controller && cameraDirection.x > -0.6 && cameraDirection.x < 0.6))
+                        {
+                            moveCamera = false;
+                        }
                     }
                 }
 
                 if (move)
                 {
-                    if (isClimbing)
+                    if (isInPuzzle)
+                    {
+                        moveDirection = new Vector3(0, 0, 0);
+                        move = true;
+                    }
+                    else if (canPushPull)
+                    {
+                        Push();
+
+                        gameObject.GetComponent<Animator>().SetBool("jumping", false);
+                        gameObject.GetComponent<Animator>().SetBool("pushing", true);
+                        move = false;
+                        return;
+                    }
+                    else if (isClimbing)
                     {
                         gameObject.GetComponent<Animator>().SetBool("jumping", false);
                         moveDirection = new Vector3(0.0f, direction.y, direction.y * 0.3f);
@@ -91,14 +116,6 @@ namespace Scripts
                         move = false;
                         return;
                     }
-                    else if (canPushPull)
-                    {
-                        Push();
-
-                        gameObject.GetComponent<Animator>().SetBool("jumping", false);
-                        gameObject.GetComponent<Animator>().SetBool("pushing", true);
-                        move = false;
-                    }
                     else if (characterController.isGrounded)
                     {
                         Move();
@@ -108,7 +125,7 @@ namespace Scripts
                         gameObject.GetComponent<Animator>().SetBool("pushing", false);
                         gameObject.GetComponent<Animator>().SetFloat("forward/backward", Mathf.Round(direction.y));
                         gameObject.GetComponent<Animator>().SetFloat("sidewalk", Mathf.Round(direction.x));
-                        
+
                         if (Mathf.Round(direction.x) != 0)
                         {
                             gameObject.GetComponent<Animator>().SetBool("walksideways", true);
@@ -144,7 +161,7 @@ namespace Scripts
             }
         }
 
-        protected void OnSpecial()
+        protected void OnSpecial1()
         {
 
         }

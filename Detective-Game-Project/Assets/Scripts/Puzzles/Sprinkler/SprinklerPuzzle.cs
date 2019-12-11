@@ -29,7 +29,8 @@ namespace Scripts
         int point = 0;
         int elements = 5;
         int max;
-        float yOffset = 0.46f;
+        float yOffset = 0.39f;
+        float xOffset = 0.81f;
 
         [HideInInspector]
         public int solved = 0;
@@ -40,10 +41,19 @@ namespace Scripts
             max = elements - 1;
             // randomize stuff a bit
             imageArray[0].transform.Rotate(0, 0, 90);
-            imageArray[1].transform.Rotate(0, 0, 0);
+            imageArray[1].transform.Rotate(0, 0, 90);
             imageArray[2].transform.Rotate(0, 0, 90);
-            imageArray[3].transform.Rotate(0, 0, 90);
+            imageArray[3].transform.Rotate(0, 0, 180);
             imageArray[4].transform.Rotate(0, 0, 180);
+
+            if (GameManager.Instance.GameType == GameType.SinglePlayer)
+            {
+                puzzleCamera.GetComponent<Camera>().rect = new Rect (0, 0, 1, 1);
+            }
+            else if (GameManager.Instance.GameType == GameType.MultiPlayerSplitScreen)
+            {
+                puzzleCamera.GetComponent<Camera>().rect = new Rect (0, 0.5f, 1, 1);
+            }
         }
 
 
@@ -55,7 +65,7 @@ namespace Scripts
                 {
                     puzzleCamera.SetActive(true);
                     indicator.SetActive(true);
-                    GameManager.Instance.Human.GetComponent<CharacterController>().enabled = false;
+                    GameManager.Instance.Human.GetComponent<HumanPlayer>().isInPuzzle = true;
                 }
             }
         }
@@ -129,7 +139,7 @@ namespace Scripts
                 }
                 if (select == 3 && point == 0) // element 1
                 {
-                    if (eulerAngZ == 0 || eulerAngZ == 180)
+                    if (eulerAngZ <= 1 || eulerAngZ == 180)
                     {
                         elementArray[select].transform.localRotation = Quaternion.Euler(0, 0, 0);
                         elementArray[select].transform.localPosition = new Vector3 (4.5f, 0, 0);
@@ -175,9 +185,7 @@ namespace Scripts
                         done = true;
                     }
                 }
-                Vector3 position = selector.transform.position;
-                position.y -= (check - select) * yOffset;
-                selector.transform.position = position;
+                selector.transform.position = imageArray[check].transform.position;
                 select = check;
             }
         }
@@ -202,9 +210,7 @@ namespace Scripts
                         done = true;
                     }
                 }
-                Vector3 position = selector.transform.position;
-                position.y += (select - check) * yOffset;
-                selector.transform.position = position;
+                selector.transform.position = imageArray[check].transform.position;
                 select = check;
             }
         }
@@ -276,14 +282,12 @@ namespace Scripts
             {
                 SelectUp();
             }
-            // select = check;
             check = point;
             PointRight();
             if (check == point)
             {
                 PointLeft();
             }
-            // point = check;
         }
 
 
@@ -291,7 +295,7 @@ namespace Scripts
         {
             puzzleCamera.SetActive(false);
             indicator.SetActive(false);
-            GameManager.Instance.Human.GetComponent<CharacterController>().enabled = true;
+            GameManager.Instance.Human.GetComponent<HumanPlayer>().isInPuzzle = false;
             if (solved == 5)
             {
                 victoryInteraction.GetComponent<IPuzzleResult>().ActivateSolution();
