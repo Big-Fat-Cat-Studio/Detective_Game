@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,44 +36,97 @@ namespace Scripts
             }
 
             playerObject.GetComponent<Player>().togglePush();
-
-            //rigidBody.gameObject.transform.Translate(moveDirection.x * Time.deltaTime, 0.0f, moveDirection.z * Time.deltaTime);
         }
 
         private void Update()
         {
-            // if (gameObject.GetComponent<Rigidbody>())
-            // {
-            //     stopInteract();
-            // }
-            if (both && dogispushing && humanispushing)
+            /*if (both && dogispushing && humanispushing)
             {
                 pushing = true;
             }
             else if (!both)
             {
-              pushing = !pushing;  
+                pushing = !pushing;  
             }
             else
             {
                 pushing = false;
-            }
-            if (pushing && humanispushing && !both)
+            }*/
+
+            if (humanispushing && !both)
             {
-                pushforce = playerObject.GetComponent<Player>().moveDirection;
+                fixPlayerPosition(ActivePlayer.Human);
+                pushforce = GameManager.Instance.Human.GetComponent<HumanPlayer>().moveDirection;
+                rigidBody.velocity = new Vector3(pushforce.x, 0, pushforce.z);
             }
-            else if (pushing && humanispushing && dogispushing)
+            else if (humanispushing && dogispushing)
             {
-                pushforce = playerObject.GetComponent<Player>().moveDirection;
+                fixPlayerPosition(ActivePlayer.Human);
+                fixPlayerPosition(ActivePlayer.Animal);
+
+                Vector3 humanMoveDirection = GameManager.Instance.Human.GetComponent<Player>().moveDirection;
+                Vector3 animalMoveDirection = GameManager.Instance.Animal.GetComponent<Player>().moveDirection;
+
+                //check if they are on the same side of the box, first check if they are on the x-side of the box or the z-side of the box,
+                //then proceed to check the proper side.
+                if (Mathf.Round(humanMoveDirection.z) == 0 &&
+                    ((GameManager.Instance.Human.transform.position.x - transform.position.x >= 0 &&
+                    GameManager.Instance.Animal.transform.position.x - transform.position.x >= 0) ||
+                    (GameManager.Instance.Human.transform.position.x - transform.position.x < 0 &&
+                    GameManager.Instance.Animal.transform.position.x - transform.position.x < 0)))
+                {
+                    if ((humanMoveDirection.x > 0 && animalMoveDirection.x > 0) ||
+                        (humanMoveDirection.x < 0 && animalMoveDirection.x < 0))
+                    {
+                        pushforce = GameManager.Instance.Human.GetComponent<Player>().moveDirection;
+                        rigidBody.velocity = new Vector3(pushforce.x, 0, pushforce.z);
+                    }
+                }
+                else if (Mathf.Round(humanMoveDirection.x) == 0 &&
+                    ((GameManager.Instance.Human.transform.position.z - transform.position.z > 0 &&
+                    GameManager.Instance.Animal.transform.position.z - transform.position.z > 0) ||
+                    (GameManager.Instance.Human.transform.position.z - transform.position.z < 0 &&
+                    GameManager.Instance.Animal.transform.position.z - transform.position.z < 0)))
+                {
+                    if ((humanMoveDirection.z > 0 && animalMoveDirection.z > 0) ||
+                        (humanMoveDirection.z < 0 && animalMoveDirection.z < 0))
+                    {
+                        pushforce = GameManager.Instance.Human.GetComponent<Player>().moveDirection;
+                        rigidBody.velocity = new Vector3(pushforce.x, 0, pushforce.z);
+                    }                
+                }
             }
             else
             {
-                pushforce = new Vector3(0,-2,0);
+                //rigidBody.velocity = new Vector3(0, 0, 0);
+                //transform.parent = null;
             }
-
-            //rigidBody.AddForce(pushforce.x * 5.5f, 0, pushforce.z * 5.5f);
-            rigidBody.gameObject.transform.Translate(pushforce.x * Time.deltaTime * 2, 0, pushforce.z * Time.deltaTime* 2);
         }
 
+        private void fixPlayerPosition(ActivePlayer player)
+        {
+            if (player == ActivePlayer.Human)
+            {
+                GameManager.Instance.Human.transform.rotation =
+                    Quaternion.Euler(new Vector3(0, Mathf.Round(GameManager.Instance.Human.transform.eulerAngles.y / 90.0f) * 90, 0));
+            }
+            else
+            {
+                GameManager.Instance.Animal.transform.rotation =
+                    Quaternion.Euler(new Vector3(0, Mathf.Round(GameManager.Instance.Animal.transform.eulerAngles.y / 90.0f) * 90, 0));
+            }
+
+            if ((player == ActivePlayer.Human && ActivePlayer.Human == GameManager.Instance.PlayerOne) ||
+                (player == ActivePlayer.Animal && ActivePlayer.Animal == GameManager.Instance.PlayerOne))
+            {
+                GameManager.Instance.CameraFollow.GetComponent<CinemachineFreeLook>().m_XAxis.Value =
+                    Mathf.Round(GameManager.Instance.CameraFollow.GetComponent<CinemachineFreeLook>().m_XAxis.Value / 90.0f) * 90;
+            }
+            else
+            {
+                GameManager.Instance.CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.Value =
+                    Mathf.Round(GameManager.Instance.CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.Value / 90.0f) * 90;
+            }
+        }
     }
 }

@@ -319,8 +319,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9142455, y: 2.7712977, z: 2.119693}
-  m_Center: {x: -0.017382212, y: 0.66001016, z: 1.1856467}
+  m_Size: {x: 0.91424555, y: 2.7712977, z: 1.303327}
+  m_Center: {x: -0.017382203, y: 0.66001016, z: 0.77746403}
 --- !u!114 &3459219000523579206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -857,6 +857,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraDirection: {x: 0, y: 0}
   moveDirection: {x: 0, y: 0, z: 0}
+  move: 0
+  canPushPull: 0
   inputType: 0
   currentPlayer: 0
   movementSpeed: 5

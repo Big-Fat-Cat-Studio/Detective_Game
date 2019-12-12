@@ -6,18 +6,22 @@ namespace Scripts {
     public class DigItem : Pickup
     {
         public string pickupItemText;
+        private bool originalBreakOnUse;
 
         // Start is called before the first frame update
         void Start()
         {
             interactableType = InteractableType.Normal;
             interactable = true;
+            originalBreakOnUse = breakOnUse;
+            breakOnUse = false;
         }
 
         public override void interact()
         {
             if (interactableType == InteractableType.Pickup)
             {
+                breakOnUse = originalBreakOnUse;
                 pickUpItem();
             }
             else
