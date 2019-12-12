@@ -11,9 +11,11 @@ namespace Scripts {
         public float boostTimer = 0f;
         public float pissTimer = 0f;
         public float poopTimer = 0f;
+        Animator animator;
 
         private void Start()
         {
+            animator = GetComponent<Animator>();
             playerInteract = GetComponentInChildren<PlayerInteract>();
             currentPlayer = ActivePlayer.Animal;
 
@@ -32,6 +34,7 @@ namespace Scripts {
 
         private void FixedUpdate()
         {
+            
             if (GameManager.Instance.checkIfPlayerIsActive(currentPlayer))
             {
                 if (moveCamera)
@@ -48,6 +51,24 @@ namespace Scripts {
                     
                 }
 
+                if (characterController.isGrounded)
+                {
+                    animator.SetBool("jump", false);
+                }
+                else
+                {
+                    animator.SetBool("jump", true);
+                    if (moveDirection.y > 1)
+                    {
+                        animator.SetFloat("jumping", 1);
+                    }
+                    if (moveDirection.y < 0)
+                    {
+                        animator.SetFloat("jumping", -1);
+                    }
+                    
+                }
+
                 if (characterController.isGrounded && move)
                 {
                     if (canPushPull)
@@ -59,6 +80,8 @@ namespace Scripts {
                     {
                         Move();
                         move = false;
+                        animator.SetBool("jump", false);
+                        animator.SetFloat("idl/walking", moveDirection.z);
                     }
                 }
 

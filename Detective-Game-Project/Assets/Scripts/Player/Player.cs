@@ -74,7 +74,7 @@ namespace Scripts
         {
             moveDirection = new Vector3(0.0f, 0.0f, direction.y);
             moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection *= movementSpeed;
+            moveDirection *= movementSpeed / 1.5f;
         }
 
         protected void Move()
