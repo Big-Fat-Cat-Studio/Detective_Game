@@ -11,8 +11,9 @@ public class TriggerDetection : MonoBehaviour
 	private GameObject LastActivePFollow;
 	private GameObject LastActiveAFollow;
 
-
 	private bool CameraCachedP, CameraCachedA;
+
+    public static GameObject CurrentTrigger = null;
 
 	private void Start()
 	{
@@ -30,7 +31,7 @@ public class TriggerDetection : MonoBehaviour
 	// Set the REGULAR camera priorities to 11!
 	private void OnTriggerEnter(Collider other)
 	{
-		if (ReferenceEquals(other.gameObject.transform.root.gameObject, GameManager.Instance.Human))
+		if (ReferenceEquals(other.gameObject, GameManager.Instance.Human))
 		{
 			if (!CameraCachedP)
 			{
@@ -39,7 +40,11 @@ public class TriggerDetection : MonoBehaviour
 				CameraCachedP = true;
 			}
 
-			Scripts.GameManager.Instance.CameraFollow = DollyHuman;
+            Debug.Log($"Entering : {GetInstanceID()}");
+
+            Debug.Log($"Colliding with : {other.name}");
+
+            Scripts.GameManager.Instance.CameraFollow = DollyHuman;
 
 			DollyHuman.GetComponent<Cinemachine.CinemachineVirtualCamera>().Priority =
 				LastActivePFollow.GetComponent<Cinemachine.CinemachineFreeLook>().Priority + 1; // 12
@@ -54,7 +59,7 @@ public class TriggerDetection : MonoBehaviour
 
 
 		}
-		if (ReferenceEquals(other.gameObject.transform.root.gameObject, GameManager.Instance.Animal))
+		if (ReferenceEquals(other.gameObject, GameManager.Instance.Animal))
 		{
 			if (!CameraCachedA)
 			{
@@ -82,12 +87,13 @@ public class TriggerDetection : MonoBehaviour
 
 	private void OnTriggerExit(Collider other)
 	{
-		if (ReferenceEquals(other.gameObject.transform.root.gameObject, GameManager.Instance.Human))
+		if (ReferenceEquals(other.gameObject, GameManager.Instance.Human))
 		{
 			if (!CameraCachedP)
 				return;
 
-			Scripts.GameManager.Instance.CameraFollow = LastActivePFollow;
+            Debug.Log($"Exit : {GetInstanceID()}");
+            Scripts.GameManager.Instance.CameraFollow = LastActivePFollow;
 
 			DollyHuman.GetComponent<Cinemachine.CinemachineVirtualCamera>().Priority = 10;
 

@@ -30,6 +30,8 @@ namespace Scripts
         public GameObject Human;
         public GameObject Animal;
 
+        public GameObject RoomCollider;
+
         [Header("These won't be used in singleplayer.")]
         public ActivePlayer PlayerOne;
         public ActivePlayer PlayerTwo;
