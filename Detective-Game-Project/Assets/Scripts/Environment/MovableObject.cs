@@ -71,7 +71,7 @@ namespace Scripts
             }
 
             //rigidBody.AddForce(pushforce.x * 5.5f, 0, pushforce.z * 5.5f);
-            if (!both)
+            if (both)
             {
                 rigidBody.gameObject.transform.Translate(pushforce.x * Time.deltaTime , 0, pushforce.z * Time.deltaTime);
             }
