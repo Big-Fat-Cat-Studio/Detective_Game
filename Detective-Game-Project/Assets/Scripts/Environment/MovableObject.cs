@@ -26,26 +26,17 @@ namespace Scripts
             if (player == ActivePlayer.Animal)
             {
                 dogispushing = !dogispushing;
+                playerObject = GameManager.Instance.Animal;
             }
-            if (player == ActivePlayer.Human)
+            else 
             {
                 humanispushing = !humanispushing;
-            }
-            if(player == ActivePlayer.Human)
-            {
                 playerObject = GameManager.Instance.Human;
-            }
-            else
-            {
-                playerObject = GameManager.Instance.Animal;
             }
 
             playerObject.GetComponent<Player>().togglePush();
 
             //rigidBody.gameObject.transform.Translate(moveDirection.x * Time.deltaTime, 0.0f, moveDirection.z * Time.deltaTime);
-            Debug.Log(dogispushing);
-            Debug.Log(humanispushing);
-            Debug.Log(pushing);
         }
 
         private void Update()
@@ -68,7 +59,7 @@ namespace Scripts
             }
             if (pushing && humanispushing && !both)
             {
-                pushforce = GameManager.Instance.Human.GetComponent<Player>().moveDirection;
+                pushforce = playerObject.GetComponent<Player>().moveDirection;
             }
             else if (pushing && humanispushing && dogispushing)
             {
@@ -78,7 +69,9 @@ namespace Scripts
             {
                 pushforce = new Vector3(0,-2,0);
             }
-            rigidBody.gameObject.transform.Translate(pushforce.x * Time.deltaTime, 0.0f, pushforce.z * Time.deltaTime);
+
+            //rigidBody.AddForce(pushforce.x * 5.5f, 0, pushforce.z * 5.5f);
+            rigidBody.gameObject.transform.Translate(pushforce.x * Time.deltaTime * 2, 0, pushforce.z * Time.deltaTime* 2);
         }
 
     }
