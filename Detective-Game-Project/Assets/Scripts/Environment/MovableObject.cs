@@ -71,7 +71,15 @@ namespace Scripts
             }
 
             //rigidBody.AddForce(pushforce.x * 5.5f, 0, pushforce.z * 5.5f);
-            rigidBody.gameObject.transform.Translate(pushforce.x * Time.deltaTime * 2, 0, pushforce.z * Time.deltaTime* 2);
+            if (!both)
+            {
+                rigidBody.gameObject.transform.Translate(pushforce.x * Time.deltaTime , 0, pushforce.z * Time.deltaTime);
+            }
+            else
+            {
+                rigidBody.gameObject.transform.Translate(pushforce.x * Time.deltaTime * 2, 0, pushforce.z * Time.deltaTime * 2);
+            }
+            
         }
 
     }
