@@ -105,6 +105,7 @@ namespace Scripts
                         if (interactableObject is MovableObject)
                         {
                             ((MovableObject)interactableObject).interact(currentPlayer);
+                            GetComponentInParent<Player>().move = true;
                         }
                         else
                         {

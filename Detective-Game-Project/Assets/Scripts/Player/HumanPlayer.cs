@@ -107,7 +107,11 @@ namespace Scripts
                     else if (canPushPull)
                     {
                         Push();
-
+                        print("GOGOGO");
+                        animator.SetFloat("forward/backward", 0);
+                        animator.SetFloat("sidewalk", 0);
+                        gameObject.GetComponent<Animator>().SetBool("turning", false);
+                        animator.SetBool("walksideways", false);
                         animator.SetBool("jumping", false);
                         animator.SetBool("pushing", true);
                         move = false;
