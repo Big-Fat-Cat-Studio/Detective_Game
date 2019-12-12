@@ -36,13 +36,16 @@ namespace Scripts {
             {
                 if (moveCamera)
                 {
-                    MoveCamera();
+                    if (!canPushPull) 
+                    {
+                        MoveCamera();
+                    }
 
-                    //print(cameraDirection.x);
-                    if (inputType == InputType.Keyboard || (inputType == InputType.Controller && cameraDirection.x > -0.6 && cameraDirection.x < 0.6))
+                    if (inputType == InputType.Keyboard || (inputType == InputType.Controller && cameraDirection.x > -0.6 && cameraDirection.x < 0.6) || canPushPull)
                     {
                         moveCamera = false;
                     }
+                    
                 }
 
                 if (characterController.isGrounded && move)

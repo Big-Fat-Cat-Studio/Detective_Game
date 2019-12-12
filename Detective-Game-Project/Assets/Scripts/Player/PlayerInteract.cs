@@ -11,11 +11,9 @@ namespace Scripts
         public GameObject holding;
         [HideInInspector]
         public List<GameObject> smallItemsHeld;
-
         private bool showsText;
         private InteractableObject objectInteractedWith;
         private float holdTimer;
-
         List<GameObject> interactableObjects;
 
         // Start is called before the first frame update
@@ -308,6 +306,14 @@ namespace Scripts
                 else
                 {
                     GameManager.Instance.showInteractText(getClosestObject().GetComponent<InteractableObject>().interactMessage, currentPlayer);
+                }
+
+
+                if (other.gameObject.GetComponent<InteractableObject>() is MovableObject && this.gameObject.GetComponentInParent<Player>().canPushPull) 
+                {
+                    this.gameObject.GetComponentInParent<Player>().move = true;
+                    other.gameObject.GetComponent<MovableObject>().interact(currentPlayer);
+                    stopInteract();
                 }
             }
         }

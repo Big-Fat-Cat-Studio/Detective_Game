@@ -68,7 +68,7 @@ namespace Scripts
             }
             if (pushing && humanispushing && !both)
             {
-                pushforce = playerObject.GetComponent<Player>().moveDirection;
+                pushforce = GameManager.Instance.Human.GetComponent<Player>().moveDirection;
             }
             else if (pushing && humanispushing && dogispushing)
             {

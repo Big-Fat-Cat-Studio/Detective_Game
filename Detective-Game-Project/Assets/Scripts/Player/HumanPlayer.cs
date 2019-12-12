@@ -79,7 +79,7 @@ namespace Scripts
 
                 if (moveCamera)
                 {
-                    if (isInPuzzle)
+                    if (isInPuzzle || canPushPull)
                     {
                         moveCamera = false;
                     }

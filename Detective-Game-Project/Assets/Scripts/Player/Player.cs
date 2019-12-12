@@ -15,12 +15,14 @@ namespace Scripts
         protected Vector2 direction;
         [HideInInspector]
         public Vector2 cameraDirection = Vector2.zero;
+        [HideInInspector]
         public Vector3 moveDirection = Vector2.zero;
         protected bool jump;
-        protected bool move;
+        [HideInInspector]
+        public bool move;
         protected bool moveCamera;
         [HideInInspector]
-        protected bool canPushPull = false;
+        public bool canPushPull = false;
 
         [HideInInspector]
         public InputType inputType;
@@ -72,7 +74,7 @@ namespace Scripts
         {
             moveDirection = new Vector3(0.0f, 0.0f, direction.y);
             moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection *= movementSpeed / 1.5f;
+            moveDirection *= movementSpeed;
         }
 
         protected void Move()
