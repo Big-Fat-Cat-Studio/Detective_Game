@@ -13,9 +13,11 @@ public class PressurePlate : MonoBehaviour
 
     [SerializeField] [Tooltip("Which object to manipulate")] private GameObject ObjectToManipulate;
 
+    public Vector3 offset;
+
     private Vector3 ObjectPressedSize;
     private bool Pressed;
-
+    private Vector3 defaultPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -24,13 +26,21 @@ public class PressurePlate : MonoBehaviour
         ObjectSizeRenderer = ObjectRenderer.bounds.size;
 
         ObjectPressedSize = new Vector3(0, (ObjectSizeCollider.y/2), 0);
+        if (ObjectToManipulate != null) defaultPosition = ObjectToManipulate.transform.position;
+    }
+
+    void Update()
+    {
+        if (ObjectToManipulate == null) return;
+        if (!Pressed && ObjectToManipulate.transform.position == defaultPosition) return;
+
+        ManipulateObject();
     }
 
     public void OnChildTriggerEnter(Collider c, GameObject g)
     {
         gameObject.transform.position -= ObjectPressedSize;
         Pressed = !Pressed;
-        
     }
 
     public void OnChildTriggerExit(Collider c, GameObject g)
@@ -42,5 +52,10 @@ public class PressurePlate : MonoBehaviour
     public void ManipulateObject()
     {
         // Do something with the object this plate is supposed to manipulate.
+        Transform objTransform = ObjectToManipulate.transform;
+        float step = 1f * Time.deltaTime;
+        Vector3 destination = (Pressed ? defaultPosition + offset : defaultPosition);
+
+        objTransform.position = Vector3.MoveTowards(objTransform.position, destination, step);
     }
 }
