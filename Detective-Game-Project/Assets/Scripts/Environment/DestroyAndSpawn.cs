@@ -24,10 +24,7 @@ namespace Scripts
             {
                 this.gameObject.SetActive(false);
                 Destroy(this.gameObject);
-                if(itemToSpawn != null)
-                {
-                    Instantiate(itemToSpawn, this.transform.position, this.transform.rotation);
-                }
+                Instantiate(itemToSpawn, this.transform.position, this.transform.rotation);
             }
             else
             {
