@@ -35,7 +35,7 @@ namespace Scripts
         private InputActionMap map;
         private Vector2 LookDelta;
         private bool released;
-
+        public GameObject CameraFollow;
 
         // Start is called before the first frame update
         void Start()
@@ -49,11 +49,13 @@ namespace Scripts
 
             if (moveDirection.x == 0 && moveDirection.z == 0)
             {
+                CameraFollow.GetComponent<CinemachineFreeLook>().m_RecenterToTargetHeading = new AxisState.Recentering(false, 0, .5f);
                 translationRH *= Time.deltaTime;
                 context.m_XAxis.Value += translationRH;
             }
             else
             {
+                CameraFollow.GetComponent<CinemachineFreeLook>().m_RecenterToTargetHeading = new AxisState.Recentering(true, 0, .5f);
                 //this check will be changed laterrrr
                 if (currentPlayer == ActivePlayer.Human)
                 {
