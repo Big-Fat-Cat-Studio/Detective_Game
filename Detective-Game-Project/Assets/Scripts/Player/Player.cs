@@ -47,16 +47,24 @@ namespace Scripts
         {
             float translationRH = cameraDirection.x * rotationSpeed;
 
-            //this check will be changed laterrrr
-            if (currentPlayer == ActivePlayer.Human)
+            if (moveDirection.x == 0 && moveDirection.z == 0)
             {
-                if (direction.x == 0 && direction.y == 0 && (translationRH > 10f || translationRH < -10f))
+                translationRH *= Time.deltaTime;
+                context.m_XAxis.Value += translationRH;
+            }
+            else
+            {
+                //this check will be changed laterrrr
+                if (currentPlayer == ActivePlayer.Human)
                 {
-                    gameObject.GetComponent<Animator>().SetBool("turning", true);
-                }
-                else
-                {
-                    gameObject.GetComponent<Animator>().SetBool("turning", false);
+                    if (direction.x == 0 && direction.y == 0 && (translationRH > 10f || translationRH < -10f))
+                    {
+                        gameObject.GetComponent<Animator>().SetBool("turning", true);
+                    }
+                    else
+                    {
+                        gameObject.GetComponent<Animator>().SetBool("turning", false);
+                    }
                 }
             }
 
@@ -127,7 +135,7 @@ namespace Scripts
 
         protected void OnSwap()
         {
-            
+
         }
 
         protected void OnJump()
