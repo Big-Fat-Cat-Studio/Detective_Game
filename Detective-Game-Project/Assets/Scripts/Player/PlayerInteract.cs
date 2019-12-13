@@ -15,7 +15,7 @@ namespace Scripts
         private InteractableObject objectInteractedWith;
         private float holdTimer;
         List<GameObject> interactableObjects;
-        public Transform holdingHand;
+        public Transform holdingPoint;
 
         // Start is called before the first frame update
         void Start()
@@ -36,16 +36,8 @@ namespace Scripts
 
             if (holding != null)
             {
-                if(currentPlayer == ActivePlayer.Human)
-                {
-                    holding.transform.rotation = holdingHand.rotation;
-                    holding.transform.position = holdingHand.position;
-                }
-                else if(currentPlayer == ActivePlayer.Animal)
-                {
-                    holding.transform.rotation = transform.rotation;
-                    holding.transform.position = new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z);
-                }
+                holding.transform.rotation = holdingPoint.rotation; //rotation must be fixed
+                holding.transform.position = holdingPoint.position;
                 holding.GetComponent<BoxCollider>().isTrigger = true;
             }
 
