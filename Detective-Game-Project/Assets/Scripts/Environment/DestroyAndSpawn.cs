@@ -26,7 +26,7 @@ namespace Scripts
                 Destroy(this.gameObject);
                 if(itemToSpawn != null)
                 {
-                    Instantiate(itemToSpawn, this.transform);
+                    Instantiate(itemToSpawn, this.transform.position, this.transform.rotation);
                 }
             }
             else
