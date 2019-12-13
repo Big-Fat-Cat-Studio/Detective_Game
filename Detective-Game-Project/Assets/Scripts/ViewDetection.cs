@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ViewDetection : MonoBehaviour
 {
+    public bool disabled;
     public bool detectOnlyHuman;
     public Transform Human;
     public Transform Dog;
@@ -90,10 +91,12 @@ public class ViewDetection : MonoBehaviour
             } 
         } 
         return false;
-
     }
+
     void FixedUpdate()
     {
+        if (disabled) return;
+
         if (detectOnlyHuman)
         {
             isinFOV = inFOV(transform, Human, maxAngle, maxRadius);
