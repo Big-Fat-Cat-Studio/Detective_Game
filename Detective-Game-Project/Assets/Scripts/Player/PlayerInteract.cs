@@ -15,6 +15,7 @@ namespace Scripts
         private InteractableObject objectInteractedWith;
         private float holdTimer;
         List<GameObject> interactableObjects;
+        public Transform holdingHand;
 
         // Start is called before the first frame update
         void Start()
@@ -35,8 +36,17 @@ namespace Scripts
 
             if (holding != null)
             {
-                holding.transform.rotation = transform.rotation;
-                holding.transform.position = new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z);
+                if(currentPlayer == ActivePlayer.Human)
+                {
+                    holding.transform.rotation = holdingHand.rotation;
+                    holding.transform.position = holdingHand.position;
+                }
+                else if(currentPlayer == ActivePlayer.Animal)
+                {
+                    holding.transform.rotation = transform.rotation;
+                    holding.transform.position = new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z);
+                }
+                holding.GetComponent<BoxCollider>().isTrigger = true;
             }
 
             //Remove the text when the player is not active anymore
@@ -234,6 +244,7 @@ namespace Scripts
         {
             if (holding != null)
             {
+                holding.GetComponent<BoxCollider>().isTrigger = false;
                 holding.GetComponent<InteractableObject>().interact();
                 holding = null;
             }
@@ -276,6 +287,7 @@ namespace Scripts
 
         private void OnTriggerEnter(Collider other)
         {
+            print(other.gameObject.name);
             if (other.gameObject.tag == Constant.TAG_INTERACT 
                 && !ReferenceEquals(other.gameObject, holding)
                 && other.gameObject.GetComponent<InteractableObject>().interactable
