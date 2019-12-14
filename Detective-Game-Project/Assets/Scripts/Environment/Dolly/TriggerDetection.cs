@@ -13,7 +13,7 @@ public class TriggerDetection : MonoBehaviour
 
 	private bool CameraCachedP, CameraCachedA;
 
-    public static GameObject CurrentTrigger = null;
+	public static GameObject CurrentTrigger = null;
 
 	private void Start()
 	{
@@ -40,11 +40,12 @@ public class TriggerDetection : MonoBehaviour
 				CameraCachedP = true;
 			}
 
-            Debug.Log($"Entering : {GetInstanceID()}");
+			Debug.Log($"Entering : {GetInstanceID()}");
 
-            Debug.Log($"Colliding with : {other.name}");
+			Debug.Log($"Colliding with : {other.name}");
 
-            Scripts.GameManager.Instance.CameraFollow = DollyHuman;
+			Scripts.GameManager.Instance.CameraFollow = DollyHuman;
+
 
 			DollyHuman.GetComponent<Cinemachine.CinemachineVirtualCamera>().Priority =
 				LastActivePFollow.GetComponent<Cinemachine.CinemachineFreeLook>().Priority + 1; // 12
@@ -92,8 +93,8 @@ public class TriggerDetection : MonoBehaviour
 			if (!CameraCachedP)
 				return;
 
-            Debug.Log($"Exit : {GetInstanceID()}");
-            Scripts.GameManager.Instance.CameraFollow = LastActivePFollow;
+			Debug.Log($"Exit : {GetInstanceID()}");
+			Scripts.GameManager.Instance.CameraFollow = LastActivePFollow;
 
 			DollyHuman.GetComponent<Cinemachine.CinemachineVirtualCamera>().Priority = 10;
 
