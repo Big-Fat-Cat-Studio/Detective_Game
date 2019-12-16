@@ -1,20 +1,60 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class TutorialItem : MonoBehaviour
+namespace Scripts
 {
-    public GameObject tutorialtrigger;
-    public bool done = false;
-    // Start is called before the first frame update
-    void Start()
+    public class TutorialItem : MonoBehaviour, InputSettings.IHumanActions
     {
-        
-    }
+        public GameObject tutorialtrigger;
+        public bool done = false;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void OnCameraMove(InputAction.CallbackContext context)
+        {
+            //
+        }
+
+        public void OnInteract(InputAction.CallbackContext context)
+        {
+            //
+        }
+
+        public void OnInteractHold(InputAction.CallbackContext context)
+        {
+            print("na");
+            this.gameObject.SetActive(false);
+        }
+
+        public void OnJump(InputAction.CallbackContext context)
+        {
+            print("ni");
+            this.gameObject.SetActive(false);
+        }
+
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            //
+        }
+
+        public void OnSpecial(InputAction.CallbackContext context)
+        {
+            //
+        }
+
+        public void OnSpecial2(InputAction.CallbackContext context)
+        {
+            //
+        }
+
+        public void OnSpecial3(InputAction.CallbackContext context)
+        {
+            //
+        }
+
+        public void OnSwap(InputAction.CallbackContext context)
+        {
+            //
+        }
     }
 }

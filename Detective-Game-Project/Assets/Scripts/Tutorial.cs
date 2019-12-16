@@ -2,50 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tutorial : MonoBehaviour
+namespace Scripts
 {
-    public GameObject Tutorialpanel;
-    public GameObject Tutorialstart;
-
-    private GameObject TutorialItem = null;
-
-    // Start is called before the first frame update
-    void Start()
+    public class Tutorial : InteractableObject
     {
-        Tutorialpanel.SetActive(true);
-        Tutorialstart.SetActive(true);
-        Time.timeScale = 0;
-    }
+        public GameObject Tutorialpanel;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void Resume()
-    {
-        Tutorialpanel.SetActive(false);
-        Tutorialstart.SetActive(false);
-        if (TutorialItem != null)
+        void Start()
         {
-            TutorialItem.SetActive(false);
+            Tutorialpanel.SetActive(false);
         }
-        Time.timeScale = 1;
-    }
 
-    private void OnTriggerEnter(Collider collision)
+        public override void interact()
         {
-            if (collision.tag == "Tutorial")
+            if (Tutorialpanel.activeSelf)
             {
-                if (collision.GetComponent<TutorialItem>().done == false)
-                {
-                    Tutorialpanel.SetActive(true);
-                    TutorialItem = collision.GetComponent<TutorialItem>().tutorialtrigger;
-                    collision.GetComponent<TutorialItem>().tutorialtrigger.SetActive(true);
-                    collision.GetComponent<TutorialItem>().done = true;
-                    Time.timeScale = 0;
-                }
+                Resume();
+            }
+            else
+            {
+                Pause();
             }
         }
+
+        public void Resume()
+        {
+            Tutorialpanel.SetActive(false);
+            Time.timeScale = 1;
+        }
+
+        public void Pause()
+        {
+            Tutorialpanel.SetActive(true);
+            Time.timeScale = 0;
+        }
+    }
 }
