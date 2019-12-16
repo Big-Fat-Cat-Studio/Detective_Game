@@ -40,10 +40,6 @@ public class TriggerDetection : MonoBehaviour
 				CameraCachedP = true;
 			}
 
-			Debug.Log($"Entering : {GetInstanceID()}");
-
-			Debug.Log($"Colliding with : {other.name}");
-
 			Scripts.GameManager.Instance.CameraFollow = DollyHuman;
 
 
