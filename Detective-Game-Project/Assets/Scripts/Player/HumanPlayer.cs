@@ -64,6 +64,7 @@ namespace Scripts
             {
                 gravity = 20.0f;
                 isClimbing = false;
+                move = true;
             }
         }
 
@@ -107,7 +108,6 @@ namespace Scripts
                     else if (canPushPull)
                     {
                         Push();
-                        print("GOGOGO");
                         animator.SetFloat("forward/backward", 0);
                         animator.SetFloat("sidewalk", 0);
                         gameObject.GetComponent<Animator>().SetBool("turning", false);
