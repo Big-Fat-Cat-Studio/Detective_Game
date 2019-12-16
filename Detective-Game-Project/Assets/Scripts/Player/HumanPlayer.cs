@@ -24,7 +24,7 @@ namespace Scripts
             movementSpeed = _movementSpeed;
         }
 
-        private void Start()
+        void Start()
         {
             animator = GetComponent<Animator>();
             playerInteract = GetComponentInChildren<PlayerInteract>();
@@ -205,12 +205,22 @@ namespace Scripts
         protected void OnSpecial2()
         {
             if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human))
-            {
-                umbrella.SetActive(!umbrella.activeSelf);
-
+            {   
+                if (umbrella.activeSelf)
+                {
+                    umbrella.SetActive(false);
+                }
+                else
+                {
+                    umbrella.SetActive(true);
+                }
                 if (umbrellaActiveOnStart)
                 {
                     umbrellaActiveOnStart = false;
+                }
+                else
+                {
+                     umbrellaActiveOnStart = true;
                 }
             }
         }
