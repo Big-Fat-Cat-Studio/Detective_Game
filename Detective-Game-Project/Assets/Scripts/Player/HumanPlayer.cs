@@ -218,6 +218,10 @@ namespace Scripts
                 {
                     umbrellaActiveOnStart = false;
                 }
+                else
+                {
+                     umbrellaActiveOnStart = true;
+                }
             }
         }
     }
