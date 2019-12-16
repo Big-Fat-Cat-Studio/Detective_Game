@@ -49,13 +49,14 @@ namespace Scripts
 
             if (moveDirection.x == 0 && moveDirection.z == 0)
             {
-                CameraFollow.GetComponent<CinemachineFreeLook>().m_RecenterToTargetHeading = new AxisState.Recentering(false, 0, .5f);
+                // CameraFollow.GetComponent<CinemachineFreeLook>().m_RecenterToTargetHeading = new AxisState.Recentering(false, 0, .5f);
                 translationRH *= Time.deltaTime;
                 context.m_XAxis.Value += translationRH;
             }
             else
             {
-                CameraFollow.GetComponent<CinemachineFreeLook>().m_RecenterToTargetHeading = new AxisState.Recentering(true, 0, .5f);
+                // CameraFollow.GetComponent<CinemachineFreeLook>().m_RecenterToTargetHeading = new AxisState.Recentering(true, 0, .5f); // rotate camera behind player
+
                 //this check will be changed laterrrr
                 if (currentPlayer == ActivePlayer.Human)
                 {
@@ -89,6 +90,7 @@ namespace Scripts
 
         protected void Move()
         {
+            transform.localRotation = Quaternion.Euler(0, context.m_XAxis.Value, 0);
             moveDirection = new Vector3(direction.x, 0, direction.y);
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection = Vector3.ClampMagnitude(moveDirection, 1f);
