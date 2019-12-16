@@ -7,23 +7,19 @@ namespace Scripts
     [System.Serializable]
     public class SaveData
     {
-        public Vector3 playerHPos;
-        public Vector3 playerDPos;
-        public string[] completedPuzzles;
         public string[] completedLevels;
         public string levelName;
+        public int levelIndex;
         public bool isDummySave;
         public bool isCheckpoint;
 
-        public SaveData(string[] completedLevels, string levelName, bool isDummySave)
+        public SaveData(int levelIndex, string levelName, bool isDummySave)
         {
             this.levelName = levelName;
-            this.completedLevels = completedLevels;
-            //this.completedPuzzles = completedPuzzles;
+            this.levelIndex = levelIndex;
+            //this.completedLevels = completedLevels;
             this.isDummySave = isDummySave;
             //this.isCheckpoint = isCheckpoint;
-            //this.playerHPos = playerHPos;
-            //this.playerDPos = playerDPos;
         }
     }
 }
