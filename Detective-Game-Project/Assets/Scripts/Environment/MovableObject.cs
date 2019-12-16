@@ -40,19 +40,6 @@ namespace Scripts
 
         private void Update()
         {
-            /*if (both && dogispushing && humanispushing)
-            {
-                pushing = true;
-            }
-            else if (!both)
-            {
-                pushing = !pushing;  
-            }
-            else
-            {
-                pushing = false;
-            }*/
-
             if (humanispushing && !both)
             {
                 fixPlayerPosition(ActivePlayer.Human);
@@ -95,11 +82,6 @@ namespace Scripts
                         rigidBody.velocity = new Vector3(pushforce.x, 0, pushforce.z);
                     }                
                 }
-            }
-            else
-            {
-                //rigidBody.velocity = new Vector3(0, 0, 0);
-                //transform.parent = null;
             }
         }
 
