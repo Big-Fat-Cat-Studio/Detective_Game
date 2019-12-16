@@ -206,14 +206,7 @@ namespace Scripts
         {
             if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human))
             {   
-                if (umbrella.activeSelf)
-                {
-                    umbrella.SetActive(false);
-                }
-                else
-                {
-                    umbrella.SetActive(true);
-                }
+                umbrella.SetActive(!umbrella.activeSelf);
                 if (umbrellaActiveOnStart)
                 {
                     umbrellaActiveOnStart = false;
