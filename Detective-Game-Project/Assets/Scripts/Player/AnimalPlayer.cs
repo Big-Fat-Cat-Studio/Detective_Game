@@ -130,7 +130,7 @@ namespace Scripts {
 
         protected void OnSpecial2()
         {
-            if (!characterController.isGrounded || abilityActive("poop")) return;
+            if (!characterController.isGrounded || abilityActive("poop") || cannotmove) return;
             animator.SetBool("poop", true);
             cannotmove = true;
             activateAbilityTimer("poop");
@@ -140,9 +140,10 @@ namespace Scripts {
 
         protected void OnSpecial3()
         {
-            if (!characterController.isGrounded || abilityActive("piss")) return;
+            if (!characterController.isGrounded || abilityActive("piss") || cannotmove) return;
             animator.SetBool("piss", true);
             cannotmove = true;
+            Debug.Log(cannotmove);
             activateAbilityTimer("piss");
             GameObject piss = (GameObject)Instantiate(Resources.Load("PissPrefab"));
             piss.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.125f, gameObject.transform.position.z);
@@ -183,7 +184,7 @@ namespace Scripts {
             if (abilityActive("piss"))
             {
                 pissTimer = Math.Max(0, pissTimer - Time.deltaTime);
-                if (pissTimer < 12f)
+                if (pissTimer > 12f && pissTimer < 12.6f)
                 {
                     animator.SetBool("piss", false);
                     cannotmove = false;
@@ -192,7 +193,8 @@ namespace Scripts {
             if (abilityActive("poop"))
             {
                 poopTimer = Math.Max(0, poopTimer - Time.deltaTime);
-                if (poopTimer < 12f)
+                
+                if (poopTimer > 12f && poopTimer < 12.6f)
                 {
                     animator.SetBool("poop", false);
                     cannotmove = false;
