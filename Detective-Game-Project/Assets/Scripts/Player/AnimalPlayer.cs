@@ -59,14 +59,7 @@ namespace Scripts {
                 else
                 {
                     animator.SetBool("jump", true);
-                    if (moveDirection.y > 1)
-                    {
-                        animator.SetFloat("jumping", 1);
-                    }
-                    if (moveDirection.y < 0)
-                    {
-                        animator.SetFloat("jumping", -1);
-                    }
+                    animator.SetFloat("jumping", moveDirection.y);
                     
                 }
 
