@@ -6,106 +6,91 @@ public class ViewDetection : MonoBehaviour
 {
     public bool disabled;
     public bool detectOnlyHuman;
+
     public Transform Human;
+    private bool humanDetected;
+    private bool humanInView;
+
     public Transform Dog;
-    public float maxAngle;
-    public float maxRadius;
-    public float heightHuman = 1.5f;
-    public float heightDog = 0.5f;
-    private bool isinFOV = false;
-    private bool isinFOV2 = false;
-    private void OnDrawGizmos()
+    private bool dogDetected;
+    private bool dogInView;
+
+    private bool inView;
+
+    public void inFov(Transform target, string tag)
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, maxRadius);
+        RaycastHit hit;
+        float offset = (tag == "Human" ? 1.5f : 0.5f);
+        Vector3 direction = (target.position + Vector3.up * offset);
 
-        Vector3 line1 = Quaternion.AngleAxis(maxAngle, transform.up)* transform.forward * maxRadius;
-        Vector3 line2 = Quaternion.AngleAxis(-maxAngle, transform.up)* transform.forward * maxRadius;
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(transform.position, line1);
-        Gizmos.DrawRay(transform.position, line2);
-
-        if (!isinFOV)
+        if(Physics.Linecast(transform.position, direction, out hit))
         {
-            Gizmos.color = Color.red;
+            if (tag == "Animal")
+            {
+                dogInView = (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Animal");
+            }
+            else if (tag == "Human")
+            {
+                humanInView = (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Human");
+            }
         }
-        else
-        {
-            Gizmos.color = Color.green;
-        }
-        Gizmos.DrawRay(transform.position, (Human.position - transform.position + Vector3.up * heightHuman).normalized * maxRadius);
-        if (!isinFOV2)
-        {
-            Gizmos.color = Color.red;
-        }
-        else
-        {
-            Gizmos.color = Color.green;
-        }
-        Gizmos.DrawRay(transform.position, (Dog.position - transform.position + Vector3.up * heightDog).normalized * maxRadius);
-
-        Gizmos.color = Color.black;
-        Gizmos.DrawRay(transform.position, gameObject.transform.forward * maxRadius);
     }
 
-    public bool inFOV(Transform checkingObject, Transform target, float maxAngle, float maxRadius) 
-    { 
-        Vector3 directionBetween = (target.position - checkingObject.position).normalized; 
-        directionBetween.y *= 0; 
-        RaycastHit hit; 
-        
-        if ( Physics.Raycast(checkingObject.position, (target.position - checkingObject.position + Vector3.up * heightHuman).normalized, out hit, maxRadius)) 
-        {
-            
-            if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Human") 
-            {
-                float angle = Vector3.Angle(checkingObject.forward, directionBetween);
-                if (angle <= maxAngle) 
-                { 
-                    
-                    return true;
-                } 
-            } 
-        } 
-        return false;
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Animal" && detectOnlyHuman) return;
 
-    }
-    public bool inFOV2(Transform checkingObject, Transform target, float maxAngle, float maxRadius) 
-    { 
-        Vector3 directionBetween = (target.position - checkingObject.position).normalized; 
-        directionBetween.y *= 0; 
-        RaycastHit hit; 
-        
-        if ( Physics.Raycast(checkingObject.position, (target.position - checkingObject.position + Vector3.up * heightDog).normalized, out hit, maxRadius)) 
+        if (other.tag == "Human")
         {
-            
-            if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Animal") 
-            {
-                float angle = Vector3.Angle(checkingObject.forward, directionBetween);
-                if (angle <= maxAngle) 
-                { 
-                    
-                    return true;
-                } 
-            } 
-        } 
-        return false;
+            humanDetected = true;
+        }
+        else if (other.tag == "Animal")
+        {
+            dogDetected = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Animal" && detectOnlyHuman) return;
+
+        if (other.tag == "Human")
+        {
+            humanDetected = false;
+            humanInView = false;
+        }
+        else if (other.tag == "Animal")
+        {
+            dogDetected = false;
+            dogInView = false;
+        }
     }
 
     void FixedUpdate()
     {
-        if (disabled) return;
-
-        if (detectOnlyHuman)
+        if (humanDetected)
         {
-            isinFOV = inFOV(transform, Human, maxAngle, maxRadius);
+            inFov(Human, "Human");
+        }
+        
+        if (dogDetected)
+        {
+            inFov(Dog, "Animal");
+        }
+        handleAlarm();
+    }
+
+    void handleAlarm()
+    {
+        if (dogInView || humanInView)
+        {
+            inView = true;
+            GetComponent<Light>().color = Color.red;
         }
         else
         {
-            isinFOV = inFOV(transform, Human, maxAngle, maxRadius);
-            isinFOV2 = inFOV2(transform, Dog, maxAngle, maxRadius);
+            inView = false;
+            GetComponent<Light>().color = Color.white;
         }
-        
     }
 }
