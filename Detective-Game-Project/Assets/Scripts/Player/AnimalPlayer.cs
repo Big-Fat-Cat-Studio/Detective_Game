@@ -11,6 +11,7 @@ namespace Scripts {
         public float boostTimer = 0f;
         public float pissTimer = 0f;
         public float poopTimer = 0f;
+        private bool cannotmove = false;
         Animator animator;
 
         private void Start()
@@ -58,20 +59,18 @@ namespace Scripts {
                 else
                 {
                     animator.SetBool("jump", true);
-                    if (moveDirection.y > 1)
-                    {
-                        animator.SetFloat("jumping", 1);
-                    }
-                    if (moveDirection.y < 0)
-                    {
-                        animator.SetFloat("jumping", -1);
-                    }
+                    animator.SetFloat("jumping", moveDirection.y);
                     
                 }
 
                 if (characterController.isGrounded && move)
                 {
-                    if (canPushPull)
+                    if (cannotmove)
+                    {
+                        moveDirection = Vector3.zero;
+                        move = false;
+                    }
+                    else if (canPushPull)
                     {
                         Push();
                         move = false;
@@ -87,7 +86,11 @@ namespace Scripts {
 
                 if (jump)
                 {
-                    Jump();
+                    if (!cannotmove) 
+                    {
+                        Jump();
+                    }
+                   
                     jump = false;
                 }
                 abilityHandler();
@@ -127,8 +130,9 @@ namespace Scripts {
 
         protected void OnSpecial2()
         {
-            if (!characterController.isGrounded || abilityActive("poop")) return;
-
+            if (!characterController.isGrounded || abilityActive("poop") || cannotmove) return;
+            animator.SetBool("poop", true);
+            cannotmove = true;
             activateAbilityTimer("poop");
             GameObject poop = (GameObject)Instantiate(Resources.Load("PoopPrefab"));
             poop.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.125f, gameObject.transform.position.z);
@@ -136,8 +140,10 @@ namespace Scripts {
 
         protected void OnSpecial3()
         {
-            if (!characterController.isGrounded || abilityActive("piss")) return;
-
+            if (!characterController.isGrounded || abilityActive("piss") || cannotmove) return;
+            animator.SetBool("piss", true);
+            cannotmove = true;
+            Debug.Log(cannotmove);
             activateAbilityTimer("piss");
             GameObject piss = (GameObject)Instantiate(Resources.Load("PissPrefab"));
             piss.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.125f, gameObject.transform.position.z);
@@ -149,6 +155,7 @@ namespace Scripts {
             {
                 case "speedBoost":
                     boostTimer = 3f;
+                    animator.SetBool("run", true);
                     movementSpeed = 10f;
                     break;
                 case "piss":
@@ -168,15 +175,30 @@ namespace Scripts {
             if (abilityActive("speedBoost"))
             {
                 boostTimer = Math.Max(0, boostTimer - Time.deltaTime);
-                if (boostTimer == 0) movementSpeed = 5f;
+                if (boostTimer == 0)
+                {
+                    animator.SetBool("run", false);
+                    movementSpeed = 5f;
+                } 
             }
             if (abilityActive("piss"))
             {
                 pissTimer = Math.Max(0, pissTimer - Time.deltaTime);
+                if (pissTimer > 12f && pissTimer < 12.6f)
+                {
+                    animator.SetBool("piss", false);
+                    cannotmove = false;
+                } 
             }
             if (abilityActive("poop"))
             {
                 poopTimer = Math.Max(0, poopTimer - Time.deltaTime);
+                
+                if (poopTimer > 12f && poopTimer < 12.6f)
+                {
+                    animator.SetBool("poop", false);
+                    cannotmove = false;
+                } 
             }
         }
 

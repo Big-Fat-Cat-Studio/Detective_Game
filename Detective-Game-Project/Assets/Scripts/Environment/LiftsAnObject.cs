@@ -7,8 +7,15 @@ namespace Scripts
     public class LiftsAnObject : InteractableObject
     {
         public GameObject objectToLift;
+        public bool CheckStates;
+        // Add ObjectState script to each of these objects
+        // Add "InteractState State = InteractState.[STATUS]" to said script
+        // If InteractState State = InteractState.ACTIVATED" -> allow interaction
+        [Tooltip("Each object is required to have the enum XENUM")]
+        public GameObject[] RequiredStates;
 
-        // Start is called before the first frame update
+        private int CheckedNum;
+
         void Start()
         {
             interactableType = InteractableType.Normal;
@@ -16,7 +23,22 @@ namespace Scripts
 
         public override void interact()
         {
-            objectToLift.GetComponent<ObjectToLift>().startMoving();
+            if (CheckStates)
+            {
+                CheckedNum = 0;
+                // Check if each state is active.
+                foreach (GameObject state in RequiredStates)
+                    if (state.GetComponent<ObjectState>().State == InteractState.ACTIVATED)
+                        CheckedNum += 1;
+                // If the number of ACTIVATES == the number of objects in need
+                // of activation -> only then run the interaction.
+                if (RequiredStates.Length == CheckedNum)
+                {
+                    objectToLift.GetComponent<ObjectToLift>().startMoving();
+                }
+            }
+            else
+                objectToLift.GetComponent<ObjectToLift>().startMoving();
         }
     }
 }
