@@ -138,6 +138,10 @@ namespace Scripts
                     {
                         ((DestroyAndSpawn)interactableObject).interact(currentPlayer, holding);
                     }
+                    else if (interactableObject.interactableType == InteractableType.STATECHANGER)
+                    {
+                        ((InteractChangeState)interactableObject).interact(holding);
+                    }
                     else if (interactableObject.interactableType != InteractableType.HoldButton)
                     {
                         interactableObject.interact();

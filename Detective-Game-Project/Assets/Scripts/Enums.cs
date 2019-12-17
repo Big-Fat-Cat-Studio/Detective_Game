@@ -22,7 +22,8 @@
         HoldButton,
         Movable,
         EndLevel,
-        DEBUG
+        DEBUG, // Interacting with a DEBUG spawns an item without destroying root item
+        STATECHANGER // Interacting with a STATECHANGER only changes a state
     }
 
     public enum ButtonPress
@@ -63,5 +64,11 @@
     {
         Keyboard,
         Controller
+    }
+
+    public enum InteractState
+    {
+        DEACTIVATED,
+        ACTIVATED
     }
 }
