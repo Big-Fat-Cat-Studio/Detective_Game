@@ -21,7 +21,8 @@
         Pickup,
         HoldButton,
         Movable,
-        EndLevel
+        EndLevel,
+        DEBUG
     }
 
     public enum ButtonPress

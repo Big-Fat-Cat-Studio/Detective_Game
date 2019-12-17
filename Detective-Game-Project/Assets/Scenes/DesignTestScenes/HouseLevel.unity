@@ -2871,7 +2871,7 @@ Transform:
   - {fileID: 650170105}
   - {fileID: 359886554}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &86259105
 Mesh:
@@ -19591,14 +19591,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerThatCanInteract: 0
-  interactMessage: Grab your glasses.
+  interactMessage: 
   interactable: 1
   interactableType: 0
   neededItem: {fileID: 0}
   itemToSpawn: {fileID: 5645848008309971076, guid: ba3e155bcb99d0e498d7b2b4a0518bbf,
     type: 3}
-  afterInteractMessage: put your glasses on.
-  DontDestroy: 1
+  afterInteractMessage: 
+  DEBUG: 1
+  Consumed: 0
 --- !u!1 &571860382 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 927349722386635769, guid: a221c9c57caceb943b9fc54d2e48b8ba,
@@ -22588,9 +22589,10 @@ GameObject:
   - component: {fileID: 643272261}
   - component: {fileID: 643272260}
   - component: {fileID: 643272259}
+  - component: {fileID: 643272263}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22662,12 +22664,31 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 643272258}
   m_LocalRotation: {x: 0.00032857197, y: 0.71097094, z: 0.00022464152, w: 0.7032213}
-  m_LocalPosition: {x: -21.862, y: 4.103, z: -12.51}
+  m_LocalPosition: {x: -21.862, y: 4.053, z: -12.51}
   m_LocalScale: {x: 1, y: 1.8799868, z: 0.31}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0.008, y: 90.628006, z: 0.045}
+--- !u!114 &643272263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643272258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb6fe8982e5a64d4fb465c5e3f63935b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerThatCanInteract: 0
+  interactMessage: 
+  interactable: 1
+  interactableType: 0
+  neededItem: {fileID: 5645848008309971076, guid: ba3e155bcb99d0e498d7b2b4a0518bbf,
+    type: 3}
+  afterInteractMessage: 
 --- !u!4 &643608029 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: cd09bf58a199649cc947ac763f73b37a,
@@ -49611,7 +49632,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh47832
+  m_Name: pb_Mesh53168
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -55996,7 +56017,7 @@ PrefabInstance:
     - target: {fileID: 6203216602602056548, guid: 95068f9bebc29cf45baf8472d5d214c1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6203216602602056548, guid: 95068f9bebc29cf45baf8472d5d214c1,
         type: 3}
@@ -63867,9 +63888,10 @@ GameObject:
   - component: {fileID: 1615656072}
   - component: {fileID: 1615656071}
   - component: {fileID: 1615656070}
+  - component: {fileID: 1615656074}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Interact
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63947,6 +63969,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1615656074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615656069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb6fe8982e5a64d4fb465c5e3f63935b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerThatCanInteract: 0
+  interactMessage: open grandpa's door.
+  interactable: 1
+  interactableType: 0
+  neededItem: {fileID: 0}
+  afterInteractMessage: Door opened.
 --- !u!1 &1635838957
 GameObject:
   m_ObjectHideFlags: 0
@@ -79108,7 +79148,8 @@ MonoBehaviour:
   interactMessage: to open the door.
   interactable: 1
   interactableType: 0
-  neededItem: {fileID: 0}
+  neededItem: {fileID: 5645848008309971076, guid: ba3e155bcb99d0e498d7b2b4a0518bbf,
+    type: 3}
   afterInteractMessage: to open the door.
 --- !u!43 &1934079574
 Mesh:

@@ -17,7 +17,6 @@ namespace Scripts {
 
         public virtual void interact()
         {
-
         }
     }
 }
