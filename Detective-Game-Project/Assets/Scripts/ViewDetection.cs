@@ -4,18 +4,33 @@ using UnityEngine;
 
 public class ViewDetection : MonoBehaviour
 {
-    public bool disabled;
     public bool detectOnlyHuman;
 
     public Transform Human;
-    private bool humanDetected;
-    private bool humanInView;
+    public bool humanDetected, humanInView;
 
     public Transform Dog;
-    private bool dogDetected;
-    private bool dogInView;
+    public bool dogDetected, dogInView;
 
-    private bool inView;
+    public bool inView;
+    private bool disabled;
+
+    void OnEnable()
+    {
+        if (!disabled) return;
+
+        Collider collider = transform.GetChild(0).transform.gameObject.GetComponent<MeshCollider>();
+
+        humanDetected = humanInView = collider.bounds.Contains(Human.position);
+        dogDetected = dogInView = collider.bounds.Contains(Dog.position);
+
+        disabled = false;
+    }
+
+    void OnDisable()
+    {
+        disabled = true;
+    }
 
     public void inFov(Transform target, string tag)
     {
@@ -36,7 +51,7 @@ public class ViewDetection : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    public void OnChildTriggerEnter(Collider other)
     {
         if (other.tag == "Animal" && detectOnlyHuman) return;
 
@@ -50,19 +65,17 @@ public class ViewDetection : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
+    public void OnChildTriggerExit(Collider other)
     {
         if (other.tag == "Animal" && detectOnlyHuman) return;
 
         if (other.tag == "Human")
         {
-            humanDetected = false;
-            humanInView = false;
+            humanDetected = humanInView = false;
         }
         else if (other.tag == "Animal")
         {
-            dogDetected = false;
-            dogInView = false;
+            dogDetected = dogInView = false;
         }
     }
 
