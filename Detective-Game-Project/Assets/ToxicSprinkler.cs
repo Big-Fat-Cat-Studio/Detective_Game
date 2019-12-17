@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ToxicSprinkler : MonoBehaviour
+namespace Scripts
 {
-    public ParticleSystem water;
-
-    public void Disable()
+    public class ToxicSprinkler : MonoBehaviour
     {
-        this.gameObject.GetComponent<BoxCollider>().isTrigger = true;
-        water.Stop();
+        public ParticleSystem water;
+
+        public void Disable()
+        {
+            this.gameObject.GetComponent<BoxCollider>().isTrigger = true;
+            water.Stop();
+        }
     }
 }

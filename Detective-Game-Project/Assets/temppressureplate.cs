@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class temppressureplate : MonoBehaviour
+namespace Scripts
 {
-    public GameObject[] toxicSprinklers;
-
-    private void OnTriggerEnter(Collider other)
+    public class temppressureplate : MonoBehaviour
     {
-        if(other.gameObject.tag == "Human" || other.gameObject.tag == "Animal")
+        public GameObject[] toxicSprinklers;
+
+        private void OnTriggerEnter(Collider other)
         {
-            print("getriggered");
-            foreach(GameObject sprinkler in toxicSprinklers)
+            if (other.gameObject.tag == "Human" || other.gameObject.tag == "Animal")
             {
-                sprinkler.GetComponent<ToxicSprinkler>().Disable();
+                print("getriggered");
+                foreach (GameObject sprinkler in toxicSprinklers)
+                {
+                    sprinkler.GetComponent<ToxicSprinkler>().Disable();
+                }
             }
         }
     }
