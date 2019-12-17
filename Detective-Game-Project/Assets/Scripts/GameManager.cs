@@ -282,5 +282,17 @@ namespace Scripts
         {
             clues.ForEach(clue => clue.toggleClues());
         }
+
+        public string getPlayerName(ActivePlayer player)
+        {
+            if (player == ActivePlayer.Human)
+            {
+                return "Kika";
+            }
+            else
+            {
+                return "Daigo";
+            }
+        }
     }
 }

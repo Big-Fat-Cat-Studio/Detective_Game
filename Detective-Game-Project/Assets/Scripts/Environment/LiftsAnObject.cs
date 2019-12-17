@@ -14,7 +14,7 @@ namespace Scripts
             interactableType = InteractableType.Normal;
         }
 
-        public override void interact()
+        public override void interact(ActivePlayer player)
         {
             objectToLift.GetComponent<ObjectToLift>().startMoving();
         }

@@ -13,7 +13,7 @@ namespace Scripts
             Tutorialpanel.SetActive(false);
         }
 
-        public override void interact()
+        public override void interact(ActivePlayer player)
         {
             if (Tutorialpanel.activeSelf)
             {
@@ -21,7 +21,7 @@ namespace Scripts
             }
             else
             {
-                Pause();
+                Pause(player);
             }
         }
 
@@ -31,9 +31,14 @@ namespace Scripts
             Time.timeScale = 1;
         }
 
-        public void Pause()
+        public void Pause(ActivePlayer player)
         {
             Tutorialpanel.SetActive(true);
+            TutorialPanel panel = Tutorialpanel.GetComponent<TutorialPanel>();
+            if (panel != null)
+            {
+                panel.showText(player);
+            }
             Time.timeScale = 0;
         }
     }

@@ -15,7 +15,7 @@ namespace Scripts {
         [HideInInspector]
         public InteractableType interactableType;
 
-        public virtual void interact()
+        public virtual void interact(ActivePlayer player)
         {
 
         }

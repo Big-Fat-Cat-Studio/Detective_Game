@@ -82,14 +82,7 @@ namespace Scripts
 
                 if (objectInteractedWith.interactableType == InteractableType.HoldButton)
                 {
-                    if (objectInteractedWith is MovableObject)
-                    {
-                        ((MovableObject)objectInteractedWith).interact(currentPlayer);
-                    }
-                    else
-                    {
-                        objectInteractedWith.GetComponent<InteractableObject>().interact();
-                    }
+                    objectInteractedWith.GetComponent<InteractableObject>().interact(currentPlayer);
                     return;
                 }
             }
@@ -104,15 +97,13 @@ namespace Scripts
                 {
                     if (interactableObject.interactableType == InteractableType.HoldButton)
                     {
+                        interactableObject.interact(currentPlayer);
+
                         if (interactableObject is MovableObject)
                         {
-                            ((MovableObject)interactableObject).interact(currentPlayer);
                             GetComponentInParent<Player>().move = true;
                         }
-                        else
-                        {
-                            interactableObject.interact();
-                        }
+
                         objectInteractedWith = interactableObject;
                     }
                 }
@@ -125,7 +116,7 @@ namespace Scripts
                     else
                     {
                         giveItem(closestInteractable);
-                        holding.GetComponent<InteractableObject>().interact();
+                        holding.GetComponent<InteractableObject>().interact(currentPlayer);
                     }
                 }
                 else
@@ -136,7 +127,7 @@ namespace Scripts
                     }
                     else if (interactableObject.interactableType != InteractableType.HoldButton)
                     {
-                        interactableObject.interact();
+                        interactableObject.interact(currentPlayer);
                     }
 
                     //Check if the object disappeared or if the player can't interact with it anymore
@@ -174,7 +165,7 @@ namespace Scripts
         {
             if (holding != null)
             {
-                holding.GetComponent<InteractableObject>().interact();
+                holding.GetComponent<InteractableObject>().interact(currentPlayer);
                 holding.transform.rotation = transform.rotation;
                 Rigidbody holdingRigidBody = holding.GetComponent<Rigidbody>();
                 holdingRigidBody.AddRelativeForce(new Vector3(0f, holdingRigidBody.mass * 100, holdingRigidBody.mass * 500));
@@ -207,7 +198,7 @@ namespace Scripts
                 GameManager.Instance.showAfterInteractText(currentPlayer, key.fullItemText);
                 GameObject newItem = Instantiate(key.fullItem);
                 holding = newItem;
-                holding.GetComponent<Pickup>().interact();
+                holding.GetComponent<Pickup>().interact(currentPlayer);
                 interactableObjects.Remove(holding);
             }
             else
@@ -237,7 +228,7 @@ namespace Scripts
             if (holding != null)
             {
                 holding.GetComponent<BoxCollider>().isTrigger = false;
-                holding.GetComponent<InteractableObject>().interact();
+                holding.GetComponent<InteractableObject>().interact(currentPlayer);
                 holding = null;
             }
         }

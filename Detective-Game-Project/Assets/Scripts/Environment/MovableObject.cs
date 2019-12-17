@@ -22,7 +22,7 @@ namespace Scripts
             rigidBody = GetComponent<Rigidbody>();
         }
 
-        public void interact(ActivePlayer player)
+        public override void interact(ActivePlayer player)
         {
             if (player == ActivePlayer.Animal)
             {
