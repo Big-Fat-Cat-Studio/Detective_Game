@@ -32,7 +32,7 @@ namespace Scripts
             this.colorSequence = new List<Color>();
             this.input = new List<string>();
             this.convertedSolution = this.ConvertSolution();
-            this.colorSequence.Add(Color.white);
+            this.colorSequence.Add(Color.clear);
             this.InsertColors();
             StartCoroutine(this.CheckSolution());
             if (lamp != null)
