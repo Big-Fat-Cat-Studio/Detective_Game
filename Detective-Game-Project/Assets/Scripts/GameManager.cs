@@ -24,6 +24,7 @@ namespace Scripts
             {
                 Instance = this;
             }
+            //Instance = this;
         }
 
         public GameType GameType;
@@ -83,6 +84,8 @@ namespace Scripts
                 CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
             }
             else if (GameType == GameType.MultiPlayerSplitScreen) {
+                //PlayerOne = CharacterManager.Instance.PlayerOne;
+                //PlayerTwo = CharacterManager.Instance.PlayerTwo;
                 if (PlayerOne == ActivePlayer.Human)
                 {
                     CameraFollow.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X";

@@ -81,7 +81,7 @@ namespace Scripts {
                         Move();
                         move = false;
                         animator.SetBool("jump", false);
-                        animator.SetFloat("idl/walking", moveDirection.z);
+                        animator.SetFloat("Walking", moveDirection.z);
                     }
                 }
 

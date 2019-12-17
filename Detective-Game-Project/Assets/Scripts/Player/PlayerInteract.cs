@@ -38,7 +38,7 @@ namespace Scripts
             {
                 holding.transform.rotation = holdingPoint.rotation; //rotation must be fixed
                 holding.transform.position = holdingPoint.position;
-                holding.GetComponent<BoxCollider>().isTrigger = true;
+                holding.GetComponent<Collider>().isTrigger = true;
             }
 
             //Remove the text when the player is not active anymore
@@ -133,6 +133,10 @@ namespace Scripts
                     if (interactableObject.interactableType == InteractableType.Destroyable)
                     {
                         ((DestroyableObject)interactableObject).interact(currentPlayer, holding);
+                    }
+                    else if(interactableObject.interactableType == InteractableType.DEBUG)
+                    {
+                        ((DestroyAndSpawn)interactableObject).interact(currentPlayer, holding);
                     }
                     else if (interactableObject.interactableType != InteractableType.HoldButton)
                     {
@@ -236,7 +240,7 @@ namespace Scripts
         {
             if (holding != null)
             {
-                holding.GetComponent<BoxCollider>().isTrigger = false;
+                holding.GetComponent<Collider>().isTrigger = false;
                 holding.GetComponent<InteractableObject>().interact();
                 holding = null;
             }
