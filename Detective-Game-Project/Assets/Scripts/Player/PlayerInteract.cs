@@ -287,10 +287,10 @@ namespace Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-            print(other.gameObject.name);
             if (other.gameObject.tag == Constant.TAG_INTERACT 
                 && !ReferenceEquals(other.gameObject, holding)
                 && other.gameObject.GetComponent<InteractableObject>().interactable
+                && !interactableObjects.Contains(other.gameObject)
                 && (other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == currentPlayer
                     || other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == ActivePlayer.Both))
             {

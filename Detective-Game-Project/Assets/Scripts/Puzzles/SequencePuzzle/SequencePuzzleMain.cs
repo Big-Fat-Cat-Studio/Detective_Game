@@ -29,6 +29,7 @@ namespace Scripts
         {
             this.timer = this.maxCountdown;
             this.timerText = GameObject.FindGameObjectWithTag("Timer").GetComponent<Text>();
+            this.timerText.gameObject.SetActive(false);
             this.colorSequence = new List<Color>();
             this.input = new List<string>();
             this.convertedSolution = this.ConvertSolution();

@@ -335,6 +335,298 @@ public class @InputSettings : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Pipe"",
+            ""id"": ""54305c06-6dbc-446a-b49f-fedf0e8956eb"",
+            ""actions"": [
+                {
+                    ""name"": ""Up"",
+                    ""type"": ""Button"",
+                    ""id"": ""05929e84-8b28-419e-9e86-9d5d09024c76"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""987626d0-1ceb-44ac-8b7e-2910ea3de494"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""709bb4a1-01a6-44f6-a489-6c4c883095cb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""fd4bc68a-42f2-473c-b60e-10737aef49e8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RotateLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""ede759dc-57f9-4e24-aadc-8e6db9b81f80"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RotateRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""d55fbe71-c473-478b-bc15-ec0335b8211a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Place"",
+                    ""type"": ""Button"",
+                    ""id"": ""a4ab00e4-e95c-4cd4-b920-482db26a0633"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""a1725aa7-7b6c-48fc-b0e2-15262785abe9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""dd9483a7-a131-4621-a138-7e61ba8cfeba"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""64650c43-0265-44f1-a286-c11ef884ed80"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5b3ce08a-697b-44ce-9d2f-82e7b160f607"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c86a935e-0205-4428-a0ac-7a67291dc0f2"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""53249797-946f-4084-8c9a-0ef23b134f46"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""48aded56-90ee-4e09-a8a7-f4e2abb90475"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9e3c7ce9-5807-45ec-9ee8-586b525b1f61"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""980bddd3-9cc4-49be-9de9-338562e20ce6"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b49db4af-4d2a-4959-9c75-18c486bf7939"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c4d30a6-4386-4583-8c85-3b833047b356"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8801ab11-d63a-4f22-b245-f876554c4327"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91cd4631-c0f0-41dd-9348-a5e9f29e4e1b"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f12a28e-04a0-4efc-bdc1-a777a94e29e6"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""RotateLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa80544c-b72f-4d7c-a4e4-1b8eaf8f0ca7"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""RotateLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ea28a075-22bc-4957-85fa-b1085d865f8b"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""RotateRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e8a0d22d-b57a-485d-8173-39d5539ed9fc"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""RotateRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""53f8a34e-3d56-4f5a-90bb-4e677b493988"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Place"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eabbea52-d8ab-4de4-b628-192b2c983bca"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Place"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5b14956c-3d4e-4deb-8fba-2249dc7fada8"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6ac35a7-03f6-4f30-8116-e0098cbae240"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -378,6 +670,16 @@ public class @InputSettings : IInputActionCollection, IDisposable
         m_Human_Jump = m_Human.FindAction("Jump", throwIfNotFound: true);
         m_Human_CameraMove = m_Human.FindAction("CameraMove", throwIfNotFound: true);
         m_Human_Special3 = m_Human.FindAction("Special3", throwIfNotFound: true);
+        // Pipe
+        m_Pipe = asset.FindActionMap("Pipe", throwIfNotFound: true);
+        m_Pipe_Up = m_Pipe.FindAction("Up", throwIfNotFound: true);
+        m_Pipe_Down = m_Pipe.FindAction("Down", throwIfNotFound: true);
+        m_Pipe_Left = m_Pipe.FindAction("Left", throwIfNotFound: true);
+        m_Pipe_Right = m_Pipe.FindAction("Right", throwIfNotFound: true);
+        m_Pipe_RotateLeft = m_Pipe.FindAction("RotateLeft", throwIfNotFound: true);
+        m_Pipe_RotateRight = m_Pipe.FindAction("RotateRight", throwIfNotFound: true);
+        m_Pipe_Place = m_Pipe.FindAction("Place", throwIfNotFound: true);
+        m_Pipe_Exit = m_Pipe.FindAction("Exit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -520,6 +822,95 @@ public class @InputSettings : IInputActionCollection, IDisposable
         }
     }
     public HumanActions @Human => new HumanActions(this);
+
+    // Pipe
+    private readonly InputActionMap m_Pipe;
+    private IPipeActions m_PipeActionsCallbackInterface;
+    private readonly InputAction m_Pipe_Up;
+    private readonly InputAction m_Pipe_Down;
+    private readonly InputAction m_Pipe_Left;
+    private readonly InputAction m_Pipe_Right;
+    private readonly InputAction m_Pipe_RotateLeft;
+    private readonly InputAction m_Pipe_RotateRight;
+    private readonly InputAction m_Pipe_Place;
+    private readonly InputAction m_Pipe_Exit;
+    public struct PipeActions
+    {
+        private @InputSettings m_Wrapper;
+        public PipeActions(@InputSettings wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Up => m_Wrapper.m_Pipe_Up;
+        public InputAction @Down => m_Wrapper.m_Pipe_Down;
+        public InputAction @Left => m_Wrapper.m_Pipe_Left;
+        public InputAction @Right => m_Wrapper.m_Pipe_Right;
+        public InputAction @RotateLeft => m_Wrapper.m_Pipe_RotateLeft;
+        public InputAction @RotateRight => m_Wrapper.m_Pipe_RotateRight;
+        public InputAction @Place => m_Wrapper.m_Pipe_Place;
+        public InputAction @Exit => m_Wrapper.m_Pipe_Exit;
+        public InputActionMap Get() { return m_Wrapper.m_Pipe; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PipeActions set) { return set.Get(); }
+        public void SetCallbacks(IPipeActions instance)
+        {
+            if (m_Wrapper.m_PipeActionsCallbackInterface != null)
+            {
+                @Up.started -= m_Wrapper.m_PipeActionsCallbackInterface.OnUp;
+                @Up.performed -= m_Wrapper.m_PipeActionsCallbackInterface.OnUp;
+                @Up.canceled -= m_Wrapper.m_PipeActionsCallbackInterface.OnUp;
+                @Down.started -= m_Wrapper.m_PipeActionsCallbackInterface.OnDown;
+                @Down.performed -= m_Wrapper.m_PipeActionsCallbackInterface.OnDown;
+                @Down.canceled -= m_Wrapper.m_PipeActionsCallbackInterface.OnDown;
+                @Left.started -= m_Wrapper.m_PipeActionsCallbackInterface.OnLeft;
+                @Left.performed -= m_Wrapper.m_PipeActionsCallbackInterface.OnLeft;
+                @Left.canceled -= m_Wrapper.m_PipeActionsCallbackInterface.OnLeft;
+                @Right.started -= m_Wrapper.m_PipeActionsCallbackInterface.OnRight;
+                @Right.performed -= m_Wrapper.m_PipeActionsCallbackInterface.OnRight;
+                @Right.canceled -= m_Wrapper.m_PipeActionsCallbackInterface.OnRight;
+                @RotateLeft.started -= m_Wrapper.m_PipeActionsCallbackInterface.OnRotateLeft;
+                @RotateLeft.performed -= m_Wrapper.m_PipeActionsCallbackInterface.OnRotateLeft;
+                @RotateLeft.canceled -= m_Wrapper.m_PipeActionsCallbackInterface.OnRotateLeft;
+                @RotateRight.started -= m_Wrapper.m_PipeActionsCallbackInterface.OnRotateRight;
+                @RotateRight.performed -= m_Wrapper.m_PipeActionsCallbackInterface.OnRotateRight;
+                @RotateRight.canceled -= m_Wrapper.m_PipeActionsCallbackInterface.OnRotateRight;
+                @Place.started -= m_Wrapper.m_PipeActionsCallbackInterface.OnPlace;
+                @Place.performed -= m_Wrapper.m_PipeActionsCallbackInterface.OnPlace;
+                @Place.canceled -= m_Wrapper.m_PipeActionsCallbackInterface.OnPlace;
+                @Exit.started -= m_Wrapper.m_PipeActionsCallbackInterface.OnExit;
+                @Exit.performed -= m_Wrapper.m_PipeActionsCallbackInterface.OnExit;
+                @Exit.canceled -= m_Wrapper.m_PipeActionsCallbackInterface.OnExit;
+            }
+            m_Wrapper.m_PipeActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Up.started += instance.OnUp;
+                @Up.performed += instance.OnUp;
+                @Up.canceled += instance.OnUp;
+                @Down.started += instance.OnDown;
+                @Down.performed += instance.OnDown;
+                @Down.canceled += instance.OnDown;
+                @Left.started += instance.OnLeft;
+                @Left.performed += instance.OnLeft;
+                @Left.canceled += instance.OnLeft;
+                @Right.started += instance.OnRight;
+                @Right.performed += instance.OnRight;
+                @Right.canceled += instance.OnRight;
+                @RotateLeft.started += instance.OnRotateLeft;
+                @RotateLeft.performed += instance.OnRotateLeft;
+                @RotateLeft.canceled += instance.OnRotateLeft;
+                @RotateRight.started += instance.OnRotateRight;
+                @RotateRight.performed += instance.OnRotateRight;
+                @RotateRight.canceled += instance.OnRotateRight;
+                @Place.started += instance.OnPlace;
+                @Place.performed += instance.OnPlace;
+                @Place.canceled += instance.OnPlace;
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
+            }
+        }
+    }
+    public PipeActions @Pipe => new PipeActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -549,5 +940,16 @@ public class @InputSettings : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnCameraMove(InputAction.CallbackContext context);
         void OnSpecial3(InputAction.CallbackContext context);
+    }
+    public interface IPipeActions
+    {
+        void OnUp(InputAction.CallbackContext context);
+        void OnDown(InputAction.CallbackContext context);
+        void OnLeft(InputAction.CallbackContext context);
+        void OnRight(InputAction.CallbackContext context);
+        void OnRotateLeft(InputAction.CallbackContext context);
+        void OnRotateRight(InputAction.CallbackContext context);
+        void OnPlace(InputAction.CallbackContext context);
+        void OnExit(InputAction.CallbackContext context);
     }
 }
