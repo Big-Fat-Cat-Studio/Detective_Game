@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Scripts
 {
-    public class SprinklerPuzzle : MonoBehaviour
+    public class SprinklerPuzzle : InteractableObject
     {
         // ElEMENTS / IMAGES NEED TO BE ADDED IN FOLLOWING ORDER: 4, 3, 5, 1, 2
         public GameObject victoryInteraction;
@@ -56,8 +56,18 @@ namespace Scripts
             }
         }
 
+        public override void interact()
+        {
+            if (!puzzleCamera.activeSelf)
+            {
+                puzzleCamera.SetActive(true);
+                indicator.SetActive(true);
+                GameManager.Instance.Human.GetComponent<HumanPlayer>().isInPuzzle = true;
+                interactable = false;
+            }
+        }
 
-        void OnTriggerStay(Collider collision)
+        /*void OnTriggerStay(Collider collision)
         {
             if (ReferenceEquals(collision.gameObject, GameManager.Instance.Human))
             {
@@ -68,11 +78,16 @@ namespace Scripts
                     GameManager.Instance.Human.GetComponent<HumanPlayer>().isInPuzzle = true;
                 }
             }
-        }
+        }*/
 
 
         void Update()
         {
+            if (selector.transform.position == new Vector3(937.5f, -270, 0))
+            {
+                selector.transform.position = imageArray[0].transform.position;
+            }
+
             // Move pipe selector
             if (Input.GetKeyDown (KeyCode.S))
             {
@@ -296,6 +311,7 @@ namespace Scripts
             puzzleCamera.SetActive(false);
             indicator.SetActive(false);
             GameManager.Instance.Human.GetComponent<HumanPlayer>().isInPuzzle = false;
+            interactable = true;
             if (solved == 5)
             {
                 victoryInteraction.GetComponent<IPuzzleResult>().ActivateSolution();

@@ -45,6 +45,7 @@ namespace Scripts
         {
             if(puzzleHasStarted)
             {
+                this.timerText.gameObject.SetActive(true);
                 this.timer -= Time.deltaTime;
                 this.timerText.text = "Timer: " + this.timer.ToString();
             }
@@ -139,6 +140,7 @@ namespace Scripts
         {
             this.puzzleHasStarted = false;
             this.timerText.text = "";
+            this.timerText.gameObject.SetActive(false);
             StopCoroutine(CheckSolution());
 
             if (lamp != null)
