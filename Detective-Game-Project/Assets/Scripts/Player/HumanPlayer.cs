@@ -210,7 +210,11 @@ namespace Scripts
                 }
                 else
                 {
-                     umbrellaActiveOnStart = true;
+                    umbrellaActiveOnStart = true;
+                }
+                if (umbrella.activeSelf)
+                {
+                    animator.SetTrigger("openUmbrella");
                 }
             }
         }
