@@ -12,6 +12,7 @@ namespace Scripts
         private GameObject playerObject;
         private Vector3 pushforce;
         bool dogispushing = false;
+        bool hitDog;
         public bool both;
         int count = 0;
         bool humanispushing = false;
@@ -42,9 +43,21 @@ namespace Scripts
         {
             if (humanispushing && !both)
             {
-                fixPlayerPosition(ActivePlayer.Human);
-                pushforce = GameManager.Instance.Human.GetComponent<HumanPlayer>().moveDirection;
-                rigidBody.velocity = new Vector3(pushforce.x, 0, pushforce.z);
+                if (hitDog)
+                {
+                    if (GameManager.Instance.Animal.transform.position.y > transform.position.y)
+                    {
+                        pushBox();
+                    }
+                    else
+                    {
+                        //if ()
+                    }
+                }
+                else
+                {
+                    pushBox();
+                }
             }
             else if (humanispushing && dogispushing)
             {
@@ -55,7 +68,7 @@ namespace Scripts
                 Vector3 animalMoveDirection = GameManager.Instance.Animal.GetComponent<Player>().moveDirection;
 
                 //check if they are on the same side of the box, first check if they are on the x-side of the box or the z-side of the box,
-                //then proceed to check the proper side.
+                //then proceed to check if they both are pushing.
                 if (Mathf.Round(humanMoveDirection.z) == 0 &&
                     ((GameManager.Instance.Human.transform.position.x - transform.position.x >= 0 &&
                     GameManager.Instance.Animal.transform.position.x - transform.position.x >= 0) ||
@@ -85,6 +98,13 @@ namespace Scripts
             }
         }
 
+        private void pushBox()
+        {
+            fixPlayerPosition(ActivePlayer.Human);
+            pushforce = GameManager.Instance.Human.GetComponent<HumanPlayer>().moveDirection;
+            rigidBody.velocity = new Vector3(pushforce.x, 0, pushforce.z);
+        }
+
         private void fixPlayerPosition(ActivePlayer player)
         {
             if (player == ActivePlayer.Human)
@@ -108,6 +128,22 @@ namespace Scripts
             {
                 GameManager.Instance.CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.Value =
                     Mathf.Round(GameManager.Instance.CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.Value / 90.0f) * 90;
+            }
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Animal))
+            {
+                //hitDog = true;
+            }
+        }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Animal))
+            {
+                //hitDog = false;
             }
         }
     }

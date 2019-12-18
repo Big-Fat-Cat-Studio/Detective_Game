@@ -9,6 +9,7 @@ namespace Scripts
         public float amountOfMovement;
         public float speed;
         public bool moveAutomatically = false;
+        private List<GameObject> collisions;
 
         private List<GameObject> objectsOnPlatform;
         private float originalPosition;
@@ -18,6 +19,7 @@ namespace Scripts
         // Start is called before the first frame update
         void Start()
         {
+            collisions = new List<GameObject>();
             if (direction == Direction.XMinus || direction == Direction.XPlus)
             {
                 originalPosition = transform.position.x;
@@ -42,7 +44,7 @@ namespace Scripts
         // Update is called once per frame
         void Update()
         {
-            if (move)
+            if (move && collisions.Count == 0)
             {
                 if (direction == Direction.XMinus)
                 {
@@ -93,14 +95,13 @@ namespace Scripts
                         move = false;
                     }
                 }
+            }
 
-                if (!move && moveAutomatically)
-                {
-                    startMoving();
-                }
+            if (!move && moveAutomatically)
+            {
+                startMoving();
             }
         }
-
         public void startMoving()
         {
             if (!move)
@@ -157,6 +158,21 @@ namespace Scripts
                 other.gameObject.transform.parent = null;
 
             }
+        }
+        
+        //Only works for up and down lifts
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Human) || ReferenceEquals(collision.gameObject, GameManager.Instance.Animal) &&
+                collision.gameObject.transform.parent != this.transform && direction == Direction.YMinus)
+            {
+                collisions.Add(collision.gameObject);
+            }
+        }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            collisions.Remove(collision.gameObject);
         }
     }
 }
