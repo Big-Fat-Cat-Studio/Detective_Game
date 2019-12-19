@@ -2,26 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts {
-    public class DigItem : Pickup
+namespace Scripts
+{
+    public class DigKeyItem : Key
     {
-        public string pickupItemText;
-        private bool originalBreakOnUse;
+        public string pickUpItemText;
 
         // Start is called before the first frame update
         void Start()
         {
             interactableType = InteractableType.Normal;
             interactable = true;
-            originalBreakOnUse = breakOnUse;
-            breakOnUse = false;
         }
 
         public override void interact()
         {
             if (interactableType == InteractableType.Pickup)
             {
-                breakOnUse = originalBreakOnUse;
                 pickUpItem();
             }
             else
@@ -30,7 +27,7 @@ namespace Scripts {
                 interactable = false;
                 interactableType = InteractableType.Pickup;
                 PlayerThatCanInteract = ActivePlayer.Both;
-                interactMessage = pickupItemText;
+                interactMessage = pickUpItemText;
             }
         }
     }

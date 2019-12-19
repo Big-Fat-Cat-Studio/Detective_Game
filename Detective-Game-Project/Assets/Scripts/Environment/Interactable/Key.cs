@@ -8,12 +8,12 @@ namespace Scripts
     {
         public int amountNeeded;
         public GameObject fullItem;
-        public string afterInteractText;
-        public string fullItemText;
+        public string humanKeyPickUpText;
+        public string combineIntoFullItemText;
 
         public string getFullAfterInteractText(int amountNow)
         {
-            return afterInteractText + " " + amountNow + "/" + amountNeeded;
+            return humanKeyPickUpText + " " + amountNow + "/" + amountNeeded;
         }
     }
 }
