@@ -118,7 +118,7 @@ namespace Scripts
                 }
                 else if (interactableObject.interactableType == InteractableType.Pickup)
                 {
-                    if (interactableObject is Key && currentPlayer == ActivePlayer.Human)
+                    if ((interactableObject is Key || interactableObject is DigKeyItem) && currentPlayer == ActivePlayer.Human)
                     {
                         holdKey(closestInteractable);
                     }
@@ -212,7 +212,7 @@ namespace Scripts
                     }
                 }
 
-                GameManager.Instance.showAfterInteractText(currentPlayer, key.fullItemText);
+                GameManager.Instance.showAfterInteractText(currentPlayer, key.combineIntoFullItemText);
                 GameObject newItem = Instantiate(key.fullItem);
                 holding = newItem;
                 holding.GetComponent<Pickup>().interact();
