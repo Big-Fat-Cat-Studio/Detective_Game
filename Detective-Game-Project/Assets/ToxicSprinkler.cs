@@ -9,10 +9,12 @@ namespace Scripts
         //Variables
         public ParticleSystem water;
 
+        private bool shouldKill = true;
+
         //Unity functions
         private void OnTriggerEnter(Collider other)
         {
-            if(other.gameObject.tag == "Human" || other.gameObject.tag == "Animal")
+            if((other.gameObject.tag == "Human" || other.gameObject.tag == "Animal") && this.shouldKill)
             {
                 other.gameObject.GetComponent<RespawnPlayer>().Respawn();
             }
@@ -21,7 +23,7 @@ namespace Scripts
         //Custom functions
         public void Disable()
         {
-            this.gameObject.GetComponent<BoxCollider>().isTrigger = true;
+            this.shouldKill = false;
             water.Stop();
         }
         
