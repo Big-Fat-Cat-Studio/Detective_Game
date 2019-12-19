@@ -38,7 +38,7 @@ namespace Scripts
             {
                 holding.transform.rotation = holdingPoint.rotation; //rotation must be fixed
                 holding.transform.position = holdingPoint.position;
-                holding.GetComponent<BoxCollider>().isTrigger = true;
+                holding.GetComponent<Collider>().isTrigger = true;
             }
 
             //Remove the text when the player is not active anymore
@@ -284,7 +284,7 @@ namespace Scripts
         private void OnTriggerEnter(Collider other)
         {
             print(other.gameObject.name);
-            if (other.gameObject.tag == Constant.TAG_INTERACT 
+            if (other.gameObject.tag == Constant.TAG_INTERACT
                 && !ReferenceEquals(other.gameObject, holding)
                 && other.gameObject.GetComponent<InteractableObject>().interactable
                 && (other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == currentPlayer
@@ -318,7 +318,7 @@ namespace Scripts
                 }
 
 
-                if (other.gameObject.GetComponent<InteractableObject>() is MovableObject && this.gameObject.GetComponentInParent<Player>().canPushPull) 
+                if (other.gameObject.GetComponent<InteractableObject>() is MovableObject && this.gameObject.GetComponentInParent<Player>().canPushPull)
                 {
                     this.gameObject.GetComponentInParent<Player>().move = true;
                     other.gameObject.GetComponent<MovableObject>().interact(currentPlayer);
