@@ -25,7 +25,7 @@ namespace Scripts
                 if(!endCutscene.isPlaying)
                 {
                     this.cutsceneHasStarted = false;
-                    LoadNextLevel();
+                    SceneManager.LoadScene(0);
                 }
             }
         }
