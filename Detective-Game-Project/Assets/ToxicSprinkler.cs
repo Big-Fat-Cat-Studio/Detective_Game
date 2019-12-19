@@ -26,6 +26,11 @@ namespace Scripts
             this.shouldKill = false;
             water.Stop();
         }
-        
+        public void Enable()
+        {
+            this.shouldKill = true;
+            water.Play();
+        }
+
     }
 }
