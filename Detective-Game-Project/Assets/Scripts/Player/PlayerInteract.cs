@@ -71,7 +71,7 @@ namespace Scripts
             {
                 InteractableObject objectInteractedWith = this.objectInteractedWith;
                 this.objectInteractedWith = null;
-                if (ReferenceEquals(objectInteractedWith.gameObject, holding) && holdTimer > 1f)
+                if (currentPlayer == ActivePlayer.Human && ReferenceEquals(objectInteractedWith.gameObject, holding) && holdTimer > 1f)
                 {
                     throwObject();
                     holdTimer = 0f;
@@ -118,7 +118,7 @@ namespace Scripts
                 }
                 else if (interactableObject.interactableType == InteractableType.Pickup)
                 {
-                    if (interactableObject is Key && currentPlayer == ActivePlayer.Human)
+                    if ((interactableObject is Key || interactableObject is DigKeyItem) && currentPlayer == ActivePlayer.Human)
                     {
                         holdKey(closestInteractable);
                     }
@@ -137,6 +137,10 @@ namespace Scripts
                     else if(interactableObject.interactableType == InteractableType.DEBUG)
                     {
                         ((DestroyAndSpawn)interactableObject).interact(currentPlayer, holding);
+                    }
+                    else if (interactableObject.interactableType == InteractableType.STATECHANGER)
+                    {
+                        ((InteractChangeState)interactableObject).interact(holding);
                     }
                     else if (interactableObject.interactableType != InteractableType.HoldButton)
                     {
@@ -178,6 +182,7 @@ namespace Scripts
         {
             if (holding != null)
             {
+                holding.GetComponent<Collider>().isTrigger = false;
                 holding.GetComponent<InteractableObject>().interact();
                 holding.transform.rotation = transform.rotation;
                 Rigidbody holdingRigidBody = holding.GetComponent<Rigidbody>();
@@ -208,7 +213,7 @@ namespace Scripts
                     }
                 }
 
-                GameManager.Instance.showAfterInteractText(currentPlayer, key.fullItemText);
+                GameManager.Instance.showAfterInteractText(currentPlayer, key.combineIntoFullItemText);
                 GameObject newItem = Instantiate(key.fullItem);
                 holding = newItem;
                 holding.GetComponent<Pickup>().interact();
@@ -240,7 +245,7 @@ namespace Scripts
         {
             if (holding != null)
             {
-                holding.GetComponent<BoxCollider>().isTrigger = false;
+                holding.GetComponent<Collider>().isTrigger = false;
                 holding.GetComponent<InteractableObject>().interact();
                 holding = null;
             }
@@ -283,10 +288,10 @@ namespace Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-            print(other.gameObject.name);
-            if (other.gameObject.tag == Constant.TAG_INTERACT
+            if (other.gameObject.tag == Constant.TAG_INTERACT 
                 && !ReferenceEquals(other.gameObject, holding)
                 && other.gameObject.GetComponent<InteractableObject>().interactable
+                && !interactableObjects.Contains(other.gameObject)
                 && (other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == currentPlayer
                     || other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == ActivePlayer.Both))
             {
@@ -318,7 +323,7 @@ namespace Scripts
                 }
 
 
-                if (other.gameObject.GetComponent<InteractableObject>() is MovableObject && this.gameObject.GetComponentInParent<Player>().canPushPull)
+                if (other.gameObject.GetComponent<InteractableObject>() is MovableObject && this.gameObject.GetComponentInParent<Player>().canPushPull) 
                 {
                     this.gameObject.GetComponentInParent<Player>().move = true;
                     other.gameObject.GetComponent<MovableObject>().interact(currentPlayer);

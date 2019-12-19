@@ -110,7 +110,6 @@ namespace Scripts
                         Push();
                         animator.SetFloat("forward/backward", 0);
                         animator.SetFloat("sidewalk", 0);
-                        gameObject.GetComponent<Animator>().SetBool("turning", false);
                         animator.SetBool("walksideways", false);
                         animator.SetBool("jumping", false);
                         animator.SetBool("pushing", true);
@@ -176,7 +175,6 @@ namespace Scripts
                     {
                         animator.SetBool("jumping", false);
                     }
-                    animator.SetBool("turning", false);
                     animator.SetBool("pushing", false);
                     animator.SetBool("walksideways", false);
                 }
@@ -191,7 +189,6 @@ namespace Scripts
                 animator.SetFloat("forward/backward", 0);
                 animator.SetFloat("sidewalk", 0);
                 animator.SetBool("jumping", false);
-                animator.SetBool("turning", false);
                 animator.SetBool("pushing", false);
                 animator.SetBool("walksideways", false);
             }
@@ -213,7 +210,11 @@ namespace Scripts
                 }
                 else
                 {
-                     umbrellaActiveOnStart = true;
+                    umbrellaActiveOnStart = true;
+                }
+                if (umbrella.activeSelf)
+                {
+                    animator.SetTrigger("openUmbrella");
                 }
             }
         }
