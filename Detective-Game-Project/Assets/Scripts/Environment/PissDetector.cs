@@ -8,6 +8,7 @@ namespace Scripts
     {
         //Variables
         public GameObject objectToActivate;
+        public ParticleSystem breakParticles;
 
         private bool hasTriggered = false;
 
@@ -16,7 +17,7 @@ namespace Scripts
         {
             if (other.gameObject.tag == "Piss" && !hasTriggered)
             {
-                print("triggering");
+                breakParticles.Play();
                 hasTriggered = true;
                 objectToActivate.GetComponent<IActivateWithPiss>().Activation();
             }

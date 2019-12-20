@@ -5,6 +5,7 @@ using System;
 namespace Scripts {
     public class AnimalPlayer : Player
     {
+        public ParticleSystem pissParticles;
         private bool bounce = false;
         public AudioClip bark;
         private AudioSource AudioComponent;
@@ -145,6 +146,7 @@ namespace Scripts {
         {
             if (!characterController.isGrounded || abilityActive("piss") || cannotmove) return;
             animator.SetBool("piss", true);
+            pissParticles.Play();
             cannotmove = true;
             Debug.Log(cannotmove);
             activateAbilityTimer("piss");
@@ -204,8 +206,10 @@ namespace Scripts {
                 pissTimer = Math.Max(0, pissTimer - Time.deltaTime);
                 if (pissTimer > 12f && pissTimer < 12.6f)
                 {
+                    pissParticles.Stop();
                     animator.SetBool("piss", false);
                     cannotmove = false;
+
                 } 
             }
             if (abilityActive("poop"))
