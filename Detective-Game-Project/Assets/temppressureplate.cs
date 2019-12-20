@@ -10,6 +10,7 @@ namespace Scripts
         public GameObject[] toxicSprinklers;
         public float shutdownTimer;
 
+        private bool isDisabled = false;
         private bool isPaused = false;
         private List<GameObject> colliders;
 
@@ -56,11 +57,7 @@ namespace Scripts
         }
         private void TurnSprinklersOff()
         {
-            StopCoroutine(PauseSPrinklers());
-            foreach (GameObject sprinkler in toxicSprinklers)
-            {
-                sprinkler.GetComponent<ToxicSprinkler>().Disable();
-            }
+            this.isDisabled = true;
         }
 
         //Coroutines
@@ -73,11 +70,14 @@ namespace Scripts
                 sprinkler.GetComponent<ToxicSprinkler>().Disable();
             }
             yield return timer;
-            foreach (GameObject sprinkler in toxicSprinklers)
+            if(!this.isDisabled)
             {
-                sprinkler.GetComponent<ToxicSprinkler>().Enable();
+                foreach (GameObject sprinkler in toxicSprinklers)
+                {
+                    sprinkler.GetComponent<ToxicSprinkler>().Enable();
+                }
+                this.isPaused = false;
             }
-            this.isPaused = false;
         }
     }
 }
