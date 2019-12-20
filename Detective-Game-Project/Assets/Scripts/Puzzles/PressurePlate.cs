@@ -45,7 +45,7 @@ public class PressurePlate : MonoBehaviour
 
         if (disableElement)
         {
-            ObjectToManipulate.GetComponent<ViewDetection>().disabled = true;
+            ObjectToManipulate.transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 
@@ -56,7 +56,7 @@ public class PressurePlate : MonoBehaviour
 
         if (disableElement)
         {
-            ObjectToManipulate.GetComponent<ViewDetection>().disabled = false;
+            ObjectToManipulate.transform.GetChild(0).gameObject.SetActive(true);
         }
     }
 
