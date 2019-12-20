@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Video;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 namespace Scripts
 {
-    public class EndLevel : InteractableObject
+    public class EndLevelWithItem : InteractableObjectItemNeeded
     {
         //Variables
         public VideoPlayer endCutscene;
@@ -16,13 +16,13 @@ namespace Scripts
         //Unity functions
         void Start()
         {
-            interactableType = InteractableType.EndLevel;
+            interactableType = InteractableType.ItemNeeded;
         }
         private void Update()
         {
-            if(this.cutsceneHasStarted)
+            if (this.cutsceneHasStarted)
             {
-                if(!endCutscene.isPlaying)
+                if (!endCutscene.isPlaying)
                 {
                     this.cutsceneHasStarted = false;
                     SceneManager.LoadScene(0);
@@ -30,11 +30,8 @@ namespace Scripts
             }
         }
 
-        //Custom functions
-        public override void interact(ActivePlayer player)
+        protected override void interactSucces(ActivePlayer player, GameObject playerItem)
         {
-            //SaveData new_save = new SaveData(recalculateCompletedLevels(GameManager.Instance.saveData.completedLevels), this.nextLevelName, false);
-            //SaveSystem.SaveProgress(new_save);
             GameManager.Instance.PlayerCamera.SetActive(false);
             GameManager.Instance.PlayerCameraP2.SetActive(false);
             GameManager.Instance.InteractTextPlayerOne.SetActive(false);
@@ -54,7 +51,7 @@ namespace Scripts
         private string[] recalculateCompletedLevels(string[] completedLevelsOld)
         {
             string[] result = new string[completedLevelsOld.Length + 1];
-            for(int current = 0; current < completedLevelsOld.Length; current++)
+            for (int current = 0; current < completedLevelsOld.Length; current++)
             {
                 result[current] = completedLevelsOld[current];
             }

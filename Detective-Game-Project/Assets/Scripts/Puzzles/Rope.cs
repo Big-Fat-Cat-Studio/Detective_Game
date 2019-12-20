@@ -32,7 +32,7 @@ namespace Scripts
             StartCoroutine(Move(Ladder, new Tuple<Vector3, Vector3>(LadderStartPos, LadderEndPos), MoveTime, () => { }));
         }
 
-        public override void interact()
+        public override void interact(ActivePlayer player)
         {
             pulling = !pulling;
         }
