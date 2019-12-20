@@ -5,11 +5,9 @@ using UnityEngine;
 
 namespace Scripts
 {
-    public class DestroyAndSpawn : InteractableObject
+    public class DestroyAndSpawn : InteractableObjectItemNeeded
     {
-        public GameObject neededItem;
         public GameObject itemToSpawn;
-        public string afterInteractMessage;
 
         // TODO(HAMZA): Change to DONTDESTROYBUTSPAWN
         public bool DEBUG;
@@ -20,31 +18,23 @@ namespace Scripts
         {
             if (DEBUG)
                 interactableType = InteractableType.DEBUG;
-            else
-                interactableType = InteractableType.Destroyable;
         }
 
-        public void interact(ActivePlayer player, GameObject playerItem)
+        protected override void interactSucces(ActivePlayer player, GameObject playerItem)
         {
-            if (neededItem == null || ReferenceEquals(playerItem, neededItem) ||
-                playerItem.name.Substring(0, playerItem.name.Length - 7) == neededItem.name)
+            if (!DEBUG)
             {
-                if (!DEBUG)
-                {
-                    this.gameObject.SetActive(false);
-                    Destroy(this.gameObject);
-                    Instantiate(itemToSpawn, this.transform.position, this.transform.rotation);
-                } else
-                {
-                    if (!Consumed) { 
-                        Instantiate(itemToSpawn, (this.transform.position + new Vector3(0,.2f, -2)), this.transform.rotation);
-                        Consumed = true;
-                    }
-                }
+                this.gameObject.SetActive(false);
+                Destroy(this.gameObject);
+                Instantiate(itemToSpawn, this.transform.position, this.transform.rotation);
             }
             else
             {
-                GameManager.Instance.showAfterInteractText(player, afterInteractMessage);
+                if (!Consumed)
+                {
+                    Instantiate(itemToSpawn, (this.transform.position + new Vector3(0, .2f, -2)), this.transform.rotation);
+                    Consumed = true;
+                }
             }
         }
     }

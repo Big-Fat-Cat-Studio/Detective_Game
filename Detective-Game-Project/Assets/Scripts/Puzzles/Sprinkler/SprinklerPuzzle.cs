@@ -57,7 +57,7 @@ namespace Scripts
             }
         }
 
-        public override void interact()
+        public override void interact(ActivePlayer player)
         {
             if (!puzzleCamera.activeSelf)
             {

@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 using System.Collections.Generic;
+using System;
 
 namespace Scripts
 {
@@ -271,6 +272,18 @@ namespace Scripts
                 currentCourotine = null;
             }
 
+        }
+
+        public string getPlayerName(ActivePlayer player)
+        {
+            if(player == ActivePlayer.Human)
+            {
+                return "Kika";
+            }
+            else
+            {
+                return "Daigo";
+            }
         }
 
         public void addCluesToList(MeshHighlighter clue)
