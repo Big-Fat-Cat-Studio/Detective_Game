@@ -17,7 +17,7 @@
     public enum InteractableType
     {
         Normal,
-        Destroyable,
+        ItemNeeded,
         Pickup,
         HoldButton,
         Movable,

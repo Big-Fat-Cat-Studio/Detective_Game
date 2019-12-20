@@ -31,7 +31,7 @@ namespace Scripts
         }
 
         //Custom functions
-        public override void interact()
+        public override void interact(ActivePlayer player)
         {
             //SaveData new_save = new SaveData(recalculateCompletedLevels(GameManager.Instance.saveData.completedLevels), this.nextLevelName, false);
             //SaveSystem.SaveProgress(new_save);

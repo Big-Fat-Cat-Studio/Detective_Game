@@ -15,7 +15,7 @@ namespace Scripts
             rigidBody = GetComponent<Rigidbody>();
         }
 
-        public override void interact()
+        public override void interact(ActivePlayer player)
         {
             pickUpItem();
         }
