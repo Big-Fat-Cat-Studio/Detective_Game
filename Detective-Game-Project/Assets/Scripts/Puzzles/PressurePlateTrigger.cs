@@ -21,5 +21,4 @@ public class PressurePlateTrigger : MonoBehaviour
     {
         Parent.OnChildTriggerExit(other, gameObject);
     }
-
 }
