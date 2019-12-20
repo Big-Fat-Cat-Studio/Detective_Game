@@ -58,6 +58,13 @@ namespace Scripts
         private void TurnSprinklersOff()
         {
             this.isDisabled = true;
+            if(!this.isPaused)
+            {
+                foreach (GameObject sprinkler in toxicSprinklers)
+                {
+                    sprinkler.GetComponent<ToxicSprinkler>().Disable();
+                }
+            }
         }
 
         //Coroutines
