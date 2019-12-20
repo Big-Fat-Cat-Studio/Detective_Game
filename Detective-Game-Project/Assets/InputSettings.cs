@@ -89,6 +89,14 @@ public class @InputSettings : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Special4"",
+                    ""type"": ""Button"",
+                    ""id"": ""e135c80a-8299-486a-9e28-46e7b372325b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -333,6 +341,28 @@ public class @InputSettings : IInputActionCollection, IDisposable
                     ""action"": ""Special3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0600a25c-20a6-4354-8704-c309fa22dc32"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Special4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cef1dfd2-c26d-4add-b953-1fd1facdf9e7"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Special4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -378,6 +408,7 @@ public class @InputSettings : IInputActionCollection, IDisposable
         m_Human_Jump = m_Human.FindAction("Jump", throwIfNotFound: true);
         m_Human_CameraMove = m_Human.FindAction("CameraMove", throwIfNotFound: true);
         m_Human_Special3 = m_Human.FindAction("Special3", throwIfNotFound: true);
+        m_Human_Special4 = m_Human.FindAction("Special4", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -436,6 +467,7 @@ public class @InputSettings : IInputActionCollection, IDisposable
     private readonly InputAction m_Human_Jump;
     private readonly InputAction m_Human_CameraMove;
     private readonly InputAction m_Human_Special3;
+    private readonly InputAction m_Human_Special4;
     public struct HumanActions
     {
         private @InputSettings m_Wrapper;
@@ -449,6 +481,7 @@ public class @InputSettings : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_Human_Jump;
         public InputAction @CameraMove => m_Wrapper.m_Human_CameraMove;
         public InputAction @Special3 => m_Wrapper.m_Human_Special3;
+        public InputAction @Special4 => m_Wrapper.m_Human_Special4;
         public InputActionMap Get() { return m_Wrapper.m_Human; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -485,6 +518,9 @@ public class @InputSettings : IInputActionCollection, IDisposable
                 @Special3.started -= m_Wrapper.m_HumanActionsCallbackInterface.OnSpecial3;
                 @Special3.performed -= m_Wrapper.m_HumanActionsCallbackInterface.OnSpecial3;
                 @Special3.canceled -= m_Wrapper.m_HumanActionsCallbackInterface.OnSpecial3;
+                @Special4.started -= m_Wrapper.m_HumanActionsCallbackInterface.OnSpecial4;
+                @Special4.performed -= m_Wrapper.m_HumanActionsCallbackInterface.OnSpecial4;
+                @Special4.canceled -= m_Wrapper.m_HumanActionsCallbackInterface.OnSpecial4;
             }
             m_Wrapper.m_HumanActionsCallbackInterface = instance;
             if (instance != null)
@@ -516,6 +552,9 @@ public class @InputSettings : IInputActionCollection, IDisposable
                 @Special3.started += instance.OnSpecial3;
                 @Special3.performed += instance.OnSpecial3;
                 @Special3.canceled += instance.OnSpecial3;
+                @Special4.started += instance.OnSpecial4;
+                @Special4.performed += instance.OnSpecial4;
+                @Special4.canceled += instance.OnSpecial4;
             }
         }
     }
@@ -549,5 +588,6 @@ public class @InputSettings : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnCameraMove(InputAction.CallbackContext context);
         void OnSpecial3(InputAction.CallbackContext context);
+        void OnSpecial4(InputAction.CallbackContext context);
     }
 }

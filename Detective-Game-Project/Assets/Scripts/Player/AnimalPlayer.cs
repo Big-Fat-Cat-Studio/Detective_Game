@@ -149,6 +149,16 @@ namespace Scripts {
             piss.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.125f, gameObject.transform.position.z);
         }
 
+        protected void OnSpecial4()
+        {
+            if (!characterController.isGrounded) return;
+
+            GameObject rippleFx = (GameObject)Instantiate(Resources.Load("Sound_Ripple"));
+            rippleFx.transform.parent = transform;
+            rippleFx.transform.localPosition = new Vector3(0f, 0.06f, 0.05f);
+            rippleFx.transform.localScale = new Vector3(1f,1f,1f);
+        }
+
         public void activateAbilityTimer(string type)
         {
             switch(type)
