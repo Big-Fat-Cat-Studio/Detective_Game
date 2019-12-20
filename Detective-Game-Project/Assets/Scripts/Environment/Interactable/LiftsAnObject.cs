@@ -13,6 +13,8 @@ namespace Scripts
         // If InteractState State = InteractState.ACTIVATED" -> allow interaction
         [Tooltip("Each object is required to have the enum XENUM")]
         public GameObject[] RequiredStates;
+        [Header("Only used when CheckStates is used")]
+        public string afterInteractText;
 
         private int CheckedNum;
 
@@ -36,9 +38,15 @@ namespace Scripts
                 {
                     objectToLift.GetComponent<ObjectToLift>().startMoving();
                 }
+                else
+                {
+                    GameManager.Instance.showAfterInteractText(player, afterInteractText);
+                }
             }
             else
+            {
                 objectToLift.GetComponent<ObjectToLift>().startMoving();
+            }
         }
     }
 }

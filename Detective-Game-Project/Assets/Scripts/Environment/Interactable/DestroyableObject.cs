@@ -9,6 +9,7 @@ namespace Scripts
     {
         protected override void interactSucces(ActivePlayer player, GameObject playerItem)
         {
+            interactable = false;
             this.gameObject.SetActive(false);
             Destroy(this.gameObject);
         }

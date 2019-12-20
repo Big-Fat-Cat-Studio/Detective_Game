@@ -16,14 +16,16 @@ namespace Scripts
         public bool both;
         int count = 0;
         bool humanispushing = false;
+        BoxCollider collider;
 
         private void Start()
         {
             interactableType = InteractableType.HoldButton;
             rigidBody = GetComponent<Rigidbody>();
+            collider = GetComponent<BoxCollider>();
         }
 
-        public void interact(ActivePlayer player)
+        public override void interact(ActivePlayer player)
         {
             if (player == ActivePlayer.Animal)
             {
@@ -48,11 +50,7 @@ namespace Scripts
                     if (GameManager.Instance.Animal.transform.position.y > transform.position.y)
                     {
                         pushBox();
-                    }
-                    else
-                    {
-                        //if ()
-                    }
+                    }     
                 }
                 else
                 {
@@ -102,7 +100,16 @@ namespace Scripts
         {
             fixPlayerPosition(ActivePlayer.Human);
             pushforce = GameManager.Instance.Human.GetComponent<HumanPlayer>().moveDirection;
-            rigidBody.velocity = new Vector3(pushforce.x, 0, pushforce.z);
+
+            if (Physics.Raycast(transform.position, Vector3.down, collider.bounds.extents.y + 0.1f))
+            {
+                rigidBody.velocity = new Vector3(pushforce.x, 0, pushforce.z);
+            }
+            else
+            {
+                rigidBody.velocity = new Vector3(pushforce.x * 2f, -3f, pushforce.z * 2f);
+            }
+            
         }
 
         private void fixPlayerPosition(ActivePlayer player)

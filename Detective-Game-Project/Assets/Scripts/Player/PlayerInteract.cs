@@ -123,10 +123,6 @@ namespace Scripts
                     {
                         ((InteractableObjectItemNeeded)interactableObject).interact(currentPlayer, holding);
                     }
-                    else if (interactableObject.interactableType == InteractableType.STATECHANGER)
-                    {
-                        ((InteractChangeState)interactableObject).interact(holding);
-                    }
                     else if (interactableObject.interactableType != InteractableType.HoldButton)
                     {
                         interactableObject.interact(currentPlayer);
@@ -136,7 +132,7 @@ namespace Scripts
                     if (closestInteractable == null || closestInteractable.activeSelf == false || !interactableObject.interactable)
                     {
                         interactableObjects.Remove(closestInteractable);
-                        destroyObject();
+                        destroyHoldingObject();
                     }
                 }
             }
@@ -236,7 +232,7 @@ namespace Scripts
             }
         }
 
-        void destroyObject()
+        public void destroyHoldingObject()
         {
             if (holding != null && holding.GetComponent<Pickup>().breakOnUse)
             {

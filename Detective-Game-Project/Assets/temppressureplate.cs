@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Scripts
 {
-    public class temppressureplate : MonoBehaviour
+    public class temppressureplate : MonoBehaviour, IActivateWithPiss
     {
         //Variables
         public GameObject[] toxicSprinklers;
@@ -46,6 +46,20 @@ namespace Scripts
                 {
                     transform.position = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
                 }
+            }
+        }
+
+        //Custom functions
+        public void Activation()
+        {
+            this.TurnSprinklersOff();
+        }
+        private void TurnSprinklersOff()
+        {
+            StopCoroutine(PauseSPrinklers());
+            foreach (GameObject sprinkler in toxicSprinklers)
+            {
+                sprinkler.GetComponent<ToxicSprinkler>().Disable();
             }
         }
 

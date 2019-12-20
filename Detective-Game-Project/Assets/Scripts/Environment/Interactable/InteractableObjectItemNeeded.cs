@@ -16,6 +16,12 @@ namespace Scripts
 
         public void interact(ActivePlayer player, GameObject playerItem)
         {
+            if (playerItem == null && neededItem != null)
+            {
+                interactFail(player, playerItem);
+                return;
+            }
+
             if (neededItem == null || ReferenceEquals(playerItem, neededItem) ||
                 playerItem.name.Substring(0, playerItem.name.Length - 7) == neededItem.name)
             {
