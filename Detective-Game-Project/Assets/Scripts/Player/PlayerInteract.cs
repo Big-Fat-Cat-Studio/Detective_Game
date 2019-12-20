@@ -71,7 +71,7 @@ namespace Scripts
             {
                 InteractableObject objectInteractedWith = this.objectInteractedWith;
                 this.objectInteractedWith = null;
-                if (ReferenceEquals(objectInteractedWith.gameObject, holding) && holdTimer > 1f)
+                if (currentPlayer == ActivePlayer.Human && ReferenceEquals(objectInteractedWith.gameObject, holding) && holdTimer > 1f)
                 {
                     throwObject();
                     holdTimer = 0f;
@@ -182,6 +182,7 @@ namespace Scripts
         {
             if (holding != null)
             {
+                holding.GetComponent<Collider>().isTrigger = false;
                 holding.GetComponent<InteractableObject>().interact();
                 holding.transform.rotation = transform.rotation;
                 Rigidbody holdingRigidBody = holding.GetComponent<Rigidbody>();
