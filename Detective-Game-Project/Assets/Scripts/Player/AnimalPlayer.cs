@@ -6,6 +6,8 @@ namespace Scripts {
     public class AnimalPlayer : Player
     {
         private bool bounce = false;
+        public AudioClip bark;
+        private AudioSource AudioComponent;
         
         [HideInInspector]
         public float boostTimer = 0f;
@@ -19,6 +21,7 @@ namespace Scripts {
             animator = GetComponent<Animator>();
             playerInteract = GetComponentInChildren<PlayerInteract>();
             currentPlayer = ActivePlayer.Animal;
+            AudioComponent = GetComponent<AudioSource>();
 
             if (GameManager.Instance.GameType == GameType.SinglePlayer || GameManager.Instance.PlayerOne == currentPlayer)
             {
@@ -157,6 +160,9 @@ namespace Scripts {
             rippleFx.transform.parent = transform;
             rippleFx.transform.localPosition = new Vector3(0f, 0.06f, 0.05f);
             rippleFx.transform.localScale = new Vector3(1f,1f,1f);
+
+            AudioComponent.clip = bark;
+            AudioComponent.Play();
         }
 
         public void activateAbilityTimer(string type)
