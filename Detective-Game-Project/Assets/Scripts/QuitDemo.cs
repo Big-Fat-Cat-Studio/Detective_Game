@@ -62,6 +62,6 @@ public class QuitDemo : MonoBehaviour
         DemoText.GetComponent<Text>().text = "This demo will self destruct in 1";
         yield return new WaitForSecondsRealtime(1);
         Application.Quit();
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
     }
 }

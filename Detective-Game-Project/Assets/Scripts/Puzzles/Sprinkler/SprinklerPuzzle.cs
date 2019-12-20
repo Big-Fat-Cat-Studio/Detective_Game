@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Scripts
 {
-    public class SprinklerPuzzle : MonoBehaviour
+    public class SprinklerPuzzle : InteractableObject
     {
         // ElEMENTS / IMAGES NEED TO BE ADDED IN FOLLOWING ORDER: 4, 3, 5, 1, 2
         public GameObject victoryInteraction;
@@ -56,110 +57,38 @@ namespace Scripts
             }
         }
 
-
-        void OnTriggerStay(Collider collision)
+        public override void interact()
         {
-            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Human))
+            if (!puzzleCamera.activeSelf)
             {
-                if (Input.GetKeyDown (KeyCode.X))
+                puzzleCamera.SetActive(true);
+                indicator.SetActive(true);
+                GameManager.Instance.Human.GetComponent<HumanPlayer>().isInPuzzle = true;
+                InputType type = GameManager.Instance.Human.GetComponent<HumanPlayer>().inputType;
+
+
+                if (type == InputType.Controller)
                 {
-                    puzzleCamera.SetActive(true);
-                    indicator.SetActive(true);
-                    GameManager.Instance.Human.GetComponent<HumanPlayer>().isInPuzzle = true;
+                    GetComponent<PlayerInput>().SwitchCurrentControlScheme(type.ToString(), Gamepad.all[0]);
                 }
+                else
+                {
+                    GetComponent<PlayerInput>().SwitchCurrentControlScheme(type.ToString(), Mouse.current, Keyboard.current);
+                }
+                
+                interactable = false;
             }
         }
 
 
         void Update()
         {
-            // Move pipe selector
-            if (Input.GetKeyDown (KeyCode.S))
+            if (selector.transform.position == new Vector3(937.5f, -270, 0))
             {
-                SelectDown();
-            }
-            if (Input.GetKeyDown (KeyCode.W))
-            {
-                SelectUp();
+                selector.transform.position = imageArray[0].transform.position;
             }
 
-
-            // Rotate selection
-            if (Input.GetKeyDown (KeyCode.RightArrow))
-            {
-                imageArray[select].transform.Rotate(0, 0, -90);
-            }
-            if (Input.GetKeyDown (KeyCode.LeftArrow))
-            {
-                imageArray[select].transform.Rotate(0, 0, 90);
-            }
-
-
-            // Move indicator
-            if (Input.GetKeyDown (KeyCode.D))
-            {
-                PointRight();
-            }
-            if (Input.GetKeyDown (KeyCode.A))
-            {
-                PointLeft();
-            }
-
-
-            // Check if correct
-            if (Input.GetKeyDown (KeyCode.X))
-            {
-                float eulerAngZ = imageArray[select].transform.localEulerAngles.z;
-                if (select == 0 && point == 3) // element 4
-                {
-                    if (eulerAngZ == 180)
-                    {
-                        elementArray[select].transform.localRotation = Quaternion.Euler(270, 0, 0);
-                        elementArray[select].transform.localPosition = new Vector3 (7.25f, 0, 3);
-                        Progress();
-                    }
-                }
-                if (select == 1 && point == 1) // element 3
-                {
-                    if (eulerAngZ == 0 || eulerAngZ == 180)
-                    {
-                        elementArray[select].transform.localRotation = Quaternion.Euler(0, 0, 0);
-                        elementArray[select].transform.localPosition = new Vector3 (17.0625f, 0, 0.75f);
-                        Progress();
-                    }
-                }
-                if (select == 2 && point == 4) // element 5
-                {
-                    if (eulerAngZ == 0)
-                    {
-                        elementArray[select].transform.localRotation = Quaternion.Euler(0, 0, 0);
-                        elementArray[select].transform.localPosition = new Vector3 (8.25f, 0, 1.5f);
-                        Progress();
-                    }
-                }
-                if (select == 3 && point == 0) // element 1
-                {
-                    if (eulerAngZ <= 1 || eulerAngZ == 180)
-                    {
-                        elementArray[select].transform.localRotation = Quaternion.Euler(0, 0, 0);
-                        elementArray[select].transform.localPosition = new Vector3 (4.5f, 0, 0);
-                        Progress();
-                    }
-                }
-                if (select == 4 && point == 2) // element 2
-                {
-                    if (eulerAngZ <= 1)
-                    {
-                        elementArray[select].transform.localRotation = Quaternion.Euler(0, 0, 0);
-                        elementArray[select].transform.localPosition = new Vector3 (5.75f, 0, -1);
-                        Progress();
-                    }
-                }
-            }
-
-
-            // Leave / finish puzzle
-            if (Input.GetKeyDown (KeyCode.Escape) || solved == 5)
+            if (solved == 5)
             {
                 Finished();
             }
@@ -296,11 +225,97 @@ namespace Scripts
             puzzleCamera.SetActive(false);
             indicator.SetActive(false);
             GameManager.Instance.Human.GetComponent<HumanPlayer>().isInPuzzle = false;
+            interactable = true;
             if (solved == 5)
             {
                 victoryInteraction.GetComponent<IPuzzleResult>().ActivateSolution();
                 Destroy(this);
             }
+        }
+
+        private void OnUp()
+        {
+            SelectUp();
+        }
+
+        private void OnDown()
+        {
+            SelectDown();
+        }
+
+        private void OnLeft()
+        {
+            PointLeft();
+        }
+
+        private void OnRight()
+        {
+            PointRight();
+        }
+
+        private void OnRotateLeft()
+        {
+            imageArray[select].transform.Rotate(0, 0, 90);
+        }
+
+        private void OnRotateRight()
+        {
+            imageArray[select].transform.Rotate(0, 0, -90);
+        }
+
+        private void OnPlace()
+        {
+            float eulerAngZ = imageArray[select].transform.localEulerAngles.z;
+            if (select == 0 && point == 3) // element 4
+            {
+                if (eulerAngZ == 180)
+                {
+                    elementArray[select].transform.localRotation = Quaternion.Euler(270, 0, 0);
+                    elementArray[select].transform.localPosition = new Vector3(7.25f, 0, 3);
+                    Progress();
+                }
+            }
+            if (select == 1 && point == 1) // element 3
+            {
+                if (eulerAngZ == 0 || eulerAngZ == 180)
+                {
+                    elementArray[select].transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    elementArray[select].transform.localPosition = new Vector3(17.0625f, 0, 0.75f);
+                    Progress();
+                }
+            }
+            if (select == 2 && point == 4) // element 5
+            {
+                if (eulerAngZ == 0)
+                {
+                    elementArray[select].transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    elementArray[select].transform.localPosition = new Vector3(8.25f, 0, 1.5f);
+                    Progress();
+                }
+            }
+            if (select == 3 && point == 0) // element 1
+            {
+                if (eulerAngZ <= 1 || eulerAngZ == 180)
+                {
+                    elementArray[select].transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    elementArray[select].transform.localPosition = new Vector3(4.5f, 0, 0);
+                    Progress();
+                }
+            }
+            if (select == 4 && point == 2) // element 2
+            {
+                if (eulerAngZ <= 1)
+                {
+                    elementArray[select].transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    elementArray[select].transform.localPosition = new Vector3(5.75f, 0, -1);
+                    Progress();
+                }
+            }
+        }
+
+        private void OnExit()
+        {
+            Finished();
         }
     }
 
