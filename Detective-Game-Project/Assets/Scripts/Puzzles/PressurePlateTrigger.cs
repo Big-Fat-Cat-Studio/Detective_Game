@@ -14,11 +14,13 @@ public class PressurePlateTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!("Animal Human".Contains(LayerMask.LayerToName(other.gameObject.layer)))) return;
         Parent.OnChildTriggerEnter(other, gameObject);
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if (!("Animal Human".Contains(LayerMask.LayerToName(other.gameObject.layer)))) return;
         Parent.OnChildTriggerExit(other, gameObject);
     }
 }
