@@ -30,5 +30,13 @@ namespace Scripts
             this.gameObject.transform.position = this.spawnLocation;
             this.gameObject.GetComponent<CharacterController>().enabled = true;
         }
+
+         private void OnTriggerEnter(Collider collision)
+        {
+            if (collision.tag == "checkpoint")
+            {
+                this.spawnLocation = this.gameObject.transform.position;
+            }
+        }
     }
 }

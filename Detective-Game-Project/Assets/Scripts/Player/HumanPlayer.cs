@@ -17,6 +17,7 @@ namespace Scripts
         public GameObject umbrella;
         public bool umbrellaActiveOnStart;
         Animator animator;
+        float canmovein = 0;
 
         public void handleSlow(float _jumpHeight, float _movementSpeed)
         {
@@ -70,6 +71,7 @@ namespace Scripts
 
         private void FixedUpdate()
         {
+            canmovein -= Time.deltaTime;
             if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human))
             {
                 if (characterController.isGrounded)
@@ -80,7 +82,7 @@ namespace Scripts
 
                 if (moveCamera)
                 {
-                    if (isInPuzzle || canPushPull)
+                    if (isInPuzzle || canPushPull || canmovein >= 0)
                     {
                         moveCamera = false;
                     }
@@ -100,7 +102,7 @@ namespace Scripts
                 {
                     gameObject.GetComponent<Animator>().speed = 1;
 
-                    if (isInPuzzle)
+                    if (isInPuzzle || canmovein >= 0)
                     {
                         moveDirection = new Vector3(0, 0, 0);
                         move = true;
@@ -215,6 +217,7 @@ namespace Scripts
                 if (umbrella.activeSelf)
                 {
                     animator.SetTrigger("openUmbrella");
+                    canmovein = 1f;
                 }
             }
         }
