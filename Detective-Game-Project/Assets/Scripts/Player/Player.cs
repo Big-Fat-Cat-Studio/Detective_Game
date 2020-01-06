@@ -35,7 +35,7 @@ namespace Scripts
         private InputActionMap map;
         private Vector2 LookDelta;
         private bool released;
-
+        public GameObject CameraFollow;
 
         // Start is called before the first frame update
         void Start()
@@ -47,16 +47,27 @@ namespace Scripts
         {
             float translationRH = cameraDirection.x * rotationSpeed;
 
-            //this check will be changed laterrrr
-            if (currentPlayer == ActivePlayer.Human)
+            if (moveDirection.x == 0 && moveDirection.z == 0)
             {
-                if (direction.x == 0 && direction.y == 0 && (translationRH > 10f || translationRH < -10f))
+                // CameraFollow.GetComponent<CinemachineFreeLook>().m_RecenterToTargetHeading = new AxisState.Recentering(false, 0, .5f);
+                translationRH *= Time.deltaTime;
+                context.m_XAxis.Value += translationRH;
+            }
+            else
+            {
+                // CameraFollow.GetComponent<CinemachineFreeLook>().m_RecenterToTargetHeading = new AxisState.Recentering(true, 0, .5f); // rotate camera behind player
+
+                //this check will be changed laterrrr
+                if (currentPlayer == ActivePlayer.Human)
                 {
-                    gameObject.GetComponent<Animator>().SetBool("turning", true);
-                }
-                else
-                {
-                    gameObject.GetComponent<Animator>().SetBool("turning", false);
+                    if (direction.x == 0 && direction.y == 0 && (translationRH > 10f || translationRH < -10f))
+                    {
+                        gameObject.GetComponent<Animator>().SetBool("turning", true);
+                    }
+                    else
+                    {
+                        gameObject.GetComponent<Animator>().SetBool("turning", false);
+                    }
                 }
             }
 
@@ -79,6 +90,7 @@ namespace Scripts
 
         protected void Move()
         {
+            transform.localRotation = Quaternion.Euler(0, context.m_XAxis.Value, 0);
             moveDirection = new Vector3(direction.x, 0, direction.y);
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection = Vector3.ClampMagnitude(moveDirection, 1f);
@@ -127,7 +139,7 @@ namespace Scripts
 
         protected void OnSwap()
         {
-            
+
         }
 
         protected void OnJump()

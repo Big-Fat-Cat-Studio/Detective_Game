@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 using System.Collections.Generic;
+using System;
 
 namespace Scripts
 {
@@ -24,6 +25,7 @@ namespace Scripts
             {
                 Instance = this;
             }
+            //Instance = this;
         }
 
         public GameType GameType;
@@ -83,6 +85,8 @@ namespace Scripts
                 CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
             }
             else if (GameType == GameType.MultiPlayerSplitScreen) {
+                //PlayerOne = CharacterManager.Instance.PlayerOne;
+                //PlayerTwo = CharacterManager.Instance.PlayerTwo;
                 if (PlayerOne == ActivePlayer.Human)
                 {
                     CameraFollow.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X";
@@ -268,6 +272,18 @@ namespace Scripts
                 currentCourotine = null;
             }
 
+        }
+
+        public string getPlayerName(ActivePlayer player)
+        {
+            if(player == ActivePlayer.Human)
+            {
+                return "Kika";
+            }
+            else
+            {
+                return "Daigo";
+            }
         }
 
         public void addCluesToList(MeshHighlighter clue)

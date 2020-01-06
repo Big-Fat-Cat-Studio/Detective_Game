@@ -20,4 +20,8 @@ namespace Scripts
     {
         void ActivateSolution();
     }
+    public interface IActivateWithPiss
+    {
+        void Activation();
+    }
 }

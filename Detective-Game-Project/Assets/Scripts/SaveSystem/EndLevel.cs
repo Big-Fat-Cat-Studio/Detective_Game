@@ -25,13 +25,13 @@ namespace Scripts
                 if(!endCutscene.isPlaying)
                 {
                     this.cutsceneHasStarted = false;
-                    LoadNextLevel();
+                    SceneManager.LoadScene(0);
                 }
             }
         }
 
         //Custom functions
-        public override void interact()
+        public override void interact(ActivePlayer player)
         {
             //SaveData new_save = new SaveData(recalculateCompletedLevels(GameManager.Instance.saveData.completedLevels), this.nextLevelName, false);
             //SaveSystem.SaveProgress(new_save);

@@ -20,9 +20,22 @@ namespace Scripts
         {
             if(this.gameObject.transform.position.y < this.yDeathLevel)
             {
-                this.gameObject.GetComponent<CharacterController>().enabled = false;
-                this.gameObject.transform.position = this.spawnLocation;
-                this.gameObject.GetComponent<CharacterController>().enabled = true;
+                Respawn();
+            }
+        }
+        //Custom functions
+        public void Respawn()
+        {
+            this.gameObject.GetComponent<CharacterController>().enabled = false;
+            this.gameObject.transform.position = this.spawnLocation;
+            this.gameObject.GetComponent<CharacterController>().enabled = true;
+        }
+
+         private void OnTriggerEnter(Collider collision)
+        {
+            if (collision.tag == "checkpoint")
+            {
+                this.spawnLocation = this.gameObject.transform.position;
             }
         }
     }

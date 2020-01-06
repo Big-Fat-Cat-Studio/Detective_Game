@@ -17,6 +17,7 @@ namespace Scripts
         public GameObject umbrella;
         public bool umbrellaActiveOnStart;
         Animator animator;
+        float canmovein = 0;
 
         public void handleSlow(float _jumpHeight, float _movementSpeed)
         {
@@ -24,7 +25,7 @@ namespace Scripts
             movementSpeed = _movementSpeed;
         }
 
-        private void Start()
+        void Start()
         {
             animator = GetComponent<Animator>();
             playerInteract = GetComponentInChildren<PlayerInteract>();
@@ -64,11 +65,13 @@ namespace Scripts
             {
                 gravity = 20.0f;
                 isClimbing = false;
+                move = true;
             }
         }
 
         private void FixedUpdate()
         {
+            canmovein -= Time.deltaTime;
             if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human))
             {
                 if (characterController.isGrounded)
@@ -79,7 +82,7 @@ namespace Scripts
 
                 if (moveCamera)
                 {
-                    if (isInPuzzle || canPushPull)
+                    if (isInPuzzle || canPushPull || canmovein >= 0)
                     {
                         moveCamera = false;
                     }
@@ -99,7 +102,7 @@ namespace Scripts
                 {
                     gameObject.GetComponent<Animator>().speed = 1;
 
-                    if (isInPuzzle)
+                    if (isInPuzzle || canmovein >= 0)
                     {
                         moveDirection = new Vector3(0, 0, 0);
                         move = true;
@@ -107,7 +110,9 @@ namespace Scripts
                     else if (canPushPull)
                     {
                         Push();
-
+                        animator.SetFloat("forward/backward", 0);
+                        animator.SetFloat("sidewalk", 0);
+                        animator.SetBool("walksideways", false);
                         animator.SetBool("jumping", false);
                         animator.SetBool("pushing", true);
                         move = false;
@@ -172,7 +177,6 @@ namespace Scripts
                     {
                         animator.SetBool("jumping", false);
                     }
-                    animator.SetBool("turning", false);
                     animator.SetBool("pushing", false);
                     animator.SetBool("walksideways", false);
                 }
@@ -187,7 +191,6 @@ namespace Scripts
                 animator.SetFloat("forward/backward", 0);
                 animator.SetFloat("sidewalk", 0);
                 animator.SetBool("jumping", false);
-                animator.SetBool("turning", false);
                 animator.SetBool("pushing", false);
                 animator.SetBool("walksideways", false);
             }
@@ -201,12 +204,20 @@ namespace Scripts
         protected void OnSpecial2()
         {
             if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human))
-            {
+            {   
                 umbrella.SetActive(!umbrella.activeSelf);
-
                 if (umbrellaActiveOnStart)
                 {
                     umbrellaActiveOnStart = false;
+                }
+                else
+                {
+                    umbrellaActiveOnStart = true;
+                }
+                if (umbrella.activeSelf)
+                {
+                    animator.SetTrigger("openUmbrella");
+                    canmovein = 1f;
                 }
             }
         }

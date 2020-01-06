@@ -17,11 +17,13 @@
     public enum InteractableType
     {
         Normal,
-        Destroyable,
+        ItemNeeded,
         Pickup,
         HoldButton,
         Movable,
-        EndLevel
+        EndLevel,
+        DEBUG, // Interacting with a DEBUG spawns an item without destroying root item
+        STATECHANGER // Interacting with a STATECHANGER only changes a state
     }
 
     public enum ButtonPress
@@ -62,5 +64,11 @@
     {
         Keyboard,
         Controller
+    }
+
+    public enum InteractState
+    {
+        DEACTIVATED,
+        ACTIVATED
     }
 }

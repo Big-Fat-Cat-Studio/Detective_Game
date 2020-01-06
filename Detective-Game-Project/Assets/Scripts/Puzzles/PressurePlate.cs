@@ -14,6 +14,7 @@ public class PressurePlate : MonoBehaviour
     [SerializeField] [Tooltip("Which object to manipulate")] private GameObject ObjectToManipulate;
 
     public Vector3 offset;
+    public bool disableElement;
 
     private Vector3 ObjectPressedSize;
     private bool Pressed;
@@ -41,12 +42,22 @@ public class PressurePlate : MonoBehaviour
     {
         gameObject.transform.position -= ObjectPressedSize;
         Pressed = !Pressed;
+
+        if (disableElement)
+        {
+            ObjectToManipulate.transform.GetChild(0).gameObject.SetActive(false);
+        }
     }
 
     public void OnChildTriggerExit(Collider c, GameObject g)
     {
         gameObject.transform.position += ObjectPressedSize;
         Pressed = !Pressed;
+
+        if (disableElement)
+        {
+            ObjectToManipulate.transform.GetChild(0).gameObject.SetActive(true);
+        }
     }
 
     public void ManipulateObject()

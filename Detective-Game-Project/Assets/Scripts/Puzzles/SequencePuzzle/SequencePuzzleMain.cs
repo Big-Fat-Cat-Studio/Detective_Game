@@ -29,10 +29,11 @@ namespace Scripts
         {
             this.timer = this.maxCountdown;
             this.timerText = GameObject.FindGameObjectWithTag("Timer").GetComponent<Text>();
+            this.timerText.gameObject.SetActive(false);
             this.colorSequence = new List<Color>();
             this.input = new List<string>();
             this.convertedSolution = this.ConvertSolution();
-            this.colorSequence.Add(Color.white);
+            this.colorSequence.Add(Color.clear);
             this.InsertColors();
             StartCoroutine(this.CheckSolution());
             if (lamp != null)
@@ -45,6 +46,7 @@ namespace Scripts
         {
             if(puzzleHasStarted)
             {
+                this.timerText.gameObject.SetActive(true);
                 this.timer -= Time.deltaTime;
                 this.timerText.text = "Timer: " + this.timer.ToString();
             }
@@ -139,6 +141,7 @@ namespace Scripts
         {
             this.puzzleHasStarted = false;
             this.timerText.text = "";
+            this.timerText.gameObject.SetActive(false);
             StopCoroutine(CheckSolution());
 
             if (lamp != null)
