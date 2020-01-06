@@ -23,6 +23,7 @@ namespace Scripts
             interactableType = InteractableType.HoldButton;
             rigidBody = GetComponent<Rigidbody>();
             collider = GetComponent<BoxCollider>();
+            rigidBody.isKinematic = true;
         }
 
         public override void interact(ActivePlayer player)
@@ -36,6 +37,7 @@ namespace Scripts
             {
                 humanispushing = !humanispushing;
                 playerObject = GameManager.Instance.Human;
+                rigidBody.isKinematic = !rigidBody.isKinematic;
             }
 
             playerObject.GetComponent<Player>().togglePush();
@@ -94,6 +96,15 @@ namespace Scripts
                     }                
                 }
             }
+
+            if (checkIfFlying() && humanispushing == false)
+            {
+                rigidBody.isKinematic = true;
+            }
+            else
+            {
+                rigidBody.isKinematic = false;
+            }
         }
 
         private void pushBox()
@@ -101,7 +112,7 @@ namespace Scripts
             fixPlayerPosition(ActivePlayer.Human);
             pushforce = GameManager.Instance.Human.GetComponent<HumanPlayer>().moveDirection;
 
-            if (Physics.Raycast(transform.position, Vector3.down, collider.bounds.extents.y + 0.1f))
+            if (checkIfFlying())
             {
                 rigidBody.velocity = new Vector3(pushforce.x, 0, pushforce.z);
             }
@@ -110,6 +121,15 @@ namespace Scripts
                 rigidBody.velocity = new Vector3(pushforce.x * 2f, -3f, pushforce.z * 2f);
             }
             
+        }
+
+        private bool checkIfFlying()
+        {
+            if (Physics.Raycast(transform.position, Vector3.down, collider.bounds.extents.y + 0.1f))
+            {
+                return true;
+            }
+            return false;
         }
 
         private void fixPlayerPosition(ActivePlayer player)
