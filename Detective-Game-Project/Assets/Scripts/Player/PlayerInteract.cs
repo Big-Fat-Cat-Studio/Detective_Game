@@ -269,6 +269,7 @@ namespace Scripts
 
         private void OnTriggerEnter(Collider other)
         {
+            print(other.gameObject);
             if (other.gameObject.tag == Constant.TAG_INTERACT 
                 && !ReferenceEquals(other.gameObject, holding)
                 && other.gameObject.GetComponent<InteractableObject>().interactable
