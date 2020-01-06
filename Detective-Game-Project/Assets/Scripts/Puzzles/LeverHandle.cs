@@ -54,6 +54,7 @@ public class LeverHandle : MonoBehaviour
         {
             // Rotate the lever && set interacted to !interacted on X
             StartCoroutine(Rotate(2, () => { Flipped = !Flipped; Debug.Log($"Switch flipped : {Flipped}"); }));
+            Manipulated.SetActive(false);
         }
     }
 
