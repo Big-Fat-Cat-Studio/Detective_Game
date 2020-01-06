@@ -14,6 +14,14 @@ namespace Scripts
             interactableType = InteractableType.Pickup;
             rigidBody = GetComponent<Rigidbody>();
         }
+        private void Start()
+        {
+            this.GetComponent<Rigidbody>().isKinematic = true;
+        }
+        private void Update()
+        {
+            this.transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
+        }
 
         public override void interact(ActivePlayer player)
         {
