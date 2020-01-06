@@ -97,6 +97,14 @@ public class @InputSettings : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MenuExit"",
+                    ""type"": ""Button"",
+                    ""id"": ""edc38b7d-9892-4b5f-be56-155acd1b16a4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -361,6 +369,28 @@ public class @InputSettings : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Special4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""68d4bedb-b0e0-4b01-a4b4-b7cdb7b47724"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuExit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d09c3561-c264-48c6-882a-971413705d0c"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MenuExit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -701,6 +731,7 @@ public class @InputSettings : IInputActionCollection, IDisposable
         m_Human_CameraMove = m_Human.FindAction("CameraMove", throwIfNotFound: true);
         m_Human_Special3 = m_Human.FindAction("Special3", throwIfNotFound: true);
         m_Human_Special4 = m_Human.FindAction("Special4", throwIfNotFound: true);
+        m_Human_MenuExit = m_Human.FindAction("MenuExit", throwIfNotFound: true);
         // Pipe
         m_Pipe = asset.FindActionMap("Pipe", throwIfNotFound: true);
         m_Pipe_Up = m_Pipe.FindAction("Up", throwIfNotFound: true);
@@ -770,6 +801,7 @@ public class @InputSettings : IInputActionCollection, IDisposable
     private readonly InputAction m_Human_CameraMove;
     private readonly InputAction m_Human_Special3;
     private readonly InputAction m_Human_Special4;
+    private readonly InputAction m_Human_MenuExit;
     public struct HumanActions
     {
         private @InputSettings m_Wrapper;
@@ -784,6 +816,7 @@ public class @InputSettings : IInputActionCollection, IDisposable
         public InputAction @CameraMove => m_Wrapper.m_Human_CameraMove;
         public InputAction @Special3 => m_Wrapper.m_Human_Special3;
         public InputAction @Special4 => m_Wrapper.m_Human_Special4;
+        public InputAction @MenuExit => m_Wrapper.m_Human_MenuExit;
         public InputActionMap Get() { return m_Wrapper.m_Human; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -823,6 +856,9 @@ public class @InputSettings : IInputActionCollection, IDisposable
                 @Special4.started -= m_Wrapper.m_HumanActionsCallbackInterface.OnSpecial4;
                 @Special4.performed -= m_Wrapper.m_HumanActionsCallbackInterface.OnSpecial4;
                 @Special4.canceled -= m_Wrapper.m_HumanActionsCallbackInterface.OnSpecial4;
+                @MenuExit.started -= m_Wrapper.m_HumanActionsCallbackInterface.OnMenuExit;
+                @MenuExit.performed -= m_Wrapper.m_HumanActionsCallbackInterface.OnMenuExit;
+                @MenuExit.canceled -= m_Wrapper.m_HumanActionsCallbackInterface.OnMenuExit;
             }
             m_Wrapper.m_HumanActionsCallbackInterface = instance;
             if (instance != null)
@@ -857,6 +893,9 @@ public class @InputSettings : IInputActionCollection, IDisposable
                 @Special4.started += instance.OnSpecial4;
                 @Special4.performed += instance.OnSpecial4;
                 @Special4.canceled += instance.OnSpecial4;
+                @MenuExit.started += instance.OnMenuExit;
+                @MenuExit.performed += instance.OnMenuExit;
+                @MenuExit.canceled += instance.OnMenuExit;
             }
         }
     }
@@ -980,6 +1019,7 @@ public class @InputSettings : IInputActionCollection, IDisposable
         void OnCameraMove(InputAction.CallbackContext context);
         void OnSpecial3(InputAction.CallbackContext context);
         void OnSpecial4(InputAction.CallbackContext context);
+        void OnMenuExit(InputAction.CallbackContext context);
     }
     public interface IPipeActions
     {
