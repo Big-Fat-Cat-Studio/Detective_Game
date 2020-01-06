@@ -153,6 +153,11 @@ namespace Scripts
             }
         }
 
+        protected void OnMenuExit()
+        {
+            GameManager.Instance.exitTutorial();
+        }
+
         public void setInputType(InputType inputType)
         {
             this.inputType = inputType;
