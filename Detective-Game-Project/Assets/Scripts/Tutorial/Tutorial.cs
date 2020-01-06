@@ -6,40 +6,32 @@ namespace Scripts
 {
     public class Tutorial : InteractableObject
     {
-        public GameObject Tutorialpanel;
+        public GameObject TutorialImage;
 
         void Start()
         {
-            Tutorialpanel.SetActive(false);
+            TutorialImage.SetActive(false);
         }
 
         public override void interact(ActivePlayer player)
         {
-            if (Tutorialpanel.activeSelf)
+            if (!TutorialImage.activeSelf)
             {
-                Resume();
-            }
-            else
-            {
-                Pause(player);
+                Pause();
             }
         }
 
         public void Resume()
         {
-            Tutorialpanel.SetActive(false);
+            TutorialImage.SetActive(false);
             Time.timeScale = 1;
         }
 
-        public void Pause(ActivePlayer player)
+        public void Pause()
         {
-            Tutorialpanel.SetActive(true);
-            TutorialPanel panel = Tutorialpanel.GetComponent<TutorialPanel>();
-            if (panel != null)
-            {
-                panel.showText(player);
-            }
+            TutorialImage.SetActive(true);
             Time.timeScale = 0;
+            GameManager.Instance.currentTutorial = this;
         }
     }
 }

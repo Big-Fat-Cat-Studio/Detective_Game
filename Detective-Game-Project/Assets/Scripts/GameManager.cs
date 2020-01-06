@@ -65,6 +65,8 @@ namespace Scripts
         private float _PrevPlayerCRotation; // Camera X-Axis Rotation
         private List<MeshHighlighter> clues = new List<MeshHighlighter>();
 
+        [HideInInspector]
+        public Tutorial currentTutorial;
         //public SaveData saveData;
 
         private void Start()
@@ -294,6 +296,15 @@ namespace Scripts
         public void toggleVision()
         {
             clues.ForEach(clue => clue.toggleClues());
+        }
+
+        public void exitTutorial()
+        {
+            if (currentTutorial != null)
+            {
+                currentTutorial.Resume();
+                currentTutorial = null;
+            }
         }
     }
 }
