@@ -13,6 +13,7 @@ namespace Scripts
         public bool testMode = false;
         public int pissCounter = 0;
         public int poopCounter = 0;
+        public int kikaDetectionCounter = 0;
 
         private bool status;
 
