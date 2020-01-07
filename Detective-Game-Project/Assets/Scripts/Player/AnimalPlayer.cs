@@ -17,6 +17,9 @@ namespace Scripts {
         private bool cannotmove = false;
         Animator animator;
 
+        public GameObject pissPrefab;
+        public GameObject poopPrefab;
+
         private void Start()
         {
             animator = GetComponent<Animator>();
@@ -135,24 +138,30 @@ namespace Scripts {
         protected void OnSpecial2()
         {
             if (!characterController.isGrounded || abilityActive("poop") || cannotmove) return;
-            AchievementsManager.Instance.poopCounter++;
+            if (AchievementsManager.Instance != null)
+            {
+                AchievementsManager.Instance.poopCounter++;
+            }
             animator.SetBool("poop", true);
             cannotmove = true;
             activateAbilityTimer("poop");
-            GameObject poop = (GameObject)Instantiate(Resources.Load("PoopPrefab"));
+            GameObject poop = Instantiate(poopPrefab);
             poop.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.125f, gameObject.transform.position.z);
         }
 
         protected void OnSpecial3()
         {
             if (!characterController.isGrounded || abilityActive("piss") || cannotmove) return;
-            AchievementsManager.Instance.pissCounter++;
+            if (AchievementsManager.Instance != null)
+            {
+                AchievementsManager.Instance.pissCounter++;
+            }
             animator.SetBool("piss", true);
             pissParticles.Play();
             cannotmove = true;
             Debug.Log(cannotmove);
             activateAbilityTimer("piss");
-            GameObject piss = (GameObject)Instantiate(Resources.Load("PissPrefab"));
+            GameObject piss = Instantiate(pissPrefab);
             piss.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.125f, gameObject.transform.position.z);
             piss.GetComponent<Collider>().enabled = false;
             piss.GetComponent<Collider>().enabled = true;

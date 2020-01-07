@@ -23,7 +23,6 @@ namespace Scripts
             interactableType = InteractableType.HoldButton;
             rigidBody = GetComponent<Rigidbody>();
             collider = GetComponent<BoxCollider>();
-            rigidBody.isKinematic = true;
         }
 
         public override void interact(ActivePlayer player)
@@ -37,7 +36,6 @@ namespace Scripts
             {
                 humanispushing = !humanispushing;
                 playerObject = GameManager.Instance.Human;
-                rigidBody.isKinematic = !rigidBody.isKinematic;
             }
 
             playerObject.GetComponent<Player>().togglePush();
@@ -95,15 +93,6 @@ namespace Scripts
                         rigidBody.velocity = new Vector3(pushforce.x, 0, pushforce.z);
                     }                
                 }
-            }
-
-            if (checkIfFlying() && humanispushing == false)
-            {
-                rigidBody.isKinematic = true;
-            }
-            else
-            {
-                rigidBody.isKinematic = false;
             }
         }
 

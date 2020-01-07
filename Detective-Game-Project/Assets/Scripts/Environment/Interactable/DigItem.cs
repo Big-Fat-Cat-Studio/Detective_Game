@@ -17,6 +17,14 @@ namespace Scripts {
             breakOnUse = false;
         }
 
+        protected override void Update()
+        {
+            if (interactableType == InteractableType.Pickup)
+            {
+                base.Update();
+            }
+        }
+
         public override void interact(ActivePlayer player)
         {
             if (interactableType == InteractableType.Pickup)

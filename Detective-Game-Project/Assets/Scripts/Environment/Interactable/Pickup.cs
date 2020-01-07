@@ -18,7 +18,7 @@ namespace Scripts
         {
             this.GetComponent<Rigidbody>().isKinematic = true;
         }
-        private void Update()
+        protected virtual void Update()
         {
             this.transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
         }
