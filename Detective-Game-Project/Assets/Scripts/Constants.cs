@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 public static class Constant
 {
-    public static string INTERACT_TEXT = "Press [X] to ";
+    public static string INTERACT_TEXT = "Press <sprite=0> to ";
+    public static string INTERACT_TEXT_CONTROLLER = "Press <sprite=1> to ";
     public static string UMBRELLA_TEXT = "Press [V] to pick up ";
 
     public static string TAG_PICKUP = "Pickup";

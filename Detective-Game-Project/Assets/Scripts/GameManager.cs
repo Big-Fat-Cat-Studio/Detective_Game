@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 using System.Collections.Generic;
 using System;
+using TMPro;
 
 namespace Scripts
 {
@@ -64,6 +65,9 @@ namespace Scripts
         private float _PrevPlayerORotation; // Object X-Axis Rotation
         private float _PrevPlayerCRotation; // Camera X-Axis Rotation
         private List<MeshHighlighter> clues = new List<MeshHighlighter>();
+
+        private InputType playerInput;
+        private InputType playerOneInput;
 
         [HideInInspector]
         public Tutorial currentTutorial;
@@ -178,6 +182,15 @@ namespace Scripts
                 Human.GetComponent<Player>().setInputType(inputType);
                 Human.GetComponent<PlayerInput>().SwitchCurrentControlScheme(inputType.ToString(), inputs);
             }
+
+            if (player == PlayerOne)
+            {
+                playerOneInput = inputType;
+            }
+            else
+            {
+                playerInput = inputType;
+            }
         }
 
         public void removeInteractText(ActivePlayer player)
@@ -207,13 +220,29 @@ namespace Scripts
         {
             if (GameType == GameType.MultiPlayerSplitScreen && player == PlayerOne)
             {
-                InteractTextPlayerOne.GetComponent<Text>().text = Constant.INTERACT_TEXT + message;
-                InteractTextPlayerOne.SetActive(true);
+                if (playerOneInput == InputType.Controller)
+                {
+                    InteractTextPlayerOne.GetComponent<TextMeshProUGUI>().text = Constant.INTERACT_TEXT_CONTROLLER + message;
+                    InteractTextPlayerOne.SetActive(true);
+                }
+                else
+                {
+                    InteractTextPlayerOne.GetComponent<TextMeshProUGUI>().text = Constant.INTERACT_TEXT + message;
+                    InteractTextPlayerOne.SetActive(true);
+                }
             }
             else
             {
-                InteractText.GetComponent<Text>().text = Constant.INTERACT_TEXT + message;
-                InteractText.SetActive(true);
+                if (playerInput == InputType.Controller)
+                {
+                    InteractText.GetComponent<TextMeshProUGUI>().text = Constant.INTERACT_TEXT_CONTROLLER + message;
+                    InteractText.SetActive(true);
+                }
+                else
+                {
+                    InteractText.GetComponent<TextMeshProUGUI>().text = Constant.INTERACT_TEXT + message;
+                    InteractText.SetActive(true);
+                }
 
                 if (GameType == GameType.SinglePlayer)
                 {
