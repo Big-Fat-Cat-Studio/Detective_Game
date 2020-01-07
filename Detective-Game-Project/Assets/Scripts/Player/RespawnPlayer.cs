@@ -9,7 +9,10 @@ namespace Scripts
         //Variables
         public int yDeathLevel;
 
-        private Vector3 spawnLocation;
+        [HideInInspector]
+        public Vector3 spawnLocation;
+        [HideInInspector]
+        public int checkPointIndex;
 
         //Unity functions
         private void Start()

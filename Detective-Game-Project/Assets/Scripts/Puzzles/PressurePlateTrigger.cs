@@ -14,6 +14,7 @@ public class PressurePlateTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject.name);
         if (!("Animal Human".Contains(LayerMask.LayerToName(other.gameObject.layer)))) return;
         Parent.OnChildTriggerEnter(other, gameObject);
     }
