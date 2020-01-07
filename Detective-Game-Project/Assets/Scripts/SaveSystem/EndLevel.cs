@@ -11,6 +11,7 @@ namespace Scripts
         //Variables
         public VideoPlayer endCutscene;
         public string nextLevelName;
+        public string achievementName;
         private bool cutsceneHasStarted = false;
 
         //Unity functions
@@ -35,6 +36,7 @@ namespace Scripts
         {
             //SaveData new_save = new SaveData(recalculateCompletedLevels(GameManager.Instance.saveData.completedLevels), this.nextLevelName, false);
             //SaveSystem.SaveProgress(new_save);
+            AchievementsManager.Instance.UnlockAchievement(achievementName);
             GameManager.Instance.PlayerCamera.SetActive(false);
             GameManager.Instance.PlayerCameraP2.SetActive(false);
             GameManager.Instance.InteractTextPlayerOne.SetActive(false);
