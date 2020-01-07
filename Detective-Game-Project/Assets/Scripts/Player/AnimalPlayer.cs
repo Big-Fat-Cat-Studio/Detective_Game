@@ -135,6 +135,7 @@ namespace Scripts {
         protected void OnSpecial2()
         {
             if (!characterController.isGrounded || abilityActive("poop") || cannotmove) return;
+            AchievementsManager.Instance.poopCounter++;
             animator.SetBool("poop", true);
             cannotmove = true;
             activateAbilityTimer("poop");
@@ -145,6 +146,7 @@ namespace Scripts {
         protected void OnSpecial3()
         {
             if (!characterController.isGrounded || abilityActive("piss") || cannotmove) return;
+            AchievementsManager.Instance.pissCounter++;
             animator.SetBool("piss", true);
             pissParticles.Play();
             cannotmove = true;

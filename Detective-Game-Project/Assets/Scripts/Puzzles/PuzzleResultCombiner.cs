@@ -9,6 +9,7 @@ namespace Scripts
         //Variables
         public SolutionType solutionType;
         public int requiredResultamount;
+        public ParticleSystem[] sprinklers;
 
         private int currentResultAmount = 0;
 
@@ -20,6 +21,14 @@ namespace Scripts
             {
                 if(this.solutionType == SolutionType.Destroy)
                 {
+                    Destroy(this.gameObject);
+                }
+                else if(this.solutionType == SolutionType.Sprinkler)
+                {
+                    foreach (ParticleSystem sprinkler in this.sprinklers)
+                    {
+                        sprinkler.Play();
+                    }
                     Destroy(this.gameObject);
                 }
                 else

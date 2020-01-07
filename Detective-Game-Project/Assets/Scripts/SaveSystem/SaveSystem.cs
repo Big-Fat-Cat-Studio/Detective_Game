@@ -39,7 +39,7 @@ namespace Scripts
         private static void CreateDummySave()
         {
             string savePath = Application.persistentDataPath + "/kika_and_daigo.save";
-            SaveData dummySave = new SaveData(1, "Tutorial", true);
+            SaveData dummySave = new SaveData(1, 0, 0, "Tutorial", true);
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream fileStream = new FileStream(savePath, FileMode.Create);
             formatter.Serialize(fileStream, dummySave);

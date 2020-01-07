@@ -57,7 +57,8 @@
 
     public enum SolutionType
     {
-        Destroy
+        Destroy,
+        Sprinkler
     }
 
     public enum InputType
