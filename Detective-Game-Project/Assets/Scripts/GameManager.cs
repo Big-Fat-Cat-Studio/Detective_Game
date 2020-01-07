@@ -2,6 +2,11 @@
 using UnityEngine.UI;
 using Cinemachine;
 using System.Collections;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
+using System.Collections.Generic;
+using System;
+using TMPro;
 
 namespace Scripts
 {
@@ -21,6 +26,7 @@ namespace Scripts
             {
                 Instance = this;
             }
+            //Instance = this;
         }
 
         public GameType GameType;
@@ -33,20 +39,16 @@ namespace Scripts
 
         [HideInInspector]
         public ActivePlayer? InteractTextActivePlayer;
-        [HideInInspector]
-        public ActivePlayer? PickupTextActivePlayer;
 
         [Header("Text game objects")]
         public GameObject AfterInteractText;
         public GameObject InteractText;
-        public GameObject PickupText;
 
         [Header("PLAYER ONE Text game objects")]
-        //Player one gameobjects instead of putting player two gameobjects because 
+        //Player one gameobjects instead of putting player two gameobjects because
         //the text game objects are on the right spot for player two
         public GameObject AfterInteractTextPlayerOne;
         public GameObject InteractTextPlayerOne;
-        public GameObject PickupTextPlayerOne;
 
         private IEnumerator currentCourotine;
         private IEnumerator currentCourotinePlayerOne;
@@ -54,6 +56,7 @@ namespace Scripts
         [Header("Camera objects")]
         public GameObject PlayerCamera;
         public GameObject PlayerCameraP2;
+        public GameObject CutsceneCamera;
 
         [Header("Freelook objects")]
         public GameObject CameraFollow;
@@ -61,32 +64,68 @@ namespace Scripts
 
         private float _PrevPlayerORotation; // Object X-Axis Rotation
         private float _PrevPlayerCRotation; // Camera X-Axis Rotation
+        private List<MeshHighlighter> clues = new List<MeshHighlighter>();
+
+        private InputType playerInput;
+        private InputType playerOneInput;
+
+        [HideInInspector]
+        public Tutorial currentTutorial;
+        //public SaveData saveData;
+
         private void Start()
         {
+            // saveData = SaveSystem.LoadProgress();
+            CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
+            CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
+            CameraFollowP2.GetComponent<CinemachineFreeLook>().Follow = Animal.transform;
+            CameraFollowP2.GetComponent<CinemachineFreeLook>().LookAt = Animal.transform;
+
             if (GameType == GameType.SinglePlayer)
             {
-                Human.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
                 PlayerOne = ActivePlayer.Human;
 
                 PlayerCamera.GetComponent<Camera>().rect = new Rect(0,0,1,1);
                 PlayerCameraP2.SetActive(false);
+                CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
+                CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
             }
-            else if (PlayerTwo == ActivePlayer.Human) {
-                CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X";
-                CameraFollowP2.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y";
-                PlayerCameraP2.GetComponent<Camera>().rect = new Rect(0, 0.5f, 1, 1);
+            else if (GameType == GameType.MultiPlayerSplitScreen) {
+                //PlayerOne = CharacterManager.Instance.PlayerOne;
+                //PlayerTwo = CharacterManager.Instance.PlayerTwo;
+                if (PlayerOne == ActivePlayer.Human)
+                {
+                    CameraFollow.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X";
+                    CameraFollow.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y";
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X P2";
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y P2";
 
-                CameraFollow.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X P2";
-                CameraFollow.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y P2";
-                PlayerCamera.GetComponent<Camera>().rect = new Rect(0, -0.5f, 1, 1);
+                    CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
+                    CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().Follow = Animal.transform;
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().LookAt = Animal.transform;
+                }
+                else if (PlayerTwo == ActivePlayer.Human)
+                {
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X";
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y";
+                    PlayerCameraP2.GetComponent<Camera>().rect = new Rect(0, 0.5f, 1, 1);
+
+                    CameraFollow.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = "Camera X P2";
+                    CameraFollow.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = "Camera Y P2";
+                    PlayerCamera.GetComponent<Camera>().rect = new Rect(0, -0.5f, 1, 1);
+
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().Follow = Human.transform;
+                    CameraFollowP2.GetComponent<CinemachineFreeLook>().LookAt = Human.transform;
+                    CameraFollow.GetComponent<CinemachineFreeLook>().Follow = Animal.transform;
+                    CameraFollow.GetComponent<CinemachineFreeLook>().LookAt = Animal.transform;
+                }
             }
 
             AfterInteractText.SetActive(false);
             InteractText.SetActive(false);
-            PickupText.SetActive(false);
             AfterInteractTextPlayerOne.SetActive(false);
             InteractTextPlayerOne.SetActive(false);
-            PickupTextPlayerOne.SetActive(false);
 
             currentCourotine = null;
             currentCourotinePlayerOne = null;
@@ -101,18 +140,12 @@ namespace Scripts
 
                 if (PlayerOne == ActivePlayer.Human)
                 {
-                    Human.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
-                    Animal.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
-
                     cameraContext.Follow = Animal.transform;
                     cameraContext.LookAt = Animal.transform;
                     PlayerOne = ActivePlayer.Animal;
                 }
                 else if (PlayerOne == ActivePlayer.Animal)
                 {
-                    Animal.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
-                    Human.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.green);
-
                     cameraContext.Follow = Human.transform;
                     cameraContext.LookAt = Human.transform;
                     PlayerOne = ActivePlayer.Human;
@@ -137,41 +170,26 @@ namespace Scripts
             return true;
         }
 
-        public bool getButtonPressForPlayer(ActivePlayer player, string buttonName, ButtonPress buttonPress)
-        { 
-            if (GameType == GameType.MultiPlayerSplitScreen && player == PlayerTwo)
-            {
-                buttonName += " P2";
-            }
-            
-            if(buttonPress == ButtonPress.Down)
-            {
-                return Input.GetButtonDown(buttonName);
-            }
-            else if (buttonPress == ButtonPress.Up)
-            {
-                return Input.GetButtonUp(buttonName);
-            }
-            else 
-            {
-                return Input.GetButton(buttonName);
-            }
-        }
-        
-        public float getAxisForPlayer(ActivePlayer player, string axisName, AxisType axisType)
+        public void assignController(ActivePlayer player, InputType inputType, params InputDevice[] inputs)
         {
-            if (GameType == GameType.MultiPlayerSplitScreen && player == PlayerTwo)
+            if (player == ActivePlayer.Animal)
             {
-                axisName += " P2";
-            }
-
-            if (axisType == AxisType.Axis)
-            {
-                return Input.GetAxis(axisName);
+                Animal.GetComponent<Player>().setInputType(inputType);
+                Animal.GetComponent<PlayerInput>().SwitchCurrentControlScheme(inputType.ToString(), inputs);
             }
             else
             {
-                return Input.GetAxisRaw(axisName);
+                Human.GetComponent<Player>().setInputType(inputType);
+                Human.GetComponent<PlayerInput>().SwitchCurrentControlScheme(inputType.ToString(), inputs);
+            }
+
+            if (player == PlayerOne)
+            {
+                playerOneInput = inputType;
+            }
+            else
+            {
+                playerInput = inputType;
             }
         }
 
@@ -190,33 +208,10 @@ namespace Scripts
             }
             else
             {
-                if (PickupTextActivePlayer == player)
+                if (InteractTextActivePlayer == player)
                 {
                     InteractText.SetActive(false);
                     InteractTextActivePlayer = null;
-                }
-            }
-        }
-
-        public void removePickupText(ActivePlayer player)
-        {
-            if (GameType == GameType.MultiPlayerSplitScreen)
-            {
-                if (player == PlayerOne)
-                {
-                    PickupTextPlayerOne.SetActive(false);
-                }
-                else
-                {
-                    PickupText.SetActive(false);
-                }
-            }
-            else
-            {
-                if (PickupTextActivePlayer == player)
-                {
-                    PickupText.SetActive(false);
-                    PickupTextActivePlayer = null;
                 }
             }
         }
@@ -225,36 +220,33 @@ namespace Scripts
         {
             if (GameType == GameType.MultiPlayerSplitScreen && player == PlayerOne)
             {
-                InteractTextPlayerOne.GetComponent<Text>().text = Constant.INTERACT_TEXT + message;
-                InteractTextPlayerOne.SetActive(true);
+                if (playerOneInput == InputType.Controller)
+                {
+                    InteractTextPlayerOne.GetComponent<TextMeshProUGUI>().text = Constant.INTERACT_TEXT_CONTROLLER + message;
+                    InteractTextPlayerOne.SetActive(true);
+                }
+                else
+                {
+                    InteractTextPlayerOne.GetComponent<TextMeshProUGUI>().text = Constant.INTERACT_TEXT + message;
+                    InteractTextPlayerOne.SetActive(true);
+                }
             }
             else
             {
-                InteractText.GetComponent<Text>().text = Constant.INTERACT_TEXT + message;
-                InteractText.SetActive(true);
+                if (playerInput == InputType.Controller)
+                {
+                    InteractText.GetComponent<TextMeshProUGUI>().text = Constant.INTERACT_TEXT_CONTROLLER + message;
+                    InteractText.SetActive(true);
+                }
+                else
+                {
+                    InteractText.GetComponent<TextMeshProUGUI>().text = Constant.INTERACT_TEXT + message;
+                    InteractText.SetActive(true);
+                }
 
                 if (GameType == GameType.SinglePlayer)
                 {
                     InteractTextActivePlayer = player;
-                }
-            }
-        }
-
-        public void showPickupText(string message, ActivePlayer player)
-        {
-            if (GameType == GameType.MultiPlayerSplitScreen && player == PlayerOne)
-            {
-                PickupTextPlayerOne.GetComponent<Text>().text = Constant.PICKUP_TEXT + message;
-                PickupTextPlayerOne.SetActive(true);
-            }
-            else
-            {
-                PickupText.GetComponent<Text>().text = Constant.PICKUP_TEXT + message;
-                PickupText.SetActive(true);
-
-                if (GameType == GameType.SinglePlayer)
-                {
-                    PickupTextActivePlayer = player;
                 }
             }
         }
@@ -310,7 +302,38 @@ namespace Scripts
                 AfterInteractText.SetActive(false);
                 currentCourotine = null;
             }
-            
+
+        }
+
+        public string getPlayerName(ActivePlayer player)
+        {
+            if(player == ActivePlayer.Human)
+            {
+                return "Kika";
+            }
+            else
+            {
+                return "Daigo";
+            }
+        }
+
+        public void addCluesToList(MeshHighlighter clue)
+        {
+            clues.Add(clue);
+        }
+
+        public void toggleVision()
+        {
+            clues.ForEach(clue => clue.toggleClues());
+        }
+
+        public void exitTutorial()
+        {
+            if (currentTutorial != null)
+            {
+                currentTutorial.Resume();
+                currentTutorial = null;
+            }
         }
     }
 }

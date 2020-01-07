@@ -11,6 +11,7 @@ public class LeverHandle : MonoBehaviour
 
     // Rotation should be clamped between -30 and 30
     [SerializeField] private GameObject RotationBasePivotPoint;
+    [SerializeField] private Collider PivotBaseCollider;
 
     // TODO(HAMZA:Change this to activeplayer!)
     [SerializeField] private GameObject CurrentPlayer;
@@ -30,8 +31,8 @@ public class LeverHandle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartAngle  = new Vector3(-30, 0, 0);
-        TargetAngle = new Vector3( 30, 0, 0);
+        StartAngle = new Vector3(-30, 0, 0);
+        TargetAngle = new Vector3(30, 0, 0);
 
         StartRotation = EndRotation = Quaternion.identity;
         StartRotation.eulerAngles = StartAngle;
@@ -41,28 +42,27 @@ public class LeverHandle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Check if a player is near the lever
-        if (Vector3.Distance(CurrentPlayer.transform.position, RotationBasePivotPoint.transform.position) <= 1.5f)
+        Helper.InteractGeneral(RotationBasePivotPoint, CurrentPlayer, 2, new Tuple<Action, Action>(InRange, OutRange));
+    }
+
+    public void InRange()
+    {
+        // Highlight the lever TODO(HAMZA:Change colorchange to shaderchange)
+        LeverRenderer.material = RangeColor;
+        BaseRenderer.material = RangeColor;
+        if (Input.GetKeyDown(KeyCode.X))
         {
-            Vector3 direction = (RotationBasePivotPoint.transform.position - CurrentPlayer.transform.position).normalized;
-            // If near the lever, check if the player is facing the lever -> dot => 0.85
-            if (Vector3.Dot(direction, CurrentPlayer.transform.forward) >= 0.70)
-            {
-                // Highlight the lever TODO(HAMZA:Change colorchange to shaderchange)
-                LeverRenderer.material = RangeColor;
-                BaseRenderer.material = RangeColor;
-                if (Input.GetKeyDown(KeyCode.X))
-                {
-                    // Rotate the lever && set interacted to !interacted on X
-                    StartCoroutine(Rotate(2, () => { Flipped = !Flipped; Debug.Log($"Switch flipped : {Flipped}"); }));
-                }
-            }
-        } else
-        {
-            // Highlight the lever TODO(HAMZA:Change colorchange to shaderchange)
-            LeverRenderer.material = BaseColor;
-            BaseRenderer.material = BaseColor;
+            // Rotate the lever && set interacted to !interacted on X
+            StartCoroutine(Rotate(2, () => { Flipped = !Flipped; Debug.Log($"Switch flipped : {Flipped}"); }));
+            Manipulated.SetActive(false);
         }
+    }
+
+    public void OutRange()
+    {
+        // Highlight the lever TODO(HAMZA:Change colorchange to shaderchange)
+        LeverRenderer.material = BaseColor;
+        BaseRenderer.material = BaseColor;
     }
 
     private IEnumerator Rotate(float time, Action cb)

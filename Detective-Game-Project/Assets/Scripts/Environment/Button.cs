@@ -14,7 +14,7 @@ namespace Scripts
         {
             if (ReferenceEquals(GameManager.Instance.Human, collision.gameObject))
             {
-                target.GetComponent<ButtonTarget>().Activate();
+                target.GetComponent<IButtonTarget>().Activate();
             }
         }
     }

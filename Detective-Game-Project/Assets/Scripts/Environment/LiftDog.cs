@@ -15,18 +15,19 @@ namespace Scripts
         //Unity functions
         private void OnTriggerEnter(Collider other)
         {
-            if(other.gameObject.tag == "Human" || other.gameObject.tag == "Dog")
+            if(ReferenceEquals(other.gameObject, GameManager.Instance.Human))
             {
                 this.playerCounter += 1;
-                if(other.gameObject.tag == "Dog")
-                {
-                    this.dog = other.gameObject;
-                }
+            }
+            else if (ReferenceEquals(other.gameObject, GameManager.Instance.Animal))
+            {
+                this.playerCounter += 1;
+                this.dog = other.gameObject;
             }
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.tag == "Human" || other.gameObject.tag == "Dog")
+            if (ReferenceEquals(GameManager.Instance.Animal, other.gameObject) || ReferenceEquals(GameManager.Instance.Human, other.gameObject))
             {
                 this.playerCounter -= 1;
             }

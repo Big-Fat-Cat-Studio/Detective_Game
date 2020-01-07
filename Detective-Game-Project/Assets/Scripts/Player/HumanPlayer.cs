@@ -1,31 +1,37 @@
 ﻿using UnityEngine;
 using Cinemachine;
+using UnityEngine.InputSystem;
 
 namespace Scripts
 {
-    public class HumanPlayer : MonoBehaviour
+    public class HumanPlayer : Player
     {
         [HideInInspector]
         public bool isClimbing = false;
-        [HideInInspector]
-        public bool canPushPull = false;
-        private CinemachineFreeLook context;
-        CharacterController characterController;
-        public float movementSpeed = 3.0f;
         public float climbingSpeed = 2.0f;
-        public float rotationSpeed = 100.0f;
-        public float jumpHeight = 8.0f;
-        public float gravity = 20f;
-        private Vector3 moveDirection = Vector3.zero;
+
+        [HideInInspector]
+        public bool isInPuzzle = false;
+
         Rigidbody body;
         public GameObject umbrella;
+        public bool umbrellaActiveOnStart;
+        Animator animator;
+        float canmovein = 0;
 
-        private void Start()
+        public void handleSlow(float _jumpHeight, float _movementSpeed)
         {
-            umbrella.transform.parent = gameObject.transform;
-            umbrella.SetActive(false);
-            if (GameManager.Instance.GameType == GameType.SinglePlayer || GameManager.Instance.PlayerOne == ActivePlayer.Human)
-            if (GameManager.Instance.PlayerOne == ActivePlayer.Human)
+            jumpHeight = _jumpHeight;
+            movementSpeed = _movementSpeed;
+        }
+
+        void Start()
+        {
+            animator = GetComponent<Animator>();
+            playerInteract = GetComponentInChildren<PlayerInteract>();
+            currentPlayer = ActivePlayer.Human;
+
+            if (GameManager.Instance.GameType == GameType.SinglePlayer || GameManager.Instance.PlayerOne == currentPlayer)
             {
                 context = GameManager.Instance.CameraFollow.GetComponent<CinemachineFreeLook>();
             }
@@ -33,7 +39,15 @@ namespace Scripts
             {
                 context = GameManager.Instance.CameraFollowP2.GetComponent<CinemachineFreeLook>();
             }
+
             characterController = GetComponent<CharacterController>();
+
+            umbrella.transform.parent = gameObject.transform;
+            umbrella.SetActive(false);
+            if (umbrellaActiveOnStart)
+            {
+                umbrella.SetActive(true);
+            }
         }
 
         private void OnTriggerEnter(Collider collision)
@@ -51,95 +65,166 @@ namespace Scripts
             {
                 gravity = 20.0f;
                 isClimbing = false;
-            }
-        }
-
-        void OnControllerColliderHit(ControllerColliderHit hit)
-        {
-            body = hit.collider.attachedRigidbody;
-
-            if (body == null)
-            {
-                return;
-            }
-            if (hit.gameObject.tag == "Movable")
-            {
-                
-            }
-            if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press) && hit.gameObject.tag == "Movable")
-            {
-                canPushPull = true;
-                body.gameObject.transform.Translate(moveDirection * Time.deltaTime);
-            }
-        }
-
-        private void Update()
-        {
-            if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human) && !canPushPull && !isClimbing &&
-                GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Special2", ButtonPress.Down))
-            {
-                umbrella.SetActive(!umbrella.activeSelf);
+                move = true;
             }
         }
 
         private void FixedUpdate()
         {
-            if (canPushPull)
-            {
-                if (!GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Interact", ButtonPress.Press))
-                {
-                    canPushPull = false;
-                }
-            }
-
+            canmovein -= Time.deltaTime;
             if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human))
             {
-                if (isClimbing)
+                if (characterController.isGrounded)
                 {
-
-                    moveDirection = new Vector3(0.0f, GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis),
-                        GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis) * 0.3f);
-                    moveDirection = transform.TransformDirection(moveDirection);
-                    moveDirection *= climbingSpeed;
-                    characterController.Move(moveDirection * Time.deltaTime);
-                }
-                if (canPushPull)
-                {
-                    moveDirection = new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical"));
-                    moveDirection = transform.TransformDirection(moveDirection);
-                    moveDirection *= movementSpeed / 1.5f;
+                    animator.SetBool("jumping", false);
+                    animator.SetBool("climbing", false);
                 }
 
-                if (!isClimbing && !canPushPull)
+                if (moveCamera)
                 {
+                    if (isInPuzzle || canPushPull || canmovein >= 0)
+                    {
+                        moveCamera = false;
+                    }
+
+                    else
+                    {
+                        MoveCamera();
+
+                        if (inputType == InputType.Keyboard || (inputType == InputType.Controller && cameraDirection.x > -0.6 && cameraDirection.x < 0.6))
+                        {
+                            moveCamera = false;
+                        }
+                    }
+                }
+
+                if (move)
+                {
+                    gameObject.GetComponent<Animator>().speed = 1;
+
+                    if (isInPuzzle || canmovein >= 0)
+                    {
+                        moveDirection = new Vector3(0, 0, 0);
+                        move = true;
+                    }
+                    else if (canPushPull)
+                    {
+                        Push();
+                        animator.SetFloat("forward/backward", 0);
+                        animator.SetFloat("sidewalk", 0);
+                        animator.SetBool("walksideways", false);
+                        animator.SetBool("jumping", false);
+                        animator.SetBool("pushing", true);
+                        move = false;
+                        return;
+                    }
+                    else if (isClimbing)
+                    {
+                        gameObject.GetComponent<Animator>().SetBool("jumping", false);
+                        moveDirection = new Vector3(0.0f, direction.y, direction.y * 0.3f);
+
+                        moveDirection = transform.TransformDirection(moveDirection);
+                        moveDirection *= climbingSpeed;
+                        gameObject.GetComponent<Animator>().SetBool("climbing", true);
+
+                        characterController.Move(moveDirection * Time.deltaTime);
+                        move = false;
+                        return;
+                    }
+                    else if (characterController.isGrounded)
+                    {
+                        Move();
+
+                        animator.SetBool("jumping", false);
+                        animator.SetBool("climbing", false);
+                        animator.SetBool("pushing", false);
+                        animator.SetFloat("forward/backward", Mathf.Round(direction.y));
+                        animator.SetFloat("sidewalk", Mathf.Round(direction.x));
+
+                        if (Mathf.Round(direction.x) != 0)
+                        {
+                            animator.SetBool("walksideways", true);
+                        }
+                        else
+                        {
+                            animator.SetBool("walksideways", false);
+                        }
+                        move = false;
+                    }
+                }
+
+                if (jump)
+                {
+                    Jump();
+                    gameObject.GetComponent<Animator>().SetBool("jumping", true);
+                    jump = false;
+                }
+
+                if (moveDirection == Vector3.zero)
+                {
+                    animator.SetFloat("forward/backward", moveDirection.z);
+                    animator.SetFloat("sidewalk", moveDirection.x);
+                    if (isClimbing)
+                    {
+                        animator.speed = 0;
+                    }
+                    else
+                    {
+                        animator.SetBool("climbing", false);
+                    }
 
                     if (characterController.isGrounded)
                     {
-                        moveDirection = new Vector3(GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Horizontal", AxisType.Axis), 0.0f,
-                            GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Vertical", AxisType.Axis));
-                        moveDirection = transform.TransformDirection(moveDirection);
-                        moveDirection *= movementSpeed;
-
-                        if (GameManager.Instance.getButtonPressForPlayer(ActivePlayer.Human, "Jump", ButtonPress.Press))
-                        {
-                            moveDirection.y = jumpHeight;
-                        }
+                        animator.SetBool("jumping", false);
                     }
-
-                    float translationRH = GameManager.Instance.getAxisForPlayer(ActivePlayer.Human, "Mouse X", AxisType.AxisRaw) * rotationSpeed;
-                    translationRH *= Time.deltaTime;
-                    context.m_XAxis.Value += translationRH;
-                    transform.Rotate(0, translationRH, 0);
+                    animator.SetBool("pushing", false);
+                    animator.SetBool("walksideways", false);
                 }
+                moveDirection.y -= gravity * Time.deltaTime;
+                characterController.Move(moveDirection * Time.deltaTime);
             }
             else
             {
-                moveDirection.x = 0.0f;
-                moveDirection.z = 0.0f;
+                moveDirection = Vector3.zero;
+                moveDirection.y -= gravity;
+                characterController.Move(moveDirection * Time.deltaTime);
+                animator.SetFloat("forward/backward", 0);
+                animator.SetFloat("sidewalk", 0);
+                animator.SetBool("jumping", false);
+                animator.SetBool("pushing", false);
+                animator.SetBool("walksideways", false);
             }
-            moveDirection.y -= gravity * Time.deltaTime;
-            characterController.Move(moveDirection * Time.deltaTime);
         }
 
+        protected void OnSpecial1()
+        {
+
+        }
+
+        protected void OnSpecial2()
+        {
+            if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human))
+            {   
+                umbrella.SetActive(!umbrella.activeSelf);
+                if (umbrellaActiveOnStart)
+                {
+                    umbrellaActiveOnStart = false;
+                }
+                else
+                {
+                    umbrellaActiveOnStart = true;
+                }
+                if (umbrella.activeSelf)
+                {
+                    animator.SetTrigger("openUmbrella");
+                    canmovein = 1f;
+                }
+                else
+                {
+                    animator.SetTrigger("closeUmbrella");
+                    canmovein = 1f;
+                }
+            }
+        }
     }
 }

@@ -3,7 +3,8 @@
     public enum ActivePlayer
     {
         Human,
-        Animal
+        Animal,
+        Both
     }
 
     public enum GameType
@@ -13,11 +14,22 @@
         MultiPlayerSplitScreen
     }
 
+    public enum InteractableType
+    {
+        Normal,
+        ItemNeeded,
+        Pickup,
+        HoldButton,
+        Movable,
+        EndLevel,
+        DEBUG, // Interacting with a DEBUG spawns an item without destroying root item
+        STATECHANGER // Interacting with a STATECHANGER only changes a state
+    }
+
     public enum ButtonPress
     {
         Down,
-        Up,
-        Press
+        Hold
     }
 
     public enum AxisType
@@ -31,5 +43,33 @@
         Correct,
         Incomplete,
         Wrong
+    }
+
+    public enum Direction
+    {
+        XPlus,
+        XMinus,
+        YPlus,
+        YMinus,
+        ZPlus,
+        ZMinus,
+    }
+
+    public enum SolutionType
+    {
+        Destroy,
+        Sprinkler
+    }
+
+    public enum InputType
+    {
+        Keyboard,
+        Controller
+    }
+
+    public enum InteractState
+    {
+        DEACTIVATED,
+        ACTIVATED
     }
 }

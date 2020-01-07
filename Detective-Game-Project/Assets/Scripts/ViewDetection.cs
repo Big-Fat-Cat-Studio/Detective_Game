@@ -2,64 +2,122 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ViewDetection : MonoBehaviour
+namespace Scripts
 {
-    public Transform player;
-    public float maxAngle;
-    public float maxRadius;
-    public float heightMultiplayer = 1.5f;
-    private bool isinFOV = false;
-    private void OnDrawGizmos()
+    public class ViewDetection : MonoBehaviour
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, maxRadius);
+        public bool detectOnlyHuman;
 
-        Vector3 line1 = Quaternion.AngleAxis(maxAngle, transform.up)* transform.forward * maxRadius;
-        Vector3 line2 = Quaternion.AngleAxis(-maxAngle, transform.up)* transform.forward * maxRadius;
+        public Transform Human;
+        public bool humanDetected, humanInView;
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(transform.position, line1);
-        Gizmos.DrawRay(transform.position, line2);
+        public Transform Dog;
+        public bool dogDetected, dogInView;
 
-        if (!isinFOV)
+        public bool inView;
+        private bool disabled;
+
+        void OnEnable()
         {
-            Gizmos.color = Color.red;
+            Collider collider = transform.GetChild(0).transform.gameObject.GetComponent<MeshCollider>();
+
+            humanDetected = humanInView = collider.bounds.Contains(Human.position);
+            dogDetected = dogInView = collider.bounds.Contains(Dog.position);
+
+            disabled = false;
         }
-        else
+
+        void OnDisable()
         {
-            Gizmos.color = Color.green;
+            disabled = true;
         }
-        Gizmos.DrawRay(transform.position, (player.position - transform.position + Vector3.up - (Vector3.up / 2)).normalized * maxRadius);
 
-        Gizmos.color = Color.black;
-        Gizmos.DrawRay(transform.position, gameObject.transform.forward * maxRadius);
-    }
-
-    public bool inFOV(Transform checkingObject, Transform target, float maxAngle, float maxRadius) 
-    { 
-        Vector3 directionBetween = (target.position - checkingObject.position).normalized; 
-        directionBetween.y *= 0; 
-        RaycastHit hit; 
-        Debug.Log("0");
-        if ( Physics.Raycast(checkingObject.position + Vector3.up - (Vector3.up / 2), (target.position - checkingObject.position).normalized, out hit, maxRadius)) 
+        public void inFov(Transform target, string tag)
         {
-            Debug.Log("1");
-            if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Human") 
+            RaycastHit hit;
+            float offset = (tag == "Human" ? 1.5f : 0.5f);
+            Vector3 direction = (target.position + Vector3.up * offset);
+
+            if(Physics.Linecast(transform.position, direction, out hit))
             {
-                Debug.Log("2");
-                float angle = Vector3.Angle(checkingObject.forward, directionBetween);
-                if (angle <= maxAngle) 
-                { 
-                    Debug.Log("3");
-                    return true;
-                } 
-            } 
-        } 
-        return false;
+                if (tag == "Animal")
+                {
+                    dogInView = (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Animal");
+                    if (dogInView) StartCoroutine(RespawnPlayer(1, hit.transform.gameObject));
+                }
+                else if (tag == "Human")
+                {
+                    humanInView = (LayerMask.LayerToName(hit.transform.gameObject.layer) == "Human");
+                    if (humanInView) StartCoroutine(RespawnPlayer(1, hit.transform.gameObject));
+                }
+            }
+        }
 
-    }
-    void FixedUpdate()
-    {
-        isinFOV = inFOV(transform, player, maxAngle, maxRadius);
+        public void OnChildTriggerEnter(Collider other)
+        {
+            if (other.tag == "Animal" && detectOnlyHuman) return;
+
+            if (other.tag == "Human")
+            {
+                humanDetected = true;
+            }
+            else if (other.tag == "Animal")
+            {
+                dogDetected = true;
+            }
+        }
+
+        public void OnChildTriggerExit(Collider other)
+        {
+            if (other.tag == "Animal" && detectOnlyHuman) return;
+
+            if (other.tag == "Human")
+            {
+                humanDetected = humanInView = false;
+            }
+            else if (other.tag == "Animal")
+            {
+                dogDetected = dogInView = false;
+            }
+        }
+
+        void FixedUpdate()
+        {
+            if (humanDetected)
+            {
+                inFov(Human, "Human");
+            }
+            
+            if (dogDetected)
+            {
+                inFov(Dog, "Animal");
+            }
+            handleAlarm();
+        }
+
+        void handleAlarm()
+        {
+            if (dogInView || humanInView)
+            {
+                inView = true;
+                GetComponent<Light>().color = Color.red;
+            }
+            else
+            {
+                inView = false;
+                GetComponent<Light>().color = Color.white;
+            }
+        }
+
+        private IEnumerator RespawnPlayer(float time, GameObject player)
+        {
+            while (time > 0.0f)
+            {
+                time -= Time.deltaTime;
+                yield return null;
+            }
+            player.GetComponent<RespawnPlayer>().Respawn();
+            OnEnable();
+        }
     }
 }

@@ -6,15 +6,13 @@ namespace Scripts
 {
     public class Tunnel : MonoBehaviour
     {
-        public GameObject TunnelA, TunnelB, Camera, ClueCamera;
+        public GameObject TunnelA, TunnelB;
         Vector3 moveInRot, moveOutRot, moveInDir, moveOutDir;
         bool Crawling = false;
         public enum FacingTunnelA {Front, Right, Back, Left};
         public enum FacingTunnelB {Front, Right, Back, Left};
         public FacingTunnelA facingTunnelA;
         public FacingTunnelB facingTunnelB;
-
-        public GameObject CinCamera;
 
         void Start()
         {
@@ -67,10 +65,10 @@ namespace Scripts
 
         void OnTriggerEnter(Collider collision)
         {
-            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Animal))
+            if (!Crawling && ReferenceEquals(collision.gameObject, GameManager.Instance.Animal))
             {
-                TunnelA.GetComponent<BoxCollider>().enabled = true;
-                TunnelB.GetComponent<BoxCollider>().enabled = false;
+                TunnelA.GetComponent<Tunnel>().Crawling = true;
+                TunnelB.GetComponent<Tunnel>().Crawling = true;
                 GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = false;
                 StartCoroutine(MoveIn());
             }
@@ -79,7 +77,7 @@ namespace Scripts
 
         IEnumerator MoveIn()
         {
-            yield return new WaitForSecondsRealtime(2);
+            yield return new WaitForSecondsRealtime(1);
             if (ReferenceEquals(gameObject, TunnelA))
             {
                 GameManager.Instance.Animal.transform.position = TunnelB.transform.position;
@@ -96,8 +94,8 @@ namespace Scripts
         {
             GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = true;
             yield return new WaitForSecondsRealtime(2f);
-            TunnelA.GetComponent<BoxCollider>().enabled = true;
-            TunnelB.GetComponent<BoxCollider>().enabled = true;
+            TunnelA.GetComponent<Tunnel>().Crawling = false;
+            TunnelB.GetComponent<Tunnel>().Crawling = false;
         }
     }
 }
