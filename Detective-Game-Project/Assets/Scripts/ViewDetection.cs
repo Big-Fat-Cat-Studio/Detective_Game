@@ -11,9 +11,10 @@ public class ViewDetection : MonoBehaviour
 
     public Transform Dog;
     public bool dogDetected, dogInView;
-
     public bool inView;
     private bool disabled;
+
+
 
     void OnEnable()
     {
