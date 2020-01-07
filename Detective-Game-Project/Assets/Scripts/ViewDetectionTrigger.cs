@@ -2,23 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ViewDetectionTrigger : MonoBehaviour
+namespace Scripts
 {
-    private ViewDetection Parent;
-
-    // Start is called before the first frame update
-    void Start()
+    public class ViewDetectionTrigger : MonoBehaviour
     {
-        Parent = gameObject.GetComponentInParent<ViewDetection>();
-    }
+        private ViewDetection Parent;
 
-    void OnTriggerEnter(Collider other)
-    {
-        Parent.OnChildTriggerEnter(other);
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
+            Parent = gameObject.GetComponentInParent<ViewDetection>();
+        }
 
-    void OnTriggerExit(Collider other)
-    {
-        Parent.OnChildTriggerExit(other);
+        void OnTriggerEnter(Collider other)
+        {
+            Parent.OnChildTriggerEnter(other);
+        }
+
+        void OnTriggerExit(Collider other)
+        {
+            Parent.OnChildTriggerExit(other);
+        }
     }
 }
