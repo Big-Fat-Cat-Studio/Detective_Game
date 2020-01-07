@@ -219,6 +219,11 @@ namespace Scripts
                     animator.SetTrigger("openUmbrella");
                     canmovein = 1f;
                 }
+                else
+                {
+                    animator.SetTrigger("closeUmbrella");
+                    canmovein = 1f;
+                }
             }
         }
     }
