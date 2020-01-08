@@ -162,7 +162,7 @@ namespace Scripts {
             Debug.Log(cannotmove);
             activateAbilityTimer("piss");
             GameObject piss = Instantiate(pissPrefab);
-            piss.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.125f, gameObject.transform.position.z);
+            piss.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
             piss.GetComponent<Collider>().enabled = false;
             piss.GetComponent<Collider>().enabled = true;
         }
