@@ -12,6 +12,11 @@ public class MenuListener : MonoBehaviour, IUIActions
     {
         Manager = new InputSettings();
         Manager.UI.SetCallbacks(this);
+
+        foreach(InputControl ic in Manager.Human.Move.controls)
+        {
+            Debug.Log("Ok");
+        }
     }
 
     private void OnEnable()
@@ -32,5 +37,10 @@ public class MenuListener : MonoBehaviour, IUIActions
     public void OnSUBMIT(InputAction.CallbackContext context)
     {
         Debug.Log("SUBMIT");
+    }
+
+    public void OnRETURN(InputAction.CallbackContext context)
+    {
+        Debug.Log("RETURN");
     }
 }
