@@ -94,6 +94,10 @@ namespace Scripts
                     }                
                 }
             }
+            else
+            {
+                rigidBody.velocity = new Vector3(rigidBody.velocity.x, rigidBody.velocity.y, rigidBody.velocity.z);
+            }
         }
 
         private void pushBox()
@@ -101,18 +105,18 @@ namespace Scripts
             fixPlayerPosition(ActivePlayer.Human);
             pushforce = GameManager.Instance.Human.GetComponent<HumanPlayer>().moveDirection;
 
-            if (checkIfFlying())
+            if (checkIfGrounded())
             {
-                rigidBody.velocity = new Vector3(pushforce.x, 0, pushforce.z);
+                rigidBody.velocity = new Vector3(pushforce.x, rigidBody.velocity.y, pushforce.z);
             }
             else
             {
-                rigidBody.velocity = new Vector3(pushforce.x * 2f, -3f, pushforce.z * 2f);
+                rigidBody.velocity = new Vector3(pushforce.x, rigidBody.velocity.y, pushforce.z);
             }
             
         }
 
-        private bool checkIfFlying()
+        private bool checkIfGrounded()
         {
             if (Physics.Raycast(transform.position, Vector3.down, collider.bounds.extents.y + 0.1f))
             {
@@ -144,22 +148,6 @@ namespace Scripts
             {
                 GameManager.Instance.CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.Value =
                     Mathf.Round(GameManager.Instance.CameraFollowP2.GetComponent<CinemachineFreeLook>().m_XAxis.Value / 90.0f) * 90;
-            }
-        }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Animal))
-            {
-                //hitDog = true;
-            }
-        }
-
-        private void OnCollisionExit(Collision collision)
-        {
-            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Animal))
-            {
-                //hitDog = false;
             }
         }
     }
