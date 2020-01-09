@@ -10,6 +10,7 @@ namespace Scripts
     {
         //Variables
         public VideoPlayer endCutscene;
+        public string achievementName;
         public string nextLevelName;
         private bool cutsceneHasStarted = false;
 
@@ -32,6 +33,7 @@ namespace Scripts
 
         protected override void interactSucces(ActivePlayer player, GameObject playerItem)
         {
+            //AchievementsManager.Instance.UnlockAchievement(achievementName);
             GameManager.Instance.PlayerCamera.SetActive(false);
             GameManager.Instance.PlayerCameraP2.SetActive(false);
             GameManager.Instance.InteractTextPlayerOne.SetActive(false);
