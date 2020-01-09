@@ -2,13 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class GraphicsMenu : MonoBehaviour
 {
     public AudioMixer MasterMixer;
+    public Dropdown ResolutionDrop;
 
-    public void SetVolume(float v)
+    private void Start()
     {
-        MasterMixer.SetFloat("Volume", v);
-    } 
+        ResolutionDrop.ClearOptions(); 
+        Resolution[] currentResolutions = Screen.resolutions;
+
+        List<string> resolutions = new List<string>();
+        foreach (Resolution r in currentResolutions)
+            resolutions.Add($"{r.width}x{r.height}");
+        ResolutionDrop.AddOptions(resolutions);
+
+    }
+
+    public void SetVolume(float volume)
+    {
+        MasterMixer.SetFloat("Volume", volume);
+    }
+
+    public void SetQuality(int i)
+    {
+        QualitySettings.SetQualityLevel(i);
+    }
+
+    public void SetFullScreen(bool isFullScreen)
+    {
+        Screen.fullScreen = isFullScreen;
+    }
 }
