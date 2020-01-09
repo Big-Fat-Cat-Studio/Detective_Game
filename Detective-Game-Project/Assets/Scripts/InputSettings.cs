@@ -942,7 +942,7 @@ public class @InputSettings : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""c6b44171-73b4-464c-bd7e-0855ed5cc104"",
                     ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""SUBMIT"",

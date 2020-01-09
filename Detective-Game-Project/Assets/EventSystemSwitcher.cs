@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class EventSystemSwitcher : MonoBehaviour
 {
+    private EventSystem _CoreESys;
+
     public GameObject SwitchTo;
-    public UnityEngine.EventSystems.EventSystem CoreESys;
+
 
     public void Switch()
     {
-        CoreESys.SetSelectedGameObject(SwitchTo);
+        _CoreESys = EventSystem.current;
+        _CoreESys.SetSelectedGameObject(SwitchTo);
     }
 
     public void Dont()
