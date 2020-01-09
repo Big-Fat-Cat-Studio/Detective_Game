@@ -9,6 +9,8 @@ namespace Scripts
         public float amountOfMovement;
         public float speed;
         public bool moveAutomatically = false;
+        [Header("If you rotate the object, please set a rotate parent to rotate the object back to normal")]
+        public GameObject rotateParent;
         private List<GameObject> collisions;
 
         private List<GameObject> objectsOnPlatform;
@@ -42,7 +44,7 @@ namespace Scripts
         }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             if (move && collisions.Count == 0)
             {
@@ -146,7 +148,14 @@ namespace Scripts
             if (ReferenceEquals(other.gameObject, GameManager.Instance.Human) ||
                 ReferenceEquals(other.gameObject, GameManager.Instance.Animal))
             {
-                other.gameObject.transform.parent = this.gameObject.transform;
+                if (rotateParent == null)
+                {
+                    other.gameObject.transform.parent = this.gameObject.transform;
+                }
+                else
+                {
+                    other.gameObject.transform.parent = rotateParent.transform;
+                }
             }
         }
 
