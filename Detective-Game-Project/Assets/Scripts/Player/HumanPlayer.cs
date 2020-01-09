@@ -18,6 +18,7 @@ namespace Scripts
         public bool umbrellaActiveOnStart;
         Animator animator;
         float canmovein = 0;
+        bool openUmbrella;
 
         public void handleSlow(float _jumpHeight, float _movementSpeed)
         {
@@ -134,7 +135,6 @@ namespace Scripts
                     else
                     {
                         Move();
-
                         animator.SetBool("jumping", false);
                         animator.SetBool("climbing", false);
                         animator.SetBool("pushing", false);
@@ -181,7 +181,6 @@ namespace Scripts
                     animator.SetBool("walksideways", false);
                 }
 
-                
                 if (!characterController.isGrounded) 
                 {
                     moveDirection.y -= gravity * Time.deltaTime;
@@ -205,6 +204,12 @@ namespace Scripts
                 animator.SetBool("pushing", false);
                 animator.SetBool("walksideways", false);
             }
+
+            if (openUmbrella && canmovein <= 0)
+            {
+                umbrella.SetActive(!umbrella.activeSelf);
+                openUmbrella = false;
+            }
         }
 
         protected void OnSpecial1()
@@ -216,7 +221,6 @@ namespace Scripts
         {
             if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human))
             {   
-                umbrella.SetActive(!umbrella.activeSelf);
                 if (umbrellaActiveOnStart)
                 {
                     umbrellaActiveOnStart = false;
@@ -225,16 +229,19 @@ namespace Scripts
                 {
                     umbrellaActiveOnStart = true;
                 }
+
                 if (umbrella.activeSelf)
                 {
-                    animator.SetTrigger("openUmbrella");
-                    canmovein = 1f;
+                    umbrella.SetActive(false);
+                    animator.SetTrigger("closeUmbrella");
                 }
                 else
                 {
-                    animator.SetTrigger("closeUmbrella");
-                    canmovein = 1f;
+                    animator.SetTrigger("openUmbrella");
+                    openUmbrella = true;
                 }
+                canmovein = 1f;
+                move = true;
             }
         }
     }
