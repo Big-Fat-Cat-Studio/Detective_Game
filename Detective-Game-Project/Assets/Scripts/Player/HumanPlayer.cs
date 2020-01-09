@@ -219,7 +219,7 @@ namespace Scripts
 
         protected void OnSpecial2()
         {
-            if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human))
+            if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human) && characterController.isGrounded)
             {   
                 if (umbrellaActiveOnStart)
                 {
