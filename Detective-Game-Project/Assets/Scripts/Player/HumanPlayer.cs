@@ -131,7 +131,7 @@ namespace Scripts
                         move = false;
                         return;
                     }
-                    else if (characterController.isGrounded)
+                    else
                     {
                         Move();
 
@@ -180,7 +180,18 @@ namespace Scripts
                     animator.SetBool("pushing", false);
                     animator.SetBool("walksideways", false);
                 }
-                moveDirection.y -= gravity * Time.deltaTime;
+
+                
+                if (!characterController.isGrounded) 
+                {
+                    moveDirection.y -= gravity * Time.deltaTime;
+                }
+                else if (moveDirection.y < -0.4f) 
+                {
+                    moveDirection.y = -0.4f;
+                    animator.SetBool("jump", false);
+                }
+                
                 characterController.Move(moveDirection * Time.deltaTime);
             }
             else

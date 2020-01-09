@@ -70,7 +70,7 @@ namespace Scripts {
                     
                 }
 
-                if (characterController.isGrounded && move)
+                if (move)
                 {
                     if (cannotmove)
                     {
@@ -86,6 +86,9 @@ namespace Scripts {
                     {
                         Move();
                         move = false;
+                    }
+
+                    if (characterController.isGrounded) {
                         animator.SetBool("jump", false);
                         animator.SetFloat("Walking", moveDirection.z);
                     }
@@ -108,13 +111,27 @@ namespace Scripts {
                 moveDirection.z = 0.0f;
             }
 
+            if(moveDirection.x == 0 && moveDirection.z == 0) 
+            {
+                animator.SetFloat("Walking", 0f);
+            }
+
             if (bounce)
             {
                 moveDirection.y = jumpHeight * 1.5f;
                 bounce = false;
             }
 
-            moveDirection.y -= gravity * Time.deltaTime;
+            if (!characterController.isGrounded) 
+            {
+                moveDirection.y -= gravity * Time.deltaTime;
+            }
+            else if (moveDirection.y < -0.4f) 
+            {
+                moveDirection.y = -0.4f;
+                animator.SetBool("jump", false);
+            }
+
             characterController.Move(moveDirection * Time.deltaTime);
         }
 
