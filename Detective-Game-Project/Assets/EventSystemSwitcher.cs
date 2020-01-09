@@ -15,6 +15,10 @@ public class EventSystemSwitcher : MonoBehaviour
     {
         _CoreESys = EventSystem.current;
         _CoreESys.SetSelectedGameObject(SwitchTo);
+
+        // From time to time the button doesn't get highlighted
+        // This fixes that.
+        SwitchTo.GetComponent<Button>().OnSelect(null);
     }
 
     public void Dont()
