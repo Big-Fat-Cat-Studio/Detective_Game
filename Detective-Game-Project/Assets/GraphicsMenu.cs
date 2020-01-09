@@ -19,6 +19,7 @@ public class GraphicsMenu : MonoBehaviour
             resolutions.Add($"{r.width}x{r.height}");
         ResolutionDrop.AddOptions(resolutions);
 
+        //TODO(HAMZA):: Add handler for the resolution scrollbar.
     }
 
     public void SetVolume(float volume)
