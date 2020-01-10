@@ -37,6 +37,8 @@ namespace Scripts
         private bool released;
         public GameObject CameraFollow;
 
+        public GameObject InGameMenu;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -161,7 +163,40 @@ namespace Scripts
 
         protected void OnMenuExit()
         {
-            GameManager.Instance.exitTutorial();
+            if (GameManager.Instance.currentTutorial != null)
+            {
+                GameManager.Instance.exitTutorial();
+            }
+            else if (inputType == InputType.Keyboard && !GameManager.Instance.paused)
+            {
+                InGameMenu.SetActive(!InGameMenu.activeSelf);
+
+                if (Time.timeScale == 0)
+                {
+                    Time.timeScale = 1;
+                }
+                else
+                {
+                    Time.timeScale = 0;
+                }
+            }
+        }
+
+        private void OnMenuExitController()
+        {
+            if (!GameManager.Instance.paused)
+            {
+                InGameMenu.SetActive(!InGameMenu.activeSelf);
+
+                if (Time.timeScale == 0)
+                {
+                    Time.timeScale = 1;
+                }
+                else
+                {
+                    Time.timeScale = 0;
+                }
+            }
         }
 
         public void setInputType(InputType inputType)

@@ -56,7 +56,7 @@ namespace Scripts
         public void CompletePuzzle()
         {
             this.puzzleIsDone = true;
-            this.victoryInteraction.GetComponent<IPuzzleResult>().ActivateSolution();
+            if (this.victoryInteraction) this.victoryInteraction.GetComponent<IPuzzleResult>().ActivateSolution();
             this.StopPuzzle();
         }
         public void InsertInput(string sequenceItemColor)
@@ -71,7 +71,14 @@ namespace Scripts
         {
             for(int i = 0; i < this.solution.Count; i++)
             {
-                this.colorSequence.Add(this.solution[i].gameObject.GetComponent<SequencePuzzlePressurePlate>().plateColor);
+                if (this.solution[i].gameObject.GetComponent<SequencePuzzlePressurePlate>() != null)
+                {
+                    this.colorSequence.Add(this.solution[i].gameObject.GetComponent<SequencePuzzlePressurePlate>().plateColor);
+                }
+                else
+                {
+                    this.colorSequence.Add(this.solution[i].gameObject.GetComponent<PressurePlate>().plateColor);
+                }
             }
         }
         private List<string> ConvertSolution()
@@ -79,7 +86,14 @@ namespace Scripts
             List<string> result = new List<string>();
             foreach(GameObject sequenceItem in solution)
             {
-                result.Add(sequenceItem.GetComponent<SequencePuzzlePressurePlate>().sequenceItemColorID);
+                if (sequenceItem.GetComponent<SequencePuzzlePressurePlate>() != null)
+                {
+                    result.Add(sequenceItem.GetComponent<SequencePuzzlePressurePlate>().sequenceItemColorID);
+                }
+                else
+                {
+                    result.Add(sequenceItem.GetComponent<PressurePlate>().sequenceItemColorID);
+                }
             }
             return result;
         }

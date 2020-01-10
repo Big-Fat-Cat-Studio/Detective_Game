@@ -2,26 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PressurePlateTrigger : MonoBehaviour
+namespace Scripts
 {
-    private PressurePlate Parent;
-
-    // Start is called before the first frame update
-    void Start()
+    public class PressurePlateTrigger : MonoBehaviour
     {
-        Parent = gameObject.GetComponentInParent<PressurePlate>();
-    }
+        private PressurePlate Parent;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other.gameObject.name);
-        if (!("Animal Human".Contains(LayerMask.LayerToName(other.gameObject.layer)))) return;
-        Parent.OnChildTriggerEnter(other, gameObject);
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
+            Parent = gameObject.GetComponentInParent<PressurePlate>();
+        }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (!("Animal Human".Contains(LayerMask.LayerToName(other.gameObject.layer)))) return;
-        Parent.OnChildTriggerExit(other, gameObject);
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!("Animal Human".Contains(LayerMask.LayerToName(other.gameObject.layer)))) return;
+
+            Parent.OnChildTriggerEnter(other, gameObject);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (!("Animal Human".Contains(LayerMask.LayerToName(other.gameObject.layer)))) return;
+
+            Parent.OnChildTriggerExit(other, gameObject);
+        }
     }
 }

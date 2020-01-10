@@ -19,6 +19,7 @@ namespace Scripts {
 
         public GameObject pissPrefab;
         public GameObject poopPrefab;
+        public Transform poopLocation;
 
         private void Start()
         {
@@ -149,7 +150,7 @@ namespace Scripts {
 
         protected void OnSpecial()
         {
-            GameManager.Instance.toggleVision();
+            
         }
 
         protected void OnSpecial2()
@@ -157,13 +158,13 @@ namespace Scripts {
             if (!characterController.isGrounded || abilityActive("poop") || cannotmove) return;
             if (AchievementsManager.Instance != null)
             {
-                AchievementsManager.Instance.poopCounter++;
+                PlayerPrefs.SetInt("poop_counter", PlayerPrefs.GetInt("poop_counter", 0) + 1);
             }
             animator.SetBool("poop", true);
             cannotmove = true;
             activateAbilityTimer("poop");
             GameObject poop = Instantiate(poopPrefab);
-            poop.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.125f, gameObject.transform.position.z);
+            poop.transform.position = poopLocation.position;
         }
 
         protected void OnSpecial3()
@@ -171,12 +172,11 @@ namespace Scripts {
             if (!characterController.isGrounded || abilityActive("piss") || cannotmove) return;
             if (AchievementsManager.Instance != null)
             {
-                AchievementsManager.Instance.pissCounter++;
+                PlayerPrefs.SetInt("piss_counter", PlayerPrefs.GetInt("piss_counter", 0) + 1);
             }
             animator.SetBool("piss", true);
             pissParticles.Play();
             cannotmove = true;
-            Debug.Log(cannotmove);
             activateAbilityTimer("piss");
             GameObject piss = Instantiate(pissPrefab);
             piss.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);

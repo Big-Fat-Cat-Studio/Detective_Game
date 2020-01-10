@@ -25,18 +25,29 @@ namespace Scripts
             {
                 if(!endCutscene.isPlaying)
                 {
+                    SetLevel();
                     this.cutsceneHasStarted = false;
                     this.LoadNextLevel();
                 }
             }
         }
 
+
+        void SetLevel()
+        {
+            int CurrentLevel = SceneManager.GetActiveScene().buildIndex;
+            int Unlocked = PlayerPrefs.GetInt("Level");
+            if (Unlocked <= CurrentLevel)
+            {
+                PlayerPrefs.SetInt("Level", CurrentLevel + 1);
+            }
+        }
+
+
         //Custom functions
         public override void interact(ActivePlayer player)
         {
-            //SaveData new_save = new SaveData(recalculateCompletedLevels(GameManager.Instance.saveData.completedLevels), this.nextLevelName, false);
-            //SaveSystem.SaveProgress(new_save);
-            //AchievementsManager.Instance.UnlockAchievement(achievementName);
+            AchievementsManager.Instance.UnlockAchievement(achievementName);
             GameManager.Instance.PlayerCamera.SetActive(false);
             GameManager.Instance.PlayerCameraP2.SetActive(false);
             GameManager.Instance.InteractTextPlayerOne.SetActive(false);

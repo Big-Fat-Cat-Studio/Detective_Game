@@ -68,6 +68,8 @@ namespace Scripts
 
         private InputType playerInput;
         private InputType playerOneInput;
+        [HideInInspector]
+        public bool paused;
 
         [HideInInspector]
         public Tutorial currentTutorial;
@@ -334,6 +336,11 @@ namespace Scripts
                 currentTutorial.Resume();
                 currentTutorial = null;
             }
+        }
+
+        public void pauseGame()
+        {
+            paused = !paused;
         }
     }
 }
