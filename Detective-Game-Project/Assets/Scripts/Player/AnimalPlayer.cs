@@ -157,7 +157,7 @@ namespace Scripts {
             if (!characterController.isGrounded || abilityActive("poop") || cannotmove) return;
             if (AchievementsManager.Instance != null)
             {
-                AchievementsManager.Instance.poopCounter++;
+                PlayerPrefs.SetInt("poop_counter", PlayerPrefs.GetInt("poop_counter", 0) + 1);
             }
             animator.SetBool("poop", true);
             cannotmove = true;
@@ -171,7 +171,7 @@ namespace Scripts {
             if (!characterController.isGrounded || abilityActive("piss") || cannotmove) return;
             if (AchievementsManager.Instance != null)
             {
-                AchievementsManager.Instance.pissCounter++;
+                PlayerPrefs.SetInt("piss_counter", PlayerPrefs.GetInt("piss_counter", 0) + 1);
             }
             animator.SetBool("piss", true);
             pissParticles.Play();

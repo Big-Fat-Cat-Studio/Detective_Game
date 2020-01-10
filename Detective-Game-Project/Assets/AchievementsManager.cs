@@ -11,8 +11,6 @@ namespace Scripts
         public static AchievementsManager Instance { get; private set; }
 
         public bool testMode = false;
-        public int pissCounter = 0;
-        public int poopCounter = 0;
         public int kikaDetectionCounter = 0;
 
         private bool status;
@@ -28,6 +26,10 @@ namespace Scripts
             {
                 Instance = this;
             }
+        }
+        private void Start()
+        {
+            StartCoroutine(PissAchievementChecker());
         }
         private void Update()
         {
@@ -70,7 +72,7 @@ namespace Scripts
             WaitForSeconds timer = new WaitForSeconds(2.0f);
             for(; ; )
             {
-                if(this.pissCounter >= 5 && this.poopCounter >= 5)
+                if(PlayerPrefs.GetInt("piss_counter", 0) >= 5 && PlayerPrefs.GetInt("poop_counter", 0) >= 5)
                 {
                     this.UnlockAchievement("the_childish_achievement");
                     break;
