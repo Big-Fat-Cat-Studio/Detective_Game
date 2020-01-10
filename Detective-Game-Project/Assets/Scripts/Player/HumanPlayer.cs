@@ -15,7 +15,6 @@ namespace Scripts
 
         Rigidbody body;
         public GameObject umbrella;
-        public bool umbrellaActiveOnStart;
         Animator animator;
         float canmovein = 0;
         bool openUmbrella;
@@ -45,10 +44,6 @@ namespace Scripts
 
             umbrella.transform.parent = gameObject.transform;
             umbrella.SetActive(false);
-            if (umbrellaActiveOnStart)
-            {
-                umbrella.SetActive(true);
-            }
         }
 
         private void OnTriggerEnter(Collider collision)
@@ -221,15 +216,6 @@ namespace Scripts
         {
             if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human) && characterController.isGrounded)
             {   
-                if (umbrellaActiveOnStart)
-                {
-                    umbrellaActiveOnStart = false;
-                }
-                else
-                {
-                    umbrellaActiveOnStart = true;
-                }
-
                 if (umbrella.activeSelf)
                 {
                     umbrella.SetActive(false);

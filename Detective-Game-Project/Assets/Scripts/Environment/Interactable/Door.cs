@@ -21,7 +21,7 @@ namespace Scripts
         {
             if (doorOpened && amountRotated < 90f)
             {
-                this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(this.gameObject.transform.rotation.eulerAngles.x, this.gameObject.transform.rotation.eulerAngles.y, this.gameObject.transform.rotation.eulerAngles.z - 4f));
+                this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(this.gameObject.transform.rotation.eulerAngles.x, this.gameObject.transform.rotation.eulerAngles.y + 4f, this.gameObject.transform.rotation.eulerAngles.z));
                 amountRotated += 4f;
             }
         }
