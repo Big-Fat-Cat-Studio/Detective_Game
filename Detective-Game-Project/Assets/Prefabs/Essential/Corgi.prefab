@@ -5681,6 +5681,7 @@ Transform:
   - {fileID: 7376979818236676582}
   - {fileID: 332547595398074897}
   - {fileID: 1660710496}
+  - {fileID: 2092340804170246278}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5731,12 +5732,12 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 0
-  m_Radius: 0.07
+  m_Radius: 0.063
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.07, z: 0}
+  m_Center: {x: -0.01, y: 0.058, z: 0}
 --- !u!114 &4901436264771404807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5750,6 +5751,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yDeathLevel: -5
+  spawnLocation: {x: 0, y: 0, z: 0}
+  checkPointIndex: 0
 --- !u!114 &198850068189950595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5801,6 +5804,7 @@ MonoBehaviour:
   jumpHeight: 6
   gravity: 20
   CameraFollow: {fileID: 0}
+  InGameMenu: {fileID: 0}
   pissParticles: {fileID: 1660710498}
   bark: {fileID: 0}
   boostTimer: 0
@@ -5810,6 +5814,7 @@ MonoBehaviour:
     type: 3}
   poopPrefab: {fileID: 6456860470246284979, guid: ca91f64be2e0b7d4d87eb7d54013a59a,
     type: 3}
+  poopLocation: {fileID: 2092340804170246278}
 --- !u!1 &6200342356953742123
 GameObject:
   m_ObjectHideFlags: 0
@@ -6119,6 +6124,36 @@ Transform:
   - {fileID: 8657335486130114741}
   m_Father: {fileID: 4115863047234179514}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8168067488958053183
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2092340804170246278}
+  m_Layer: 9
+  m_Name: PoopLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2092340804170246278
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8168067488958053183}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0214, z: -0.091}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8873462300710093821}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8290177612637626546
 GameObject:

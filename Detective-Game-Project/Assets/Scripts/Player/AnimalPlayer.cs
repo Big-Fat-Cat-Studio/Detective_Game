@@ -19,6 +19,7 @@ namespace Scripts {
 
         public GameObject pissPrefab;
         public GameObject poopPrefab;
+        public Transform poopLocation;
 
         private void Start()
         {
@@ -149,7 +150,7 @@ namespace Scripts {
 
         protected void OnSpecial()
         {
-            GameManager.Instance.toggleVision();
+            
         }
 
         protected void OnSpecial2()
@@ -163,7 +164,7 @@ namespace Scripts {
             cannotmove = true;
             activateAbilityTimer("poop");
             GameObject poop = Instantiate(poopPrefab);
-            poop.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 0.125f, gameObject.transform.position.z);
+            poop.transform.position = poopLocation.position;
         }
 
         protected void OnSpecial3()
