@@ -157,6 +157,7 @@ namespace Scripts
             dropObject();
             holding = item;
             interactableObjects.Remove(item);
+            item.GetComponentInChildren<ParticleSystem>().Stop(); //particles
         }
 
         public void throwObject()
@@ -165,6 +166,7 @@ namespace Scripts
             {
                 holding.GetComponent<Collider>().isTrigger = false;
                 holding.GetComponent<InteractableObject>().interact(currentPlayer);
+                holding.GetComponentInChildren<ParticleSystem>().Play(); //particles
                 holding.transform.rotation = transform.rotation;
                 Rigidbody holdingRigidBody = holding.GetComponent<Rigidbody>();
                 holdingRigidBody.AddRelativeForce(new Vector3(0f, holdingRigidBody.mass * 100, holdingRigidBody.mass * 500));
@@ -228,6 +230,7 @@ namespace Scripts
             {
                 holding.GetComponent<Collider>().isTrigger = false;
                 holding.GetComponent<InteractableObject>().interact(currentPlayer);
+                holding.GetComponentInChildren<ParticleSystem>().Play(); //particles
                 holding = null;
             }
         }
@@ -269,7 +272,6 @@ namespace Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-            print(other.gameObject);
             if (other.gameObject.tag == Constant.TAG_INTERACT 
                 && !ReferenceEquals(other.gameObject, holding)
                 && other.gameObject.GetComponent<InteractableObject>().interactable

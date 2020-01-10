@@ -10,5 +10,6 @@ public class ColliderCopier : MonoBehaviour
     void LateUpdate()
     {
         this.transform.position = boxToCopy.transform.position;
+        this.transform.rotation = boxToCopy.transform.rotation;
     }
 }

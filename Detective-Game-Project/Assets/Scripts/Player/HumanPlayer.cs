@@ -18,6 +18,7 @@ namespace Scripts
         public bool umbrellaActiveOnStart;
         Animator animator;
         float canmovein = 0;
+        bool openUmbrella;
 
         public void handleSlow(float _jumpHeight, float _movementSpeed)
         {
@@ -131,10 +132,9 @@ namespace Scripts
                         move = false;
                         return;
                     }
-                    else if (characterController.isGrounded)
+                    else
                     {
                         Move();
-
                         animator.SetBool("jumping", false);
                         animator.SetBool("climbing", false);
                         animator.SetBool("pushing", false);
@@ -180,7 +180,17 @@ namespace Scripts
                     animator.SetBool("pushing", false);
                     animator.SetBool("walksideways", false);
                 }
-                moveDirection.y -= gravity * Time.deltaTime;
+
+                if (!characterController.isGrounded) 
+                {
+                    moveDirection.y -= gravity * Time.deltaTime;
+                }
+                else if (moveDirection.y < -0.4f) 
+                {
+                    moveDirection.y = -0.4f;
+                    animator.SetBool("jump", false);
+                }
+                
                 characterController.Move(moveDirection * Time.deltaTime);
             }
             else
@@ -194,6 +204,12 @@ namespace Scripts
                 animator.SetBool("pushing", false);
                 animator.SetBool("walksideways", false);
             }
+
+            if (openUmbrella && canmovein <= 0)
+            {
+                umbrella.SetActive(!umbrella.activeSelf);
+                openUmbrella = false;
+            }
         }
 
         protected void OnSpecial1()
@@ -203,9 +219,8 @@ namespace Scripts
 
         protected void OnSpecial2()
         {
-            if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human))
+            if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human) && characterController.isGrounded)
             {   
-                umbrella.SetActive(!umbrella.activeSelf);
                 if (umbrellaActiveOnStart)
                 {
                     umbrellaActiveOnStart = false;
@@ -214,16 +229,19 @@ namespace Scripts
                 {
                     umbrellaActiveOnStart = true;
                 }
+
                 if (umbrella.activeSelf)
                 {
-                    animator.SetTrigger("openUmbrella");
-                    canmovein = 1f;
+                    umbrella.SetActive(false);
+                    animator.SetTrigger("closeUmbrella");
                 }
                 else
                 {
-                    animator.SetTrigger("closeUmbrella");
-                    canmovein = 1f;
+                    animator.SetTrigger("openUmbrella");
+                    openUmbrella = true;
                 }
+                canmovein = 1f;
+                move = true;
             }
         }
     }

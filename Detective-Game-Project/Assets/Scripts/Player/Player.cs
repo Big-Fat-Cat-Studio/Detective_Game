@@ -90,11 +90,17 @@ namespace Scripts
 
         protected void Move()
         {
+            float currentDirection = moveDirection.y;
+
             transform.localRotation = Quaternion.Euler(0, context.m_XAxis.Value, 0);
-            moveDirection = new Vector3(direction.x, 0, direction.y);
+            moveDirection.x = direction.x;
+            moveDirection.y = 0;
+            moveDirection.z = direction.y;
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection = Vector3.ClampMagnitude(moveDirection, 1f);
             moveDirection *= movementSpeed;
+
+            moveDirection.y = currentDirection;
         }
 
         protected void Jump()
