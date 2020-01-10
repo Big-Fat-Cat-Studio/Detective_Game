@@ -39,7 +39,6 @@ namespace Scripts
         }
         public void StartGame()
         {
-            print("klik");
             CharacterManager.Instance.PlayerOne = this.player1;
             CharacterManager.Instance.PlayerTwo = this.player2;
             //nog nodig: bepalen welk level geladen moet worden; GameManager.Instance.levelToLoad ofzo?
