@@ -214,19 +214,19 @@ namespace Scripts
 
         protected void OnSpecial2()
         {
-            if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human) && characterController.isGrounded)
+            if (GameManager.Instance.checkIfPlayerIsActive(ActivePlayer.Human) && characterController.isGrounded && canmovein <= 0)
             {   
                 if (umbrella.activeSelf)
                 {
-                    umbrella.SetActive(false);
                     animator.SetTrigger("closeUmbrella");
+                    umbrella.SetActive(false);
                 }
                 else
                 {
                     animator.SetTrigger("openUmbrella");
                     openUmbrella = true;
                 }
-                canmovein = 1f;
+                canmovein = 1.4f;
                 move = true;
             }
         }
