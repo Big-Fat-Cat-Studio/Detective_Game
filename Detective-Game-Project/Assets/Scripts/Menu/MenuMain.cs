@@ -7,23 +7,36 @@ using UnityEngine.SceneManagement;
 public class MenuMain : MonoBehaviour
 {
     public GameObject Play;
-    public GameObject newGame;
+    public GameObject NewGame;
 
     //remove after added
     public GameObject Credits;
 
+    int Unlocked;
+
     void Start()
     {
-        // Resume.GetComponent<Button>().interactable = false; // Only disabled when playing for the very first time
+        GetLevel();
+
+        if (Unlocked <= 1)
+        {
+            NewGame.GetComponent<Button>().interactable = false;
+        }
 
         //remove after added
         Credits.GetComponent<Button>().interactable = false;
-        newGame.GetComponent<Button>().interactable = false;
     }
 
 
     void OnEnable()
     {
+        GetLevel();
+
+        if (Unlocked <= 1)
+        {
+            NewGame.GetComponent<Button>().interactable = false;
+        }
+
         // these next 2 lines look completely retarded
         // but they actually fix a stupid bug
         Play.SetActive(false);
@@ -32,13 +45,15 @@ public class MenuMain : MonoBehaviour
     }
 
 
-    public void NewGame()
+    void GetLevel()
     {
-        // Start from scratch
+        Unlocked = PlayerPrefs.GetInt("Level", 1);
+    }
 
-        // Should throw prompt warning for loss of save game
 
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+    public void Reset()
+    {
+        PlayerPrefs.SetInt("Level", 1);
 
         SceneManager.LoadScene(1);
     }

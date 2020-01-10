@@ -25,11 +25,24 @@ namespace Scripts
             {
                 if (!endCutscene.isPlaying)
                 {
+                    SetLevel();
                     this.cutsceneHasStarted = false;
                     this.LoadNextLevel();
                 }
             }
         }
+
+
+        void SetLevel()
+        {
+            int CurrentLevel = SceneManager.GetActiveScene().buildIndex;
+            int Unlocked = PlayerPrefs.GetInt("Level");
+            if (Unlocked <= CurrentLevel)
+            {
+                PlayerPrefs.SetInt("Level", CurrentLevel + 1);
+            }
+        }
+
 
         protected override void interactSucces(ActivePlayer player, GameObject playerItem)
         {

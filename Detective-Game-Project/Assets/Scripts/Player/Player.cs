@@ -37,6 +37,8 @@ namespace Scripts
         private bool released;
         public GameObject CameraFollow;
 
+        public GameObject InGameMenu;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -161,7 +163,17 @@ namespace Scripts
 
         protected void OnMenuExit()
         {
-            GameManager.Instance.exitTutorial();
+            if (GameManager.Instance.currentTutorial != null)
+            {
+                GameManager.Instance.exitTutorial();
+            }
+            else // doesn't work, why? It closes the menu meaning the if statement is triggered, why does the stupid thing open the menu?
+            {
+                InGameMenu.SetActive(true);
+
+                // HOI LEON, HIER GRAAG PLAYER INPUT UITZETTEN
+
+            }
         }
 
         public void setInputType(InputType inputType)
