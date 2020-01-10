@@ -11,7 +11,7 @@ namespace Scripts
         public static AchievementsManager Instance { get; private set; }
 
         public bool testMode = false;
-        public int kikaDetectionCounter = 0;
+        //public int kikaDetectionCounter = 0;
 
         private bool status;
 
@@ -29,6 +29,7 @@ namespace Scripts
         }
         private void Start()
         {
+            DontDestroyOnLoad(this.gameObject);
             StartCoroutine(PissAchievementChecker());
         }
         private void Update()

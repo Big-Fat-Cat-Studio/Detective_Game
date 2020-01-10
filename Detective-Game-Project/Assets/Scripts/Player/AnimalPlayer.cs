@@ -176,7 +176,6 @@ namespace Scripts {
             animator.SetBool("piss", true);
             pissParticles.Play();
             cannotmove = true;
-            Debug.Log(cannotmove);
             activateAbilityTimer("piss");
             GameObject piss = Instantiate(pissPrefab);
             piss.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
