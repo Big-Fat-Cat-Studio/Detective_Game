@@ -167,12 +167,35 @@ namespace Scripts
             {
                 GameManager.Instance.exitTutorial();
             }
-            else // doesn't work, why? It closes the menu meaning the if statement is triggered, why does the stupid thing open the menu?
+            else if (inputType == InputType.Keyboard && !GameManager.Instance.paused)
             {
-                InGameMenu.SetActive(true);
+                InGameMenu.SetActive(!InGameMenu.activeSelf);
 
-                // HOI LEON, HIER GRAAG PLAYER INPUT UITZETTEN
+                if (Time.timeScale == 0)
+                {
+                    Time.timeScale = 1;
+                }
+                else
+                {
+                    Time.timeScale = 0;
+                }
+            }
+        }
 
+        private void OnMenuExitController()
+        {
+            if (!GameManager.Instance.paused)
+            {
+                InGameMenu.SetActive(!InGameMenu.activeSelf);
+
+                if (Time.timeScale == 0)
+                {
+                    Time.timeScale = 1;
+                }
+                else
+                {
+                    Time.timeScale = 0;
+                }
             }
         }
 

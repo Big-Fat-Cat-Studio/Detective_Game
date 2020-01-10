@@ -59,7 +59,7 @@
                     "id": "baaf3dfc-f4a5-45f7-9e64-b01ac15a8aa2",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Press(behavior=2)"
+                    "interactions": "Press"
                 },
                 {
                     "name": "CameraMove",
@@ -91,7 +91,15 @@
                     "id": "edc38b7d-9892-4b5f-be56-155acd1b16a4",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press"
+                },
+                {
+                    "name": "MenuExitController",
+                    "type": "Button",
+                    "id": "4171e3f8-5974-45da-bee6-5f7a928b0444",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -378,6 +386,17 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "MenuExit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "97d66d02-ac36-494f-ba29-95eb6325f61d",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "MenuExitController",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -702,6 +721,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ESCAPE",
+                    "type": "Button",
+                    "id": "68b7f51a-81fd-4806-96a6-3828c1afac67",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -966,6 +993,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "RETURN",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "228ed248-f121-4d99-b73c-eb3c3e56ea6d",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ESCAPE",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ae96617f-c2c1-4c7d-a881-b653546bbbbc",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ESCAPE",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

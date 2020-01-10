@@ -36,4 +36,9 @@ public class MenuListener : MonoBehaviour, IUIActions
     public void OnRETURN(InputAction.CallbackContext context)
     {
     }
+
+    public void OnESCAPE(InputAction.CallbackContext context)
+    {
+        
+    }
 }
