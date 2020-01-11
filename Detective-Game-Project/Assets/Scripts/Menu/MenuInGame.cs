@@ -32,6 +32,7 @@ namespace Scripts
 
         public void ResetLevel()
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
