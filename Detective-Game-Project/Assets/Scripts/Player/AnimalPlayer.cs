@@ -10,6 +10,7 @@ namespace Scripts {
         public AudioClip bark;
         public AudioClip Poo;
         public AudioClip Pee;
+        public AudioClip Eat;
         private AudioSource AudioComponent;
         
         [HideInInspector]
@@ -207,6 +208,8 @@ namespace Scripts {
             switch(type)
             {
                 case "speedBoost":
+                    AudioComponent.clip = Eat;
+                    AudioComponent.Play();
                     boostTimer = 3f;
                     animator.SetBool("run", true);
                     movementSpeed = 10f;
