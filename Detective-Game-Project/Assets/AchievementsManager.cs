@@ -11,6 +11,7 @@ namespace Scripts
         public static AchievementsManager Instance { get; private set; }
 
         public bool testMode = false;
+        public bool canUnlockFinalAchievement = false;
         //public int kikaDetectionCounter = 0;
 
         private bool status;
