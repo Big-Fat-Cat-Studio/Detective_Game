@@ -51,6 +51,7 @@ namespace Scripts
 
             if (disableElement) ObjectToManipulate.transform.GetChild(0).gameObject.SetActive(false);
             if (sequencePuzzleManager) sequencePuzzleManager.GetComponent<SequencePuzzleMain>().InsertInput(sequenceItemColorID);
+            gameObject.GetComponent<AudioSource>().Play();
         }
 
         public void OnChildTriggerExit(Collider c, GameObject g)

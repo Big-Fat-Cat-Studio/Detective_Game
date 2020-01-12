@@ -22,6 +22,7 @@ namespace Scripts
 
             GameManager.Instance.Animal.GetComponent<AnimalPlayer>().activateAbilityTimer("speedBoost");
             timer = cooldown;
+            gameObject.GetComponent<AudioSource>().Play();
         }
 
         void Update()
