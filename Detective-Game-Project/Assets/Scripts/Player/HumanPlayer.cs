@@ -18,6 +18,8 @@ namespace Scripts
         Animator animator;
         float canmovein = 0;
         bool openUmbrella;
+        public AudioClip Umbrellaopen;
+        public AudioClip pushing;
 
         public void handleSlow(float _jumpHeight, float _movementSpeed)
         {
@@ -106,6 +108,9 @@ namespace Scripts
                     else if (canPushPull)
                     {
                         Push();
+                        gameObject.GetComponent<AudioSource>().clip = pushing;
+                        gameObject.GetComponent<AudioSource>().Play();
+                        gameObject.GetComponent<AudioSource>().loop = true;
                         animator.SetFloat("forward/backward", 0);
                         animator.SetFloat("sidewalk", 0);
                         animator.SetBool("walksideways", false);
@@ -130,6 +135,8 @@ namespace Scripts
                     else
                     {
                         Move();
+                        gameObject.GetComponent<AudioSource>().clip = null;
+                        gameObject.GetComponent<AudioSource>().loop = false;
                         animator.SetBool("jumping", false);
                         animator.SetBool("climbing", false);
                         animator.SetBool("pushing", false);
@@ -225,6 +232,8 @@ namespace Scripts
                 {
                     animator.SetTrigger("openUmbrella");
                     openUmbrella = true;
+                    gameObject.GetComponent<AudioSource>().clip = Umbrellaopen;
+                    gameObject.GetComponent<AudioSource>().Play();
                 }
                 canmovein = 1.4f;
                 move = true;

@@ -8,6 +8,8 @@ namespace Scripts {
         public ParticleSystem pissParticles;
         private bool bounce = false;
         public AudioClip bark;
+        public AudioClip Poo;
+        public AudioClip Pee;
         private AudioSource AudioComponent;
         
         [HideInInspector]
@@ -165,6 +167,8 @@ namespace Scripts {
             activateAbilityTimer("poop");
             GameObject poop = Instantiate(poopPrefab);
             poop.transform.position = poopLocation.position;
+            AudioComponent.clip = Poo;
+            AudioComponent.Play();
         }
 
         protected void OnSpecial3()
@@ -182,6 +186,8 @@ namespace Scripts {
             piss.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
             piss.GetComponent<Collider>().enabled = false;
             piss.GetComponent<Collider>().enabled = true;
+            AudioComponent.clip = Pee;
+            AudioComponent.Play();
         }
 
         protected void OnSpecial4()
@@ -192,7 +198,6 @@ namespace Scripts {
             rippleFx.transform.parent = transform;
             rippleFx.transform.localPosition = new Vector3(0f, 0.06f, 0.05f);
             rippleFx.transform.localScale = new Vector3(1f,1f,1f);
-
             AudioComponent.clip = bark;
             AudioComponent.Play();
         }
