@@ -11,7 +11,6 @@ namespace Scripts
         public static AchievementsManager Instance { get; private set; }
 
         public bool testMode = false;
-        public bool canUnlockFinalAchievement = false;
         //public int kikaDetectionCounter = 0;
 
         private bool status;
@@ -39,12 +38,11 @@ namespace Scripts
             {
                 if (Input.GetKeyDown(KeyCode.F1))
                 {
-                    UnlockAchievement("test_achievement");
+                    UnlockAchievement("");
                 }
                 if (Input.GetKeyDown(KeyCode.F2))
                 {
-                    LockAchievement("test_achievement");
-                    print(status);
+                    LockAchievement("");
                 }
             }
         }
