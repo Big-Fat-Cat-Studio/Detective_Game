@@ -20,7 +20,7 @@ namespace Scripts
             }
         }
 
-         public void NoTwoKeyboardsP2()
+        public void NoTwoKeyboardsP2()
         {
             if (P2Value == 0)
             {
