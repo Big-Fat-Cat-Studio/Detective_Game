@@ -11,6 +11,7 @@ namespace Scripts {
         public AudioClip Poo;
         public AudioClip Pee;
         public AudioClip Eat;
+        public AudioClip Boing;
         private AudioSource AudioComponent;
         
         [HideInInspector]
@@ -144,6 +145,9 @@ namespace Scripts {
             if(hit.gameObject.tag == "Umbrella")
             {
                 bounce = true;
+                AudioComponent.clip = Boing;
+                AudioComponent.Play();
+
             }
             else
             {
@@ -210,7 +214,7 @@ namespace Scripts {
                 case "speedBoost":
                     AudioComponent.clip = Eat;
                     AudioComponent.Play();
-                    boostTimer = 3f;
+                    boostTimer = 6f;
                     animator.SetBool("run", true);
                     movementSpeed = 10f;
                     break;

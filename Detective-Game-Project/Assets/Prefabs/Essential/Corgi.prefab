@@ -5659,7 +5659,6 @@ GameObject:
   - component: {fileID: 4901436264771404807}
   - component: {fileID: 198850068189950595}
   - component: {fileID: 4865383514900136942}
-  - component: {fileID: 2402438469633207160}
   - component: {fileID: 4034327780835318966}
   m_Layer: 9
   m_Name: Corgi
@@ -5779,7 +5778,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Controller
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Human
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -5812,6 +5811,7 @@ MonoBehaviour:
   Poo: {fileID: 8300000, guid: de2482778d8deaf4ea66d2122c9d7ef4, type: 3}
   Pee: {fileID: 8300000, guid: 3b72cd0b8b47115468d45a82e5f3eea3, type: 3}
   Eat: {fileID: 8300000, guid: b8bd22d6ba78ac4438047e2c02da3467, type: 3}
+  Boing: {fileID: 8300000, guid: d6c6ca99f0bd9a64ea6ccd2ebcb93abc, type: 3}
   boostTimer: 0
   pissTimer: 0
   poopTimer: 0
@@ -5820,14 +5820,6 @@ MonoBehaviour:
   poopPrefab: {fileID: 6456860470246284979, guid: ca91f64be2e0b7d4d87eb7d54013a59a,
     type: 3}
   poopLocation: {fileID: 2092340804170246278}
---- !u!81 &2402438469633207160
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5584330677525131758}
-  m_Enabled: 0
 --- !u!82 &4034327780835318966
 AudioSource:
   m_ObjectHideFlags: 0

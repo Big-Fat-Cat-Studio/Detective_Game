@@ -211,6 +211,8 @@ namespace Scripts
             {
                 umbrella.SetActive(!umbrella.activeSelf);
                 openUmbrella = false;
+                gameObject.GetComponent<AudioSource>().clip = Umbrellaopen;
+                gameObject.GetComponent<AudioSource>().Play();
             }
         }
 
@@ -232,8 +234,6 @@ namespace Scripts
                 {
                     animator.SetTrigger("openUmbrella");
                     openUmbrella = true;
-                    gameObject.GetComponent<AudioSource>().clip = Umbrellaopen;
-                    gameObject.GetComponent<AudioSource>().Play();
                 }
                 canmovein = 1.4f;
                 move = true;

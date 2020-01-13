@@ -15,5 +15,10 @@ namespace Scripts
         {
             return humanKeyPickUpText + " " + amountNow + "/" + amountNeeded;
         }
+
+        protected override void pickUpItem() {
+            base.pickUpItem();
+            gameObject.GetComponent<AudioSource>().Play();
+        }
     }
 }
