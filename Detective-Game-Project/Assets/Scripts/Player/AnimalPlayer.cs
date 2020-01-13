@@ -11,6 +11,7 @@ namespace Scripts {
         public AudioClip Poo;
         public AudioClip Pee;
         public AudioClip Eat;
+        public AudioClip Boing;
         private AudioSource AudioComponent;
         
         [HideInInspector]
@@ -144,6 +145,9 @@ namespace Scripts {
             if(hit.gameObject.tag == "Umbrella")
             {
                 bounce = true;
+                AudioComponent.clip = Boing;
+                AudioComponent.Play();
+
             }
             else
             {
