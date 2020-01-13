@@ -22,25 +22,35 @@ namespace Scripts
             if (collision.tag == "Human")
             {
                 triggered = true;
-                collision.gameObject.GetComponent<HumanPlayer>().handleSlow(_jumpHeight: 4f, _movementSpeed: 2f);
+                StartCoroutine(ShitSlow(collision));
+                this.gameObject.GetComponent<MeshRenderer>().enabled = false;
             }
         }
 
-        void OnTriggerExit(Collider collision)
-        {
-            if (!triggered) return;
+        //void OnTriggerExit(Collider collision)
+        //{
+        //    if (!triggered) return;
 
-            if (collision.tag == "Human")
-            {
-                triggered = false;
-                collision.gameObject.GetComponent<HumanPlayer>().handleSlow(_jumpHeight: 6f, _movementSpeed: 4f);
-            }
-        }
+        //    if (collision.tag == "Human")
+        //    {
+        //        triggered = false;
+        //        collision.gameObject.GetComponent<HumanPlayer>().handleSlow(_jumpHeight: 6f, _movementSpeed: 4f);
+        //    }
+        //}
 
         void OnDestroy()
         {
             if (!triggered) return;
             GameManager.Instance.Human.GetComponent<HumanPlayer>().handleSlow(_jumpHeight: 6f, _movementSpeed: 4f);
+        }
+
+        private IEnumerator ShitSlow(Collider collision)
+        {
+            print("slowing");
+            collision.gameObject.GetComponent<HumanPlayer>().handleSlow(_jumpHeight: 4f, _movementSpeed: 2f);
+            yield return new WaitForSeconds(5.0f);
+            collision.gameObject.GetComponent<HumanPlayer>().handleSlow(_jumpHeight: 6f, _movementSpeed: 4f);
+            print("speeding");
         }
     }
 }

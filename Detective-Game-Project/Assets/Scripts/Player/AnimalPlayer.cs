@@ -214,7 +214,7 @@ namespace Scripts {
                 case "speedBoost":
                     AudioComponent.clip = Eat;
                     AudioComponent.Play();
-                    boostTimer = 3f;
+                    boostTimer = 6f;
                     animator.SetBool("run", true);
                     movementSpeed = 10f;
                     break;
