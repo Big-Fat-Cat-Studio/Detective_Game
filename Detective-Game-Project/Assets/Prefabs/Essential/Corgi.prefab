@@ -5659,8 +5659,8 @@ GameObject:
   - component: {fileID: 4901436264771404807}
   - component: {fileID: 198850068189950595}
   - component: {fileID: 4865383514900136942}
-  - component: {fileID: 4034327780835318966}
   - component: {fileID: 2402438469633207160}
+  - component: {fileID: 4034327780835318966}
   m_Layer: 9
   m_Name: Corgi
   m_TagString: Animal
@@ -5820,6 +5820,14 @@ MonoBehaviour:
   poopPrefab: {fileID: 6456860470246284979, guid: ca91f64be2e0b7d4d87eb7d54013a59a,
     type: 3}
   poopLocation: {fileID: 2092340804170246278}
+--- !u!81 &2402438469633207160
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5584330677525131758}
+  m_Enabled: 0
 --- !u!82 &4034327780835318966
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5916,14 +5924,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!81 &2402438469633207160
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5584330677525131758}
-  m_Enabled: 1
 --- !u!1 &6200342356953742123
 GameObject:
   m_ObjectHideFlags: 0
