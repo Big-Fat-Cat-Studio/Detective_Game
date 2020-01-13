@@ -11,6 +11,7 @@ public class MenuMain : MonoBehaviour
 
     //remove after added
     public GameObject Credits;
+    public string creditsScene;
 
     int Unlocked;
 
@@ -24,7 +25,7 @@ public class MenuMain : MonoBehaviour
         }
 
         //remove after added
-        Credits.GetComponent<Button>().interactable = false;
+        //Credits.GetComponent<Button>().interactable = false;
     }
 
 
@@ -58,6 +59,10 @@ public class MenuMain : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void PlayCredits()
+    {
+        SceneManager.LoadScene(creditsScene);
+    }
 
     public void QuitGame()
     {

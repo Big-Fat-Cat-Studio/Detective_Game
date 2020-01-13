@@ -543,6 +543,8 @@ GameObject:
   - component: {fileID: 3510704278360546842}
   - component: {fileID: 3510704278360546843}
   - component: {fileID: 3510704278360546840}
+  - component: {fileID: 2006265020202533540}
+  - component: {fileID: 3201360296571983546}
   m_Layer: 8
   m_Name: kika
   m_TagString: Human
@@ -646,11 +648,13 @@ MonoBehaviour:
   jumpHeight: 6
   gravity: 20
   CameraFollow: {fileID: 0}
+  InGameMenu: {fileID: 0}
   isClimbing: 0
   climbingSpeed: 2
   isInPuzzle: 0
   umbrella: {fileID: 7010863284292006052}
-  umbrellaActiveOnStart: 0
+  Umbrellaopen: {fileID: 8300000, guid: 84a2eece82728114d9aee060ec0884eb, type: 3}
+  pushing: {fileID: 8300000, guid: 91c4dbabf749db54c8e4ee8393b2498e, type: 3}
 --- !u!114 &3510704278360546843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -694,6 +698,110 @@ MonoBehaviour:
   m_DefaultActionMap: Human
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!81 &2006265020202533540
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3510704278360546841}
+  m_Enabled: 1
+--- !u!82 &3201360296571983546
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3510704278360546841}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3569210074835264320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1412,7 +1520,6 @@ GameObject:
   - component: {fileID: 3047749908767733889}
   - component: {fileID: 8752535936595625080}
   - component: {fileID: 4780797834824314437}
-  - component: {fileID: 3231004404870766792}
   m_Layer: 8
   m_Name: Umbrella
   m_TagString: Umbrella
@@ -1496,19 +1603,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.019970274, y: 0.0060024043, z: 0.023059685}
   m_Center: {x: 2.0361683e-25, y: 0.005242271, z: 9.1699454e-10}
---- !u!114 &3231004404870766792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7010863284292006052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6a184ceb2010254ca3703fe04d4b462, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  message: 
 --- !u!1 &7081058154861548908
 GameObject:
   m_ObjectHideFlags: 0

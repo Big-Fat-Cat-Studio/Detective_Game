@@ -35,6 +35,7 @@ namespace Scripts
                 }
 
                 colliders.Add(other.gameObject);
+                gameObject.GetComponent<AudioSource>().Play();
             }
         }
 

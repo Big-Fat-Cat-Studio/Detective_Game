@@ -38,12 +38,11 @@ namespace Scripts
             {
                 if (Input.GetKeyDown(KeyCode.F1))
                 {
-                    UnlockAchievement("test_achievement");
+                    UnlockAchievement("");
                 }
                 if (Input.GetKeyDown(KeyCode.F2))
                 {
-                    LockAchievement("test_achievement");
-                    print(status);
+                    LockAchievement("");
                 }
             }
         }
