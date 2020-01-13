@@ -18,6 +18,12 @@ namespace Scripts
         // Start is called before the first frame update
         void Start()
         {
+            if (MainControllerManager.Instance != null)
+            {
+                inputDeviceP1 = MainControllerManager.Instance.inputDeviceP1;
+                inputDeviceP2 = MainControllerManager.Instance.inputDeviceP2;
+            }
+
             if (GameManager.Instance.GameType == GameType.MultiPlayerSplitScreen)
             {
                 setPlayers();
