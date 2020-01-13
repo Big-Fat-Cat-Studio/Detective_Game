@@ -218,18 +218,29 @@ namespace Scripts
             }
         }
 
-        public void showInteractText(string message, ActivePlayer player)
+        public void showInteractText(string message, ActivePlayer player, bool isHoldPrompt)
         {
+            string interactTextStart;
+
+            if (isHoldPrompt)
+            {
+                interactTextStart = Constant.INTERACT_HOLD_TEXT;
+            }
+            else
+            {
+                interactTextStart = Constant.INTERACT_PRESS_TEXT;
+            }
+
             if (GameType == GameType.MultiPlayerSplitScreen && player == PlayerOne)
             {
                 if (playerOneInput == InputType.Controller)
                 {
-                    InteractTextPlayerOne.GetComponent<TextMeshProUGUI>().text = Constant.INTERACT_TEXT_CONTROLLER + message;
+                    InteractTextPlayerOne.GetComponent<TextMeshProUGUI>().text = interactTextStart + Constant.INTERACT_TEXT_CONTROLLER + message;
                     InteractTextPlayerOne.SetActive(true);
                 }
                 else
                 {
-                    InteractTextPlayerOne.GetComponent<TextMeshProUGUI>().text = Constant.INTERACT_TEXT + message;
+                    InteractTextPlayerOne.GetComponent<TextMeshProUGUI>().text = interactTextStart + Constant.INTERACT_TEXT + message;
                     InteractTextPlayerOne.SetActive(true);
                 }
             }
@@ -237,12 +248,12 @@ namespace Scripts
             {
                 if (playerInput == InputType.Controller)
                 {
-                    InteractText.GetComponent<TextMeshProUGUI>().text = Constant.INTERACT_TEXT_CONTROLLER + message;
+                    InteractText.GetComponent<TextMeshProUGUI>().text = interactTextStart + Constant.INTERACT_TEXT_CONTROLLER + message;
                     InteractText.SetActive(true);
                 }
                 else
                 {
-                    InteractText.GetComponent<TextMeshProUGUI>().text = Constant.INTERACT_TEXT + message;
+                    InteractText.GetComponent<TextMeshProUGUI>().text = interactTextStart + Constant.INTERACT_TEXT + message;
                     InteractText.SetActive(true);
                 }
 
