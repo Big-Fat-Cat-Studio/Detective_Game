@@ -20,6 +20,7 @@ namespace Scripts
                 breakParticles.Play();
                 hasTriggered = true;
                 objectToActivate.GetComponent<IActivateWithPiss>().Activation();
+                gameObject.GetComponent<AudioSource>().Play();
             }
         }
     }
