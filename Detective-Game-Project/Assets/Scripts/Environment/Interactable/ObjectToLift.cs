@@ -44,7 +44,7 @@ namespace Scripts
         }
 
         // Update is called once per frame
-        void FixedUpdate()
+        void Update()
         {
             if (move && collisions.Count == 0)
             {
@@ -112,32 +112,32 @@ namespace Scripts
 
                 if (direction == Direction.XMinus && transform.position.x < originalPosition - amountOfMovement)
                 {
-                    originalPosition = transform.position.x;
+                    originalPosition = originalPosition - amountOfMovement;
                     direction = Direction.XPlus;
                 }
                 else if (direction == Direction.XPlus && transform.position.x > originalPosition + amountOfMovement)
                 {
-                    originalPosition = transform.position.x;
+                    originalPosition = originalPosition + amountOfMovement;
                     direction = Direction.XMinus;
                 }
                 else if (direction == Direction.YMinus && transform.position.y < originalPosition - amountOfMovement)
                 {
-                    originalPosition = transform.position.y;
+                    originalPosition = originalPosition - amountOfMovement;
                     direction = Direction.YPlus;
                 }
                 else if (direction == Direction.YPlus && transform.position.y > originalPosition + amountOfMovement)
                 {
-                    originalPosition = transform.position.y;
+                    originalPosition = originalPosition + amountOfMovement;
                     direction = Direction.YMinus;
                 }
                 else if (direction == Direction.ZMinus && transform.position.z < originalPosition - amountOfMovement)
                 {
-                    originalPosition = transform.position.z;
+                    originalPosition = originalPosition - amountOfMovement;
                     direction = Direction.ZPlus;
                 }
                 else if (direction == Direction.ZPlus && transform.position.z > originalPosition + amountOfMovement)
                 {
-                    originalPosition = transform.position.z;
+                    originalPosition = originalPosition + amountOfMovement;
                     direction = Direction.ZMinus;
                 }
             }
@@ -172,8 +172,8 @@ namespace Scripts
         //Only works for up and down lifts
         private void OnCollisionEnter(Collision collision)
         {
-            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Human) || ReferenceEquals(collision.gameObject, GameManager.Instance.Animal) &&
-                collision.gameObject.transform.parent != this.transform && direction == Direction.YMinus)
+            if (((ReferenceEquals(collision.gameObject, GameManager.Instance.Human) || ReferenceEquals(collision.gameObject, GameManager.Instance.Animal)) &&
+                collision.gameObject.transform.parent != this.transform && direction == Direction.YMinus) || collision.gameObject.tag == "Umbrella")
             {
                 collisions.Add(collision.gameObject);
             }

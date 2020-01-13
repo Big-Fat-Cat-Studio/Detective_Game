@@ -14,6 +14,7 @@ namespace Scripts
         public GameObject[] elementArray;
         public GameObject selector;
         public GameObject[] imageArray;
+        public AudioClip waterpressuresolved;
         Vector3[] positionArray = new[]
         {
             new Vector3 (4.5f, 0, -1),
@@ -222,6 +223,8 @@ namespace Scripts
 
         void Finished()
         {
+            gameObject.GetComponent<AudioSource>().clip = waterpressuresolved;
+            gameObject.GetComponent<AudioSource>().Play();
             puzzleCamera.SetActive(false);
             indicator.SetActive(false);
             GameManager.Instance.Human.GetComponent<HumanPlayer>().isInPuzzle = false;

@@ -28,7 +28,7 @@ namespace Scripts
             pickUpItem();
         }
 
-        protected void pickUpItem()
+        protected virtual void pickUpItem()
         {
             if (interactable)
             {

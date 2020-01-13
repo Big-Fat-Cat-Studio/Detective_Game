@@ -7,6 +7,7 @@ namespace Scripts {
     {
         public string pickUpItemText;
         private bool originalBreakOnUse;
+        Animator animator;
 
         // Start is called before the first frame update
         void Start()
@@ -39,6 +40,7 @@ namespace Scripts {
                 interactableType = InteractableType.Pickup;
                 PlayerThatCanInteract = ActivePlayer.Both;
                 interactMessage = pickUpItemText;
+                GameManager.Instance.Animal.GetComponentInChildren<Animator>().SetTrigger("dig");
             }
         }
     }

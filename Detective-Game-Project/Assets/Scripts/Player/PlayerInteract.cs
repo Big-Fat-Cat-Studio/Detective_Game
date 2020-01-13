@@ -56,7 +56,8 @@ namespace Scripts
             //Show the text again when the player is active
             if (countObjectsInRange() > 0 && !showsText)
             {
-                GameManager.Instance.showInteractText(getClosestObject().GetComponent<InteractableObject>().interactMessage, currentPlayer);
+                InteractableObject interactableObject = getClosestObject().GetComponent<InteractableObject>();
+                GameManager.Instance.showInteractText(interactableObject.interactMessage, currentPlayer, interactableObject.isHoldPrompt);
                 showsText = true;
             }
         }
@@ -280,7 +281,8 @@ namespace Scripts
                     || other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == ActivePlayer.Both))
             {
                 interactableObjects.Add(other.gameObject);
-                GameManager.Instance.showInteractText(getClosestObject().GetComponent<InteractableObject>().interactMessage, currentPlayer);
+                InteractableObject interactableObject = getClosestObject().GetComponent<InteractableObject>();
+                GameManager.Instance.showInteractText(interactableObject.interactMessage, currentPlayer, interactableObject.isHoldPrompt);
                 showsText = true;
             }
         }
@@ -303,7 +305,8 @@ namespace Scripts
                 }
                 else
                 {
-                    GameManager.Instance.showInteractText(getClosestObject().GetComponent<InteractableObject>().interactMessage, currentPlayer);
+                    InteractableObject interactableObject = getClosestObject().GetComponent<InteractableObject>();
+                    GameManager.Instance.showInteractText(interactableObject.interactMessage, currentPlayer, interactableObject.isHoldPrompt);
                 }
 
 

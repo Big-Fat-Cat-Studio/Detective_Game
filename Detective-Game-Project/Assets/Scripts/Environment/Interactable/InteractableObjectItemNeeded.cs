@@ -21,8 +21,8 @@ namespace Scripts
                 interactFail(player, playerItem);
                 return;
             }
-
-            if (neededItem == null || ReferenceEquals(playerItem, neededItem) ||
+            
+            if (neededItem == null || ReferenceEquals(playerItem, neededItem) || playerItem.name == neededItem.name ||
                 playerItem.name.Substring(0, playerItem.name.Length - 7) == neededItem.name)
             {
                 interactSucces(player, playerItem);

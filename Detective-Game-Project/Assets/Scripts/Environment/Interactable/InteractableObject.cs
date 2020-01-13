@@ -14,6 +14,7 @@ namespace Scripts {
         public bool interactable = true;
         [HideInInspector]
         public InteractableType interactableType;
+        public bool isHoldPrompt = false;
 
         public virtual void interact(ActivePlayer player)
         {
