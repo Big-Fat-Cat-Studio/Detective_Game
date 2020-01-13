@@ -10,6 +10,7 @@ namespace Scripts
         {
             GetComponent<ObjectToLift>().moveAutomatically = true;
             GetComponent<ObjectToLift>().startMoving();
+            gameObject.GetComponent<AudioSource>().Play();
         }
     }
 }
