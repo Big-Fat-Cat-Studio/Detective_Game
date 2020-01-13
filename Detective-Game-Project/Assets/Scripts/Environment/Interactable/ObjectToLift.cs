@@ -44,7 +44,7 @@ namespace Scripts
         }
 
         // Update is called once per frame
-        void FixedUpdate()
+        void Update()
         {
             if (move && collisions.Count == 0)
             {
@@ -172,8 +172,8 @@ namespace Scripts
         //Only works for up and down lifts
         private void OnCollisionEnter(Collision collision)
         {
-            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Human) || ReferenceEquals(collision.gameObject, GameManager.Instance.Animal) &&
-                collision.gameObject.transform.parent != this.transform && direction == Direction.YMinus)
+            if (((ReferenceEquals(collision.gameObject, GameManager.Instance.Human) || ReferenceEquals(collision.gameObject, GameManager.Instance.Animal)) &&
+                collision.gameObject.transform.parent != this.transform && direction == Direction.YMinus) || collision.gameObject.tag == "Umbrella")
             {
                 collisions.Add(collision.gameObject);
             }
