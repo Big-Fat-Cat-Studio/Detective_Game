@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scripts
 {
-    public class ObjectToLift : MonoBehaviour
+    public class ObjectToLift : MonoBehaviour, IPuzzleResult
     {
         public Direction direction;
         public float amountOfMovement;
@@ -182,6 +182,11 @@ namespace Scripts
         private void OnCollisionExit(Collision collision)
         {
             collisions.Remove(collision.gameObject);
+        }
+
+        public void ActivateSolution()
+        {
+            moveAutomatically = true;
         }
     }
 }
