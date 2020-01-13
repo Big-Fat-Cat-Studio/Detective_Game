@@ -112,32 +112,32 @@ namespace Scripts
 
                 if (direction == Direction.XMinus && transform.position.x < originalPosition - amountOfMovement)
                 {
-                    originalPosition = transform.position.x;
+                    originalPosition = originalPosition - amountOfMovement;
                     direction = Direction.XPlus;
                 }
                 else if (direction == Direction.XPlus && transform.position.x > originalPosition + amountOfMovement)
                 {
-                    originalPosition = transform.position.x;
+                    originalPosition = originalPosition + amountOfMovement;
                     direction = Direction.XMinus;
                 }
                 else if (direction == Direction.YMinus && transform.position.y < originalPosition - amountOfMovement)
                 {
-                    originalPosition = transform.position.y;
+                    originalPosition = originalPosition - amountOfMovement;
                     direction = Direction.YPlus;
                 }
                 else if (direction == Direction.YPlus && transform.position.y > originalPosition + amountOfMovement)
                 {
-                    originalPosition = transform.position.y;
+                    originalPosition = originalPosition + amountOfMovement;
                     direction = Direction.YMinus;
                 }
                 else if (direction == Direction.ZMinus && transform.position.z < originalPosition - amountOfMovement)
                 {
-                    originalPosition = transform.position.z;
+                    originalPosition = originalPosition - amountOfMovement;
                     direction = Direction.ZPlus;
                 }
                 else if (direction == Direction.ZPlus && transform.position.z > originalPosition + amountOfMovement)
                 {
-                    originalPosition = transform.position.z;
+                    originalPosition = originalPosition + amountOfMovement;
                     direction = Direction.ZMinus;
                 }
             }
