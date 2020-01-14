@@ -190,7 +190,7 @@ namespace Scripts
                 else if (moveDirection.y < -0.4f) 
                 {
                     moveDirection.y = -0.4f;
-                    animator.SetBool("jump", false);
+                    animator.SetBool("jumping", false);
                 }
                 
                 characterController.Move(moveDirection * Time.deltaTime);
