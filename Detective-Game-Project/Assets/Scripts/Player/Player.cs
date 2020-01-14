@@ -38,6 +38,7 @@ namespace Scripts
         public GameObject CameraFollow;
 
         public GameObject InGameMenu;
+        protected float canmovein = 0;
 
         // Start is called before the first frame update
         void Start()
