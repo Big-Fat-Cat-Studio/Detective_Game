@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MenuMain : MonoBehaviour
 {
@@ -23,9 +24,8 @@ public class MenuMain : MonoBehaviour
         {
             NewGame.GetComponent<Button>().interactable = false;
         }
-
-        //remove after added
-        //Credits.GetComponent<Button>().interactable = false;
+        // int QLevel = PlayerPrefs.GetInt("GraphicsQuality", 2);
+        // QualitySettings.SetQualityLevel(QLevel, true);
     }
 
 
@@ -67,6 +67,5 @@ public class MenuMain : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-        //UnityEditor.EditorApplication.isPlaying = false; DON'T USE THIS
     }
 }

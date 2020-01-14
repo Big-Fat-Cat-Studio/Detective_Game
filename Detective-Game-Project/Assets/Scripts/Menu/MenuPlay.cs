@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MenuPlay : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class MenuPlay : MonoBehaviour
             Level1.SetActive(false);
             Level1.SetActive(true);
             Level1.GetComponent<Button>().Select();
-            Level1.GetComponentInChildren<Text>().text = "Grandpa's garden";
+            Level1.GetComponentInChildren<TMP_Text>().text = "Grandpa's garden";
             Target.GetComponent<Image>().sprite = imageArray[0];
         }
 
@@ -33,7 +34,7 @@ public class MenuPlay : MonoBehaviour
             Level2.SetActive(true);
             Level2.GetComponent<Button>().interactable = true;
             Level2.GetComponent<Button>().Select();
-            Level2.GetComponentInChildren<Text>().text = "Grandpa's office";
+            Level2.GetComponentInChildren<TMP_Text>().text = "Grandpa's office";
             Target.GetComponent<Image>().sprite = imageArray[1];
         }
 
@@ -43,7 +44,7 @@ public class MenuPlay : MonoBehaviour
             Level3.SetActive(true);
             Level3.GetComponent<Button>().interactable = true;
             Level3.GetComponent<Button>().Select();
-            Level3.GetComponentInChildren<Text>().text = "The warehouse";
+            Level3.GetComponentInChildren<TMP_Text>().text = "The warehouse";
             Target.GetComponent<Image>().sprite = imageArray[2];
         }
 
@@ -53,7 +54,7 @@ public class MenuPlay : MonoBehaviour
             Level4.SetActive(true);
             Level4.GetComponent<Button>().interactable = true;
             Level4.GetComponent<Button>().Select();
-            Level4.GetComponentInChildren<Text>().text = "Subway";
+            Level4.GetComponentInChildren<TMP_Text>().text = "Subway";
             Target.GetComponent<Image>().sprite = imageArray[3];
         }
     }
