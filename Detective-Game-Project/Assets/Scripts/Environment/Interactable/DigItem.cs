@@ -35,21 +35,13 @@ namespace Scripts {
             }
             else
             {
+                GameManager.Instance.Animal.GetComponentInChildren<PlayerInteract>().giveItem(this.gameObject);
                 interactable = false;
+                interactableType = InteractableType.Pickup;
+                PlayerThatCanInteract = ActivePlayer.Both;
+                interactMessage = pickUpItemText;
                 GameManager.Instance.Animal.GetComponentInChildren<Animator>().SetTrigger("dig");
-                GameManager.Instance.Animal.GetComponent<AnimalPlayer>().cannotmove = true;
-                StartCoroutine(digAnimation());
             }
-        }
-
-        IEnumerator digAnimation()
-        {
-            yield return new WaitForSeconds(3f);
-            GameManager.Instance.Animal.GetComponent<AnimalPlayer>().cannotmove = false;
-            interactableType = InteractableType.Pickup;
-            PlayerThatCanInteract = ActivePlayer.Both;
-            interactMessage = pickUpItemText;
-            GameManager.Instance.Animal.GetComponentInChildren<PlayerInteract>().giveItem(this.gameObject);
         }
     }
 }

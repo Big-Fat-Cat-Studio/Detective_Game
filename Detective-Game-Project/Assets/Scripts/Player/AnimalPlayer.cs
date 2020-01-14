@@ -18,8 +18,7 @@ namespace Scripts {
         public float boostTimer = 0f;
         public float pissTimer = 0f;
         public float poopTimer = 0f;
-        [HideInInspector]
-        public bool cannotmove = false;
+        private bool cannotmove = false;
         Animator animator;
 
         public GameObject pissPrefab;
