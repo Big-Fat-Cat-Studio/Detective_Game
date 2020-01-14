@@ -49,9 +49,9 @@ public class MenuGraphics : MonoBehaviour
     {
         firstSelect.SetActive(false);
         firstSelect.SetActive(true);
-        firstSelect.GetComponent<TMP_Dropdown>().Select();
+        //firstSelect.GetComponent<TMP_Dropdown>().Select();
+        firstSelect.GetComponent<Button>().Select();
     }
-
 
     public void SetResolutions (int resolutionIndex)
     {
