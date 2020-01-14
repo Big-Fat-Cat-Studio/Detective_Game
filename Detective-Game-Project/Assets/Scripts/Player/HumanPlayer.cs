@@ -16,6 +16,7 @@ namespace Scripts
         Rigidbody body;
         public GameObject umbrella;
         Animator animator;
+        float canmovein = 0;
         bool openUmbrella;
         public AudioClip Umbrellaopen;
         public AudioClip pushing;
