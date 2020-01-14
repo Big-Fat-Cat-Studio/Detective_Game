@@ -10,7 +10,7 @@ namespace Scripts
         public SolutionType solutionType;
         public int requiredResultamount;
         public ParticleSystem[] sprinklers;
-
+        public GameObject srinklersound;
         private int currentResultAmount = 0;
 
         //Custom functions
@@ -29,6 +29,7 @@ namespace Scripts
                     {
                         sprinkler.Play();
                     }
+                    srinklersound.GetComponent<AudioSource>().Play();
                     Destroy(this.gameObject);
                 }
                 else
