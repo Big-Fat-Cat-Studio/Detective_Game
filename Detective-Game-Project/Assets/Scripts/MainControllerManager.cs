@@ -6,8 +6,8 @@ namespace Scripts
 {
     public class MainControllerManager : MonoBehaviour
     {
-        public InputType inputDeviceP1;
-        public InputType inputDeviceP2;
+        public InputType inputDeviceP1 = InputType.Controller;
+        public InputType inputDeviceP2 = InputType.Controller;
 
         //Singleton, so we can access human/animal everywhere
         public static MainControllerManager Instance { get; private set; }
@@ -21,19 +21,18 @@ namespace Scripts
             else
             {
                 Instance = this;
+                DontDestroyOnLoad(gameObject);
             }
         }
 
-        // Start is called before the first frame update
-        void Start()
+        public void setInputDeviceP1(InputType input)
         {
-
+            inputDeviceP1 = input;
         }
 
-        // Update is called once per frame
-        void Update()
+        public void setInputDeviceP2(InputType input)
         {
-
+            inputDeviceP2 = input;
         }
     }
 }

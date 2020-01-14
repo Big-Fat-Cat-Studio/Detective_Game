@@ -9,7 +9,8 @@ namespace Scripts
         //Variables
         public GameObject[] toxicSprinklers;
         public float shutdownTimer;
-
+        public GameObject srinklersound;
+        public AudioClip srinklersounds;
         private bool isDisabled = false;
         private bool isPaused = false;
         private List<GameObject> colliders;
@@ -55,6 +56,7 @@ namespace Scripts
         public void Activation()
         {
             this.TurnSprinklersOff();
+            srinklersound.GetComponent<AudioSource>().clip = null;
         }
         private void TurnSprinklersOff()
         {
@@ -77,6 +79,7 @@ namespace Scripts
             {
                 sprinkler.GetComponent<ToxicSprinkler>().Disable();
             }
+            srinklersound.GetComponent<AudioSource>().clip = null;
             yield return timer;
             if(!this.isDisabled)
             {
@@ -85,6 +88,8 @@ namespace Scripts
                     sprinkler.GetComponent<ToxicSprinkler>().Enable();
                 }
                 this.isPaused = false;
+                srinklersound.GetComponent<AudioSource>().clip = srinklersounds;
+                srinklersound.GetComponent<AudioSource>().Play();
             }
         }
     }

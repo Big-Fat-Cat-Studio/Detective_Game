@@ -46,7 +46,10 @@ namespace Scripts
 
         protected override void interactSucces(ActivePlayer player, GameObject playerItem)
         {
-            AchievementsManager.Instance.UnlockAchievement(achievementName);
+            if (AchievementsManager.Instance != null)
+            {
+                AchievementsManager.Instance.UnlockAchievement(achievementName);
+            }
             GameManager.Instance.PlayerCamera.SetActive(false);
             GameManager.Instance.PlayerCameraP2.SetActive(false);
             GameManager.Instance.InteractTextPlayerOne.SetActive(false);

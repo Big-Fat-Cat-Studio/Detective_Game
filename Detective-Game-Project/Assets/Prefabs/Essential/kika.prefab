@@ -372,7 +372,7 @@ Transform:
   - {fileID: 3663792416623026633}
   - {fileID: 4755504314213424094}
   m_Father: {fileID: 496485747378433034}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2469443684055803311
 GameObject:
@@ -566,7 +566,6 @@ Transform:
   - {fileID: 6273741724722086583}
   - {fileID: 1653224232715167282}
   - {fileID: 3696127456716982997}
-  - {fileID: 7898924432993131993}
   - {fileID: 8333526692371562338}
   - {fileID: 79109615760608908}
   m_Father: {fileID: 0}
@@ -1287,52 +1286,8 @@ Transform:
   - {fileID: 3453094536295933933}
   - {fileID: 86127057479387946}
   m_Father: {fileID: 496485747378433034}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6326521042524294249
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7898924432993131993}
-  - component: {fileID: 5742106559369320557}
-  m_Layer: 13
-  m_Name: Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7898924432993131993
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6326521042524294249}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.248, z: 0}
-  m_LocalScale: {x: 0.36315078, y: 0.36315078, z: 0.36315078}
-  m_Children: []
-  m_Father: {fileID: 496485747378433034}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &5742106559369320557
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6326521042524294249}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: -0.00000047683716, y: 0, z: 0}
 --- !u!1 &6450305885403846813
 GameObject:
   m_ObjectHideFlags: 0
@@ -1520,7 +1475,7 @@ GameObject:
   - component: {fileID: 3047749908767733889}
   - component: {fileID: 8752535936595625080}
   - component: {fileID: 4780797834824314437}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: Umbrella
   m_TagString: Umbrella
   m_Icon: {fileID: 0}

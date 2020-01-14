@@ -16,7 +16,6 @@ namespace Scripts
         Rigidbody body;
         public GameObject umbrella;
         Animator animator;
-        float canmovein = 0;
         bool openUmbrella;
         public AudioClip Umbrellaopen;
         public AudioClip pushing;
@@ -190,7 +189,7 @@ namespace Scripts
                 else if (moveDirection.y < -0.4f) 
                 {
                     moveDirection.y = -0.4f;
-                    animator.SetBool("jump", false);
+                    animator.SetBool("jumping", false);
                 }
                 
                 characterController.Move(moveDirection * Time.deltaTime);
