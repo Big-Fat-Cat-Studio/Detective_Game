@@ -13,7 +13,10 @@ namespace Scripts
         {
             if (other.gameObject.tag == "Animal")
             {
-                AchievementsManager.Instance.UnlockAchievement(achievementName);
+                if (AchievementsManager.Instance != null)
+                {
+                    AchievementsManager.Instance.UnlockAchievement(achievementName);
+                }
             }
         }
     }
