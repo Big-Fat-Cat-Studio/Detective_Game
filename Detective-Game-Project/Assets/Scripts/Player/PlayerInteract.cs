@@ -7,6 +7,7 @@ namespace Scripts
     public class PlayerInteract : MonoBehaviour
     {
         public ActivePlayer currentPlayer;
+        public AudioClip cry;
         [HideInInspector]
         public GameObject holding;
         [HideInInspector]
@@ -145,7 +146,11 @@ namespace Scripts
             {
                 objectInteractedWith = holding.GetComponent<InteractableObject>();
             }
-
+            if (currentPlayer == ActivePlayer.Animal)
+            {
+                GetComponentInParent<AudioSource>().clip = cry;
+                GetComponentInParent<AudioSource>().Play();
+            }
             if (countObjectsInRange() == 0)
             {
                 GameManager.Instance.removeInteractText(currentPlayer);
