@@ -177,11 +177,13 @@ namespace Scripts
             if (player == ActivePlayer.Animal)
             {
                 Animal.GetComponent<Player>().setInputType(inputType);
+                Animal.GetComponent<PlayerInput>().enabled = true;
                 Animal.GetComponent<PlayerInput>().SwitchCurrentControlScheme(inputType.ToString(), inputs);
             }
             else
             {
                 Human.GetComponent<Player>().setInputType(inputType);
+                Human.GetComponent<PlayerInput>().enabled = true;
                 Human.GetComponent<PlayerInput>().SwitchCurrentControlScheme(inputType.ToString(), inputs);
             }
 

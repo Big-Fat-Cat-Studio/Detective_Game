@@ -1,6 +1,8 @@
 ﻿using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,9 +17,15 @@ namespace Scripts
         private GameObject playerOne;
         private GameObject playerTwo;
 
+        private int amountOfControllers;
+        private int amountOfControllersNeeded;
+        private List<InputDevice> listOfDevices;
+
         // Start is called before the first frame update
         void Start()
         {
+            listOfDevices = new List<InputDevice>();
+
             if (MainControllerManager.Instance != null)
             {
                 inputDeviceP1 = MainControllerManager.Instance.inputDeviceP1;
@@ -37,28 +45,55 @@ namespace Scripts
             else
             {
                 var gamepads = Gamepad.all;
+                amountOfControllers = Gamepad.all.Count;
 
-                if (inputDeviceP1 == InputType.Controller && inputDeviceP2 == InputType.Controller && Gamepad.all.Count > 1)
+                if (inputDeviceP1 == InputType.Controller && inputDeviceP2 == InputType.Controller)
                 {
-                    GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, gamepads[0]);
-                    GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, gamepads[1]);
+                    amountOfControllersNeeded = 2;
+
+                    if (amountOfControllers > 0)
+                    {
+                        GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, gamepads[0]);
+
+                        if (amountOfControllers > 1)
+                        {
+                            GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, gamepads[1]);
+                        }
+                    }
                 }
                 else if (inputDeviceP1 == InputType.Controller && inputDeviceP2 == InputType.Keyboard)
                 {
-                    GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, gamepads[0]);
+                    if (amountOfControllers > 0)
+                    {
+                        GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, gamepads[0]);
+                    }
+                    else
+                    {
+                        amountOfControllersNeeded = 1;
+                    }
+
                     GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Keyboard, Keyboard.current, Mouse.current);
                 }
-                else if (inputDeviceP1 == InputType.Keyboard && inputDeviceP2 == InputType.Keyboard)
+                else if (inputDeviceP1 == InputType.Keyboard && inputDeviceP2 == InputType.Controller)
                 {
                     GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Keyboard, Keyboard.current, Mouse.current);
-                    GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Keyboard, Keyboard.current, Mouse.current);
+
+                    if (amountOfControllers > 0)
+                    {
+                        GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, gamepads[0]);
+                    }
+                    else
+                    {
+                        amountOfControllersNeeded = 1;
+                    }
                 }
                 else
                 {
                     GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Keyboard, Keyboard.current, Mouse.current);
-                    GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, gamepads[0]);
+                    GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Keyboard, Keyboard.current, Mouse.current);                    
                 }
             }
+            StartCoroutine(checkForControllers());
         }
 
         // Update is called once per frame
@@ -125,6 +160,58 @@ namespace Scripts
                     return playerTwo.GetComponent<Player>().cameraDirection.y;
                 }
             }
+        }
+
+        private IEnumerator checkForControllers()
+        {
+            yield return new WaitForSeconds(3);
+            InputSystem.onDeviceChange += (device, change) =>
+            {
+                switch (change)
+                {
+                    case InputDeviceChange.Added:
+                        Debug.Log("New device added: " + device);
+                        if (amountOfControllers < amountOfControllersNeeded && !listOfDevices.Contains(device))
+                        {
+                            if (amountOfControllersNeeded == 2)
+                            {
+                                if (amountOfControllers == 0)
+                                {
+                                    GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, device);
+                                }
+                                else
+                                {
+                                    GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, device);
+                                }
+                            }
+                            else
+                            {
+                                if (inputDeviceP1 == InputType.Controller)
+                                {
+                                    GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, device);
+                                }
+                                else
+                                {
+                                    GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, device);
+                                }
+                            }
+
+                            listOfDevices.Add(device);
+                            amountOfControllers++;
+                        }
+                        goto default;
+                    //break;
+                    case InputDeviceChange.Removed:
+                        Debug.Log("Device removed: " + device);
+                        goto default;
+                    //break;
+                    default:
+                        print(change.ToString());
+                        break;
+                }
+            };
+
+            yield return StartCoroutine(checkForControllers());
         }
     }
 }
