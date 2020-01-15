@@ -41,14 +41,14 @@ namespace Scripts
         public ActivePlayer? InteractTextActivePlayer;
 
         [Header("Text game objects")]
-        public GameObject AfterInteractText;
-        public GameObject InteractText;
+        public GameObject AfterInteractTextP2;
+        public GameObject InteractTextP2;
 
         [Header("PLAYER ONE Text game objects")]
         //Player one gameobjects instead of putting player two gameobjects because
         //the text game objects are on the right spot for player two
-        public GameObject AfterInteractTextPlayerOne;
-        public GameObject InteractTextPlayerOne;
+        public GameObject AfterInteractTextP1;
+        public GameObject InteractTextP1;
 
         private IEnumerator currentCourotine;
         private IEnumerator currentCourotinePlayerOne;
@@ -124,10 +124,10 @@ namespace Scripts
                 }
             }
 
-            AfterInteractText.SetActive(false);
-            InteractText.SetActive(false);
-            AfterInteractTextPlayerOne.SetActive(false);
-            InteractTextPlayerOne.SetActive(false);
+            AfterInteractTextP2.SetActive(false);
+            InteractTextP2.SetActive(false);
+            AfterInteractTextP1.SetActive(false);
+            InteractTextP1.SetActive(false);
 
             currentCourotine = null;
             currentCourotinePlayerOne = null;
@@ -203,18 +203,18 @@ namespace Scripts
             {
                 if (player == PlayerOne)
                 {
-                    InteractTextPlayerOne.SetActive(false);
+                    InteractTextP1.SetActive(false);
                 }
                 else
                 {
-                    InteractText.SetActive(false);
+                    InteractTextP2.SetActive(false);
                 }
             }
             else
             {
                 if (InteractTextActivePlayer == player)
                 {
-                    InteractText.SetActive(false);
+                    InteractTextP2.SetActive(false);
                     InteractTextActivePlayer = null;
                 }
             }
@@ -237,26 +237,26 @@ namespace Scripts
             {
                 if (playerOneInput == InputType.Controller)
                 {
-                    InteractTextPlayerOne.GetComponent<TextMeshProUGUI>().text = interactTextStart + Constant.INTERACT_TEXT_CONTROLLER + message;
-                    InteractTextPlayerOne.SetActive(true);
+                    InteractTextP1.GetComponent<TextMeshProUGUI>().text = interactTextStart + Constant.INTERACT_TEXT_CONTROLLER + message;
+                    InteractTextP1.SetActive(true);
                 }
                 else
                 {
-                    InteractTextPlayerOne.GetComponent<TextMeshProUGUI>().text = interactTextStart + Constant.INTERACT_TEXT + message;
-                    InteractTextPlayerOne.SetActive(true);
+                    InteractTextP1.GetComponent<TextMeshProUGUI>().text = interactTextStart + Constant.INTERACT_TEXT + message;
+                    InteractTextP1.SetActive(true);
                 }
             }
             else
             {
                 if (playerInput == InputType.Controller)
                 {
-                    InteractText.GetComponent<TextMeshProUGUI>().text = interactTextStart + Constant.INTERACT_TEXT_CONTROLLER + message;
-                    InteractText.SetActive(true);
+                    InteractTextP2.GetComponent<TextMeshProUGUI>().text = interactTextStart + Constant.INTERACT_TEXT_CONTROLLER + message;
+                    InteractTextP2.SetActive(true);
                 }
                 else
                 {
-                    InteractText.GetComponent<TextMeshProUGUI>().text = interactTextStart + Constant.INTERACT_TEXT + message;
-                    InteractText.SetActive(true);
+                    InteractTextP2.GetComponent<TextMeshProUGUI>().text = interactTextStart + Constant.INTERACT_TEXT + message;
+                    InteractTextP2.SetActive(true);
                 }
 
                 if (GameType == GameType.SinglePlayer)
@@ -270,8 +270,8 @@ namespace Scripts
         {
             if (GameType == GameType.MultiPlayerSplitScreen && player == PlayerOne)
             {
-                AfterInteractTextPlayerOne.GetComponent<Text>().text = message;
-                AfterInteractTextPlayerOne.SetActive(true);
+                AfterInteractTextP1.GetComponent<Text>().text = message;
+                AfterInteractTextP1.SetActive(true);
 
                 if (currentCourotinePlayerOne != null)
                 {
@@ -283,8 +283,8 @@ namespace Scripts
             }
             else
             {
-                AfterInteractText.GetComponent<Text>().text = message;
-                AfterInteractText.SetActive(true);
+                AfterInteractTextP2.GetComponent<Text>().text = message;
+                AfterInteractTextP2.SetActive(true);
 
                 if (currentCourotine != null)
                 {
@@ -309,12 +309,12 @@ namespace Scripts
             yield return new WaitForSecondsRealtime(6);
             if (player == PlayerOne && GameType == GameType.MultiPlayerSplitScreen)
             {
-                AfterInteractTextPlayerOne.SetActive(false);
+                AfterInteractTextP1.SetActive(false);
                 currentCourotinePlayerOne = null;
             }
             else
             {
-                AfterInteractText.SetActive(false);
+                AfterInteractTextP2.SetActive(false);
                 currentCourotine = null;
             }
 
