@@ -24,7 +24,7 @@ public class MenuGraphics : MonoBehaviour
         int QLevel = QualitySettings.GetQualityLevel();
         qualityDropdown.value = QLevel;
         qualityDropdown.RefreshShownValue();
-        
+
 
         int currentResolutionIndex = 0;
         for (int i = 0; i < resolutions.Length; i++)
@@ -50,7 +50,6 @@ public class MenuGraphics : MonoBehaviour
         firstSelect.SetActive(false);
         firstSelect.SetActive(true);
         firstSelect.GetComponent<TMP_Dropdown>().Select();
-        //firstSelect.GetComponent<Button>().Select();
     }
 
     public void SetResolutions (int resolutionIndex)
@@ -63,7 +62,6 @@ public class MenuGraphics : MonoBehaviour
     public void SetQuality (int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex, true);
-        // PlayerPrefs.SetInt("GraphicsQuality", qualityIndex);
     }
 
     public void SetFullscreen (bool isFullScreen)
