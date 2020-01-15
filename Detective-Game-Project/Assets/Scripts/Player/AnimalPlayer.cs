@@ -98,7 +98,17 @@ namespace Scripts {
 
                     if (characterController.isGrounded) {
                         animator.SetBool("jump", false);
-                        animator.SetFloat("Walking", moveDirection.z);
+                        animator.SetFloat("Walking", Mathf.Round(direction.y));
+                        animator.SetFloat("sidewalk", Mathf.Round(direction.x));
+
+                        if (Mathf.Round(direction.x) != 0)
+                        {
+                            animator.SetBool("walkside", true);
+                        }
+                        else
+                        {
+                            animator.SetBool("walkside", false);
+                        }
                     }
                 }
 
