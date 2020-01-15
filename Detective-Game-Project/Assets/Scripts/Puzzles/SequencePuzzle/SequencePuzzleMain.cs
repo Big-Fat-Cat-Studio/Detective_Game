@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace Scripts
 {
@@ -12,12 +13,12 @@ namespace Scripts
         public GameObject victoryInteraction;
         public Light lamp;
         public float maxCountdown;
+        public TMP_Text timerText;
 
         private Color victoryColor = new Color(0, 1, 0, 0);
         private List<Color> colorSequence;
         private List<string> convertedSolution;
         private List<string> input;
-        private Text timerText;
         private int currentColor = 0;
         private float timer = 0;
         private bool sequenceStillCorrect = true;
@@ -28,7 +29,6 @@ namespace Scripts
         private void Start()
         {
             this.timer = this.maxCountdown;
-            this.timerText = GameObject.FindGameObjectWithTag("Timer").GetComponent<Text>();
             this.timerText.gameObject.SetActive(false);
             this.colorSequence = new List<Color>();
             this.input = new List<string>();
@@ -40,7 +40,7 @@ namespace Scripts
             {
                 StartCoroutine(this.ShowSequence());
             }
-            
+
         }
         private void Update()
         {
@@ -117,7 +117,7 @@ namespace Scripts
                         return SequencePuzzleStatus.Incomplete;
                     }
                 }
-                
+
             }
             else
             {
@@ -162,7 +162,7 @@ namespace Scripts
             {
                 StopCoroutine(ShowSequence());
                 this.lamp.color = this.victoryColor;
-            }       
+            }
         }
 
         //Coroutines

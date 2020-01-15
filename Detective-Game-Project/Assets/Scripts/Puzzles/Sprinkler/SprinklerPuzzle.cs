@@ -48,14 +48,14 @@ namespace Scripts
             imageArray[3].transform.Rotate(0, 0, 180);
             imageArray[4].transform.Rotate(0, 0, 180);
 
-            if (GameManager.Instance.GameType == GameType.SinglePlayer)
+            /*if (GameManager.Instance.GameType == GameType.SinglePlayer)
             {
                 puzzleCamera.GetComponent<Camera>().rect = new Rect (0, 0, 1, 1);
             }
             else if (GameManager.Instance.GameType == GameType.MultiPlayerSplitScreen)
             {
                 puzzleCamera.GetComponent<Camera>().rect = new Rect (0, 0.5f, 1, 1);
-            }
+            }*/
         }
 
         public override void interact(ActivePlayer player)
@@ -76,7 +76,7 @@ namespace Scripts
                 {
                     GetComponent<PlayerInput>().SwitchCurrentControlScheme(type.ToString(), Mouse.current, Keyboard.current);
                 }
-                
+
                 interactable = false;
             }
         }
