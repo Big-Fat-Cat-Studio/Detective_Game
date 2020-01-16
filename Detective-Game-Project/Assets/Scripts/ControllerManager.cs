@@ -169,7 +169,7 @@ namespace Scripts
 
         private IEnumerator checkForControllers()
         {
-            yield return new WaitForSeconds(2);
+            yield return StartCoroutine(WaitForSecondsDuringPause(2));
             InputSystem.onDeviceChange += (device, change) =>
             {
                 switch (change)
@@ -252,6 +252,15 @@ namespace Scripts
             };
 
             yield return StartCoroutine(checkForControllers());
+        }
+
+        public static IEnumerator WaitForSecondsDuringPause(float time)
+        {
+            float start = Time.realtimeSinceStartup;
+            while (Time.realtimeSinceStartup < start + time)
+            {
+                yield return null;
+            }
         }
     }
 }
