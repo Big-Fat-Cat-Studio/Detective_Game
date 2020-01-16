@@ -17,8 +17,10 @@ namespace Scripts
             GameManager.Instance.InteractTextP2.SetActive(false);
             GameManager.Instance.AfterInteractTextP1.SetActive(false);
             GameManager.Instance.AfterInteractTextP2.SetActive(false);
-            GameManager.Instance.Human.SetActive(false);
-            GameManager.Instance.Animal.SetActive(false);
+            //GameManager.Instance.Human.SetActive(false);
+            //GameManager.Instance.Animal.SetActive(false);
+            GameManager.Instance.Human.GetComponent<CharacterController>().enabled = false;
+            GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = false;
             GameManager.Instance.CutsceneCamera.SetActive(true);
             intro.Play();
             StartCoroutine(VideoChecker());
@@ -35,8 +37,10 @@ namespace Scripts
                     GameManager.Instance.CutsceneCamera.SetActive(false);
                     GameManager.Instance.PlayerCamera.SetActive(true);
                     GameManager.Instance.PlayerCameraP2.SetActive(true);
-                    GameManager.Instance.Human.SetActive(true);
-                    GameManager.Instance.Animal.SetActive(true);
+                    //GameManager.Instance.Human.SetActive(true);
+                    //GameManager.Instance.Animal.SetActive(true);
+                    GameManager.Instance.Human.GetComponent<CharacterController>().enabled = true;
+                    GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = true;
                     Pause();
                     break;
                 }

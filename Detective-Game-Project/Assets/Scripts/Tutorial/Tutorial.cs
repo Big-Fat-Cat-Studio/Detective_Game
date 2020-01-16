@@ -7,6 +7,7 @@ namespace Scripts
     public class Tutorial : InteractableObject
     {
         public GameObject TutorialImage;
+        protected bool cannotInteract;
 
         void Start()
         {
@@ -23,15 +24,21 @@ namespace Scripts
 
         public void Resume()
         {
-            TutorialImage.SetActive(false);
-            Time.timeScale = 1;
+            if (!cannotInteract)
+            {
+                TutorialImage.SetActive(false);
+                Time.timeScale = 1;
+            }
         }
 
         public void Pause()
         {
-            TutorialImage.SetActive(true);
-            Time.timeScale = 0;
-            GameManager.Instance.currentTutorial = this;
+            if (!cannotInteract)
+            {
+                TutorialImage.SetActive(true);
+                Time.timeScale = 0;
+                GameManager.Instance.currentTutorial = this;
+            }
         }
     }
 }
