@@ -17,7 +17,7 @@ public class MenuOptions : MonoBehaviour
     // }
     public void MenuReturn()
     {
-        Resume.GetComponent<Button>().Select();
+        Graphics.GetComponent<Button>().Select();
     }
 
     public void MenuDisable()
@@ -42,8 +42,9 @@ public class MenuOptions : MonoBehaviour
     {
         // //remove after added
         Sound.GetComponent<Button>().interactable = false;
-        // Controls.GetComponent<Button>().interactable = false;
         Language.GetComponent<Button>().interactable = false;
-        Resume.GetComponent<Button>().Select();
+        Graphics.SetActive(false);
+        Graphics.SetActive(true);
+        Graphics.GetComponent<Button>().Select();
     }
 }

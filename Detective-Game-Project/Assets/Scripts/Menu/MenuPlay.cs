@@ -48,15 +48,15 @@ public class MenuPlay : MonoBehaviour
             Target.GetComponent<Image>().sprite = imageArray[2];
         }
 
-        if (Unlocked >= 4)
-        {
-            Level4.SetActive(false);
-            Level4.SetActive(true);
-            Level4.GetComponent<Button>().interactable = true;
-            Level4.GetComponent<Button>().Select();
-            Level4.GetComponentInChildren<TMP_Text>().text = "Subway";
-            Target.GetComponent<Image>().sprite = imageArray[3];
-        }
+        // if (Unlocked >= 4)
+        // {
+        //     Level4.SetActive(false);
+        //     Level4.SetActive(true);
+        //     Level4.GetComponent<Button>().interactable = true;
+        //     Level4.GetComponent<Button>().Select();
+        //     Level4.GetComponentInChildren<TMP_Text>().text = "Subway";
+        //     Target.GetComponent<Image>().sprite = imageArray[3];
+        // }
     }
 
     void GetLevel()
@@ -79,8 +79,8 @@ public class MenuPlay : MonoBehaviour
         SceneManager.LoadScene(3);
     }
 
-    public void LoadLevel4()
-    {
-        SceneManager.LoadScene(4);
-    }
+    // public void LoadLevel4()
+    // {
+    //     SceneManager.LoadScene(4);
+    // }
 }

@@ -24,8 +24,6 @@ public class MenuMain : MonoBehaviour
         {
             NewGame.GetComponent<Button>().interactable = false;
         }
-        // int QLevel = PlayerPrefs.GetInt("GraphicsQuality", 2);
-        // QualitySettings.SetQualityLevel(QLevel, true);
     }
 
 

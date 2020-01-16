@@ -3,7 +3,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MenuPlayImageLoader : MonoBehaviour, ISelectHandler
+public class MenuImageLoader : MonoBehaviour, ISelectHandler
 {
     public GameObject Target;
     public Sprite Image;
