@@ -63,8 +63,8 @@
 
     public enum InputType
     {
-        Keyboard,
-        Controller
+        Controller,
+        Keyboard
     }
 
     public enum InteractState
