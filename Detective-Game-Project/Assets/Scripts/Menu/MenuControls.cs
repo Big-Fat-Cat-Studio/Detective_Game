@@ -45,6 +45,11 @@ namespace Scripts
                 Player2.SetActive(false);
                 Player2.SetActive(true);
                 P2Value = DropdownP2.value;
+
+                DropdownP1.value = 1;
+                Player1.SetActive(false);
+                Player1.SetActive(true);
+                P1Value = DropdownP1.value;
             }
         }
 
@@ -56,6 +61,11 @@ namespace Scripts
                 Player1.SetActive(false);
                 Player1.SetActive(true);
                 P1Value = DropdownP1.value;
+
+                DropdownP2.value = 1;
+                Player2.SetActive(false);
+                Player2.SetActive(true);
+                P2Value = DropdownP2.value;
             }
         }
 
