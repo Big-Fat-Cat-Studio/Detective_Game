@@ -9,26 +9,42 @@ namespace Scripts
     public class MenuControls : MonoBehaviour
     {
         public GameObject Player1, Player2;
+        public TMP_Dropdown DropdownP1, DropdownP2;
         int P1Value, P2Value;
 
         // ADD FUNCTION FOR INVERTED CAMERA
+
+        void Start()
+        {
+            int P1Level = PlayerPrefs.GetInt("ControlP1", 0);
+            print(P1Level);
+            DropdownP1.value = P1Level;
+            DropdownP1.RefreshShownValue();
+
+            int P2Level = PlayerPrefs.GetInt("ControlP2", 0);
+            print(P2Level);
+            DropdownP2.value = P2Level;
+            DropdownP2.RefreshShownValue();
+        }
 
         void OnEnable()
         {
             Player1.SetActive(false);
             Player1.SetActive(true);
-            Player1.GetComponent<TMP_Dropdown>().Select();
-            P1Value = Player1.GetComponent<TMP_Dropdown>().value;
-            P2Value = Player2.GetComponent<TMP_Dropdown>().value;
+            DropdownP1.Select();
+
+            P1Value = DropdownP1.value;
+            P2Value = DropdownP2.value;
         }
 
         public void NoTwoKeyboardsP1()
         {
             if (P1Value == 0)
             {
-                Player2.GetComponent<TMP_Dropdown>().value = 0;
+                DropdownP2.value = 0;
                 Player2.SetActive(false);
                 Player2.SetActive(true);
+                P2Value = DropdownP2.value;
             }
         }
 
@@ -36,15 +52,16 @@ namespace Scripts
         {
             if (P2Value == 0)
             {
-                Player1.GetComponent<TMP_Dropdown>().value = 0;
+                DropdownP1.value = 0;
                 Player1.SetActive(false);
                 Player1.SetActive(true);
+                P1Value = DropdownP1.value;
             }
         }
 
         public void setInputDeviceP1()
         {
-            if(Player1.GetComponent<TMP_Dropdown>().value == 0)
+            if(DropdownP1.value == 0)
             {
                 MainControllerManager.Instance.setInputDeviceP1(InputType.Controller);
             }
@@ -56,7 +73,7 @@ namespace Scripts
 
         public void setInputDeviceP2()
         {
-            if (Player2.GetComponent<TMP_Dropdown>().value == 0)
+            if (DropdownP2.value == 0)
             {
                 MainControllerManager.Instance.setInputDeviceP2(InputType.Controller);
             }
