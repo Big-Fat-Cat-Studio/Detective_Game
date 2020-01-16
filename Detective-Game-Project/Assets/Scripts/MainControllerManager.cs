@@ -28,7 +28,7 @@ namespace Scripts
         private void Start()
         {
             inputDeviceP1 = (InputType)PlayerPrefs.GetInt("ControlP1", 0);
-            inputDeviceP2 = (InputType)PlayerPrefs.GetInt("ControlP2", 1);
+            inputDeviceP2 = (InputType)PlayerPrefs.GetInt("ControlP2", 0);
         }
 
         public void setInputDeviceP1(InputType input)
