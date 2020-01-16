@@ -11,8 +11,8 @@ namespace Scripts
     public class ControllerManager : MonoBehaviour
     {
         [Header("If both are controller then make sure there are 2 controllers connected!")]
-        public InputType inputDeviceP1;
-        public InputType inputDeviceP2;
+        public InputType inputTypeP1;
+        public InputType inputTypeP2;
 
         private GameObject playerOne;
         private GameObject playerTwo;
@@ -21,6 +21,9 @@ namespace Scripts
         private int amountOfControllersNeeded;
         private List<InputDevice> listOfDevices;
 
+        private InputDevice inputDeviceP1 = null;
+        private InputDevice inputDeviceP2 = null;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -28,8 +31,8 @@ namespace Scripts
 
             if (MainControllerManager.Instance != null)
             {
-                inputDeviceP1 = MainControllerManager.Instance.inputDeviceP1;
-                inputDeviceP2 = MainControllerManager.Instance.inputDeviceP2;
+                inputTypeP1 = MainControllerManager.Instance.inputDeviceP1;
+                inputTypeP2 = MainControllerManager.Instance.inputDeviceP2;
             }
 
             if (GameManager.Instance.GameType == GameType.MultiPlayerSplitScreen)
@@ -44,47 +47,49 @@ namespace Scripts
             }
             else
             {
-                var gamepads = Gamepad.all;
-                amountOfControllers = Gamepad.all.Count;
+                //var gamepads = Gamepad.all;
+                List<Gamepad> gamepads = Gamepad.all.Where(gamepad => !gamepad.name.StartsWith("DualShock")).ToList();
+                amountOfControllers = gamepads.Count;
 
-                if (inputDeviceP1 == InputType.Controller && inputDeviceP2 == InputType.Controller)
+                if (inputTypeP1 == InputType.Controller && inputTypeP2 == InputType.Controller)
                 {
                     amountOfControllersNeeded = 2;
 
                     if (amountOfControllers > 0)
                     {
                         GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, gamepads[0]);
+                        inputDeviceP1 = gamepads[0];
 
                         if (amountOfControllers > 1)
                         {
                             GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, gamepads[1]);
+                            inputDeviceP2 = gamepads[1];
                         }
                     }
                 }
-                else if (inputDeviceP1 == InputType.Controller && inputDeviceP2 == InputType.Keyboard)
+                else if (inputTypeP1 == InputType.Controller && inputTypeP2 == InputType.Keyboard)
                 {
+                    amountOfControllersNeeded = 1;
+
                     if (amountOfControllers > 0)
                     {
                         GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, gamepads[0]);
+                        inputDeviceP1 = gamepads[0];
                     }
-                    else
-                    {
-                        amountOfControllersNeeded = 1;
-                    }
-
                     GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Keyboard, Keyboard.current, Mouse.current);
+                    inputDeviceP2 = Keyboard.current;
                 }
-                else if (inputDeviceP1 == InputType.Keyboard && inputDeviceP2 == InputType.Controller)
+                else if (inputTypeP1 == InputType.Keyboard && inputTypeP2 == InputType.Controller)
                 {
+                    amountOfControllersNeeded = 1;
+
                     GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Keyboard, Keyboard.current, Mouse.current);
+                    inputDeviceP1 = Keyboard.current;
 
                     if (amountOfControllers > 0)
                     {
                         GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, gamepads[0]);
-                    }
-                    else
-                    {
-                        amountOfControllersNeeded = 1;
+                        inputDeviceP2 = gamepads[0];
                     }
                 }
                 else
@@ -164,45 +169,80 @@ namespace Scripts
 
         private IEnumerator checkForControllers()
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(2);
             InputSystem.onDeviceChange += (device, change) =>
             {
                 switch (change)
                 {
                     case InputDeviceChange.Added:
-                        Debug.Log("New device added: " + device);
-                        if (amountOfControllers < amountOfControllersNeeded && !listOfDevices.Contains(device))
+                        if (!device.name.StartsWith("DualShock"))
                         {
-                            if (amountOfControllersNeeded == 2)
+                            Debug.Log("New device added: " + device);
+                            if (amountOfControllers < amountOfControllersNeeded && !listOfDevices.Contains(device))
                             {
-                                if (amountOfControllers == 0)
+                                if (amountOfControllersNeeded == 2)
                                 {
-                                    GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, device);
+                                    if (amountOfControllers == 0)
+                                    {
+                                        GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, device);
+                                        inputDeviceP1 = device;
+                                    }
+                                    else
+                                    {
+                                        GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, device);
+                                        inputDeviceP2 = device;
+                                    }
                                 }
                                 else
                                 {
-                                    GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, device);
+                                    if (inputTypeP1 == InputType.Controller)
+                                    {
+                                        GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, device);
+                                        inputDeviceP1 = device;
+                                    }
+                                    else
+                                    {
+                                        GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, device);
+                                        inputDeviceP2 = device;
+                                    }
                                 }
-                            }
-                            else
-                            {
-                                if (inputDeviceP1 == InputType.Controller)
-                                {
-                                    GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, device);
-                                }
-                                else
-                                {
-                                    GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, device);
-                                }
-                            }
 
-                            listOfDevices.Add(device);
-                            amountOfControllers++;
+                                listOfDevices.Add(device);
+                                amountOfControllers++;
+                            }
                         }
                         goto default;
                     //break;
-                    case InputDeviceChange.Removed:
+                    case InputDeviceChange.Disconnected:
                         Debug.Log("Device removed: " + device);
+                        if (inputDeviceP1 == device)
+                        {
+                            GameManager.Instance.turnOffController(GameManager.Instance.PlayerOne);
+
+                            if (inputTypeP2 == InputType.Controller)
+                            {
+                                GameManager.Instance.keepControllerOn(GameManager.Instance.PlayerTwo, inputDeviceP2);
+                            }
+                        }
+                        else if (inputDeviceP2 == device)
+                        {
+                            GameManager.Instance.turnOffController(GameManager.Instance.PlayerTwo);
+                            if (inputTypeP1 == InputType.Controller)
+                            {
+                                GameManager.Instance.keepControllerOn(GameManager.Instance.PlayerOne, inputDeviceP1);
+                            }
+                        }
+                        goto default;
+                    //break;
+                    case InputDeviceChange.Reconnected:
+                        if (inputDeviceP1 == device)
+                        {
+                            GameManager.Instance.turnOnController(GameManager.Instance.PlayerOne, inputDeviceP1);
+                        }
+                        else if (inputDeviceP2 == device)
+                        {
+                            GameManager.Instance.turnOnController(GameManager.Instance.PlayerTwo, inputDeviceP2);
+                        }
                         goto default;
                     //break;
                     default:

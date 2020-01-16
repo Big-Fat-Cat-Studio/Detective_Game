@@ -197,6 +197,44 @@ namespace Scripts
             }
         }
 
+        public void turnOffController(ActivePlayer player)
+        {
+            if (player == ActivePlayer.Animal)
+            {
+                Animal.GetComponent<PlayerInput>().enabled = false;
+            }
+            else
+            {
+                Human.GetComponent<PlayerInput>().enabled = false;
+            }
+        }
+
+        public void turnOnController(ActivePlayer player, params InputDevice[] inputs)
+        {
+            if (player == ActivePlayer.Animal)
+            {
+                Animal.GetComponent<PlayerInput>().enabled = true;
+                Animal.GetComponent<PlayerInput>().SwitchCurrentControlScheme(Animal.GetComponent<Player>().inputType.ToString(), inputs);
+            }
+            else
+            {
+                Human.GetComponent<PlayerInput>().enabled = true;
+                Human.GetComponent<PlayerInput>().SwitchCurrentControlScheme(Human.GetComponent<Player>().inputType.ToString(), inputs);
+            }
+        }
+
+        public void keepControllerOn(ActivePlayer player, params InputDevice[] inputs)
+        {
+            if (player == ActivePlayer.Animal && Animal.GetComponent<PlayerInput>().enabled)
+            {
+                Animal.GetComponent<PlayerInput>().SwitchCurrentControlScheme(Animal.GetComponent<Player>().inputType.ToString(), inputs);
+            }
+            else if (player == ActivePlayer.Human && Human.GetComponent<PlayerInput>().enabled)
+            {
+                Human.GetComponent<PlayerInput>().SwitchCurrentControlScheme(Human.GetComponent<Player>().inputType.ToString(), inputs);
+            }
+        }
+
         public void removeInteractText(ActivePlayer player)
         {
             if (GameType == GameType.MultiPlayerSplitScreen)
