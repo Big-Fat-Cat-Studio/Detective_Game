@@ -96,57 +96,7 @@ namespace Scripts
         }
 
 
-        void SelectDown()
-        {
-            if (select < max)
-            {
-                int check = select;
-                bool done = false;
-                while (done == false)
-                {
-                    check++;
-                    if (active[check] == true)
-                    {
-                        done = true;
-                    }
-                    else if (check == max)
-                    {
-                        check = select;
-                        done = true;
-                    }
-                }
-                selector.transform.position = imageArray[check].transform.position;
-                select = check;
-            }
-        }
-
-
-        void SelectUp()
-        {
-            if (select > 0)
-            {
-                int check = select;
-                bool done = false;
-                while (done == false)
-                {
-                    check--;
-                    if (active[check] == true)
-                    {
-                        done = true;
-                    }
-                    else if (check == 0)
-                    {
-                        check = select;
-                        done = true;
-                    }
-                }
-                selector.transform.position = imageArray[check].transform.position;
-                select = check;
-            }
-        }
-
-
-        void PointRight()
+        void MovePipeDown()
         {
             if (point < max)
             {
@@ -173,7 +123,7 @@ namespace Scripts
         }
 
 
-        void PointLeft()
+        void MovePipeUp()
         {
             if (point > 0)
             {
@@ -200,6 +150,56 @@ namespace Scripts
         }
 
 
+        void SelectRight()
+        {
+            if (select < max)
+            {
+                int check = select;
+                bool done = false;
+                while (done == false)
+                {
+                    check++;
+                    if (active[check] == true)
+                    {
+                        done = true;
+                    }
+                    else if (check == max)
+                    {
+                        check = select;
+                        done = true;
+                    }
+                }
+                selector.transform.position = imageArray[check].transform.position;
+                select = check;
+            }
+        }
+
+
+        void SelectLeft()
+        {
+            if (select > 0)
+            {
+                int check = select;
+                bool done = false;
+                while (done == false)
+                {
+                    check--;
+                    if (active[check] == true)
+                    {
+                        done = true;
+                    }
+                    else if (check == 0)
+                    {
+                        check = select;
+                        done = true;
+                    }
+                }
+                selector.transform.position = imageArray[check].transform.position;
+                select = check;
+            }
+        }
+
+
         void Progress()
         {
             imageArray[select].gameObject.SetActive(false);
@@ -207,16 +207,16 @@ namespace Scripts
             placed[point] = false;
             solved += 1;
             int check = select;
-            SelectDown();
+            MovePipeDown();
             if (check == select)
             {
-                SelectUp();
+                MovePipeUp();
             }
             check = point;
-            PointRight();
+            SelectRight();
             if (check == point)
             {
-                PointLeft();
+                SelectLeft();
             }
         }
 
@@ -238,22 +238,22 @@ namespace Scripts
 
         private void OnUp()
         {
-            SelectUp();
+            MovePipeUp();
         }
 
         private void OnDown()
         {
-            SelectDown();
+            MovePipeDown();
         }
 
         private void OnLeft()
         {
-            PointLeft();
+            SelectLeft();
         }
 
         private void OnRight()
         {
-            PointRight();
+            SelectRight();
         }
 
         private void OnRotateLeft()
