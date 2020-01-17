@@ -285,6 +285,7 @@ namespace Scripts
                 && (other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == currentPlayer
                     || other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == ActivePlayer.Both))
             {
+                print(other.gameObject.name);
                 interactableObjects.Add(other.gameObject);
                 InteractableObject interactableObject = getClosestObject().GetComponent<InteractableObject>();
                 GameManager.Instance.showInteractText(interactableObject.interactMessage, currentPlayer, interactableObject.isHoldPrompt);
