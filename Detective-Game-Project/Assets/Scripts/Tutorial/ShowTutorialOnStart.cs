@@ -8,22 +8,30 @@ namespace Scripts
     public class ShowTutorialOnStart : Tutorial
     {
         public VideoPlayer intro;
+        public bool watchCutscene = true;
 
         void Start()
         {
-            GameManager.Instance.PlayerCamera.SetActive(false);
-            GameManager.Instance.PlayerCameraP2.SetActive(false);
-            GameManager.Instance.InteractTextP1.SetActive(false);
-            GameManager.Instance.InteractTextP2.SetActive(false);
-            GameManager.Instance.AfterInteractTextP1.SetActive(false);
-            GameManager.Instance.AfterInteractTextP2.SetActive(false);
-            //GameManager.Instance.Human.SetActive(false);
-            //GameManager.Instance.Animal.SetActive(false);
-            GameManager.Instance.Human.GetComponent<CharacterController>().enabled = false;
-            GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = false;
-            GameManager.Instance.CutsceneCamera.SetActive(true);
-            intro.Play();
-            StartCoroutine(VideoChecker());
+            if (watchCutscene)
+            {
+                GameManager.Instance.PlayerCamera.SetActive(false);
+                GameManager.Instance.PlayerCameraP2.SetActive(false);
+                GameManager.Instance.InteractTextP1.SetActive(false);
+                GameManager.Instance.InteractTextP2.SetActive(false);
+                GameManager.Instance.AfterInteractTextP1.SetActive(false);
+                GameManager.Instance.AfterInteractTextP2.SetActive(false);
+                //GameManager.Instance.Human.SetActive(false);
+                //GameManager.Instance.Animal.SetActive(false);
+                GameManager.Instance.Human.GetComponent<CharacterController>().enabled = false;
+                GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = false;
+                GameManager.Instance.CutsceneCamera.SetActive(true);
+                intro.Play();
+                StartCoroutine(VideoChecker());
+            }
+            else
+            {
+                Pause();
+            }
         }
         private IEnumerator VideoChecker()
         {
