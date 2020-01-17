@@ -104,7 +104,6 @@ namespace Scripts
             moveDirection *= movementSpeed;
             if (this is AnimalPlayer)
             {
-                print("x: " + direction.x + " - y: " + direction.y );
                 if ((direction.x > 0.5 && direction.x <  0.9) && (direction.y > 0.5 && direction.y < 0.9) || (direction.x < -0.5 && direction.x > -0.9) && (direction.y < -0.5 && direction.y > -0.9)) 
                 {
                     this.transform.Rotate(0,45,0);
