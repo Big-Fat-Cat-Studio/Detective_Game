@@ -38,6 +38,7 @@ namespace Scripts
         public GameObject CameraFollow;
 
         public GameObject InGameMenu;
+        public GameObject[] cutsceneTriggers;
 
         // Start is called before the first frame update
         void Start()
@@ -196,6 +197,16 @@ namespace Scripts
                 {
                     Time.timeScale = 0;
                 }
+            }
+        }
+
+        private void OnSkipCutscene()
+        {
+            print("skipping...");
+            foreach(GameObject fullCutscene in this.cutsceneTriggers)
+            {
+                ISkipable cutscene = fullCutscene.GetComponent<ISkipable>();
+                cutscene.Skip();
             }
         }
 
