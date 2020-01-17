@@ -6,7 +6,7 @@ using UnityEngine.Video;
 
 namespace Scripts
 {
-    public class EndLevelWithItem : InteractableObjectItemNeeded
+    public class EndLevelWithItem : InteractableObjectItemNeeded, ISkipable
     {
         //Variables
         public VideoPlayer endCutscene;
@@ -61,6 +61,16 @@ namespace Scripts
             GameManager.Instance.CutsceneCamera.SetActive(true);
             this.endCutscene.Play();
             StartCoroutine(StartupTimer());
+        }
+        public void Skip()
+        {
+            if (endCutscene.isPlaying)
+            {
+                endCutscene.Stop();
+                SetLevel();
+                this.cutsceneHasStarted = false;
+                this.LoadNextLevel();
+            }
         }
         private void LoadNextLevel()
         {

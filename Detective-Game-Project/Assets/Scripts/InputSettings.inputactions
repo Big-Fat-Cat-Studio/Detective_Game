@@ -100,6 +100,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "SkipCutscene",
+                    "type": "Button",
+                    "id": "7c00bb44-322c-4fac-b722-85138f5d793a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold(duration=2)"
                 }
             ],
             "bindings": [
@@ -397,6 +405,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "MenuExitController",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "14e6c249-b4e7-43af-946a-fa3dac52516a",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SkipCutscene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "20c3e7ce-84f5-4cfa-8875-444de52d9f4f",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "SkipCutscene",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

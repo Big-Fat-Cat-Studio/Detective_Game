@@ -113,6 +113,14 @@ public class @InputSettings : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""SkipCutscene"",
+                    ""type"": ""Button"",
+                    ""id"": ""7c00bb44-322c-4fac-b722-85138f5d793a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=2)""
                 }
             ],
             ""bindings"": [
@@ -410,6 +418,28 @@ public class @InputSettings : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""MenuExitController"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""14e6c249-b4e7-43af-946a-fa3dac52516a"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SkipCutscene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20c3e7ce-84f5-4cfa-8875-444de52d9f4f"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""SkipCutscene"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1078,6 +1108,7 @@ public class @InputSettings : IInputActionCollection, IDisposable
         m_Human_Special4 = m_Human.FindAction("Special4", throwIfNotFound: true);
         m_Human_MenuExit = m_Human.FindAction("MenuExit", throwIfNotFound: true);
         m_Human_MenuExitController = m_Human.FindAction("MenuExitController", throwIfNotFound: true);
+        m_Human_SkipCutscene = m_Human.FindAction("SkipCutscene", throwIfNotFound: true);
         // Pipe
         m_Pipe = asset.FindActionMap("Pipe", throwIfNotFound: true);
         m_Pipe_Up = m_Pipe.FindAction("Up", throwIfNotFound: true);
@@ -1155,6 +1186,7 @@ public class @InputSettings : IInputActionCollection, IDisposable
     private readonly InputAction m_Human_Special4;
     private readonly InputAction m_Human_MenuExit;
     private readonly InputAction m_Human_MenuExitController;
+    private readonly InputAction m_Human_SkipCutscene;
     public struct HumanActions
     {
         private @InputSettings m_Wrapper;
@@ -1171,6 +1203,7 @@ public class @InputSettings : IInputActionCollection, IDisposable
         public InputAction @Special4 => m_Wrapper.m_Human_Special4;
         public InputAction @MenuExit => m_Wrapper.m_Human_MenuExit;
         public InputAction @MenuExitController => m_Wrapper.m_Human_MenuExitController;
+        public InputAction @SkipCutscene => m_Wrapper.m_Human_SkipCutscene;
         public InputActionMap Get() { return m_Wrapper.m_Human; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1216,6 +1249,9 @@ public class @InputSettings : IInputActionCollection, IDisposable
                 @MenuExitController.started -= m_Wrapper.m_HumanActionsCallbackInterface.OnMenuExitController;
                 @MenuExitController.performed -= m_Wrapper.m_HumanActionsCallbackInterface.OnMenuExitController;
                 @MenuExitController.canceled -= m_Wrapper.m_HumanActionsCallbackInterface.OnMenuExitController;
+                @SkipCutscene.started -= m_Wrapper.m_HumanActionsCallbackInterface.OnSkipCutscene;
+                @SkipCutscene.performed -= m_Wrapper.m_HumanActionsCallbackInterface.OnSkipCutscene;
+                @SkipCutscene.canceled -= m_Wrapper.m_HumanActionsCallbackInterface.OnSkipCutscene;
             }
             m_Wrapper.m_HumanActionsCallbackInterface = instance;
             if (instance != null)
@@ -1256,6 +1292,9 @@ public class @InputSettings : IInputActionCollection, IDisposable
                 @MenuExitController.started += instance.OnMenuExitController;
                 @MenuExitController.performed += instance.OnMenuExitController;
                 @MenuExitController.canceled += instance.OnMenuExitController;
+                @SkipCutscene.started += instance.OnSkipCutscene;
+                @SkipCutscene.performed += instance.OnSkipCutscene;
+                @SkipCutscene.canceled += instance.OnSkipCutscene;
             }
         }
     }
@@ -1438,6 +1477,7 @@ public class @InputSettings : IInputActionCollection, IDisposable
         void OnSpecial4(InputAction.CallbackContext context);
         void OnMenuExit(InputAction.CallbackContext context);
         void OnMenuExitController(InputAction.CallbackContext context);
+        void OnSkipCutscene(InputAction.CallbackContext context);
     }
     public interface IPipeActions
     {
