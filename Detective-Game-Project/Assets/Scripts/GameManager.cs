@@ -308,7 +308,7 @@ namespace Scripts
         {
             if (GameType == GameType.MultiPlayerSplitScreen && player == PlayerOne)
             {
-                AfterInteractTextP1.GetComponent<Text>().text = message;
+                AfterInteractTextP1.GetComponent<TextMeshProUGUI>().text = message;
                 AfterInteractTextP1.SetActive(true);
 
                 if (currentCourotinePlayerOne != null)
@@ -321,7 +321,7 @@ namespace Scripts
             }
             else
             {
-                AfterInteractTextP2.GetComponent<Text>().text = message;
+                AfterInteractTextP2.GetComponent<TextMeshProUGUI>().text = message;
                 AfterInteractTextP2.SetActive(true);
 
                 if (currentCourotine != null)

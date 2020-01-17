@@ -146,7 +146,7 @@ namespace Scripts
             {
                 objectInteractedWith = holding.GetComponent<InteractableObject>();
             }
-            if (currentPlayer == ActivePlayer.Animal)
+            else if (currentPlayer == ActivePlayer.Animal)
             {
                 GetComponentInParent<AudioSource>().clip = cry;
                 GetComponentInParent<AudioSource>().Play();
@@ -285,6 +285,7 @@ namespace Scripts
                 && (other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == currentPlayer
                     || other.gameObject.GetComponent<InteractableObject>().PlayerThatCanInteract == ActivePlayer.Both))
             {
+                print(other.gameObject.name);
                 interactableObjects.Add(other.gameObject);
                 InteractableObject interactableObject = getClosestObject().GetComponent<InteractableObject>();
                 GameManager.Instance.showInteractText(interactableObject.interactMessage, currentPlayer, interactableObject.isHoldPrompt);
