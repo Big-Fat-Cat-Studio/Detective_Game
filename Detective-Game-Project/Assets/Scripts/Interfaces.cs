@@ -24,4 +24,8 @@ namespace Scripts
     {
         void Activation();
     }
+    public interface ISkipable
+    {
+        void Skip();
+    }
 }
