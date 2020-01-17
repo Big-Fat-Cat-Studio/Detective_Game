@@ -5,7 +5,7 @@ using UnityEngine.Video;
 
 namespace Scripts
 {
-    public class ShowTutorialOnStart : Tutorial, ISkipable
+    public class ShowTutorialOnStart : Tutorial
     {
         public VideoPlayer intro;
 
@@ -33,7 +33,7 @@ namespace Scripts
                 yield return timer;
                 if(!intro.isPlaying)
                 {
-                    //intro.gameObject.SetActive(false);
+                    intro.gameObject.SetActive(false);
                     GameManager.Instance.CutsceneCamera.SetActive(false);
                     GameManager.Instance.PlayerCamera.SetActive(true);
                     GameManager.Instance.PlayerCameraP2.SetActive(true);
@@ -45,16 +45,6 @@ namespace Scripts
                     break;
                 }
             }
-        }
-        public void Skip()
-        {
-            //intro.gameObject.SetActive(false);
-            GameManager.Instance.CutsceneCamera.SetActive(false);
-            GameManager.Instance.PlayerCamera.SetActive(true);
-            GameManager.Instance.PlayerCameraP2.SetActive(true);
-            GameManager.Instance.Human.GetComponent<CharacterController>().enabled = true;
-            GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = true;
-            Pause();
         }
     }
 }

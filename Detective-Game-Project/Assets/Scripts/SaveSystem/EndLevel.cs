@@ -6,13 +6,12 @@ using UnityEngine.SceneManagement;
 
 namespace Scripts
 {
-    public class EndLevel : InteractableObject, ISkipable
+    public class EndLevel : InteractableObject
     {
         //Variables
         public VideoPlayer endCutscene;
         public string nextLevelName;
         public string achievementName;
-
         private bool cutsceneHasStarted = false;
 
         //Unity functions
@@ -63,16 +62,6 @@ namespace Scripts
             GameManager.Instance.CutsceneCamera.SetActive(true);
             this.endCutscene.Play();
             StartCoroutine(StartupTimer());
-        }
-        public void Skip()
-        {
-            if(endCutscene.isPlaying)
-            {
-                endCutscene.Stop();
-                SetLevel();
-                this.cutsceneHasStarted = false;
-                this.LoadNextLevel();
-            }
         }
         private void LoadNextLevel()
         {
