@@ -146,7 +146,7 @@ namespace Scripts
             {
                 objectInteractedWith = holding.GetComponent<InteractableObject>();
             }
-            if (currentPlayer == ActivePlayer.Animal)
+            else if (currentPlayer == ActivePlayer.Animal)
             {
                 GetComponentInParent<AudioSource>().clip = cry;
                 GetComponentInParent<AudioSource>().Play();
