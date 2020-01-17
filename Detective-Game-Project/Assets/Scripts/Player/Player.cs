@@ -102,7 +102,30 @@ namespace Scripts
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection = Vector3.ClampMagnitude(moveDirection, 1f);
             moveDirection *= movementSpeed;
-
+            if (this is AnimalPlayer)
+            {
+                if (direction.x > 0 && direction.y == 0)
+                {
+                    this.transform.Rotate(0,90,0);
+                }
+                else if (direction.x < 0 && direction.y == 0)
+                {
+                    this.transform.Rotate(0,-90,0);
+                }
+                if (direction.x > 0 && direction.y > 0 || direction.x < 0 && direction.y < 0) 
+                {
+                    this.transform.Rotate(0,45,0);
+                }
+                else if (direction.x < 0 && direction.y > 0 || direction.x > 0 && direction.y < 0) 
+                {
+                    this.transform.Rotate(0,-45,0);
+                }
+                else
+                {
+                    this.transform.Rotate(0,0,0);
+                }
+                
+            }
             moveDirection.y = currentDirection;
         }
 
