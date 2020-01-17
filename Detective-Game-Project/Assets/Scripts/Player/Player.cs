@@ -104,22 +104,24 @@ namespace Scripts
             moveDirection *= movementSpeed;
             if (this is AnimalPlayer)
             {
-                if (direction.x > 0 && direction.y == 0)
-                {
-                    this.transform.Rotate(0,90,0);
-                }
-                else if (direction.x < 0 && direction.y == 0)
-                {
-                    this.transform.Rotate(0,-90,0);
-                }
-                if (direction.x > 0 && direction.y > 0 || direction.x < 0 && direction.y < 0) 
+                print("x: " + direction.x + " - y: " + direction.y );
+                if ((direction.x > 0.5 && direction.x <  0.9) && (direction.y > 0.5 && direction.y < 0.9) || (direction.x < -0.5 && direction.x > -0.9) && (direction.y < -0.5 && direction.y > -0.9)) 
                 {
                     this.transform.Rotate(0,45,0);
                 }
-                else if (direction.x < 0 && direction.y > 0 || direction.x > 0 && direction.y < 0) 
+                else if ((direction.x < -0.5 && direction.x >  -0.9) && (direction.y > 0.5 && direction.y < 0.9) || (direction.x > 0.5 && direction.x < 0.9) && (direction.y < -0.5 && direction.y > -0.9)) 
                 {
                     this.transform.Rotate(0,-45,0);
                 }
+                else if (Mathf.Round(direction.x) == 1 && (direction.y > -0.5 && direction.y < 0.5))
+                {
+                    this.transform.Rotate(0,90,0);
+                }
+                else if (Mathf.Round(direction.x) == -1 && (direction.y > -0.5 && direction.y < 0.5))
+                {
+                    this.transform.Rotate(0,-90,0);
+                }
+                
                 else
                 {
                     this.transform.Rotate(0,0,0);
