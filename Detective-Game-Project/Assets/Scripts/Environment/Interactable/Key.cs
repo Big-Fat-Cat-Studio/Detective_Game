@@ -18,7 +18,7 @@ namespace Scripts
 
         protected override void pickUpItem() {
             base.pickUpItem();
-            if (base.interactable)
+            if (!base.interactable)
             {
                 gameObject.GetComponent<AudioSource>().Play();
             }
