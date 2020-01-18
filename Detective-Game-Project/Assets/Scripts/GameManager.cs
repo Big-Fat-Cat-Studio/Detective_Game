@@ -50,6 +50,11 @@ namespace Scripts
         public GameObject AfterInteractTextP1;
         public GameObject InteractTextP1;
 
+        [Header("General counter for key object")]
+        public GameObject KeyCounter; // Text Object
+        public Byte KeyCounterRequired; // Actual number of keyparts required
+        public Byte KeyCounterActual; // Actual number of keyparts collected
+
         private IEnumerator currentCourotine;
         private IEnumerator currentCourotinePlayerOne;
 
@@ -128,9 +133,13 @@ namespace Scripts
             InteractTextP2.SetActive(false);
             AfterInteractTextP1.SetActive(false);
             InteractTextP1.SetActive(false);
+            KeyCounter.SetActive(false);
 
             currentCourotine = null;
             currentCourotinePlayerOne = null;
+
+            // Init the key counter if needed
+            InitKeyCounter();
         }
 
         // Update is called once per frame
@@ -157,6 +166,10 @@ namespace Scripts
                 cameraContext.m_XAxis.Value = _PrevPlayerCRotation;
                 _PrevPlayerCRotation = tempX;
             }
+
+            // If counter is anything other than 0 it's initialized.
+            if (KeyCounterActual > 0)
+                UpdateKeyCounter();
         }
 
         public bool checkIfPlayerIsActive(ActivePlayer player)
@@ -356,6 +369,21 @@ namespace Scripts
                 currentCourotine = null;
             }
 
+        }
+
+        public void InitKeyCounter()
+        {
+            Key keyComponent = FindObjectOfType<Key>();
+            if (keyComponent != null)
+            {
+                KeyCounterRequired = (byte)keyComponent.amountNeeded;
+                KeyCounter.SetActive(true);
+            }
+        }
+
+        public void UpdateKeyCounter()
+        {
+            KeyCounter.GetComponent<TextMeshProUGUI>().text = $"{KeyCounterActual}/{KeyCounterRequired}";
         }
 
         public string getPlayerName(ActivePlayer player)
