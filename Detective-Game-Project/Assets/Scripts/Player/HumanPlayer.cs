@@ -160,6 +160,10 @@ namespace Scripts
                 {
                     idle1 += Time.deltaTime;
                 }
+                else
+                {
+                    idle1 = 0;
+                }
                 if (idle1 >= 5)
                 {
                     animator.SetTrigger("idle1");
