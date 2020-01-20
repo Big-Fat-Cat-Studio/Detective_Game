@@ -47,12 +47,14 @@ namespace Scripts
             if (pulling)
             { 
                 ob.transform.position = Vector3.Lerp(ob.transform.position, pos.Item2, Time.deltaTime);
+                Ladder.GetComponent<Collider>().isTrigger = false;
                 yield return null;
             }
             else
             { 
                 ob.transform.position = Vector3.Lerp(ob.transform.position, pos.Item1, Time.deltaTime);
                 time -= Time.deltaTime;
+                Ladder.GetComponent<Collider>().isTrigger = true;
                 yield return null;
             }
             c();
