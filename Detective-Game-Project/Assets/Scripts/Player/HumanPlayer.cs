@@ -9,7 +9,7 @@ namespace Scripts
         [HideInInspector]
         public bool isClimbing = false;
         public float climbingSpeed = 2.0f;
-
+        float idle1 = 0;
         [HideInInspector]
         public bool isInPuzzle = false;
 
@@ -155,6 +155,16 @@ namespace Scripts
                     }
                 }
 
+
+                if (animator.GetFloat("forward/backward") == 0)
+                {
+                    idle1 += Time.deltaTime;
+                }
+                if (idle1 >= 5)
+                {
+                    animator.SetTrigger("idle1");
+                }
+                
                 if (jump)
                 {
                     Jump();
