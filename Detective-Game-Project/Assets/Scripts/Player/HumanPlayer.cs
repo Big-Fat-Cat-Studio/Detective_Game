@@ -163,6 +163,7 @@ namespace Scripts
                 if (idle1 >= 5)
                 {
                     animator.SetTrigger("idle1");
+                    idle1 = 0;
                 }
                 
                 if (jump)
