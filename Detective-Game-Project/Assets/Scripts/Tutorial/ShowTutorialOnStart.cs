@@ -8,29 +8,22 @@ namespace Scripts
     public class ShowTutorialOnStart : Tutorial, ISkipable
     {
         public VideoPlayer intro;
-        public bool watchCutscene = true;
+        private bool cutscenePlayed = false;
 
         void Start()
         {
-            if (watchCutscene)
-            {
-                GameManager.Instance.PlayerCamera.SetActive(false);
-                GameManager.Instance.PlayerCameraP2.SetActive(false);
-                GameManager.Instance.InteractTextP1.SetActive(false);
-                GameManager.Instance.InteractTextP2.SetActive(false);
-                GameManager.Instance.AfterInteractTextP1.SetActive(false);
-                GameManager.Instance.AfterInteractTextP2.SetActive(false);
-                GameManager.Instance.Human.GetComponent<CharacterController>().enabled = false;
-                GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = false;
-                GameManager.Instance.Human.GetComponent<AudioListener>().enabled = false;
-                GameManager.Instance.CutsceneCamera.SetActive(true);
-                intro.Play();
-                StartCoroutine(VideoChecker());
-            }
-            else
-            {
-                Pause();
-            }
+            GameManager.Instance.PlayerCamera.SetActive(false);
+            GameManager.Instance.PlayerCameraP2.SetActive(false);
+            GameManager.Instance.InteractTextP1.SetActive(false);
+            GameManager.Instance.InteractTextP2.SetActive(false);
+            GameManager.Instance.AfterInteractTextP1.SetActive(false);
+            GameManager.Instance.AfterInteractTextP2.SetActive(false);
+            GameManager.Instance.Human.GetComponent<CharacterController>().enabled = false;
+            GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = false;
+            GameManager.Instance.Human.GetComponent<AudioListener>().enabled = false;
+            GameManager.Instance.CutsceneCamera.SetActive(true);
+            intro.Play();
+            StartCoroutine(VideoChecker());
         }
         private IEnumerator VideoChecker()
         {
@@ -52,13 +45,17 @@ namespace Scripts
 
         private void EndCutscene()
         {
-            GameManager.Instance.CutsceneCamera.SetActive(false);
-            GameManager.Instance.PlayerCamera.SetActive(true);
-            GameManager.Instance.PlayerCameraP2.SetActive(true);
-            GameManager.Instance.Human.GetComponent<CharacterController>().enabled = true;
-            GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = true;
-            GameManager.Instance.Human.GetComponent<AudioListener>().enabled = true;
-            Pause();
+            if (!cutscenePlayed)
+            {
+                cutscenePlayed = true;
+                GameManager.Instance.CutsceneCamera.SetActive(false);
+                GameManager.Instance.PlayerCamera.SetActive(true);
+                GameManager.Instance.PlayerCameraP2.SetActive(true);
+                GameManager.Instance.Human.GetComponent<CharacterController>().enabled = true;
+                GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = true;
+                GameManager.Instance.Human.GetComponent<AudioListener>().enabled = true;
+                Pause();
+            }
         }
     }
 }
