@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7946202509819655764}
   - component: {fileID: 6206905374375179891}
   - component: {fileID: 572172854884698143}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Full Key
   m_TagString: Interact
   m_Icon: {fileID: 0}
@@ -98,6 +98,7 @@ MonoBehaviour:
   interactMessage: pick up the key
   interactable: 1
   interactableType: 0
+  isHoldPrompt: 0
   breakOnUse: 1
 --- !u!54 &6206905374375179891
 Rigidbody:
@@ -139,6 +140,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PickupParticles
+      objectReference: {fileID: 0}
+    - target: {fileID: 1530862022120422444, guid: f5483bd6daf317c439042e40c4c9a296,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1530862022120422445, guid: f5483bd6daf317c439042e40c4c9a296,
         type: 3}
