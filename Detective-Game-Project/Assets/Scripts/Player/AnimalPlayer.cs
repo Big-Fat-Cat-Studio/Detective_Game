@@ -25,8 +25,13 @@ namespace Scripts {
         Animator animator;
 
         public GameObject pissPrefab;
+        public GameObject pissIndicator;
+
         public GameObject poopPrefab;
+        public GameObject poopIndicator;
         public Transform poopLocation;
+
+        public GameObject runIndicator;
 
         private void Start()
         {
@@ -230,12 +235,15 @@ namespace Scripts {
                     boostTimer = 6f;
                     animator.SetBool("run", true);
                     movementSpeed = 10f;
+                    runIndicator.SetActive(true);
                     break;
                 case "piss":
                     pissTimer = 15f;
+                    pissIndicator.SetActive(true);
                     break;
                 case "poop":
                     poopTimer = 15f;
+                    poopIndicator.SetActive(true);
                     break;
                 default:
                     Debug.Log("default");
@@ -252,6 +260,7 @@ namespace Scripts {
                 {
                     animator.SetBool("run", false);
                     movementSpeed = 5f;
+                    runIndicator.SetActive(false);
                 } 
             }
             if (abilityActive("piss"))
@@ -260,6 +269,7 @@ namespace Scripts {
                 if (pissTimer > 12f && pissTimer < 12.6f)
                 {
                     pissParticles.Stop();
+                    pissIndicator.SetActive(false);
                     animator.SetBool("piss", false);
                     cannotmove = false;
 
@@ -272,6 +282,7 @@ namespace Scripts {
                 if (poopTimer > 12f && poopTimer < 12.6f)
                 {
                     animator.SetBool("poop", false);
+                    poopIndicator.SetActive(false);
                     cannotmove = false;
                 } 
             }
