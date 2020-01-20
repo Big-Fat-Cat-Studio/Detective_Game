@@ -67,7 +67,7 @@ public class MenuConfirmationHandler : MonoBehaviour
             ExecuteDecline.Invoke();
         });
 
-        // On press 
+        // On press
 
     }
 }

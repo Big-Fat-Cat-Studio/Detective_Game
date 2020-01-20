@@ -17,12 +17,10 @@ namespace Scripts
         void Start()
         {
             int P1Level = PlayerPrefs.GetInt("ControlP1", 0);
-            print(P1Level);
             DropdownP1.value = P1Level;
             DropdownP1.RefreshShownValue();
 
             int P2Level = PlayerPrefs.GetInt("ControlP2", 0);
-            print(P2Level);
             DropdownP2.value = P2Level;
             DropdownP2.RefreshShownValue();
         }
