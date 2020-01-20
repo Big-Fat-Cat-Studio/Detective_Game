@@ -15,8 +15,6 @@ public class MenuMain : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.SetInt("Level", 3);
-        Unlocked = PlayerPrefs.GetInt("Level");
         GetLevel();
 
         if (Unlocked <= 1)
