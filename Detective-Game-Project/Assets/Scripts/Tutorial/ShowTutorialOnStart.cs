@@ -8,6 +8,8 @@ namespace Scripts
     public class ShowTutorialOnStart : Tutorial, ISkipable
     {
         public VideoPlayer intro;
+        public AudioSource backgroundMusic;
+        public GameObject canvas;
         private bool cutscenePlayed = false;
 
         void Start()
@@ -22,6 +24,8 @@ namespace Scripts
             GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = false;
             GameManager.Instance.Human.GetComponent<AudioListener>().enabled = false;
             GameManager.Instance.CutsceneCamera.SetActive(true);
+            backgroundMusic.Stop();
+            canvas.SetActive(false);
             intro.Play();
             StartCoroutine(VideoChecker());
         }
@@ -54,6 +58,8 @@ namespace Scripts
                 GameManager.Instance.Human.GetComponent<CharacterController>().enabled = true;
                 GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = true;
                 GameManager.Instance.Human.GetComponent<AudioListener>().enabled = true;
+                backgroundMusic.Play();
+                canvas.SetActive(true);
                 Pause();
             }
         }

@@ -50,6 +50,8 @@ namespace Scripts
             {
                 AchievementsManager.Instance.UnlockAchievement(achievementName);
             }
+
+            interactable = false;
             GameManager.Instance.PlayerCamera.SetActive(false);
             GameManager.Instance.PlayerCameraP2.SetActive(false);
             GameManager.Instance.InteractTextP1.SetActive(false);
@@ -59,6 +61,12 @@ namespace Scripts
             GameManager.Instance.Human.SetActive(false);
             GameManager.Instance.Animal.SetActive(false);
             GameManager.Instance.CutsceneCamera.SetActive(true);
+
+            foreach (AudioSource audio in FindObjectsOfType<AudioSource>())
+            {
+                audio.Stop();
+            }
+
             this.endCutscene.Play();
             StartCoroutine(StartupTimer());
         }
