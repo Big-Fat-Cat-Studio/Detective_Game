@@ -13,6 +13,7 @@ namespace Scripts
 
         public string getFullAfterInteractText(int amountNow)
         {
+            GameManager.Instance.KeyCounterActual = (byte)amountNow;
             return humanKeyPickUpText + " " + amountNow + "/" + amountNeeded;
         }
 
