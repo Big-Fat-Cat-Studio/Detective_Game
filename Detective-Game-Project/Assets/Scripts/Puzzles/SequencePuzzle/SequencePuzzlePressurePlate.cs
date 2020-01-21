@@ -21,6 +21,7 @@ namespace Scripts
             {
                 if (!pressed)
                 {
+                    GetComponent<AudioSource>().Play();
                     sequencePuzzleManager.GetComponent<SequencePuzzleMain>().InsertInput(this.sequenceItemColorID);
                     transform.position = new Vector3(transform.position.x, transform.position.y - 0.08f, transform.position.z);
                     pressed = true;
