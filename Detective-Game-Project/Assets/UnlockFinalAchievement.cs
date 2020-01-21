@@ -17,12 +17,15 @@ namespace Scripts
         //Unity functions
         private void Start()
         {
-            SteamUserStats.GetAchievement("level_4", out thirdAchievementStatus);
-            if(thirdAchievementStatus)
+            if (AchievementsManager.Instance != null)
             {
-                SteamUserStats.SetAchievement("the_reunion");
-                SteamUserStats.StoreStats();
-                SteamAPI.RunCallbacks();
+                SteamUserStats.GetAchievement("level_4", out thirdAchievementStatus);
+                if (thirdAchievementStatus)
+                {
+                    SteamUserStats.SetAchievement("the_reunion");
+                    SteamUserStats.StoreStats();
+                    SteamAPI.RunCallbacks();
+                }
             }
             StartCoroutine(BackToMenu());
         }
@@ -30,7 +33,7 @@ namespace Scripts
         //Coroutines
         private IEnumerator BackToMenu()
         {
-            WaitForSeconds timer = new WaitForSeconds(5.0f);
+            WaitForSeconds timer = new WaitForSeconds(1.0f);
             for(; ; )
             {
                 yield return timer;
