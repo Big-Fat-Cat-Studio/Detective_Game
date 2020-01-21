@@ -9,28 +9,7 @@ public class MenuPlay : MonoBehaviour
 {
     public GameObject Level4, Level3, Level2, Level1, Target;
     public Sprite[] imageArray;
-    int Unlocked, UnlockedCheat;
-
-    //TODO(HAMZA): Improve if we ever continue working on this.
-    private string CurrentCheat;
-    public enum MENUCHEATS { UNLOCKLEVELS = 1337 };
-
-
-    void Update()
-    {
-        if (Input.inputString.Length > 0)
-        {
-            CurrentCheat += Input.inputString;
-            if (CurrentCheat.Contains($"{(int)MENUCHEATS.UNLOCKLEVELS}"))
-            {
-                // Reset cheat counter
-                CurrentCheat = "";
-                // Perform cheat
-                UnlockedCheat = 1;
-                OnEnable();
-            }
-        }
-    }
+    int Unlocked;
 
     void OnEnable()
     {
@@ -40,7 +19,7 @@ public class MenuPlay : MonoBehaviour
         // but they actually fix a stupid bug
 
 
-        if (Unlocked >= 1 || UnlockedCheat > 0)
+        if (Unlocked >= 1)
         {
             Level1.SetActive(false);
             Level1.SetActive(true);
@@ -49,7 +28,7 @@ public class MenuPlay : MonoBehaviour
             Target.GetComponent<Image>().sprite = imageArray[0];
         }
 
-        if (Unlocked >= 2 || UnlockedCheat > 0)
+        if (Unlocked >= 2)
         {
             Level2.SetActive(false);
             Level2.SetActive(true);
@@ -59,7 +38,7 @@ public class MenuPlay : MonoBehaviour
             Target.GetComponent<Image>().sprite = imageArray[1];
         }
 
-        if (Unlocked >= 3 || UnlockedCheat > 0)
+        if (Unlocked >= 3)
         {
             Level3.SetActive(false);
             Level3.SetActive(true);
@@ -69,7 +48,7 @@ public class MenuPlay : MonoBehaviour
             Target.GetComponent<Image>().sprite = imageArray[2];
         }
 
-        // if (Unlocked >= 4 || UnlockedCheat > 0)
+        // if (Unlocked >= 4)
         // {
         //     Level4.SetActive(false);
         //     Level4.SetActive(true);
