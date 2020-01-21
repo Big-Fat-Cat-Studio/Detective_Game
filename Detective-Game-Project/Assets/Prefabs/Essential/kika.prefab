@@ -648,6 +648,7 @@ MonoBehaviour:
   gravity: 20
   CameraFollow: {fileID: 0}
   InGameMenu: {fileID: 0}
+  cutsceneTriggers: []
   isClimbing: 0
   climbingSpeed: 2
   isInPuzzle: 0
@@ -1080,6 +1081,50 @@ Transform:
   m_Father: {fileID: 7874942529394133162}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5295546964782291488
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6203887245496860463}
+  - component: {fileID: 2579826762294006406}
+  m_Layer: 15
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6203887245496860463
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5295546964782291488}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6273741724722086583}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2579826762294006406
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5295546964782291488}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.019970296, y: 0.0008676822, z: 0.023059685}
+  m_Center: {x: -8.077337e-22, y: 0.002285121, z: 0.00000011920918}
 --- !u!1 &5398425770823660988
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,7 +1538,8 @@ Transform:
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0.081, y: 1.304, z: 0.215}
   m_LocalScale: {x: 43.333374, y: 43.333336, z: 43.333374}
-  m_Children: []
+  m_Children:
+  - {fileID: 6203887245496860463}
   m_Father: {fileID: 496485747378433034}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -1557,8 +1603,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.019970274, y: 0.0060024043, z: 0.023059685}
-  m_Center: {x: 2.0361683e-25, y: 0.005242271, z: 9.1699454e-10}
+  m_Size: {x: 0.019970292, y: 0.0052622394, z: 0.023059685}
+  m_Center: {x: -6.413817e-24, y: 0.0056123533, z: 9.169937e-10}
 --- !u!1 &7081058154861548908
 GameObject:
   m_ObjectHideFlags: 0
