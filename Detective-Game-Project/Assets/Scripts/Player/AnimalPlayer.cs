@@ -237,17 +237,14 @@ namespace Scripts {
                     boostTimer = 6f;
                     animator.SetBool("run", true);
                     movementSpeed = 10f;
-                    runIndicator.GetComponent<TextMeshProUGUI>().text = $"{(int) boostTimer}";
                     runIndicator.SetActive(true);
                     break;
                 case "piss":
                     pissTimer = 15f;
-                    pissIndicator.GetComponent<TextMeshProUGUI>().text = $"{(int) pissTimer}";
                     pissIndicator.SetActive(true);
                     break;
                 case "poop":
                     poopTimer = 15f;
-                    poopIndicator.GetComponent<TextMeshProUGUI>().text = $"{(int) poopTimer}";
                     poopIndicator.SetActive(true);
                     break;
                 default:
@@ -261,6 +258,7 @@ namespace Scripts {
             if (abilityActive("speedBoost"))
             {
                 boostTimer = Math.Max(0, boostTimer - Time.deltaTime);
+                runIndicator.GetComponent<TextMeshProUGUI>().text = $"{(int)boostTimer}";
                 if (boostTimer == 0)
                 {
                     animator.SetBool("run", false);
@@ -271,6 +269,7 @@ namespace Scripts {
             if (abilityActive("piss"))
             {
                 pissTimer = Math.Max(0, pissTimer - Time.deltaTime);
+                pissIndicator.GetComponent<TextMeshProUGUI>().text = $"{(int)pissTimer}";
                 if (pissTimer > 12f && pissTimer < 12.6f)
                 {
                     pissParticles.Stop();
@@ -283,14 +282,14 @@ namespace Scripts {
             if (abilityActive("poop"))
             {
                 poopTimer = Math.Max(0, poopTimer - Time.deltaTime);
-
+                poopIndicator.GetComponent<TextMeshProUGUI>().text = $"{(int)poopTimer}";
                 if (poopTimer > 12f && poopTimer < 12.6f)
                 {
                     animator.SetBool("poop", false);
                     cannotmove = false;
                 }
-                if ((int)pissTimer == 0)
-                    pissIndicator.SetActive(false);
+                if ((int)poopTimer == 0)
+                    poopIndicator.SetActive(false);
             }
         }
 
