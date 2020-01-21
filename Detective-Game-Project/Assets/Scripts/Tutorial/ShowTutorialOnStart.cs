@@ -58,6 +58,7 @@ namespace Scripts
                 GameManager.Instance.Human.GetComponent<CharacterController>().enabled = true;
                 GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = true;
                 GameManager.Instance.Human.GetComponent<AudioListener>().enabled = true;
+                intro.Stop();
                 backgroundMusic.Play();
                 canvas.SetActive(true);
                 Pause();
