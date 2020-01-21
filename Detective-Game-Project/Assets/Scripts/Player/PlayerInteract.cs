@@ -201,7 +201,7 @@ namespace Scripts
                         smallItemsHeld.RemoveAt(i);
                     }
                 }
-
+                GameManager.Instance.KeyCounter.SetActive(false);
                 GameManager.Instance.showAfterInteractText(currentPlayer, key.combineIntoFullItemText);
                 GameObject newItem = Instantiate(key.fullItem);
                 holding = newItem;
