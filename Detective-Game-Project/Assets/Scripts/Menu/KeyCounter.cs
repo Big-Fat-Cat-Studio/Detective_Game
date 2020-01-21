@@ -9,6 +9,5 @@ public class KeyCounter : MonoBehaviour
 	void Start()
 	{
 		Key TestObject = Object.FindObjectOfType<Key>();
-		Debug.Log(TestObject.amountNeeded);
 	}
 }
