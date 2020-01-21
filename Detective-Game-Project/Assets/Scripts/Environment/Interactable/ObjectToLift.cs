@@ -13,7 +13,6 @@ namespace Scripts
         public GameObject rotateParent;
         private List<GameObject> collisions;
 
-        private GameObject umbrella = null;
         private float originalPosition;
         private Rigidbody rigidBody;
         private bool move = false;
@@ -96,12 +95,6 @@ namespace Scripts
                         move = false;
                     }
                 }
-
-                if (umbrella != null && !umbrella.activeSelf)
-                {
-                    collisions.Remove(umbrella);
-                    umbrella = null;
-                } 
             }
 
             if (!move && moveAutomatically)
@@ -177,21 +170,21 @@ namespace Scripts
         //Only works for up and down lifts
         private void OnCollisionEnter(Collision collision)
         {
-            if (((ReferenceEquals(collision.gameObject, GameManager.Instance.Human) || ReferenceEquals(collision.gameObject, GameManager.Instance.Animal)) &&
-                collision.gameObject.transform.parent != this.transform && direction == Direction.YMinus) || collision.gameObject.tag == "Umbrella")
+            if ((ReferenceEquals(collision.gameObject, GameManager.Instance.Human) || ReferenceEquals(collision.gameObject, GameManager.Instance.Animal)) &&
+                collision.gameObject.transform.parent != this.transform && direction == Direction.YMinus)
             {
                 collisions.Add(collision.gameObject);
-
-                if (collision.gameObject.tag == "Umbrella")
-                {
-                    umbrella = collision.gameObject;
-                }
+                print(collision.gameObject.tag);
             }
         }
 
         private void OnCollisionExit(Collision collision)
         {
-            collisions.Remove(collision.gameObject);
+            if (ReferenceEquals(collision.gameObject, GameManager.Instance.Human) || ReferenceEquals(collision.gameObject, GameManager.Instance.Animal))
+            {
+                collisions.Remove(collision.gameObject);
+                print(collision.gameObject);
+            }
         }
 
         public void ActivateSolution()
