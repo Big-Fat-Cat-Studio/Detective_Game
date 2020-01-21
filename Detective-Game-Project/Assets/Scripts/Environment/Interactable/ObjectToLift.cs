@@ -13,7 +13,7 @@ namespace Scripts
         public GameObject rotateParent;
         private List<GameObject> collisions;
 
-        private List<GameObject> objectsOnPlatform;
+        private GameObject umbrella = null;
         private float originalPosition;
         private Rigidbody rigidBody;
         private bool move = false;
@@ -34,7 +34,6 @@ namespace Scripts
             {
                 originalPosition = transform.position.z;
             }
-            objectsOnPlatform = new List<GameObject>();
             rigidBody = GetComponent<Rigidbody>();
 
             if (moveAutomatically)
@@ -97,6 +96,12 @@ namespace Scripts
                         move = false;
                     }
                 }
+
+                if (umbrella != null && !umbrella.activeSelf)
+                {
+                    collisions.Remove(umbrella);
+                    umbrella = null;
+                } 
             }
 
             if (!move && moveAutomatically)
@@ -176,6 +181,11 @@ namespace Scripts
                 collision.gameObject.transform.parent != this.transform && direction == Direction.YMinus) || collision.gameObject.tag == "Umbrella")
             {
                 collisions.Add(collision.gameObject);
+
+                if (collision.gameObject.tag == "Umbrella")
+                {
+                    umbrella = collision.gameObject;
+                }
             }
         }
 
