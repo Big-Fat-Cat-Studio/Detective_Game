@@ -156,7 +156,7 @@ namespace Scripts
                 }
 
 
-                if (animator.GetFloat("forward/backward") == 0 && animator.GetBool("jumping") == false && animator.GetBool("walksideways") == false)
+                if (animator.GetFloat("forward/backward") == 0 && animator.GetBool("jumping") == false && animator.GetBool("walksideways") == false && animator.GetBool("climbing") == false && animator.GetBool("pushing") == false)
                 {
                     idle1 += Time.deltaTime;
                 }
