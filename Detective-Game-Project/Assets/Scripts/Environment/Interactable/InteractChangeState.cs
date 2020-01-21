@@ -7,6 +7,7 @@ namespace Scripts
     {
         public GameObject[] ChangeStateOf;
         public Material ApplyOnChange;
+        public ParticleSystem brokenParticles;
 
         [HideInInspector] public bool Consumed;
 
@@ -35,6 +36,7 @@ namespace Scripts
                 GameManager.Instance.showAfterInteractText(player, "Great, I think it's fixed! Maybe the dog elevator works now.");
                 neededItem = null;
                 GameManager.Instance.Human.GetComponentInChildren<PlayerInteract>().destroyHoldingObject();
+                brokenParticles.Stop();
             }
         }
 	}
