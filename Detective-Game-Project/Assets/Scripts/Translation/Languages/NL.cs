@@ -75,10 +75,13 @@ public class NL : Language
         yardBin = "Druk op <sprite=0> / <sprite=1> om de doos te duwen";
         yardSnacks = "Druk op <sprite=0> / <sprite=1> om een snack te eten";
         yardWrench = "Druk op <sprite=0> / <sprite=1> om de moersleutel op te pakken";
-        yardElevatorFix = "Druk op <sprite=0> / <sprite=1> om de elektriciteit in te schakelen";
+        yardFuseUse = "Druk op <sprite=0> / <sprite=1> om de elektriciteit in te schakelen";
+        yardFuseFix = "De schakelaar is kapot, misschien kan ik hem repareren met een moersleutel";
         yardElevatorButton = "Druk op <sprite=0> / <sprite=1> om de lift aan te zetten";
+        yardRope = "Druk op <sprite=0> / <sprite=1> om aan het touw te trekken";
         yardEndLevel = "De deur zit op slot! Ik heb een sleutel nodig om deze te openen";
 
+        yardKeyUse = "Druk op <sprite=0> / <sprite=1> om de deur te openen";
         yardKeyPart = "Druk op <sprite=0> / <sprite=1> om een deel van een sleutel op te pakken";
         yardKeyDig = "Druk op <sprite=0> / <sprite=1> om een deel van een sleutel op te graven";
         yardKeyHuman = "Je pakt een deel van een sleutel op en stopt het in je broekzak";

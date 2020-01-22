@@ -27,7 +27,7 @@ namespace Scripts
 
         [Header("YARD")]
         public GameObject yardBin;
-        public GameObject yardWrench, yardSnacks, yardElevatorFix, yardElevatorButton, yardEndLevel;
+        public GameObject yardWrench, yardSnacks, yardFuse, yardElevatorButton, yardRope, yardEndLevel;
         public GameObject yardKeyPart1, yardKeyPart2, yardKeyPart3;
 
 
@@ -172,10 +172,12 @@ namespace Scripts
                 yardBin.GetComponent<InteractableObject>().interactMessage = language.yardBin;
                 yardWrench.GetComponent<InteractableObject>().interactMessage = language.yardWrench;
                 yardSnacks.GetComponent<InteractableObject>().interactMessage = language.yardSnacks;
-                yardElevatorFix.GetComponent<InteractableObject>().interactMessage = language.yardElevatorFix;
-                // yardElevatorFixAfter.GetComponent<InteractableObject>().afterInteractMessage = language.yardElevatorFixAfter;
+                yardFuse.GetComponent<InteractableObject>().interactMessage = language.yardFuseUse;
+                yardFuse.GetComponent<InteractChangeState>().afterInteractMessage = language.yardFuseFix;
                 yardElevatorButton.GetComponent<InteractableObject>().interactMessage = language.yardElevatorButton;
-                yardEndLevel.GetComponent<InteractableObject>().interactMessage = language.yardEndLevel;
+                yardRope.GetComponent<InteractableObject>().interactMessage = language.yardRope;
+                yardEndLevel.GetComponent<InteractableObject>().interactMessage = language.yardKeyUse;
+                yardEndLevel.GetComponent<InteractChangeState>().afterInteractMessage = language.yardEndLevel;
 
 
                 yardKeyPart1.GetComponent<InteractableObject>().interactMessage = language.yardKeyPart;
