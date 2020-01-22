@@ -2528,6 +2528,252 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &520953082
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 520953086}
+  - component: {fileID: 520953085}
+  - component: {fileID: 520953084}
+  - component: {fileID: 520953083}
+  m_Layer: 0
+  m_Name: Translator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &520953083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520953082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af9028c9f2eadd745a4146ebb7b52265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuMainPlay: 
+  menuMainNewGame: 
+  menuMainOptions: 
+  menuMainCredits: 
+  menuMainExit: 
+  menuPlay1: 
+  menuPlay2: 
+  menuPlay3: 
+  menuOptionsGraphics: 
+  menuOptionsSound: 
+  menuOptionsControls: 
+  menuOptionsLanguage: 
+  menuGraphicsVeryLow: 
+  menuGraphicsLow: 
+  menuGraphicsMedium: 
+  menuGraphicsHigh: 
+  menuGraphicsVeryHigh: 
+  menuGraphicsUltra: 
+  menuGraphicsFullscreen: 
+  menuControlsController: 
+  menuControlsKeyboard: 
+  menuConfirmNewGame: 
+  menuConfirmExit: 
+  menuConfirmInGame: 
+  menuCommonBack: 
+  menuCommonYes: 
+  menuCommonNo: 
+  yardWrench: 
+  yardBin: 
+  yardSnacks: 
+  yardElevatorFix: 
+  yardElevatorButton: 
+  yardEndLevel: 
+  yardKeyPart: 
+  yardKeyDig: 
+  yardKeyHuman: 
+  yardKeyCombine: 
+  tutorialCommon: 
+  tutorialPush: 
+  tutorialPushHeader: 
+  tutorialPushMessageTop: 
+  tutorialPushMessageBot: 
+  tutorialNature: 
+  tutorialNatureHeader: 
+  tutorialNatureMessageTop: 
+  tutorialNatureMessageBot: 
+  tutorialSnacks: 
+  tutorialSnacksHeader: 
+  tutorialSnacksMessageTop: 
+  tutorialSnacksMessageBot: 
+  tutorialUmbrella: 
+  tutorialUmbrellaHeader: 
+  tutorialUmbrellaMessageTop: 
+  tutorialUmbrellaMessageBot: 
+  tutorialMoveMessageWalk: 
+  tutorialMoveMessageLook: 
+  tutorialMoveMessageJump: 
+--- !u!114 &520953084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520953082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2532f6ef3fc1b0640a8d0052b6c093ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuMainPlay: 
+  menuMainNewGame: 
+  menuMainOptions: 
+  menuMainCredits: 
+  menuMainExit: 
+  menuPlay1: 
+  menuPlay2: 
+  menuPlay3: 
+  menuOptionsGraphics: 
+  menuOptionsSound: 
+  menuOptionsControls: 
+  menuOptionsLanguage: 
+  menuGraphicsVeryLow: 
+  menuGraphicsLow: 
+  menuGraphicsMedium: 
+  menuGraphicsHigh: 
+  menuGraphicsVeryHigh: 
+  menuGraphicsUltra: 
+  menuGraphicsFullscreen: 
+  menuControlsController: 
+  menuControlsKeyboard: 
+  menuConfirmNewGame: 
+  menuConfirmExit: 
+  menuConfirmInGame: 
+  menuCommonBack: 
+  menuCommonYes: 
+  menuCommonNo: 
+  yardWrench: 
+  yardBin: 
+  yardSnacks: 
+  yardElevatorFix: 
+  yardElevatorButton: 
+  yardEndLevel: 
+  yardKeyPart: 
+  yardKeyDig: 
+  yardKeyHuman: 
+  yardKeyCombine: 
+  tutorialCommon: 
+  tutorialPush: 
+  tutorialPushHeader: 
+  tutorialPushMessageTop: 
+  tutorialPushMessageBot: 
+  tutorialNature: 
+  tutorialNatureHeader: 
+  tutorialNatureMessageTop: 
+  tutorialNatureMessageBot: 
+  tutorialSnacks: 
+  tutorialSnacksHeader: 
+  tutorialSnacksMessageTop: 
+  tutorialSnacksMessageBot: 
+  tutorialUmbrella: 
+  tutorialUmbrellaHeader: 
+  tutorialUmbrellaMessageTop: 
+  tutorialUmbrellaMessageBot: 
+  tutorialMoveMessageWalk: 
+  tutorialMoveMessageLook: 
+  tutorialMoveMessageJump: 
+--- !u!114 &520953085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520953082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ec881d174ce95b46a9550f3f0deb1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuMainPlay: {fileID: 1795309730}
+  menuMainNewGame: {fileID: 1590170768}
+  menuMainOptions: {fileID: 1739977678}
+  menuMainCredits: {fileID: 1669481355}
+  menuMainExit: {fileID: 764525463}
+  menuPlay1: {fileID: 567665737}
+  menuPlay2: {fileID: 1875944069}
+  menuPlay3: {fileID: 1932946665}
+  menuPlayBack: {fileID: 1410687101}
+  menuOptionsGraphics: {fileID: 1019849959}
+  menuOptionsSound: {fileID: 1737806785}
+  menuOptionsControls: {fileID: 1826822303}
+  menuOptionsLanguage: {fileID: 585824699}
+  menuOptionsBack: {fileID: 1582272450}
+  menuGraphicsFullscreen: {fileID: 2124012227}
+  menuGraphicsBack: {fileID: 323014091}
+  menuControlsPlayer1: {fileID: 913285697}
+  menuControlsPlayer2: {fileID: 304899870}
+  menuControlsBack: {fileID: 1503012487}
+  menuConfirmNewGame: {fileID: 541047709}
+  menuConfirmNewGameYes: {fileID: 1031736581}
+  menuConfirmNewGameNo: {fileID: 558016750}
+  menuConfirmExit: {fileID: 1277769441}
+  menuConfirmExitYes: {fileID: 1331994951}
+  menuConfirmExitNo: {fileID: 1554332870}
+  menuInGameResume: {fileID: 0}
+  menuInGameOptions: {fileID: 0}
+  menuInGameRestart: {fileID: 0}
+  menuInGameMainMenu: {fileID: 0}
+  menuInGameConfirmRestart: {fileID: 0}
+  menuInGameConfirmRestartYes: {fileID: 0}
+  menuInGameConfirmRestartNo: {fileID: 0}
+  menuInGameConfirmMainMenu: {fileID: 0}
+  menuInGameConfirmMainMenuYes: {fileID: 0}
+  menuInGameConfirmMainMenuNo: {fileID: 0}
+  yardBin: {fileID: 0}
+  yardWrench: {fileID: 0}
+  yardSnacks: {fileID: 0}
+  yardElevatorFix: {fileID: 0}
+  yardElevatorButton: {fileID: 0}
+  yardEndLevel: {fileID: 0}
+  yardKeyPart1: {fileID: 0}
+  yardKeyPart2: {fileID: 0}
+  yardKeyPart3: {fileID: 0}
+  tutorialMoveMessageWalk: {fileID: 0}
+  tutorialMoveMessageLook: {fileID: 0}
+  tutorialMoveMessageJump: {fileID: 0}
+  tutorialPush: {fileID: 0}
+  tutorialPushHeader: {fileID: 0}
+  tutorialPushMessageTop: {fileID: 0}
+  tutorialPushMessageBot: {fileID: 0}
+  tutorialNature: {fileID: 0}
+  tutorialNatureHeader: {fileID: 0}
+  tutorialNatureMessageTop: {fileID: 0}
+  tutorialNatureMessageBot: {fileID: 0}
+  tutorialSnacks: {fileID: 0}
+  tutorialSnacksHeader: {fileID: 0}
+  tutorialSnacksMessageTop: {fileID: 0}
+  tutorialSnacksMessageBot: {fileID: 0}
+  tutorialUmbrella: {fileID: 0}
+  tutorialUmbrellaHeader: {fileID: 0}
+  tutorialUmbrellaMessageTop: {fileID: 0}
+  tutorialUmbrellaMessageBot: {fileID: 0}
+--- !u!4 &520953086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520953082}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.235352, y: 9, z: -31.163086}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &527653588
 GameObject:
   m_ObjectHideFlags: 0
