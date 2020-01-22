@@ -77,6 +77,7 @@ public class NL : Language
         yardWrench = "Druk op <sprite=0> / <sprite=1> om de moersleutel op te pakken";
         yardFuseUse = "Druk op <sprite=0> / <sprite=1> om de elektriciteit in te schakelen";
         yardFuseFix = "De schakelaar is kapot, misschien kan ik hem repareren met een moersleutel";
+        yardFuseFixed = "Tof, ik denk dat ik het gerepareerd heb! Misschien werkt de lift nu";
         yardElevatorButton = "Druk op <sprite=0> / <sprite=1> om de lift aan te zetten";
         yardRope = "Druk op <sprite=0> / <sprite=1> om aan het touw te trekken";
         yardEndLevel = "De deur zit op slot! Ik heb een sleutel nodig om deze te openen";
@@ -86,6 +87,7 @@ public class NL : Language
         yardKeyDig = "Druk op <sprite=0> / <sprite=1> om een deel van een sleutel op te graven";
         yardKeyHuman = "Je pakt een deel van een sleutel op en stopt het in je broekzak";
         yardKeyCombine = "Je combineert alle sleutel delen om er een volledige van te maken";
+        yardKeyFull = "Druk op <sprite=0> / <sprite=1> om de sleutel op te pakken";
 
 
     }

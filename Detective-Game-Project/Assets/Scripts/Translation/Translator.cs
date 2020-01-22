@@ -28,7 +28,7 @@ namespace Scripts
         [Header("YARD")]
         public GameObject yardBin;
         public GameObject yardWrench, yardSnacks, yardFuse, yardElevatorButton, yardRope, yardEndLevel;
-        public GameObject yardKeyPart1, yardKeyPart2, yardKeyPart3;
+        public GameObject yardKeyPart1, yardKeyPart2, yardKeyPart3, yardKeyFull;
 
 
         public GameObject tutorialMoveMessageWalk, tutorialMoveMessageLook, tutorialMoveMessageJump;
@@ -174,11 +174,11 @@ namespace Scripts
                 yardSnacks.GetComponent<InteractableObject>().interactMessage = language.yardSnacks;
                 yardFuse.GetComponent<InteractableObject>().interactMessage = language.yardFuseUse;
                 yardFuse.GetComponent<InteractChangeState>().afterInteractMessage = language.yardFuseFix;
+                yardFuse.GetComponent<InteractChangeState>().textFixed = language.yardFuseFixed;
                 yardElevatorButton.GetComponent<InteractableObject>().interactMessage = language.yardElevatorButton;
                 yardRope.GetComponent<InteractableObject>().interactMessage = language.yardRope;
                 yardEndLevel.GetComponent<InteractableObject>().interactMessage = language.yardKeyUse;
                 yardEndLevel.GetComponent<EndLevelWithItem>().afterInteractMessage = language.yardEndLevel;
-
 
                 yardKeyPart1.GetComponent<InteractableObject>().interactMessage = language.yardKeyPart;
                 yardKeyPart1.GetComponent<Key>().humanKeyPickUpText = language.yardKeyHuman;
@@ -192,6 +192,8 @@ namespace Scripts
                 yardKeyPart3.GetComponent<Key>().humanKeyPickUpText = language.yardKeyHuman;
                 yardKeyPart3.GetComponent<Key>().combineIntoFullItemText = language.yardKeyCombine;
                 yardKeyPart3.GetComponent<DigKeyItem>().pickUpItemText = language.yardKeyPart;
+
+                yardKeyFull.GetComponent<InteractableObject>().interactMessage = language.yardKeyFull;
 
 
 

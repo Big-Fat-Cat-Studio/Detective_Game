@@ -32,9 +32,9 @@ public class Language : MonoBehaviour
 
     // YARD
     [HideInInspector]
-    public string yardWrench, yardBin, yardSnacks, yardFuseUse, yardFuseFix, yardElevatorButton, yardRope, yardEndLevel;
+    public string yardWrench, yardBin, yardSnacks, yardFuseUse, yardFuseFix, yardFuseFixed, yardElevatorButton, yardRope, yardEndLevel;
     [HideInInspector]
-    public string yardKeyUse, yardKeyPart, yardKeyDig, yardKeyHuman, yardKeyCombine;
+    public string yardKeyUse, yardKeyPart, yardKeyDig, yardKeyHuman, yardKeyCombine, yardKeyFull;
 
     [HideInInspector]
     public string tutorialCommon;

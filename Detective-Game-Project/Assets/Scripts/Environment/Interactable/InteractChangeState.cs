@@ -8,6 +8,7 @@ namespace Scripts
         public GameObject[] ChangeStateOf;
         public Material ApplyOnChange;
         public ParticleSystem brokenParticles;
+        public string textFixed;
 
         [HideInInspector] public bool Consumed;
 
@@ -26,14 +27,11 @@ namespace Scripts
 
         protected override void interactSucces(ActivePlayer player, GameObject playerItem)
         {
-            if (Consumed)
-            {
-                GameManager.Instance.showAfterInteractText(player, "I already fixed it, the elevator should work now.");
-            }
-            else
+            if (!Consumed)
             {
                 Consumed = true;
-                GameManager.Instance.showAfterInteractText(player, "Great, I think it's fixed! Maybe the dog elevator works now.");
+                interactable = false;
+                GameManager.Instance.showAfterInteractText(player, textFixed);
                 neededItem = null;
                 GameManager.Instance.Human.GetComponentInChildren<PlayerInteract>().destroyHoldingObject();
                 brokenParticles.Stop();
