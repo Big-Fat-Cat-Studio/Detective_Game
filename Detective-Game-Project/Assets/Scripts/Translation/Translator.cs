@@ -177,7 +177,7 @@ namespace Scripts
                 yardElevatorButton.GetComponent<InteractableObject>().interactMessage = language.yardElevatorButton;
                 yardRope.GetComponent<InteractableObject>().interactMessage = language.yardRope;
                 yardEndLevel.GetComponent<InteractableObject>().interactMessage = language.yardKeyUse;
-                yardEndLevel.GetComponent<InteractChangeState>().afterInteractMessage = language.yardEndLevel;
+                yardEndLevel.GetComponent<EndLevelWithItem>().afterInteractMessage = language.yardEndLevel;
 
 
                 yardKeyPart1.GetComponent<InteractableObject>().interactMessage = language.yardKeyPart;
