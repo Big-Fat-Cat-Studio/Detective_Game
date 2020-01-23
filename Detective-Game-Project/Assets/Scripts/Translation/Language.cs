@@ -15,7 +15,9 @@ public class Language : MonoBehaviour
     [HideInInspector]
     public string menuGraphicsFullscreen;
 
-    // menuSound = "";
+    [HideInInspector]
+    public string menuSoundVolume, menuSoundMusic, menuSoundSound;
+
     [HideInInspector]
     public string menuControlsController, menuControlsKeyboard;
 
