@@ -58,8 +58,8 @@ namespace Scripts
             GameManager.Instance.InteractTextP2.SetActive(false);
             GameManager.Instance.AfterInteractTextP1.SetActive(false);
             GameManager.Instance.AfterInteractTextP2.SetActive(false);
-            GameManager.Instance.Human.SetActive(false);
-            GameManager.Instance.Animal.SetActive(false);
+            GameManager.Instance.Human.GetComponent<CharacterController>().enabled = false;
+            GameManager.Instance.Animal.GetComponent<CharacterController>().enabled = false;
             GameManager.Instance.CutsceneCamera.SetActive(true);
 
             foreach (AudioSource audio in FindObjectsOfType<AudioSource>())
@@ -72,6 +72,7 @@ namespace Scripts
         }
         public void Skip()
         {
+            print("triggered");
             if (endCutscene.isPlaying)
             {
                 endCutscene.Stop();
