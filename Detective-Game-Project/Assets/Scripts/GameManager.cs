@@ -273,6 +273,7 @@ namespace Scripts
 
         public void showInteractText(string message, ActivePlayer player, bool isHoldPrompt)
         {
+            print(message);
             if (GameType == GameType.MultiPlayerSplitScreen && player == PlayerOne)
             {
                 if (playerOneInput == InputType.Controller)
