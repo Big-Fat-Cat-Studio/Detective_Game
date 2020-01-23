@@ -13,7 +13,7 @@ public class Language : MonoBehaviour
     [HideInInspector]
     public string menuOptionsGraphics, menuOptionsSound, menuOptionsControls, menuOptionsLanguage;
     [HideInInspector]
-    public string menuGraphicsVeryLow, menuGraphicsLow, menuGraphicsMedium, menuGraphicsHigh, menuGraphicsVeryHigh, menuGraphicsUltra, menuGraphicsFullscreen;
+    public string menuGraphicsFullscreen;
 
     // menuSound = "";
     [HideInInspector]
@@ -37,17 +37,17 @@ public class Language : MonoBehaviour
 
     //TUTORIAL
     [HideInInspector]
-    public string tutorialCommon;
+    public string tutorialCommon, tutorialClose;
     [HideInInspector]
-    public string tutorialPush, tutorialPushHeader, tutorialPushMessageTop, tutorialPushMessageBot;
+    public string tutorialPush, tutorialPushHeader, tutorialPushMessageText;
     [HideInInspector]
-    public string tutorialNature, tutorialNatureHeader, tutorialNatureMessageTop, tutorialNatureMessageBot;
+    public string tutorialNature, tutorialNatureHeader, tutorialNatureMessageText;
     [HideInInspector]
-    public string tutorialSnacks, tutorialSnacksHeader, tutorialSnacksMessageTop, tutorialSnacksMessageBot;
+    public string tutorialSnacks, tutorialSnacksHeader, tutorialSnacksMessageText;
     [HideInInspector]
-    public string tutorialUmbrella, tutorialUmbrellaHeader, tutorialUmbrellaMessageTop, tutorialUmbrellaMessageBot;
+    public string tutorialUmbrella, tutorialUmbrellaHeader, tutorialUmbrellaMessageText, tutorialUmbrellaMessageBot;
     [HideInInspector]
-    public string tutorialMoveMessageWalk, tutorialMoveMessageLook, tutorialMoveMessageJump;
+    public string tutorialMoveMessageHeader, tutorialMoveMessageText;
 
     // YARD
     [HideInInspector]
@@ -65,4 +65,29 @@ public class Language : MonoBehaviour
     public string docksToolBox, docksBook, docksVent, docksVentStuck;
     [HideInInspector]
     public string docksPipe, docksPipeRotate, docksPipeMove, docksPipeSelect;
+
+    [HideInInspector]
+    public string space = "<br><br>";
+    [HideInInspector]
+    public string buttonX = " <sprite=13> / <sprite=0> ";
+    [HideInInspector]
+    public string pipeRotate = "    <sprite=15><sprite=16> / <sprite=8><sprite=9>";
+    [HideInInspector]
+    public string pipeMove = "    <sprite=12><sprite=21> / <sprite=7><sprite=4>";
+    [HideInInspector]
+    public string pipeSelect = "    <sprite=14><sprite=18> / <sprite=5><sprite=6>";
+    [HideInInspector]
+    public string dogPee = " <sprite=17> / <sprite=9> ";
+    [HideInInspector]
+    public string dogPoo = " <sprite=22> / <sprite=1> ";
+    [HideInInspector]
+    public string tutMove = " <sprite=12><sprite=21><sprite=14><sprite=18> / <sprite=10> ";
+    [HideInInspector]
+    public string tutLook = " <sprite=23> / <sprite=11> ";
+    [HideInInspector]
+    public string tutJump = " <sprite=20> / <sprite=2> ";
+    [HideInInspector]
+    public string tutUmbrella = " <sprite=22> / <sprite=1> ";
+    [HideInInspector]
+    public string close = " <sprite=19> / <sprite=3> ";
 }

@@ -21,12 +21,6 @@ public class NL : Language
         menuOptionsControls = "Besturing";
         menuOptionsLanguage = "Taal";
 
-        menuGraphicsVeryLow = "";
-        menuGraphicsLow = "";
-        menuGraphicsMedium = "";
-        menuGraphicsHigh = "";
-        menuGraphicsVeryHigh = "";
-        menuGraphicsUltra = "";
         menuGraphicsFullscreen = "Volledig scherm";
 
         // menuSound = "";
@@ -49,69 +43,66 @@ public class NL : Language
         // COMMON
 
         commonDoorLocked = "De deur zit op slot! Ik heb een sleutel nodig om deze te openen";
-        commonDoorOpen = "Druk op <sprite=0> / <sprite=1> om de deur te openen";
-        commonElevator = "Druk op <sprite=0> / <sprite=1> om de lift aan te zetten";
-        commonRope = "Druk op <sprite=0> / <sprite=1> om aan het touw te trekken";
-        commonBox = "Druk op <sprite=0> / <sprite=1> om de doos te duwen";
+        commonDoorOpen = "Druk op" + buttonX + "om de deur te openen";
+        commonElevator = "Druk op" + buttonX + "om de lift aan te zetten";
+        commonRope = "Druk op" + buttonX + "om aan het touw te trekken";
+        commonBox = "Druk op" + buttonX + "om de doos te duwen";
 
-        commonKeyPickup = "Druk op <sprite=0> / <sprite=1> om de sleutel op te pakken";
-        commonKeyPart = "Druk op <sprite=0> / <sprite=1> om een deel van een sleutel op te pakken";
-        commonKeyDig = "Druk op <sprite=0> / <sprite=1> om een deel van een sleutel op te graven";
+        commonKeyPickup = "Druk op" + buttonX + "om de sleutel op te pakken";
+        commonKeyPart = "Druk op" + buttonX + "om een deel van een sleutel op te pakken";
+        commonKeyDig = "Druk op" + buttonX + "om een deel van een sleutel op te graven";
         commonKeyHuman = "Je pakt een deel van een sleutel op en stopt het in je broekzak";
         commonKeyCombine = "Je combineert alle sleutel delen om er een volledige van te maken";
 
         // TUTORIAL
 
-        tutorialCommon = "Druk op <sprite=0> / <sprite=1> om de uitleg te lezen";
+        tutorialCommon = "Druk op" + buttonX + "om de uitleg te lezen";
 
-        tutorialPushHeader = "Push objects";
-        tutorialPushMessageTop = "Press x to push an object with Kika";
-        tutorialPushMessageBot = "For heavier objects you need Daigo to push as well!";
+        tutorialPushHeader = "OBJECTEN DUWEN";
+        tutorialPushMessageText = "Druk op" + buttonX + "om een object te duwen met Kika" + space + "Voor zwaardere objecten heb je Daigo ook nodig!";
 
-        tutorialNatureHeader = "Nature's call";
-        tutorialNatureMessageTop = "Sometimes a dog has to take a leak with [button]";
-        tutorialNatureMessageBot = "And yes... [button] does the rest";
+        tutorialNatureHeader = "HOND UITLATEN";
+        tutorialNatureMessageText = "Soms moet een hond een plasje plegen"+ dogPee + space + "En ja..." + dogPoo + "doet de rest";
 
-        tutorialSnacksHeader = "Dog treats";
-        tutorialSnacksMessageTop = "Press [x] near a dispenser for a dog treat";
-        tutorialSnacksMessageBot = "These treats will make Daigo go faster!";
+        tutorialSnacksHeader = "HONDEN SNOEPJES";
+        tutorialSnacksMessageText = "Druk op" + buttonX + "naast een snoepautomaat voor een honden snoepje" + space + "Deze snoepjes maken Daigo sneller!";
 
-        tutorialUmbrellaHeader = "Umbrella";
-        tutorialUmbrellaMessageTop = "Kika can open her umbrella with [button]";
-        tutorialUmbrellaMessageBot = "Daigo can reach new heights by bouncing off the umbrella!";
+        tutorialUmbrellaHeader = "PARAPLU";
+        tutorialUmbrellaMessageText = "Kika kan haar paraplu openen met" + tutUmbrella  + space + "Daigo kan nieuwe hoogtes berereiken door op de paraplu te springen";
 
-        tutorialMoveMessageWalk = "Use [button] to walk around";
-        tutorialMoveMessageLook = "Use [button] to look around";
-        tutorialMoveMessageJump = "Press [button] to jump";
+        tutorialMoveMessageHeader = "BEWEGING";
+        tutorialMoveMessageText = "Gebruik" + tutMove + "om te lopen" + space + "Gebruik" + tutLook + "om rond te kijken" + space + "Druk op" + tutJump + "om te springen";
+
+        tutorialClose = close + "Sluiten";
 
         // YARD
 
-        yardSnacks = "Druk op <sprite=0> / <sprite=1> om een snack te eten";
-        yardWrench = "Druk op <sprite=0> / <sprite=1> om de moersleutel op te pakken";
-        yardFuseUse = "Druk op <sprite=0> / <sprite=1> om de elektriciteit in te schakelen";
+        yardSnacks = "Druk op" + buttonX + "om een snack te eten";
+        yardWrench = "Druk op" + buttonX + "om de moersleutel op te pakken";
+        yardFuseUse = "Druk op" + buttonX + "om de elektriciteit in te schakelen";
         yardFuseFix = "De schakelaar is kapot, misschien kan ik hem repareren met een moersleutel";
         yardFuseFixed = "Tof, ik denk dat ik het gerepareerd heb! Misschien werkt de lift nu";
 
         // CITY
 
-        cityBoxBig = "Druk op <sprite=0> / <sprite=1> om de grote doos te duwen";
-        cityPoster = "Druk op <sprite=0> / <sprite=1> om de poster te bekijken";
+        cityBoxBig = "Druk op" + buttonX + "om de grote doos te duwen";
+        cityPoster = "Druk op" + buttonX + "om de poster te bekijken";
         cityDoorHandleMiss = "De deur heeft geen hendel... Misschien is hij ergens anders";
 
-        cityDoorHandleDig = "Druk op <sprite=0> / <sprite=1> om de deurhendel op te graven";
-        cityDoorHandle = "Druk op <sprite=0> / <sprite=1> om de deurhendel op te pakken";
+        cityDoorHandleDig = "Druk op" + buttonX + "om de deurhendel op te graven";
+        cityDoorHandle = "Druk op" + buttonX + "om de deurhendel op te pakken";
 
         // DOCKS
 
-        docksToolBox = "Druk op <sprite=0> / <sprite=1> om de gereedschapskist op te pakken";
-        docksBook = "Druk op <sprite=0> / <sprite=1> om het boek te lezen";
-        docksVent = "Druk op <sprite=0> / <sprite=1> om het rooster te verwijderen";
+        docksToolBox = "Druk op" + buttonX + "om de gereedschapskist op te pakken";
+        docksBook = "Druk op" + buttonX + "om het boek te lezen";
+        docksVent = "Druk op" + buttonX + "om het rooster te verwijderen";
         docksVentStuck = "Het rooster zit vast! Ik heb gereedschap nodig om het te openen";
 
-        docksPipe = "Druk op <sprite=0> / <sprite=1> om de leidingen te repareren";
-        docksPipeRotate = "draai pijp    <sprite=15><sprite=16> / <sprite=8><sprite=9>";
-        docksPipeMove = "verplaats pijp    <sprite=12><sprite=21> / <sprite=7><sprite=4>";
-        docksPipeSelect = "selecteer pijp    <sprite=14><sprite=18> / <sprite=5><sprite=6>";
+        docksPipe = "Druk op" + buttonX + "om de leidingen te repareren";
+        docksPipeRotate = "draai pijp" + pipeRotate;
+        docksPipeMove = "verplaats pijp" + pipeMove;
+        docksPipeSelect = "selecteer pijp" + pipeSelect;
     }
 
 }

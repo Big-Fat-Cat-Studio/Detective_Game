@@ -26,12 +26,12 @@ namespace Scripts
         public GameObject menuInGameConfirmMainMenu, menuInGameConfirmMainMenuYes, menuInGameConfirmMainMenuNo;
 
         [Header("TUTORIAL")]
-        public GameObject tutorialMoveMessageWalk;
-        public GameObject tutorialMoveMessageLook, tutorialMoveMessageJump;
-        public GameObject tutorialPush, tutorialPushHeader, tutorialPushMessageTop, tutorialPushMessageBot;
-        public GameObject tutorialNature, tutorialNatureHeader, tutorialNatureMessageTop, tutorialNatureMessageBot;
-        public GameObject tutorialSnacks, tutorialSnacksHeader, tutorialSnacksMessageTop, tutorialSnacksMessageBot;
-        public GameObject tutorialUmbrella, tutorialUmbrellaHeader, tutorialUmbrellaMessageTop, tutorialUmbrellaMessageBot;
+        public GameObject tutorialMoveMessageHeader;
+        public GameObject tutorialMoveMessageText, tutorialMoveClose;
+        public GameObject tutorialPush, tutorialPushHeader, tutorialPushMessageText, tutorialPushClose;
+        public GameObject tutorialNature, tutorialNatureHeader, tutorialNatureMessageText, tutorialNatureClose;
+        public GameObject tutorialSnacks, tutorialSnacksHeader, tutorialSnacksMessageText, tutorialSnacksClose;
+        public GameObject tutorialUmbrella, tutorialUmbrellaHeader, tutorialUmbrellaMessageText, tutorialUmbrellaClose;
 
         [Header("YARD")]
         public GameObject yardBin;
@@ -148,29 +148,29 @@ namespace Scripts
 
             if (scene == 1)
             {
-                // tutorialMoveMessageWalk.GetComponent<Text>().text = "";
-                // tutorialMoveMessageLook.GetComponent<Text>().text = "";
-                // tutorialMoveMessageJump.GetComponent<Text>().text = "";
+                tutorialMoveMessageHeader.GetComponent<TMP_Text>().text = language.tutorialMoveMessageHeader;
+                tutorialMoveMessageText.GetComponent<TMP_Text>().text = language.tutorialMoveMessageText;
+                tutorialMoveClose.GetComponent<TMP_Text>().text = language.tutorialClose;
 
                 tutorialPush.GetComponent<InteractableObject>().interactMessage = language.tutorialCommon;
-                // tutorialPushHeader.GetComponent<Text>().text = "";
-                // tutorialPushMessageTop.GetComponent<Text>().text = "";
-                // tutorialPushMessageBot.GetComponent<Text>().text = "";
+                tutorialPushHeader.GetComponent<TMP_Text>().text = language.tutorialPushHeader;
+                tutorialPushMessageText.GetComponent<TMP_Text>().text = language.tutorialPushMessageText;
+                tutorialPushClose.GetComponent<TMP_Text>().text = language.tutorialClose;
 
                 tutorialNature.GetComponent<InteractableObject>().interactMessage = language.tutorialCommon;
-                // tutorialNatureHeader.GetComponent<Text>().text = "";
-                // tutorialNatureMessageTop.GetComponent<Text>().text = "";
-                // tutorialNatureMessageBot.GetComponent<Text>().text = "";
+                tutorialNatureHeader.GetComponent<TMP_Text>().text = language.tutorialNatureHeader;
+                tutorialNatureMessageText.GetComponent<TMP_Text>().text = language.tutorialNatureMessageText;
+                tutorialNatureClose.GetComponent<TMP_Text>().text = language.tutorialClose;
 
                 tutorialSnacks.GetComponent<InteractableObject>().interactMessage = language.tutorialCommon;
-                // tutorialSnacksHeader.GetComponent<Text>().text = "";
-                // tutorialSnacksMessageTop.GetComponent<Text>().text = "";
-                // tutorialSnacksMessageBot.GetComponent<Text>().text = "";
+                tutorialSnacksHeader.GetComponent<TMP_Text>().text = language.tutorialSnacksHeader;
+                tutorialSnacksMessageText.GetComponent<TMP_Text>().text = language.tutorialSnacksMessageText;
+                tutorialSnacksClose.GetComponent<TMP_Text>().text = language.tutorialClose;
 
                 tutorialUmbrella.GetComponent<InteractableObject>().interactMessage = language.tutorialCommon;
-                // tutorialUmbrellaHeader.GetComponent<Text>().text = "";
-                // tutorialUmbrellaMessageTop.GetComponent<Text>().text = "";
-                // tutorialUmbrellaMessageBot.GetComponent<Text>().text = "";
+                tutorialUmbrellaHeader.GetComponent<TMP_Text>().text = language.tutorialUmbrellaHeader;
+                tutorialUmbrellaMessageText.GetComponent<TMP_Text>().text = language.tutorialUmbrellaMessageText;
+                tutorialUmbrellaClose.GetComponent<TMP_Text>().text = language.tutorialClose;
 
                 yardBin.GetComponent<InteractableObject>().interactMessage = language.commonBox;
                 yardWrench.GetComponent<InteractableObject>().interactMessage = language.yardWrench;
