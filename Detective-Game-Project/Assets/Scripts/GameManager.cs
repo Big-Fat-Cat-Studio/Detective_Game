@@ -273,27 +273,16 @@ namespace Scripts
 
         public void showInteractText(string message, ActivePlayer player, bool isHoldPrompt)
         {
-            string interactTextStart;
-
-            if (isHoldPrompt)
-            {
-                interactTextStart = Constant.INTERACT_HOLD_TEXT;
-            }
-            else
-            {
-                interactTextStart = Constant.INTERACT_PRESS_TEXT;
-            }
-
             if (GameType == GameType.MultiPlayerSplitScreen && player == PlayerOne)
             {
                 if (playerOneInput == InputType.Controller)
                 {
-                    InteractTextP1.GetComponent<TextMeshProUGUI>().text = interactTextStart + Constant.INTERACT_TEXT_CONTROLLER + message;
+                    InteractTextP1.GetComponent<TextMeshProUGUI>().text = message;
                     InteractTextP1.SetActive(true);
                 }
                 else
                 {
-                    InteractTextP1.GetComponent<TextMeshProUGUI>().text = interactTextStart + Constant.INTERACT_TEXT + message;
+                    InteractTextP1.GetComponent<TextMeshProUGUI>().text = message;
                     InteractTextP1.SetActive(true);
                 }
             }
@@ -301,12 +290,12 @@ namespace Scripts
             {
                 if (playerInput == InputType.Controller)
                 {
-                    InteractTextP2.GetComponent<TextMeshProUGUI>().text = interactTextStart + Constant.INTERACT_TEXT_CONTROLLER + message;
+                    InteractTextP2.GetComponent<TextMeshProUGUI>().text = message;
                     InteractTextP2.SetActive(true);
                 }
                 else
                 {
-                    InteractTextP2.GetComponent<TextMeshProUGUI>().text = interactTextStart + Constant.INTERACT_TEXT + message;
+                    InteractTextP2.GetComponent<TextMeshProUGUI>().text = message;
                     InteractTextP2.SetActive(true);
                 }
 
