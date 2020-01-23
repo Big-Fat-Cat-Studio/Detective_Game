@@ -25,15 +25,18 @@ namespace Scripts
         public GameObject menuInGameConfirmRestart, menuInGameConfirmRestartYes, menuInGameConfirmRestartNo;
         public GameObject menuInGameConfirmMainMenu, menuInGameConfirmMainMenuYes, menuInGameConfirmMainMenuNo;
 
-        [Header("YARD")]
-        public GameObject yardBin;
-        public GameObject yardWrench, yardSnacks, yardFuse, yardElevatorButton, yardRope, yardEndLevel;
-        public GameObject yardKeyPart1, yardKeyPart2, yardKeyPart3, yardKeyFull;
-        public GameObject tutorialMoveMessageWalk, tutorialMoveMessageLook, tutorialMoveMessageJump;
+        [Header("TUTORIAL")]
+        public GameObject tutorialMoveMessageWalk;
+        public GameObject tutorialMoveMessageLook, tutorialMoveMessageJump;
         public GameObject tutorialPush, tutorialPushHeader, tutorialPushMessageTop, tutorialPushMessageBot;
         public GameObject tutorialNature, tutorialNatureHeader, tutorialNatureMessageTop, tutorialNatureMessageBot;
         public GameObject tutorialSnacks, tutorialSnacksHeader, tutorialSnacksMessageTop, tutorialSnacksMessageBot;
         public GameObject tutorialUmbrella, tutorialUmbrellaHeader, tutorialUmbrellaMessageTop, tutorialUmbrellaMessageBot;
+
+        [Header("YARD")]
+        public GameObject yardBin;
+        public GameObject yardWrench, yardSnacks, yardFuse, yardElevatorButton, yardRope, yardEndLevel;
+        public GameObject yardKeyPart1, yardKeyPart2, yardKeyPart3, yardKeyFull;
 
         [Header("CITY")]
         public GameObject cityBox;
@@ -89,7 +92,7 @@ namespace Scripts
         public void Translate()
         {
             int scene = SceneManager.GetActiveScene().buildIndex;
-            // Debug.Log(scene);
+
             if (scene == 0)
             {
                 menuMainPlay.GetComponentInChildren<TMP_Text>().text = language.menuMainPlay;
