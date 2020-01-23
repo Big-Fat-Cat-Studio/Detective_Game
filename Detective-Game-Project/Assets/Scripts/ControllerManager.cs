@@ -48,7 +48,7 @@ namespace Scripts
             else
             {
                 //var gamepads = Gamepad.all;
-                List<Gamepad> gamepads = Gamepad.all.Where(gamepad => !gamepad.name.StartsWith("DualShock")).ToList();
+                List<Gamepad> gamepads = Gamepad.all.ToList();
                 amountOfControllers = gamepads.Count;
 
                 if (inputTypeP1 == InputType.Controller && inputTypeP2 == InputType.Controller)
@@ -175,41 +175,38 @@ namespace Scripts
                 switch (change)
                 {
                     case InputDeviceChange.Added:
-                        if (!device.name.StartsWith("DualShock"))
+                        Debug.Log("New device added: " + device);
+                        if (amountOfControllers < amountOfControllersNeeded && !listOfDevices.Contains(device))
                         {
-                            Debug.Log("New device added: " + device);
-                            if (amountOfControllers < amountOfControllersNeeded && !listOfDevices.Contains(device))
+                            if (amountOfControllersNeeded == 2)
                             {
-                                if (amountOfControllersNeeded == 2)
+                                if (amountOfControllers == 0)
                                 {
-                                    if (amountOfControllers == 0)
-                                    {
-                                        GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, device);
-                                        inputDeviceP1 = device;
-                                    }
-                                    else
-                                    {
-                                        GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, device);
-                                        inputDeviceP2 = device;
-                                    }
+                                    GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, device);
+                                    inputDeviceP1 = device;
                                 }
                                 else
                                 {
-                                    if (inputTypeP1 == InputType.Controller)
-                                    {
-                                        GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, device);
-                                        inputDeviceP1 = device;
-                                    }
-                                    else
-                                    {
-                                        GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, device);
-                                        inputDeviceP2 = device;
-                                    }
+                                    GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, device);
+                                    inputDeviceP2 = device;
                                 }
-
-                                listOfDevices.Add(device);
-                                amountOfControllers++;
                             }
+                            else
+                            {
+                                if (inputTypeP1 == InputType.Controller)
+                                {
+                                    GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, device);
+                                    inputDeviceP1 = device;
+                                }
+                                else
+                                {
+                                    GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, device);
+                                    inputDeviceP2 = device;
+                                }
+                            }
+
+                            listOfDevices.Add(device);
+                            amountOfControllers++;
                         }
                         goto default;
                     //break;
