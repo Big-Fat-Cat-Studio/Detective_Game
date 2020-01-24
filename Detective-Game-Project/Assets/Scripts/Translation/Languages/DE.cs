@@ -46,8 +46,8 @@ public class DE : Language
         commonDoorLocked = "Die Tür ist verschlossen! Ich brauche eine Schlußel die Tür zu öffnen";
         commonDoorOpen = "Drück auf" + buttonX + "um die Tür zu öffnen";
         commonElevator = "Drück auf" + buttonX + "um den Aufzug ein zu schalten";
-        commonRope = "Drück auf" + buttonX + "um an das Seil zu ziehen";
-        commonBox = "Drück auf" + buttonX + "die Kiste zu schieben";
+        commonRope = "Halt" + buttonX + "um an das Seil zu ziehen";
+        commonBox = "Halt" + buttonX + "die Kiste zu schieben";
 
         commonKeyPickup = "Drück auf" + buttonX + "um der Schlüssel auf zu heben";
         commonKeyPart = "Drück auf" + buttonX + "um ein Schlüselstück auf zu heben";
@@ -86,7 +86,7 @@ public class DE : Language
 
         // CITY
 
-        cityBoxBig = "Drück auf" + buttonX + "um die große Kiste zu schieben";
+        cityBoxBig = "Halt" + buttonX + "um die große Kiste zu schieben";
         cityPoster = "Drück auf" + buttonX + "um das Plakat zu sehen";
         cityDoorHandleMiss = "Die Tür hast keine Klinke... Er soll irgendwo liegen";
 
