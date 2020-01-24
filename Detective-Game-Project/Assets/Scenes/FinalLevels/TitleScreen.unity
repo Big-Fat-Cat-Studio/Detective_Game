@@ -14718,6 +14718,11 @@ GameObject:
   - component: {fileID: 1766730725}
   - component: {fileID: 1766730724}
   - component: {fileID: 1766730723}
+  - component: {fileID: 1766730731}
+  - component: {fileID: 1766730730}
+  - component: {fileID: 1766730729}
+  - component: {fileID: 1766730728}
+  - component: {fileID: 1766730727}
   - component: {fileID: 1766730726}
   - component: {fileID: 1766730722}
   m_Layer: 0
@@ -15047,7 +15052,487 @@ MonoBehaviour:
   m_GameObject: {fileID: 1766730721}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e7b15da1633cd46b15ebc8ffcf838d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuMainPlay: 
+  menuMainNewGame: 
+  menuMainOptions: 
+  menuMainCredits: 
+  menuMainExit: 
+  menuPlay1: 
+  menuPlay2: 
+  menuPlay3: 
+  menuOptionsGraphics: 
+  menuOptionsSound: 
+  menuOptionsControls: 
+  menuOptionsLanguage: 
+  menuGraphicsFullscreen: 
+  menuSoundVolume: 
+  menuSoundMusic: 
+  menuSoundSound: 
+  menuControlsController: 
+  menuControlsKeyboard: 
+  menuConfirmNewGame: 
+  menuConfirmExit: 
+  menuConfirmInGame: 
+  menuCommonBack: 
+  menuCommonYes: 
+  menuCommonNo: 
+  menuResume: 
+  menuRestart: 
+  menuMainMenu: 
+  commonDoorLocked: 
+  commonDoorOpen: 
+  commonElevator: 
+  commonRope: 
+  commonBox: 
+  commonKeyPickup: 
+  commonKeyPart: 
+  commonKeyDig: 
+  commonKeyHuman: 
+  commonKeyCombine: 
+  tutorialCommon: 
+  tutorialClose: 
+  tutorialPush: 
+  tutorialPushHeader: 
+  tutorialPushMessageText: 
+  tutorialNature: 
+  tutorialNatureHeader: 
+  tutorialNatureMessageText: 
+  tutorialSnacks: 
+  tutorialSnacksHeader: 
+  tutorialSnacksMessageText: 
+  tutorialUmbrella: 
+  tutorialUmbrellaHeader: 
+  tutorialUmbrellaMessageText: 
+  tutorialUmbrellaMessageBot: 
+  tutorialMoveMessageHeader: 
+  tutorialMoveMessageText: 
+  yardWrench: 
+  yardSnacks: 
+  yardFuseUse: 
+  yardFuseFix: 
+  yardFuseFixed: 
+  cityBoxBig: 
+  cityPoster: 
+  cityDoorHandleMiss: 
+  cityDoorHandleDig: 
+  cityDoorHandle: 
+  docksToolBox: 
+  docksBook: 
+  docksVent: 
+  docksVentStuck: 
+  docksPipe: 
+  docksPipeRotate: 
+  docksPipeMove: 
+  docksPipeSelect: 
+  space: <br><br>
+  buttonX: ' <sprite=13> / <sprite=0> '
+  pipeRotate: '    <sprite=15><sprite=16> / <sprite=8><sprite=9>'
+  pipeMove: '    <sprite=12><sprite=21> / <sprite=7><sprite=4>'
+  pipeSelect: '    <sprite=14><sprite=18> / <sprite=5><sprite=6>'
+  dogPee: ' <sprite=17> / <sprite=9> '
+  dogPoo: ' <sprite=22> / <sprite=1> '
+  tutMove: ' <sprite=12><sprite=21><sprite=14><sprite=18> / <sprite=10> '
+  tutLook: ' <sprite=23> / <sprite=11> '
+  tutJump: ' <sprite=20> / <sprite=2> '
+  tutUmbrella: ' <sprite=22> / <sprite=1> '
+  close: ' <sprite=19> / <sprite=3> '
+--- !u!114 &1766730727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766730721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af9028c9f2eadd745a4146ebb7b52265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuMainPlay: 
+  menuMainNewGame: 
+  menuMainOptions: 
+  menuMainCredits: 
+  menuMainExit: 
+  menuPlay1: 
+  menuPlay2: 
+  menuPlay3: 
+  menuOptionsGraphics: 
+  menuOptionsSound: 
+  menuOptionsControls: 
+  menuOptionsLanguage: 
+  menuGraphicsFullscreen: 
+  menuSoundVolume: 
+  menuSoundMusic: 
+  menuSoundSound: 
+  menuControlsController: 
+  menuControlsKeyboard: 
+  menuConfirmNewGame: 
+  menuConfirmExit: 
+  menuConfirmInGame: 
+  menuCommonBack: 
+  menuCommonYes: 
+  menuCommonNo: 
+  menuResume: 
+  menuRestart: 
+  menuMainMenu: 
+  commonDoorLocked: 
+  commonDoorOpen: 
+  commonElevator: 
+  commonRope: 
+  commonBox: 
+  commonKeyPickup: 
+  commonKeyPart: 
+  commonKeyDig: 
+  commonKeyHuman: 
+  commonKeyCombine: 
+  tutorialCommon: 
+  tutorialClose: 
+  tutorialPush: 
+  tutorialPushHeader: 
+  tutorialPushMessageText: 
+  tutorialNature: 
+  tutorialNatureHeader: 
+  tutorialNatureMessageText: 
+  tutorialSnacks: 
+  tutorialSnacksHeader: 
+  tutorialSnacksMessageText: 
+  tutorialUmbrella: 
+  tutorialUmbrellaHeader: 
+  tutorialUmbrellaMessageText: 
+  tutorialUmbrellaMessageBot: 
+  tutorialMoveMessageHeader: 
+  tutorialMoveMessageText: 
+  yardWrench: 
+  yardSnacks: 
+  yardFuseUse: 
+  yardFuseFix: 
+  yardFuseFixed: 
+  cityBoxBig: 
+  cityPoster: 
+  cityDoorHandleMiss: 
+  cityDoorHandleDig: 
+  cityDoorHandle: 
+  docksToolBox: 
+  docksBook: 
+  docksVent: 
+  docksVentStuck: 
+  docksPipe: 
+  docksPipeRotate: 
+  docksPipeMove: 
+  docksPipeSelect: 
+  space: <br><br>
+  buttonX: ' <sprite=13> / <sprite=0> '
+  pipeRotate: '    <sprite=15><sprite=16> / <sprite=8><sprite=9>'
+  pipeMove: '    <sprite=12><sprite=21> / <sprite=7><sprite=4>'
+  pipeSelect: '    <sprite=14><sprite=18> / <sprite=5><sprite=6>'
+  dogPee: ' <sprite=17> / <sprite=9> '
+  dogPoo: ' <sprite=22> / <sprite=1> '
+  tutMove: ' <sprite=12><sprite=21><sprite=14><sprite=18> / <sprite=10> '
+  tutLook: ' <sprite=23> / <sprite=11> '
+  tutJump: ' <sprite=20> / <sprite=2> '
+  tutUmbrella: ' <sprite=22> / <sprite=1> '
+  close: ' <sprite=19> / <sprite=3> '
+--- !u!114 &1766730728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766730721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411458292df06b5428c463cc56b64986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuMainPlay: 
+  menuMainNewGame: 
+  menuMainOptions: 
+  menuMainCredits: 
+  menuMainExit: 
+  menuPlay1: 
+  menuPlay2: 
+  menuPlay3: 
+  menuOptionsGraphics: 
+  menuOptionsSound: 
+  menuOptionsControls: 
+  menuOptionsLanguage: 
+  menuGraphicsFullscreen: 
+  menuSoundVolume: 
+  menuSoundMusic: 
+  menuSoundSound: 
+  menuControlsController: 
+  menuControlsKeyboard: 
+  menuConfirmNewGame: 
+  menuConfirmExit: 
+  menuConfirmInGame: 
+  menuCommonBack: 
+  menuCommonYes: 
+  menuCommonNo: 
+  menuResume: 
+  menuRestart: 
+  menuMainMenu: 
+  commonDoorLocked: 
+  commonDoorOpen: 
+  commonElevator: 
+  commonRope: 
+  commonBox: 
+  commonKeyPickup: 
+  commonKeyPart: 
+  commonKeyDig: 
+  commonKeyHuman: 
+  commonKeyCombine: 
+  tutorialCommon: 
+  tutorialClose: 
+  tutorialPush: 
+  tutorialPushHeader: 
+  tutorialPushMessageText: 
+  tutorialNature: 
+  tutorialNatureHeader: 
+  tutorialNatureMessageText: 
+  tutorialSnacks: 
+  tutorialSnacksHeader: 
+  tutorialSnacksMessageText: 
+  tutorialUmbrella: 
+  tutorialUmbrellaHeader: 
+  tutorialUmbrellaMessageText: 
+  tutorialUmbrellaMessageBot: 
+  tutorialMoveMessageHeader: 
+  tutorialMoveMessageText: 
+  yardWrench: 
+  yardSnacks: 
+  yardFuseUse: 
+  yardFuseFix: 
+  yardFuseFixed: 
+  cityBoxBig: 
+  cityPoster: 
+  cityDoorHandleMiss: 
+  cityDoorHandleDig: 
+  cityDoorHandle: 
+  docksToolBox: 
+  docksBook: 
+  docksVent: 
+  docksVentStuck: 
+  docksPipe: 
+  docksPipeRotate: 
+  docksPipeMove: 
+  docksPipeSelect: 
+  space: <br><br>
+  buttonX: ' <sprite=13> / <sprite=0> '
+  pipeRotate: '    <sprite=15><sprite=16> / <sprite=8><sprite=9>'
+  pipeMove: '    <sprite=12><sprite=21> / <sprite=7><sprite=4>'
+  pipeSelect: '    <sprite=14><sprite=18> / <sprite=5><sprite=6>'
+  dogPee: ' <sprite=17> / <sprite=9> '
+  dogPoo: ' <sprite=22> / <sprite=1> '
+  tutMove: ' <sprite=12><sprite=21><sprite=14><sprite=18> / <sprite=10> '
+  tutLook: ' <sprite=23> / <sprite=11> '
+  tutJump: ' <sprite=20> / <sprite=2> '
+  tutUmbrella: ' <sprite=22> / <sprite=1> '
+  close: ' <sprite=19> / <sprite=3> '
+--- !u!114 &1766730729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766730721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b0dd5e5423a74449fde5c1f6e7e50f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuMainPlay: 
+  menuMainNewGame: 
+  menuMainOptions: 
+  menuMainCredits: 
+  menuMainExit: 
+  menuPlay1: 
+  menuPlay2: 
+  menuPlay3: 
+  menuOptionsGraphics: 
+  menuOptionsSound: 
+  menuOptionsControls: 
+  menuOptionsLanguage: 
+  menuGraphicsFullscreen: 
+  menuSoundVolume: 
+  menuSoundMusic: 
+  menuSoundSound: 
+  menuControlsController: 
+  menuControlsKeyboard: 
+  menuConfirmNewGame: 
+  menuConfirmExit: 
+  menuConfirmInGame: 
+  menuCommonBack: 
+  menuCommonYes: 
+  menuCommonNo: 
+  menuResume: 
+  menuRestart: 
+  menuMainMenu: 
+  commonDoorLocked: 
+  commonDoorOpen: 
+  commonElevator: 
+  commonRope: 
+  commonBox: 
+  commonKeyPickup: 
+  commonKeyPart: 
+  commonKeyDig: 
+  commonKeyHuman: 
+  commonKeyCombine: 
+  tutorialCommon: 
+  tutorialClose: 
+  tutorialPush: 
+  tutorialPushHeader: 
+  tutorialPushMessageText: 
+  tutorialNature: 
+  tutorialNatureHeader: 
+  tutorialNatureMessageText: 
+  tutorialSnacks: 
+  tutorialSnacksHeader: 
+  tutorialSnacksMessageText: 
+  tutorialUmbrella: 
+  tutorialUmbrellaHeader: 
+  tutorialUmbrellaMessageText: 
+  tutorialUmbrellaMessageBot: 
+  tutorialMoveMessageHeader: 
+  tutorialMoveMessageText: 
+  yardWrench: 
+  yardSnacks: 
+  yardFuseUse: 
+  yardFuseFix: 
+  yardFuseFixed: 
+  cityBoxBig: 
+  cityPoster: 
+  cityDoorHandleMiss: 
+  cityDoorHandleDig: 
+  cityDoorHandle: 
+  docksToolBox: 
+  docksBook: 
+  docksVent: 
+  docksVentStuck: 
+  docksPipe: 
+  docksPipeRotate: 
+  docksPipeMove: 
+  docksPipeSelect: 
+  space: <br><br>
+  buttonX: ' <sprite=13> / <sprite=0> '
+  pipeRotate: '    <sprite=15><sprite=16> / <sprite=8><sprite=9>'
+  pipeMove: '    <sprite=12><sprite=21> / <sprite=7><sprite=4>'
+  pipeSelect: '    <sprite=14><sprite=18> / <sprite=5><sprite=6>'
+  dogPee: ' <sprite=17> / <sprite=9> '
+  dogPoo: ' <sprite=22> / <sprite=1> '
+  tutMove: ' <sprite=12><sprite=21><sprite=14><sprite=18> / <sprite=10> '
+  tutLook: ' <sprite=23> / <sprite=11> '
+  tutJump: ' <sprite=20> / <sprite=2> '
+  tutUmbrella: ' <sprite=22> / <sprite=1> '
+  close: ' <sprite=19> / <sprite=3> '
+--- !u!114 &1766730730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766730721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32999f80d2b96de47886b352557d8501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuMainPlay: 
+  menuMainNewGame: 
+  menuMainOptions: 
+  menuMainCredits: 
+  menuMainExit: 
+  menuPlay1: 
+  menuPlay2: 
+  menuPlay3: 
+  menuOptionsGraphics: 
+  menuOptionsSound: 
+  menuOptionsControls: 
+  menuOptionsLanguage: 
+  menuGraphicsFullscreen: 
+  menuSoundVolume: 
+  menuSoundMusic: 
+  menuSoundSound: 
+  menuControlsController: 
+  menuControlsKeyboard: 
+  menuConfirmNewGame: 
+  menuConfirmExit: 
+  menuConfirmInGame: 
+  menuCommonBack: 
+  menuCommonYes: 
+  menuCommonNo: 
+  menuResume: 
+  menuRestart: 
+  menuMainMenu: 
+  commonDoorLocked: 
+  commonDoorOpen: 
+  commonElevator: 
+  commonRope: 
+  commonBox: 
+  commonKeyPickup: 
+  commonKeyPart: 
+  commonKeyDig: 
+  commonKeyHuman: 
+  commonKeyCombine: 
+  tutorialCommon: 
+  tutorialClose: 
+  tutorialPush: 
+  tutorialPushHeader: 
+  tutorialPushMessageText: 
+  tutorialNature: 
+  tutorialNatureHeader: 
+  tutorialNatureMessageText: 
+  tutorialSnacks: 
+  tutorialSnacksHeader: 
+  tutorialSnacksMessageText: 
+  tutorialUmbrella: 
+  tutorialUmbrellaHeader: 
+  tutorialUmbrellaMessageText: 
+  tutorialUmbrellaMessageBot: 
+  tutorialMoveMessageHeader: 
+  tutorialMoveMessageText: 
+  yardWrench: 
+  yardSnacks: 
+  yardFuseUse: 
+  yardFuseFix: 
+  yardFuseFixed: 
+  cityBoxBig: 
+  cityPoster: 
+  cityDoorHandleMiss: 
+  cityDoorHandleDig: 
+  cityDoorHandle: 
+  docksToolBox: 
+  docksBook: 
+  docksVent: 
+  docksVentStuck: 
+  docksPipe: 
+  docksPipeRotate: 
+  docksPipeMove: 
+  docksPipeSelect: 
+  space: <br><br>
+  buttonX: ' <sprite=13> / <sprite=0> '
+  pipeRotate: '    <sprite=15><sprite=16> / <sprite=8><sprite=9>'
+  pipeMove: '    <sprite=12><sprite=21> / <sprite=7><sprite=4>'
+  pipeSelect: '    <sprite=14><sprite=18> / <sprite=5><sprite=6>'
+  dogPee: ' <sprite=17> / <sprite=9> '
+  dogPoo: ' <sprite=22> / <sprite=1> '
+  tutMove: ' <sprite=12><sprite=21><sprite=14><sprite=18> / <sprite=10> '
+  tutLook: ' <sprite=23> / <sprite=11> '
+  tutJump: ' <sprite=20> / <sprite=2> '
+  tutUmbrella: ' <sprite=22> / <sprite=1> '
+  close: ' <sprite=19> / <sprite=3> '
+--- !u!114 &1766730731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766730721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a608e1700c47cfd43a38231d5848b0df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   menuMainPlay: 

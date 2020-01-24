@@ -27,7 +27,6 @@ public class MenuSound : MonoBehaviour
 
     public void SetSoundVolume (float soundVolume)
     {
-        // shutUpDog.GetComponent<AudioSource>().mute = false;
         audioMixer.SetFloat("soundVolume", Mathf.Log10(soundVolume) * 20);
         PlayerPrefs.SetFloat("SoundVolume", soundVolume);
     }

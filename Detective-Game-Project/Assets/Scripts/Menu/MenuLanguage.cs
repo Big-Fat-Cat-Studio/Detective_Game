@@ -37,6 +37,18 @@ public class MenuLanguage : MonoBehaviour
             case "Türk":
                 PlayerPrefs.SetString("Language", "TR");
                 break;
+            case "한국어":
+                PlayerPrefs.SetString("Language", "KR");
+                break;
+            case "日本語":
+                PlayerPrefs.SetString("Language", "JP");
+                break;
+            case "русский":
+                PlayerPrefs.SetString("Language", "RU");
+                break;
+            case "عربى":
+                PlayerPrefs.SetString("Language", "RB");
+                break;
         }
     }
 
@@ -68,6 +80,18 @@ public class MenuLanguage : MonoBehaviour
                 break;
             case "TR":
                 Cycle("Türk");
+                break;
+            case "KR":
+                Cycle("한국어");
+                break;
+            case "JP":
+                Cycle("日本語");
+                break;
+            case "RU":
+                Cycle("русский");
+                break;
+            case "RB":
+                Cycle("عربى");
                 break;
         }
     }
