@@ -14,6 +14,7 @@ namespace Scripts
         public GameObject menuMainNewGame, menuMainOptions, menuMainCredits, menuMainExit;
         public GameObject menuPlay1, menuPlay2, menuPlay3, menuPlayBack;
         public GameObject menuOptionsGraphics, menuOptionsSound, menuOptionsControls, menuOptionsLanguage, menuOptionsBack;
+        public GameObject menuLanguageBack;
         public GameObject menuGraphicsFullscreen, menuGraphicsBack;
         public GameObject menuControlsPlayer1, menuControlsPlayer2, menuControlsBack;
         public GameObject menuConfirmNewGame, menuConfirmNewGameYes, menuConfirmNewGameNo;
@@ -50,47 +51,39 @@ namespace Scripts
         public GameObject docksDoorOpen, docksDoorLocked1, docksDoorLocked2;
         public GameObject docksPipe, docksPipeRotate, docksPipeMove, docksPipeSelect;
 
-
         Language language;
 
         void Start()
         {
-            string lang = "NL";
-            switch (lang)
-            {
-                // case "EN":
-                //     selected = gameObject.GetComponent<EN>();
-                //     break;
-                case "NL":
-                    language = gameObject.GetComponent<NL>();
-                    break;
-                // case "DK":
-                //     selected = gameObject.GetComponent<DK>();
-                //     break;
-            }
-            Translate();
+            Invoke("Translate", 0.1f);
         }
 
-        void OnEnable()
+        void SwitchLanguage()
         {
-            string lang = "NL";
-            switch (lang)
+            string savedLanguage = PlayerPrefs.GetString("Language", "UK");
+            print(savedLanguage);
+            switch (savedLanguage)
             {
-                // case "EN":
-                //     selected = gameObject.GetComponent<EN>();
-                //     break;
+                case "UK":
+                    language = gameObject.GetComponent<UK>();
+                    break;
                 case "NL":
                     language = gameObject.GetComponent<NL>();
                     break;
-                // case "DK":
-                //     selected = gameObject.GetComponent<DK>();
+                // case "ES":
+                //     language = gameObject.GetComponent<ES>();
+                //     break;
+                // case "PT":
+                //     language = gameObject.GetComponent<PT>();
                 //     break;
             }
-            Translate();
         }
 
         public void Translate()
         {
+            SwitchLanguage();
+            string savedLanguage = PlayerPrefs.GetString("Language", "UK");
+
             int scene = SceneManager.GetActiveScene().buildIndex;
 
             if (scene == 0)
@@ -114,6 +107,8 @@ namespace Scripts
 
                 menuGraphicsFullscreen.GetComponentInChildren<TMP_Text>().text = language.menuGraphicsFullscreen;
                 menuGraphicsBack.GetComponentInChildren<TMP_Text>().text = language.menuCommonBack;
+
+                menuLanguageBack.GetComponentInChildren<TMP_Text>().text = language.menuCommonBack;
 
                 menuControlsPlayer1.GetComponent<TMP_Dropdown>().options[0].text = language.menuControlsController;
                 menuControlsPlayer1.GetComponent<TMP_Dropdown>().options[1].text = language.menuControlsKeyboard;
