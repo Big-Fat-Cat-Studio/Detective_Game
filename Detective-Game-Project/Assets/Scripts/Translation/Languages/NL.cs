@@ -101,9 +101,9 @@ public class NL : Language
         docksVentStuck = "Het rooster zit vast! Ik heb gereedschap nodig om het te openen";
 
         docksPipe = "Druk op" + buttonX + "om de leidingen te repareren";
-        docksPipeRotate = "draai pijp" + pipeRotate;
-        docksPipeMove = "verplaats pijp" + pipeMove;
-        docksPipeSelect = "selecteer pijp" + pipeSelect;
+        docksPipeRotate = "Draai pijp" + pipeRotate;
+        docksPipeMove = "Verplaats pijp" + pipeMove;
+        docksPipeSelect = "Selecteer pijp" + pipeSelect;
     }
 
 }
