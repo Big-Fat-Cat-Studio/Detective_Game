@@ -19,7 +19,7 @@ public class PT : Language
         menuOptionsGraphics = "Gráficos";
         menuOptionsSound = "Som";
         menuOptionsControls = "Controlos";
-        menuOptionsLanguage = "Língua";
+        menuOptionsLanguage = "Idioma";
 
         menuGraphicsFullscreen = "Ecrã Inteiro";
 
