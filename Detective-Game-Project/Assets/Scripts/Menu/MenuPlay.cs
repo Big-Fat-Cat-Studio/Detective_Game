@@ -35,17 +35,14 @@ public class MenuPlay : MonoBehaviour
     void OnEnable()
     {
         GetLevel();
-
-        // these next 2 lines look completely retarded
-        // but they actually fix a stupid bug
-
+        Level2.GetComponentInChildren<TMP_Text>().enabled = false;
+        Level3.GetComponentInChildren<TMP_Text>().enabled = false;
 
         if (Unlocked >= 1 || UnlockedCheat > 0)
         {
             Level1.SetActive(false);
             Level1.SetActive(true);
             Level1.GetComponent<Button>().Select();
-            Level1.GetComponentInChildren<TMP_Text>().text = "Grandpa's garden";
             Target.GetComponent<Image>().sprite = imageArray[0];
         }
 
@@ -55,7 +52,7 @@ public class MenuPlay : MonoBehaviour
             Level2.SetActive(true);
             Level2.GetComponent<Button>().interactable = true;
             Level2.GetComponent<Button>().Select();
-            Level2.GetComponentInChildren<TMP_Text>().text = "Grandpa's office";
+            Level2.GetComponentInChildren<TMP_Text>().enabled = true;
             Target.GetComponent<Image>().sprite = imageArray[1];
         }
 
@@ -65,7 +62,7 @@ public class MenuPlay : MonoBehaviour
             Level3.SetActive(true);
             Level3.GetComponent<Button>().interactable = true;
             Level3.GetComponent<Button>().Select();
-            Level3.GetComponentInChildren<TMP_Text>().text = "The warehouse";
+            Level3.GetComponentInChildren<TMP_Text>().enabled = true;
             Target.GetComponent<Image>().sprite = imageArray[2];
         }
 
