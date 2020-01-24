@@ -5,16 +5,8 @@ using UnityEngine.UI;
 
 public class MenuOptions : MonoBehaviour
 {
-    //remove after added
     public GameObject Resume, Graphics, Sound, Controls, Language;
 
-    // void Start()
-    // {
-    //     // //remove after added
-    //     Sound.GetComponent<Button>().interactable = false;
-    //     // Controls.GetComponent<Button>().interactable = false;
-    //     Language.GetComponent<Button>().interactable = false;
-    // }
     public void MenuReturn()
     {
         Graphics.GetComponent<Button>().Select();
@@ -35,14 +27,13 @@ public class MenuOptions : MonoBehaviour
         Graphics.GetComponent<Button>().interactable = true;
         // Sound.GetComponent<Button>().interactable = true;
         Controls.GetComponent<Button>().interactable = true;
-        // Language.GetComponent<Button>().interactable = true;
+        Language.GetComponent<Button>().interactable = true;
     }
 
     void OnEnable()
     {
         // //remove after added
         Sound.GetComponent<Button>().interactable = false;
-        Language.GetComponent<Button>().interactable = false;
         Graphics.SetActive(false);
         Graphics.SetActive(true);
         Graphics.GetComponent<Button>().Select();

@@ -16,6 +16,17 @@ namespace Scripts
 
         void Start()
         {
+            // int P1Level = PlayerPrefs.GetInt("ControlP1", 0);
+            // DropdownP1.value = P1Level;
+            // DropdownP1.RefreshShownValue();
+            //
+            // int P2Level = PlayerPrefs.GetInt("ControlP2", 0);
+            // DropdownP2.value = P2Level;
+            // DropdownP2.RefreshShownValue();
+        }
+
+        void OnEnable()
+        {
             int P1Level = PlayerPrefs.GetInt("ControlP1", 0);
             DropdownP1.value = P1Level;
             DropdownP1.RefreshShownValue();
@@ -23,16 +34,15 @@ namespace Scripts
             int P2Level = PlayerPrefs.GetInt("ControlP2", 0);
             DropdownP2.value = P2Level;
             DropdownP2.RefreshShownValue();
-        }
 
-        void OnEnable()
-        {
-            Player1.SetActive(false);
-            Player1.SetActive(true);
-            DropdownP1.Select();
+            // Player1.SetActive(false);
+            // Player1.SetActive(true);
 
-            P1Value = DropdownP1.value;
-            P2Value = DropdownP2.value;
+
+            
+            //
+            // Player1.GetComponent<TMP_Dropdown>().Select();
+            // Player1.GetComponent<TMP_Dropdown>().RefreshShownValue();
         }
 
         public void NoTwoKeyboardsP1()
