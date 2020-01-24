@@ -2,32 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Template : Language
+public class RU : Language
 {
     void Start()
     {
-        menuMainPlay = "";
-        menuMainNewGame = "";
-        menuMainOptions = "";
-        menuMainCredits = "";
-        menuMainExit = "";
+        menuMainPlay = "Играть";
+        menuMainNewGame = "Новая игра";
+        menuMainOptions = "Опции";
+        menuMainCredits = "Кредиты";
+        menuMainExit = "Выход";
 
-        menuPlay1 = "";
-        menuPlay2 = "";
-        menuPlay3 = "";
+        menuPlay1 = "Дедушкин сад";
+        menuPlay2 = "Дедушкин офис";
+        menuPlay3 = "Склад";
 
-        menuOptionsGraphics = "";
-        menuOptionsSound = "";
-        menuOptionsControls = "";
-        menuOptionsLanguage = "";
+        menuOptionsGraphics = "Графика";
+        menuOptionsSound = "Звук";
+        menuOptionsControls = "Управление";
+        menuOptionsLanguage = "Язык";
 
-        menuGraphicsFullscreen = "";
+        menuGraphicsFullscreen = "Полный экран";
 
-        menuSoundVolume = "";
-        menuSoundMusic = "";
+        menuSoundVolume = "Громкость";
+        menuSoundMusic = "Звук";
 
-        menuControlsController = "";
-        menuControlsKeyboard = "";
+        menuControlsController = "Контроллер";
+        menuControlsKeyboard = "Клавиатура";
 
         menuConfirmNewGame = "Вы потеряете все открывшиеся уровни. Вы уверены?";
         menuConfirmExit = "Вы уверены, что хотите выйти?";
@@ -38,8 +38,8 @@ public class Template : Language
         menuCommonNo = "Нет";
 
         menuResume = "Продолжить";
-        menuRestart = "";
-        menuMainMenu = "";
+        menuRestart = "Перезапустить";
+        menuMainMenu = "Главное меню";
 
         // COMMON
 
@@ -97,7 +97,7 @@ public class Template : Language
 
         docksToolBox = "Нажмите" + buttonX + "чтобы подобрать ящик с инструментами.";
         docksBook = "Нажмите" + buttonX + "чтобы прочесть книгу";
-        docksVent = "" + buttonX + "";
+        docksVent = "Нажмите" + buttonX + "чтобы открыть вентиляционное отверстие.";
         docksVentStuck = "Вентиляционное отверстие заело! Может быть я могла бы его открыть с помощью подходящего инструмента.";
 
         docksPipe = "Нажмите" + buttonX + "чтобы починить трубопровод.";
