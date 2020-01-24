@@ -23,8 +23,8 @@ public class NL : Language
 
         menuGraphicsFullscreen = "Volledig scherm";
 
-        menuSoundVolume = "volume";
-        menuSoundMusic = "muziek";
+        menuSoundVolume = "Volume";
+        menuSoundMusic = "Muziek";
 
         menuControlsController = "Controller";
         menuControlsKeyboard = "Toetsenbord";
