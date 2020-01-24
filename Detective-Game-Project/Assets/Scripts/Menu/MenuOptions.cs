@@ -25,15 +25,13 @@ public class MenuOptions : MonoBehaviour
     {
         Resume.GetComponent<Button>().interactable = true;
         Graphics.GetComponent<Button>().interactable = true;
-        // Sound.GetComponent<Button>().interactable = true;
+        Sound.GetComponent<Button>().interactable = true;
         Controls.GetComponent<Button>().interactable = true;
         Language.GetComponent<Button>().interactable = true;
     }
 
     void OnEnable()
     {
-        // //remove after added
-        Sound.GetComponent<Button>().interactable = false;
         Graphics.SetActive(false);
         Graphics.SetActive(true);
         Graphics.GetComponent<Button>().Select();

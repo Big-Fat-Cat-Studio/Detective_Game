@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 namespace Scripts
 {
@@ -15,6 +16,7 @@ namespace Scripts
         public GameObject menuPlay1, menuPlay2, menuPlay3, menuPlayBack;
         public GameObject menuOptionsGraphics, menuOptionsSound, menuOptionsControls, menuOptionsLanguage, menuOptionsBack;
         public GameObject menuLanguageBack;
+        public GameObject menuSoundMusic, menuSoundSound;
         public GameObject menuGraphicsFullscreen, menuGraphicsBack;
         public GameObject menuControlsPlayer1, menuControlsPlayer2, menuControlsBack;
         public GameObject menuConfirmNewGame, menuConfirmNewGameYes, menuConfirmNewGameNo;
@@ -53,28 +55,56 @@ namespace Scripts
 
         Language language;
 
+        [Header("THIS TOTALLY BELONGS HERE")]
+        public AudioMixer audioMixer;
+
         void Start()
         {
+            audioMixer.SetFloat("musicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume", 0.75f)) * 20);
+            audioMixer.SetFloat("soundVolume", Mathf.Log10(PlayerPrefs.GetFloat("SoundVolume", 0.75f)) * 20);
             Invoke("Translate", 0.1f);
         }
 
         void SwitchLanguage()
         {
             string savedLanguage = PlayerPrefs.GetString("Language", "UK");
-            print(savedLanguage);
             switch (savedLanguage)
             {
+                // case "DE":
+                //     language = gameObject.GetComponent<DE>();
+                //     break;
+                // case "DK":
+                //     language = gameObject.GetComponent<DK>();
+                //     break;
                 case "UK":
                     language = gameObject.GetComponent<UK>();
+                    break;
+                case "ES":
+                    language = gameObject.GetComponent<ES>();
+                    break;
+                case "FR":
+                    language = gameObject.GetComponent<FR>();
                     break;
                 case "NL":
                     language = gameObject.GetComponent<NL>();
                     break;
-                // case "ES":
-                //     language = gameObject.GetComponent<ES>();
-                //     break;
-                // case "PT":
+                case "PT":
+                    language = gameObject.GetComponent<PT>();
+                    break;
+                // case "TR":
                 //     language = gameObject.GetComponent<PT>();
+                //     break;
+                case "KR":
+                    language = gameObject.GetComponent<KR>();
+                    break;
+                case "JP":
+                    language = gameObject.GetComponent<JP>();
+                    break;
+                // case "RU":
+                //     language = gameObject.GetComponent<RU>();
+                //     break;
+                // case "RB": // THIS IS ARABIC BECAUSE ITS NOT A COUNTRY SO I MADE ONE UP
+                //     language = gameObject.GetComponent<RB>();
                 //     break;
             }
         }
@@ -107,6 +137,9 @@ namespace Scripts
 
                 menuGraphicsFullscreen.GetComponentInChildren<TMP_Text>().text = language.menuGraphicsFullscreen;
                 menuGraphicsBack.GetComponentInChildren<TMP_Text>().text = language.menuCommonBack;
+
+                menuSoundMusic.GetComponent<TMP_Text>().text = language.menuSoundMusic;
+                menuSoundSound.GetComponent<TMP_Text>().text = language.menuOptionsSound;
 
                 menuLanguageBack.GetComponentInChildren<TMP_Text>().text = language.menuCommonBack;
 
