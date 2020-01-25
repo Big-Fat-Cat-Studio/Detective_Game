@@ -92,7 +92,7 @@ namespace Scripts
                     language = gameObject.GetComponent<PT>();
                     break;
                 case "TR":
-                    language = gameObject.GetComponent<PT>();
+                    language = gameObject.GetComponent<TR>();
                     break;
                 case "KR":
                     language = gameObject.GetComponent<KR>();
