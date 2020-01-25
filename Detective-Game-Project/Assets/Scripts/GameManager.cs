@@ -44,6 +44,9 @@ namespace Scripts
         public GameObject AfterInteractTextP2;
         public GameObject InteractTextP2;
 
+        public GameObject DisconnectedP1;
+        public GameObject DisconnectedP2;
+
         [Header("General counter for key object")]
         public GameObject KeyCounter; // Text Object
         public Byte KeyCounterRequired; // Actual number of keyparts required
@@ -371,6 +374,26 @@ namespace Scripts
                 currentCourotine = null;
             }
 
+        }
+
+        public void toggleOnDisconnectIconP1()
+        {
+            DisconnectedP1.SetActive(true);
+        }
+
+        public void toggleOffDisconnectIconP1()
+        {
+            DisconnectedP1.SetActive(false);
+        }
+
+        public void toggleOnDisconnectIconP2()
+        {
+            DisconnectedP2.SetActive(true);
+        }
+
+        public void toggleOffDisconnectIconP2()
+        {
+            DisconnectedP2.SetActive(false);
         }
 
         public void InitKeyCounter()

@@ -72,7 +72,6 @@ namespace Scripts
         }
         public void Skip()
         {
-            print("triggered");
             if (endCutscene.isPlaying)
             {
                 endCutscene.Stop();
