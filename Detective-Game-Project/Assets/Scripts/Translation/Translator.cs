@@ -16,7 +16,7 @@ namespace Scripts
         public GameObject menuPlay1, menuPlay2, menuPlay3, menuPlayBack;
         public GameObject menuOptionsGraphics, menuOptionsSound, menuOptionsControls, menuOptionsLanguage, menuOptionsBack;
         public GameObject menuLanguageBack;
-        public GameObject menuSoundMusic, menuSoundSound;
+        public GameObject menuSoundMusic, menuSoundSound, menuSoundBack;
         public GameObject menuGraphicsFullscreen, menuGraphicsBack;
         public GameObject menuControlsPlayer1, menuControlsPlayer2, menuControlsBack;
         public GameObject menuConfirmNewGame, menuConfirmNewGameYes, menuConfirmNewGameNo;
@@ -25,6 +25,7 @@ namespace Scripts
         [Header("INGAMEMENU")]
         public GameObject menuInGameResume;
         public GameObject menuInGameOptions, menuInGameRestart, menuInGameMainMenu;
+        public GameObject menuInGameOptionsMusic, menuInGameOptionsSound, menuInGameOptionsFullscreen, menuInGameOptionsBack;
         public GameObject menuInGameConfirmRestart, menuInGameConfirmRestartYes, menuInGameConfirmRestartNo;
         public GameObject menuInGameConfirmMainMenu, menuInGameConfirmMainMenuYes, menuInGameConfirmMainMenuNo;
 
@@ -137,6 +138,7 @@ namespace Scripts
 
                 menuSoundMusic.GetComponent<TMP_Text>().text = language.menuSoundMusic;
                 menuSoundSound.GetComponent<TMP_Text>().text = language.menuOptionsSound;
+                menuSoundBack.GetComponentInChildren<TMP_Text>().text = language.menuCommonBack;
 
                 menuLanguageBack.GetComponentInChildren<TMP_Text>().text = language.menuCommonBack;
 
@@ -161,6 +163,11 @@ namespace Scripts
                 menuInGameOptions.GetComponentInChildren<Text>().text = language.menuMainOptions;
                 menuInGameRestart.GetComponentInChildren<Text>().text = language.menuRestart;
                 menuInGameMainMenu.GetComponentInChildren<Text>().text = language.menuMainMenu;
+
+                menuInGameOptionsMusic.GetComponent<TMP_Text>().text = language.menuSoundMusic;
+                menuInGameOptionsSound.GetComponent<TMP_Text>().text = language.menuOptionsSound;
+                menuInGameOptionsFullscreen.GetComponentInChildren<TMP_Text>().text = language.menuGraphicsFullscreen;
+                menuInGameOptionsBack.GetComponentInChildren<TMP_Text>().text = language.menuCommonBack;
 
                 menuInGameConfirmRestart.GetComponentInChildren<TMP_Text>().text = language.menuConfirmInGame;
                 menuInGameConfirmRestartYes.GetComponentInChildren<TMP_Text>().text = language.menuCommonYes;

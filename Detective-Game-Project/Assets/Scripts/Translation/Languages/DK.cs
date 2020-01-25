@@ -33,7 +33,7 @@ public class DK : Language
         menuConfirmExit = "Er du sikker på at du ønsker at afslutte?";
         menuConfirmInGame = "Du vil miste adgang til de baner du har låst op, er du sikker?";
 
-        menuCommonBack = "Tilbage til forrige menu";
+        menuCommonBack = "Tilbage";
         menuCommonYes = "Ja";
         menuCommonNo = "Nej";
 
@@ -56,7 +56,7 @@ public class DK : Language
         commonKeyCombine = "Du har samlet alle stykkerne sammen til en færdig nøgle";
 
         // TUTORIAL
-        
+
         tutorialCommon = "Tryk" + buttonX + "for at læse brugervejledningen";
 
         tutorialPushHeader = "SKUB GENSTANDE"; //ALL CAPS
