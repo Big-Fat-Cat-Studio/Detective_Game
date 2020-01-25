@@ -9,7 +9,7 @@ namespace Scripts
         public GameObject MainMenu;
         public GameObject Options;
 
-        public void OpenMenu()
+        public void CloseMenu()
         {
             MainMenu.SetActive(true);
             Options.SetActive(false);

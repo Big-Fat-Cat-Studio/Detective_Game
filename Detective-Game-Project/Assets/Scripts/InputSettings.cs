@@ -283,7 +283,7 @@ public class @InputSettings : IInputActionCollection, IDisposable
                     ""id"": ""3b573b32-106f-4d77-ad49-ed8f84d462a5"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": ""StickDeadzone,ScaleVector2(x=2,y=2)"",
+                    ""processors"": ""StickDeadzone,ScaleVector2(x=1.5,y=0.5)"",
                     ""groups"": ""Controller"",
                     ""action"": ""CameraMove"",
                     ""isComposite"": false,

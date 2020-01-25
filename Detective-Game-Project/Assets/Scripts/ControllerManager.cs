@@ -14,6 +14,9 @@ namespace Scripts
         public InputType inputTypeP1;
         public InputType inputTypeP2;
 
+        public GameObject DisconnectedP1;
+        public GameObject DisconnectedP2;
+
         private GameObject playerOne;
         private GameObject playerTwo;
 
@@ -59,11 +62,13 @@ namespace Scripts
                     {
                         GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, gamepads[0]);
                         inputDeviceP1 = gamepads[0];
+                        DisconnectedP1.SetActive(false);
 
                         if (amountOfControllers > 1)
                         {
                             GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, gamepads[1]);
                             inputDeviceP2 = gamepads[1];
+                            DisconnectedP2.SetActive(false);
                         }
                     }
                 }
@@ -75,9 +80,11 @@ namespace Scripts
                     {
                         GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, gamepads[0]);
                         inputDeviceP1 = gamepads[0];
+                        DisconnectedP1.SetActive(false);
                     }
                     GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Keyboard, Keyboard.current, Mouse.current);
                     inputDeviceP2 = Keyboard.current;
+                    DisconnectedP2.SetActive(false);
                 }
                 else if (inputTypeP1 == InputType.Keyboard && inputTypeP2 == InputType.Controller)
                 {
@@ -85,17 +92,21 @@ namespace Scripts
 
                     GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Keyboard, Keyboard.current, Mouse.current);
                     inputDeviceP1 = Keyboard.current;
+                    DisconnectedP1.SetActive(false);
 
                     if (amountOfControllers > 0)
                     {
                         GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, gamepads[0]);
                         inputDeviceP2 = gamepads[0];
+                        DisconnectedP2.SetActive(false);
                     }
                 }
                 else
                 {
                     GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Keyboard, Keyboard.current, Mouse.current);
-                    GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Keyboard, Keyboard.current, Mouse.current);                    
+                    GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Keyboard, Keyboard.current, Mouse.current);
+                    DisconnectedP1.SetActive(false);
+                    DisconnectedP2.SetActive(false);
                 }
             }
             StartCoroutine(checkForControllers());
@@ -184,11 +195,13 @@ namespace Scripts
                                 {
                                     GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, device);
                                     inputDeviceP1 = device;
+                                    DisconnectedP1.SetActive(true);
                                 }
                                 else
                                 {
                                     GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, device);
                                     inputDeviceP2 = device;
+                                    DisconnectedP2.SetActive(true);
                                 }
                             }
                             else
@@ -197,11 +210,13 @@ namespace Scripts
                                 {
                                     GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, device);
                                     inputDeviceP1 = device;
+                                    DisconnectedP1.SetActive(true);
                                 }
                                 else
                                 {
                                     GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, device);
                                     inputDeviceP2 = device;
+                                    DisconnectedP2.SetActive(true);
                                 }
                             }
 
@@ -215,6 +230,7 @@ namespace Scripts
                         if (inputDeviceP1 == device)
                         {
                             GameManager.Instance.turnOffController(GameManager.Instance.PlayerOne);
+                            DisconnectedP1.SetActive(true);
 
                             if (inputTypeP2 == InputType.Controller)
                             {
@@ -224,6 +240,8 @@ namespace Scripts
                         else if (inputDeviceP2 == device)
                         {
                             GameManager.Instance.turnOffController(GameManager.Instance.PlayerTwo);
+                            DisconnectedP2.SetActive(true);
+
                             if (inputTypeP1 == InputType.Controller)
                             {
                                 GameManager.Instance.keepControllerOn(GameManager.Instance.PlayerOne, inputDeviceP1);
@@ -235,10 +253,12 @@ namespace Scripts
                         if (inputDeviceP1 == device)
                         {
                             GameManager.Instance.turnOnController(GameManager.Instance.PlayerOne, inputDeviceP1);
+                            DisconnectedP1.SetActive(false);
                         }
                         else if (inputDeviceP2 == device)
                         {
                             GameManager.Instance.turnOnController(GameManager.Instance.PlayerTwo, inputDeviceP2);
+                            DisconnectedP2.SetActive(false);
                         }
                         goto default;
                     //break;

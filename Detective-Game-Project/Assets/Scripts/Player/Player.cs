@@ -194,7 +194,11 @@ namespace Scripts
             }
             else if (inputType == InputType.Keyboard && !GameManager.Instance.paused)
             {
-                InGameMenu.GetComponent<MainMenuInGame>().OpenMenu();
+                if (InGameMenu.activeSelf)
+                {
+                    InGameMenu.GetComponent<MainMenuInGame>().CloseMenu();
+                }
+
                 InGameMenu.SetActive(!InGameMenu.activeSelf);
 
                 if (Time.timeScale == 0)
@@ -212,7 +216,11 @@ namespace Scripts
         {
             if (!GameManager.Instance.paused)
             {
-                InGameMenu.GetComponent<MainMenuInGame>().OpenMenu();
+                if (InGameMenu.activeSelf)
+                {
+                    InGameMenu.GetComponent<MainMenuInGame>().CloseMenu();
+                }
+
                 InGameMenu.SetActive(!InGameMenu.activeSelf);
 
                 if (Time.timeScale == 0)
