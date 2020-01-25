@@ -46,9 +46,6 @@ public class MenuLanguage : MonoBehaviour
             case "русский":
                 PlayerPrefs.SetString("Language", "RU");
                 break;
-            case "عربى":
-                PlayerPrefs.SetString("Language", "RB");
-                break;
         }
     }
 
@@ -89,9 +86,6 @@ public class MenuLanguage : MonoBehaviour
                 break;
             case "RU":
                 Cycle("русский");
-                break;
-            case "RB":
-                Cycle("عربى");
                 break;
         }
     }

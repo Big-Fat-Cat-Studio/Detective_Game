@@ -70,12 +70,12 @@ namespace Scripts
             string savedLanguage = PlayerPrefs.GetString("Language", "UK");
             switch (savedLanguage)
             {
-                // case "DE":
-                //     language = gameObject.GetComponent<DE>();
-                //     break;
-                // case "DK":
-                //     language = gameObject.GetComponent<DK>();
-                //     break;
+                case "DE":
+                    language = gameObject.GetComponent<DE>();
+                    break;
+                case "DK":
+                    language = gameObject.GetComponent<DK>();
+                    break;
                 case "UK":
                     language = gameObject.GetComponent<UK>();
                     break;
@@ -91,21 +91,18 @@ namespace Scripts
                 case "PT":
                     language = gameObject.GetComponent<PT>();
                     break;
-                // case "TR":
-                //     language = gameObject.GetComponent<PT>();
-                //     break;
+                case "TR":
+                    language = gameObject.GetComponent<PT>();
+                    break;
                 case "KR":
                     language = gameObject.GetComponent<KR>();
                     break;
                 case "JP":
                     language = gameObject.GetComponent<JP>();
                     break;
-                // case "RU":
-                //     language = gameObject.GetComponent<RU>();
-                //     break;
-                // case "RB": // THIS IS ARABIC BECAUSE ITS NOT A COUNTRY SO I MADE ONE UP
-                //     language = gameObject.GetComponent<RB>();
-                //     break;
+                case "RU":
+                    language = gameObject.GetComponent<RU>();
+                    break;
             }
         }
 
