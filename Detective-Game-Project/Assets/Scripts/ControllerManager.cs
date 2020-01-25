@@ -116,6 +116,11 @@ namespace Scripts
         void Update()
         {
             CinemachineCore.GetInputAxis = getAxisCustom;
+
+            if (inputTypeP1 == InputType.Controller && inputTypeP2 == InputType.Controller && amountOfControllers == 0 && Input.GetKeyDown(KeyCode.Escape))
+            {
+                GameManager.Instance.openMenu();
+            }
         }
 
         public void setPlayers()
@@ -195,13 +200,13 @@ namespace Scripts
                                 {
                                     GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, device);
                                     inputDeviceP1 = device;
-                                    DisconnectedP1.SetActive(true);
+                                    DisconnectedP1.SetActive(false);
                                 }
                                 else
                                 {
                                     GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, device);
                                     inputDeviceP2 = device;
-                                    DisconnectedP2.SetActive(true);
+                                    DisconnectedP2.SetActive(false);
                                 }
                             }
                             else
@@ -210,13 +215,13 @@ namespace Scripts
                                 {
                                     GameManager.Instance.assignController(GameManager.Instance.PlayerOne, InputType.Controller, device);
                                     inputDeviceP1 = device;
-                                    DisconnectedP1.SetActive(true);
+                                    DisconnectedP1.SetActive(false);
                                 }
                                 else
                                 {
                                     GameManager.Instance.assignController(GameManager.Instance.PlayerTwo, InputType.Controller, device);
                                     inputDeviceP2 = device;
-                                    DisconnectedP2.SetActive(true);
+                                    DisconnectedP2.SetActive(false);
                                 }
                             }
 

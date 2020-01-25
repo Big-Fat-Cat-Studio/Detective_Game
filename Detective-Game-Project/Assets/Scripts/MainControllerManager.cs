@@ -27,8 +27,20 @@ namespace Scripts
 
         private void Start()
         {
-            inputDeviceP1 = (InputType)PlayerPrefs.GetInt("ControlP1", 1);
-            inputDeviceP2 = (InputType)PlayerPrefs.GetInt("ControlP2", 0);
+            if (PlayerPrefs.GetInt("FirstTimeStartingSincePatch0", 1) == 1)
+            {
+                inputDeviceP1 = InputType.Keyboard;
+                inputDeviceP2 = InputType.Controller;
+            
+                PlayerPrefs.SetInt("ControlP1", 1);
+                PlayerPrefs.SetInt("ControlP2", 0);
+                PlayerPrefs.SetInt("FirstTimeStartingSincePatch0", 0);
+            }
+            else
+            {
+                inputDeviceP1 = (InputType)PlayerPrefs.GetInt("ControlP1", 1);
+                inputDeviceP2 = (InputType)PlayerPrefs.GetInt("ControlP2", 0);
+            }
         }
 
         public void setInputDeviceP1(InputType input)

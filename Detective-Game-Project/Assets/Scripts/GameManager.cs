@@ -172,6 +172,18 @@ namespace Scripts
                 UpdateKeyCounter();
         }
 
+        public void openMenu()
+        {
+            if (currentTutorial != null)
+            {
+                exitTutorial();
+            }
+            else
+            {
+                Human.GetComponent<Player>().openMenu();
+            }
+        }
+
         public bool checkIfPlayerIsActive(ActivePlayer player)
         {
             if (GameType == GameType.SinglePlayer)

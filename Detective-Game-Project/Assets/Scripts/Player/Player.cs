@@ -194,21 +194,7 @@ namespace Scripts
             }
             else if (inputType == InputType.Keyboard && !GameManager.Instance.paused)
             {
-                if (InGameMenu.activeSelf)
-                {
-                    InGameMenu.GetComponent<MainMenuInGame>().CloseMenu();
-                }
-
-                InGameMenu.SetActive(!InGameMenu.activeSelf);
-
-                if (Time.timeScale == 0)
-                {
-                    Time.timeScale = 1;
-                }
-                else
-                {
-                    Time.timeScale = 0;
-                }
+                openMenu();
             }
         }
 
@@ -216,21 +202,7 @@ namespace Scripts
         {
             if (!GameManager.Instance.paused)
             {
-                if (InGameMenu.activeSelf)
-                {
-                    InGameMenu.GetComponent<MainMenuInGame>().CloseMenu();
-                }
-
-                InGameMenu.SetActive(!InGameMenu.activeSelf);
-
-                if (Time.timeScale == 0)
-                {
-                    Time.timeScale = 1;
-                }
-                else
-                {
-                    Time.timeScale = 0;
-                }
+                openMenu();
             }
         }
 
@@ -258,6 +230,25 @@ namespace Scripts
             if (!canPushPull)
             {
                 gameObject.GetComponent<Animator>().SetBool("pushing", false);
+            }
+        }
+
+        public void openMenu()
+        {
+            if (InGameMenu.activeSelf)
+            {
+                InGameMenu.GetComponent<MainMenuInGame>().CloseMenu();
+            }
+
+            InGameMenu.SetActive(!InGameMenu.activeSelf);
+
+            if (Time.timeScale == 0)
+            {
+                Time.timeScale = 1;
+            }
+            else
+            {
+                Time.timeScale = 0;
             }
         }
     }
