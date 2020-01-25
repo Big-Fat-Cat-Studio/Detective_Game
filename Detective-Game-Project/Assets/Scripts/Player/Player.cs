@@ -194,6 +194,7 @@ namespace Scripts
             }
             else if (inputType == InputType.Keyboard && !GameManager.Instance.paused)
             {
+                InGameMenu.GetComponent<MainMenuInGame>().OpenMenu();
                 InGameMenu.SetActive(!InGameMenu.activeSelf);
 
                 if (Time.timeScale == 0)
@@ -211,6 +212,7 @@ namespace Scripts
         {
             if (!GameManager.Instance.paused)
             {
+                InGameMenu.GetComponent<MainMenuInGame>().OpenMenu();
                 InGameMenu.SetActive(!InGameMenu.activeSelf);
 
                 if (Time.timeScale == 0)
