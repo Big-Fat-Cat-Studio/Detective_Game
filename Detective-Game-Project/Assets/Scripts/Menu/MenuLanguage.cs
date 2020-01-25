@@ -13,7 +13,7 @@ public class MenuLanguage : MonoBehaviour
         string newLanguage = dropdownLanguage.options[dropdownLanguage.value].text;
         switch (newLanguage)
         {
-            case "Deutch":
+            case "Deutsch":
                 PlayerPrefs.SetString("Language", "DE");
                 break;
             case "Dansk":
@@ -55,7 +55,7 @@ public class MenuLanguage : MonoBehaviour
         switch (savedLanguage)
         {
             case "DE":
-                Cycle("Deutch");
+                Cycle("Deutsch");
                 break;
             case "DK":
                 Cycle("Dansk");
