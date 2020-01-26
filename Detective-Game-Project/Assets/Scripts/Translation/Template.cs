@@ -29,81 +29,81 @@ public class Template : Language
         menuControlsController = "";
         menuControlsKeyboard = "";
 
-        menuConfirmNewGame = "Вы потеряете все открывшиеся уровни. Вы уверены?";
-        menuConfirmExit = "Вы уверены, что хотите выйти?";
-        menuConfirmInGame = "Прогресс Вашего уровня будет утерян. Вы уверены?";
+        menuConfirmNewGame = "";
+        menuConfirmExit = "";
+        menuConfirmInGame = "";
 
-        menuCommonBack = "Назад";
-        menuCommonYes = "Да";
-        menuCommonNo = "Нет";
+        menuCommonBack = "";
+        menuCommonYes = "";
+        menuCommonNo = "";
 
-        menuResume = "Продолжить";
+        menuResume = "";
         menuRestart = "";
         menuMainMenu = "";
 
         // COMMON
 
-        commonDoorLocked = "Дверь заперта! Мне нужен ключ чтобы ее открыть.";
-        commonDoorOpen = "Нажмите" + buttonX + "чтобы открыть дверь.";
-        commonElevator = "Нажмите" + buttonX + "чтобы активировать лифт.";
-        commonRope = "Удерживайте" + buttonX + "чтобы тянуть верёвку вниз.";
-        commonBox = "Удерживайте" + buttonX + "чтобы толкать ящик.";
+        commonDoorLocked = "";
+        commonDoorOpen = "" + buttonX + "";
+        commonElevator = "" + buttonX + "";
+        commonRope = "" + buttonX + "";
+        commonBox = "" + buttonX + "";
 
-        commonKeyPickup = "Нажмите" + buttonX + "чтобы подобрать ключ.";
-        commonKeyPart = "Нажмите" + buttonX + "чтобы подобрать часть ключа.";
-        commonKeyDig = "Нажмите" + buttonX + "чтобы откопать часть ключа.";
-        commonKeyHuman = "Вы подобрали часть ключа и положили его в карман.";
-        commonKeyCombine = "Вы совместили все части ключа в целый ключ.";
+        commonKeyPickup = "" + buttonX + "";
+        commonKeyPart = "" + buttonX + "";
+        commonKeyDig = "" + buttonX + "";
+        commonKeyHuman = "";
+        commonKeyCombine = "";
 
         // TUTORIAL
 
-        tutorialCommon = "Нажмите" + buttonX + "прочесть обучающее сообщение.";
+        tutorialCommon = "" + buttonX + "";
 
-        tutorialPushHeader = "Толкать объекты"; //ALL CAPS
-        tutorialPushMessageText = "Нажмите" + buttonX + "чтобы толкать объект вместе с Кикой" + space + "Чтобы толкать объекты потяжелее Вам нужна помощь Дайго!";
+        tutorialPushHeader = ""; //ALL CAPS
+        tutorialPushMessageText = "" + buttonX + "" + space + "";
 
-        tutorialNatureHeader = "Зов природы"; //ALL CAPS
-        tutorialNatureMessageText = "Иногда собаке нужно сходить по-маленькому с помощью"+ dogPee + space + "И да…" + dogPoo + "работает и для других нужд";
+        tutorialNatureHeader = ""; //ALL CAPS
+        tutorialNatureMessageText = ""+ dogPee + space + "" + dogPoo + "";
 
-        tutorialSnacksHeader = "Лакомства для собак"; //ALL CAPS
-        tutorialSnacksMessageText = "Удерживайте" + buttonX + "возле диспенсера чтобы получить лакомство для собак" + space + "Эти лакомства помогут Дайго бежать быстрее!";
+        tutorialSnacksHeader = ""; //ALL CAPS
+        tutorialSnacksMessageText = "" + buttonX + "" + space + "";
 
-        tutorialUmbrellaHeader = "Зонтик"; //ALL CAPS
-        tutorialUmbrellaMessageText = "Кика может открыть ее зонтик с помощью" + tutUmbrella  + space + "Дайго может прыгать выше, отскакивая от зонтика!";
+        tutorialUmbrellaHeader = ""; //ALL CAPS
+        tutorialUmbrellaMessageText = "" + tutUmbrella  + space + "";
 
-        tutorialMoveMessageHeader = "Движение"; //ALL CAPS
-        tutorialMoveMessageText = "Используйте" + tutMove + "чтобы передвигаться" + space + "Используйте" + tutLook + "чтобы смотреть по сторонам" + space + "Используйте" + tutJump + "чтобы прыгать";
+        tutorialMoveMessageHeader = ""; //ALL CAPS
+        tutorialMoveMessageText = "" + tutMove + "" + space + "" + tutLook + "" + space + "" + tutJump + "";
 
-        tutorialClose = close + "Закрыть";
+        tutorialClose = close + "";
 
         // YARD
 
-        yardSnacks = "Нажмите" + buttonX + "чтобы съесть печеньку.";
-        yardWrench = "Нажмите" + buttonX + "чтобы подобрать гаечный ключ.";
-        yardFuseUse = "Нажмите" + buttonX + "чтобы включить электричество.";
-        yardFuseFix = "Переключатель, кажется, сломан, может я могу его починить с помощью гаечного ключа.";
-        yardFuseFixed = "Здорово! Думаю, он исправлен! Может быть, лифт теперь работает.";
+        yardSnacks = "" + buttonX + "";
+        yardWrench = "" + buttonX + "";
+        yardFuseUse = "" + buttonX + "";
+        yardFuseFix = "";
+        yardFuseFixed = "";
 
         // CITY
 
-        cityBoxBig = "Удерживайте" + buttonX + "чтобы толкать большой ящик.";
-        cityPoster = "Нажмите" + buttonX + "чтобы посмотреть на постер.";
-        cityDoorHandleMiss = "У двери нет ручки… Может быть я могу найти ее в другом месте.";
+        cityBoxBig = "" + buttonX + "";
+        cityPoster = "" + buttonX + "";
+        cityDoorHandleMiss = "";
 
-        cityDoorHandleDig = "Нажмите" + buttonX + "откопать ручку от двери.";
-        cityDoorHandle = "Нажмите" + buttonX + "подобрать ручку от двери.";
+        cityDoorHandleDig = "" + buttonX + "";
+        cityDoorHandle = "" + buttonX + "";
 
         // DOCKS
 
-        docksToolBox = "Нажмите" + buttonX + "чтобы подобрать ящик с инструментами.";
-        docksBook = "Нажмите" + buttonX + "чтобы прочесть книгу";
+        docksToolBox = "" + buttonX + "";
+        docksBook = "" + buttonX + "";
         docksVent = "" + buttonX + "";
-        docksVentStuck = "Вентиляционное отверстие заело! Может быть я могла бы его открыть с помощью подходящего инструмента.";
+        docksVentStuck = "";
 
-        docksPipe = "Нажмите" + buttonX + "чтобы починить трубопровод.";
-        docksPipeRotate = "Поверните трубу" + pipeRotate;
-        docksPipeMove = "Выберите позицию" + pipeMove;
-        docksPipeSelect = "Выберите трубу" + pipeSelect;
+        docksPipe = "" + buttonX + "";
+        docksPipeRotate = "" + pipeRotate;
+        docksPipeMove = "" + pipeMove;
+        docksPipeSelect = "" + pipeSelect;
     }
 
 }
