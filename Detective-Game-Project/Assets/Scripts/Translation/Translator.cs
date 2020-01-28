@@ -50,7 +50,7 @@ namespace Scripts
 
         [Header("WAREHOUSE")]
         public GameObject docksButton;
-        public GameObject docksToolBox, docksVent, docksKey1, docksKey2, docksBook, docksRope;
+        public GameObject docksToolBox, docksVent, docksKey1, docksKey2, docksBook, docksRope, docksSnacks;
         public GameObject docksDoorOpen, docksDoorLocked1, docksDoorLocked2;
         public GameObject docksPipe, docksPipeRotate, docksPipeMove, docksPipeSelect;
 
@@ -267,6 +267,7 @@ namespace Scripts
                 docksToolBox.GetComponent<InteractableObject>().interactMessage = language.docksToolBox;
                 docksBook.GetComponent<InteractableObject>().interactMessage = language.docksBook;
                 docksRope.GetComponent<InteractableObject>().interactMessage = language.commonRope;
+                docksSnacks.GetComponent<InteractableObject>().interactMessage = language.yardSnacks;
 
                 docksKey1.GetComponent<InteractableObject>().interactMessage = language.commonKeyPickup;
                 docksKey2.GetComponent<InteractableObject>().interactMessage = language.commonKeyPickup;
