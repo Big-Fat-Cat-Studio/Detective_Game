@@ -79,7 +79,7 @@ public class Language : MonoBehaviour
     [HideInInspector]
     public string pipeSelect = "    <sprite=14><sprite=18> / <sprite=5><sprite=6>";
     [HideInInspector]
-    public string dogPee = " <sprite=17> / <sprite=9> ";
+    public string dogPee = " <sprite=17> / <sprite=8> ";
     [HideInInspector]
     public string dogPoo = " <sprite=22> / <sprite=1> ";
     [HideInInspector]
